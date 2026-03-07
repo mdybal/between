@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-stone-950 text-stone-200;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+}
+
+/* Victorian ornamental divider */
+@layer components {
+  .ornament {
+    @apply flex items-center gap-4 my-6;
+  }
+  .ornament::before,
+  .ornament::after {
+    content: '';
+    @apply flex-1 border-t border-amber-700/40;
+  }
+
+  /* Parchment card style */
+  .parchment {
+    background: linear-gradient(135deg, hsl(35 25% 10%) 0%, hsl(25 20% 8%) 100%);
+    border: 1px solid hsl(35 30% 20%);
+  }
+}
