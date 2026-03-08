@@ -8,14 +8,14 @@ import type { CharacterType } from '@/types'
 import { cn } from '@/lib/utils'
 
 const typeLabels: Record<CharacterType, string> = {
-  player: 'Investigator',
+  hunter: 'Hunter',
   npc: 'NPC',
   ally: 'Ally',
   antagonist: 'Antagonist',
 }
 
 const typeBadgeVariant: Record<CharacterType, 'amber' | 'green' | 'muted' | 'red'> = {
-  player: 'amber',
+  hunter: 'amber',
   ally: 'green',
   npc: 'muted',
   antagonist: 'red',
@@ -30,7 +30,7 @@ const statusBadgeVariant = {
 
 const filters: { value: CharacterType | 'all'; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'player', label: 'Investigators' },
+  { value: 'hunter', label: 'Hunters' },
   { value: 'npc', label: 'NPCs' },
   { value: 'ally', label: 'Allies' },
   { value: 'antagonist', label: 'Antagonists' },
@@ -100,14 +100,32 @@ export default function CharactersPage() {
               {character.description}
             </p>
 
-            {/* Traits */}
-            <div className="mt-3 flex flex-wrap gap-1">
-              {character.traits.map((trait) => (
-                <Badge key={trait} variant="muted">
-                  {trait}
-                </Badge>
-              ))}
-            </div>
+            {/* Conditions (Hunters only) */}
+            {character.type === 'hunter' && character.conditions && character.conditions.length > 0 && (
+              <div className="mt-3">
+                <p className="mb-1 font-serif text-xs uppercase tracking-widest text-stone-600">
+                  Conditions
+                </p>
+                <div className="flex flex-wrap gap-1">
+                  {character.conditions.map((condition) => (
+                    <Badge key={condition} variant="red">
+                      {condition}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Traits (NPCs / non-hunters) */}
+            {character.type !== 'hunter' && (
+              <div className="mt-3 flex flex-wrap gap-1">
+                {character.traits.map((trait) => (
+                  <Badge key={trait} variant="muted">
+                    {trait}
+                  </Badge>
+                ))}
+              </div>
+            )}
           </Link>
         ))}
       </div>

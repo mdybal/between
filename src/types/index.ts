@@ -13,7 +13,22 @@ export interface Session {
 
 // ─── Character ────────────────────────────────────────────────────────────────
 
-export type CharacterType = 'player' | 'npc' | 'ally' | 'antagonist'
+export type CharacterType = 'hunter' | 'npc' | 'ally' | 'antagonist'
+
+export interface PrivateQuartersItem {
+  name: string
+  used: boolean
+}
+
+export interface MaskEntry {
+  name: string
+  used: boolean
+}
+
+export interface MaskGroup {
+  category: string        // e.g. "Mask of Past", "Mask of Junos"
+  masks: MaskEntry[]
+}
 
 export interface Character {
   id: string
@@ -24,6 +39,9 @@ export interface Character {
   description: string
   background: string
   traits: string[]
+  conditions?: string[]
+  privateQuarters?: PrivateQuartersItem[]
+  masks?: MaskGroup[]
   imageUrl?: string
   status: 'active' | 'deceased' | 'missing' | 'unknown'
 }
