@@ -1,13 +1,17 @@
+import { Suspense } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Calendar, Users, Star } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { sessions } from '@/data/sessions'
+import { sessionContentRegistry } from '@/sessions/registry'
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
   const session = sessions.find((s) => s.id === id)
 
   if (!session) return <Navigate to="/actual-plays" replace />
+
+  const SessionContent = id ? sessionContentRegistry[id] : undefined
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -66,34 +70,52 @@ export default function SessionDetailPage() {
         )}
       </header>
 
-      {/* Summary */}
-      <section className="mt-8">
-        <h2 className="mb-4 font-serif text-xs uppercase tracking-widest text-stone-500">
-          Session Summary
-        </h2>
-        <p className="font-serif text-base leading-relaxed text-stone-300">
-          {session.summary}
-        </p>
-      </section>
+      {/* ── Custom session content (from src/sessions/session-XX.tsx) ── */}
+      {SessionContent ? (
+        <div className="mt-8">
+          <Suspense
+            fallback={
+              <p className="font-serif text-sm italic text-stone-600 py-8 text-center">
+                Loading session…
+              </p>
+            }
+          >
+            <SessionContent />
+          </Suspense>
+        </div>
+      ) : (
+        /* Fallback: render the plain data from sessions.ts if no custom file exists yet */
+        <div className="mt-8 space-y-8">
+          {/* Summary */}
+          <section>
+            <h2 className="mb-4 font-serif text-xs uppercase tracking-widest text-stone-500">
+              Session Summary
+            </h2>
+            <p className="font-serif text-base leading-relaxed text-stone-300">
+              {session.summary}
+            </p>
+          </section>
 
-      {/* Highlights */}
-      {session.highlights.length > 0 && (
-        <section className="mt-10">
-          <h2 className="mb-4 flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-stone-500">
-            <Star size={12} className="text-amber-700" />
-            Key Moments
-          </h2>
-          <ul className="space-y-3">
-            {session.highlights.map((highlight, i) => (
-              <li key={i} className="flex gap-3">
-                <span className="mt-1 shrink-0 text-amber-700">✦</span>
-                <span className="font-serif text-sm leading-relaxed text-stone-400">
-                  {highlight}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
+          {/* Highlights */}
+          {session.highlights.length > 0 && (
+            <section>
+              <h2 className="mb-4 flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-stone-500">
+                <Star size={12} className="text-amber-700" />
+                Key Moments
+              </h2>
+              <ul className="space-y-3">
+                {session.highlights.map((highlight, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="mt-1 shrink-0 text-amber-700">✦</span>
+                    <span className="font-serif text-sm leading-relaxed text-stone-400">
+                      {highlight}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       )}
 
       {/* Navigation between sessions */}

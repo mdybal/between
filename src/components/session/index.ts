@@ -1,0 +1,6 @@
+// Barrel export — import everything from '@/components/session'
+export { Prose, ProseSection } from './Prose'
+export { SessionImage, ClearFloat } from './SessionImage'
+export { PullQuote } from './PullQuote'
+export { HighlightBox, BulletList } from './HighlightBox'
+export { SessionDivider } from './SessionDivider'
