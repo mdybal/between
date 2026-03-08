@@ -7,6 +7,7 @@ import CharactersPage from '@/pages/CharactersPage'
 import CharacterDetailPage from '@/pages/CharacterDetailPage'
 import ThreatsPage from '@/pages/ThreatsPage'
 import ThreatDetailPage from '@/pages/ThreatDetailPage'
+import MapPage from '@/pages/MapPage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/characters/:id" element={<CharacterDetailPage />} />
           <Route path="/threats" element={<ThreatsPage />} />
           <Route path="/threats/:id" element={<ThreatDetailPage />} />
+          <Route path="/map" element={<MapPage />} />
           {/* 404 fallback */}
           <Route
             path="*"

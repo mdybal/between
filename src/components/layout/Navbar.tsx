@@ -8,13 +8,14 @@ const navLinks = [
   { to: '/actual-plays', label: 'Actual Plays' },
   { to: '/characters', label: 'Characters' },
   { to: '/threats', label: 'Threats & Masterminds' },
+  { to: '/map', label: 'Map' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b border-amber-900/30 bg-stone-950/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-[2000] border-b border-amber-900/30 bg-stone-950/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo / Title */}
         <NavLink to="/" className="flex flex-col leading-tight" onClick={() => setOpen(false)}>

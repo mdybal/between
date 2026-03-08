@@ -46,6 +46,60 @@ export interface Character {
   status: 'active' | 'deceased' | 'missing' | 'unknown'
 }
 
+// ─── Map ─────────────────────────────────────────────────────────────────────
+
+export type PoiCategory =
+  | 'location'
+  | 'crime-scene'
+  | 'safe-house'
+  | 'danger'
+  | 'clue'
+  | 'unknown'
+
+/**
+ * State of a map element within a given session snapshot.
+ * - 'active'   → shown normally
+ * - 'disabled' → shown greyed-out (still visible but inactive)
+ * - 'removed'  → hidden from view entirely
+ */
+export type MapElementState = 'active' | 'disabled' | 'removed'
+
+/**
+ * A map session snapshot.  The id must match the sessionId used on POIs/Zones.
+ * Multiple POI/Zone entries can share the same logical id but differ by sessionId,
+ * representing how that element evolves across sessions.
+ */
+export interface MapSession {
+  id: string       // e.g. "session-01"
+  title: string
+  description: string
+}
+
+export interface PointOfInterest {
+  id: string
+  name: string
+  category: PoiCategory
+  description: string
+  /** [y, x] in image-pixel coordinates (origin top-left) */
+  coords: [number, number]
+  /** Which session this entry belongs to */
+  sessionId: string
+  state: MapElementState
+  linkedCharacters?: string[]
+}
+
+export interface MapZone {
+  id: string
+  name: string
+  description: string
+  color: string        // hex or css colour used for the polygon fill
+  /** Array of [y, x] pixel coordinate pairs */
+  polygon: [number, number][]
+  /** Which session this entry belongs to */
+  sessionId: string
+  state: MapElementState
+}
+
 // ─── Threat / Mastermind ──────────────────────────────────────────────────────
 
 export type ThreatLevel = 'minor' | 'moderate' | 'severe' | 'catastrophic'
