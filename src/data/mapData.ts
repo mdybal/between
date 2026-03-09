@@ -54,8 +54,8 @@ export const pointsOfInterest: PointOfInterest[] = [
     description:
       'The mortuary has been cleared by police. The symbols were scrubbed away — someone with influence intervened.',
     coords: [980, 2100],
-    sessionId: 'session-02',
-    state: 'disabled',
+    sessionId: 'session-03',
+    state: 'active',
     linkedCharacters: ['cornelius-vane'],
   },
 
@@ -79,7 +79,7 @@ export const pointsOfInterest: PointOfInterest[] = [
       'Lady Pemberton has gone quiet. Her butler claims she is "indisposed." The curtains remain drawn.',
     coords: [700, 1200],
     sessionId: 'session-02',
-    state: 'disabled',
+    state: 'removed', 
     linkedCharacters: ['lady-pemberton'],
   },
 
@@ -103,7 +103,7 @@ export const pointsOfInterest: PointOfInterest[] = [
       'The practice has been broken into. Files are scattered. Vane suspects the cult knows who he is.',
     coords: [620, 1050],
     sessionId: 'session-02',
-    state: 'active',
+    state: 'disabled',
     linkedCharacters: ['cornelius-vane'],
   },
   {
@@ -192,7 +192,7 @@ export const pointsOfInterest: PointOfInterest[] = [
   {
     id: 'river-thames-dock',
     name: 'Suspicious Dock, Southwark',
-    category: 'unknown',
+    category: 'danger',
     description:
       'Cargo manifests suggest unusual shipments arriving here at irregular hours. The dock master refuses to speak.',
     coords: [1400, 2000],
@@ -207,7 +207,7 @@ export const pointsOfInterest: PointOfInterest[] = [
       'The shipment has arrived. Crates bearing occult markings were unloaded under cover of darkness. The dock master has vanished.',
     coords: [1400, 2000],
     sessionId: 'session-03',
-    state: 'active',
+    state: 'disabled',
   },
 ]
 
@@ -317,7 +317,7 @@ export const mapZones: MapZone[] = [
       'The cult\'s shipment has arrived in Southwark. The docks are now a primary area of investigation.',
     color: '#065f46',
     polygon: [
-      [1200, 1300],
+      [200, 1300],
       [1200, 2200],
       [1650, 2200],
       [1650, 1300],

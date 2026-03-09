@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-rastercoords'
 import { Layers, Clock, X, ChevronRight, Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
@@ -12,18 +13,30 @@ import type { PointOfInterest, MapZone, MapSession, PoiCategory } from '@/types'
 const IMG_W = 3500
 const IMG_H = 1952
 
-const BOUNDS: L.LatLngBoundsExpression = [
-  [0, 0],
-  [IMG_H, IMG_W],
-]
-
 // ─── Session ordering ─────────────────────────────────────────────────────────
 
 // Ordered list of session ids (index = chronological order)
 const SESSION_ORDER = mapSessions.map((s) => s.id)
+const MAX_SESSION_IDX = SESSION_ORDER.length - 1
 
 function sessionIndex(sessionId: string): number {
   return SESSION_ORDER.indexOf(sessionId)
+}
+
+// ─── Canonical entry helper ───────────────────────────────────────────────────
+//
+// Returns the entry with the highest sessionIdx that is <= selIdx, or null.
+// This is the "what did this element look like at session selIdx?" query.
+
+function canonicalAt<T extends { id: string; sessionId: string }>(
+  id: string,
+  selIdx: number,
+  all: T[],
+): T | null {
+  const candidates = all
+    .filter((e) => e.id === id && sessionIndex(e.sessionId) <= selIdx)
+    .sort((a, b) => sessionIndex(b.sessionId) - sessionIndex(a.sessionId))
+  return candidates[0] ?? null
 }
 
 // ─── POI styling ─────────────────────────────────────────────────────────────
@@ -46,6 +59,8 @@ const categoryConfig: Record<
 
 // ─── Icon factories ───────────────────────────────────────────────────────────
 
+const DISABLED_COLOR = '#9ca3af'
+
 function makePinIcon(color: string, opacity = 1) {
   const svg = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" width="24" height="32" opacity="${opacity}">
@@ -66,48 +81,6 @@ function makeHighlightIcon(color: string) {
   return L.divIcon({ html: svg, className: '', iconSize: [32, 42], iconAnchor: [16, 42], popupAnchor: [0, -44] })
 }
 
-// ─── Session-based visibility logic ──────────────────────────────────────────
-//
-// Given a selected session (by index) and an element's (id, sessionId):
-//
-//   • Find the "canonical" entry for this element at the selected session:
-//       - The entry whose sessionId == selectedSession  → "current"
-//       - If none, the latest entry with sessionId < selectedSession → "inherited"
-//   • If the canonical entry has state='removed' → hide
-//   • If the canonical entry has state='disabled' → show greyed-out
-//   • If the canonical entry's sessionId == selectedSession → highlight (current)
-//   • If the canonical entry's sessionId < selectedSession → dim (past)
-//   • Entries with sessionId > selectedSession → hide (future)
-//   • Entries with same id but different sessionId than canonical → hide (superseded)
-
-type VisibilityResult = 'hidden' | 'highlight' | 'normal' | 'dim' | 'disabled'
-
-function resolveVisibility(
-  elementId: string,
-  elementSessionId: string,
-  selectedSessionIdx: number,
-  allEntries: { id: string; sessionId: string }[],
-): VisibilityResult {
-  const elemIdx = sessionIndex(elementSessionId)
-
-  // This entry is in the future → hide
-  if (elemIdx > selectedSessionIdx) return 'hidden'
-
-  // Find the canonical entry for this id at the selected session:
-  // = the entry with the highest sessionIdx that is <= selectedSessionIdx
-  const candidates = allEntries
-    .filter((e) => e.id === elementId && sessionIndex(e.sessionId) <= selectedSessionIdx)
-    .sort((a, b) => sessionIndex(b.sessionId) - sessionIndex(a.sessionId))
-
-  const canonical = candidates[0]
-
-  // This entry is not the canonical one → hide (superseded by a later entry)
-  if (!canonical || canonical.sessionId !== elementSessionId) return 'hidden'
-
-  // canonical entry is this one — now check state
-  return elemIdx === selectedSessionIdx ? 'highlight' : 'dim'
-}
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 type ActivePanel = 'layers' | 'timeline' | null
@@ -118,13 +91,19 @@ type SelectedItem =
 
 // ─── Leaflet layer refs ───────────────────────────────────────────────────────
 
+// Each ref stores the element id and the Leaflet object.
+// The actual entry data is always looked up dynamically via canonicalAt.
 interface PoiRef {
-  poi: PointOfInterest
+  id: string
+  // The earliest entry — used for stable coords, category, name for tooltip
+  baseEntry: PointOfInterest
   marker: L.Marker
 }
 
 interface ZoneRef {
-  zone: MapZone
+  id: string
+  // The earliest entry — used for stable coords, color, name for tooltip
+  baseEntry: MapZone
   poly: L.Polygon
 }
 
@@ -133,143 +112,126 @@ interface ZoneRef {
 export default function MapPage() {
   const mapContainerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<L.Map | null>(null)
+  const rcRef = useRef<L.RasterCoords | null>(null)
   const poiRefsRef = useRef<PoiRef[]>([])
   const zoneRefsRef = useRef<ZoneRef[]>([])
-  const highlightMarkerRef = useRef<L.Marker | null>(null)
 
   const [activePanel, setActivePanel] = useState<ActivePanel>(null)
   const [selectedItem, setSelectedItem] = useState<SelectedItem>(null)
   const [selectedSession, setSelectedSession] = useState<MapSession | null>(null)
-  // Tracks which item is highlighted on the map (from Layers selection or direct click)
   const [highlightedItemId, setHighlightedItemId] = useState<string | null>(null)
 
   const [showPoi, setShowPoi] = useState(true)
   const [showZones, setShowZones] = useState(true)
 
   // ── Apply session filter to all markers/polygons ──────────────────────────
+  //
+  // Rules:
+  //   No session selected:
+  //     • Use canonicalAt(id, MAX_SESSION_IDX) — the overall latest entry
+  //     • If state='removed' → hide
+  //     • If state='disabled' → show grey at full opacity
+  //     • If state='active' → show normally
+  //
+  //   Session selected (selIdx = index of selected session):
+  //     2.1  canonicalAt returns null (no entry at or before selIdx) → hide
+  //     2.1  canonicalAt returns entry with state='removed' → hide
+  //     2.2  entry.sessionId == session.id (isCurrent) → show normally
+  //     2.3  entry.sessionId < session.id (isPast) → show dimmed
+  //     POI disabled: always full opacity, light-grey (regardless of current/past)
+  //
   const applySessionFilter = useCallback(
     (session: MapSession | null, highlightId: string | null) => {
       const map = mapRef.current
       if (!map) return
 
-      if (session === null) {
-        // No session selected — show everything in its base state
-        poiRefsRef.current.forEach(({ poi, marker }) => {
-          if (poi.state === 'removed') {
-            marker.remove()
-            return
-          }
-          if (!map.hasLayer(marker) && showPoi) marker.addTo(map)
-          const cfg = categoryConfig[poi.category]
-          const isHighlighted = highlightId === poi.id
-          if (isHighlighted) {
-            marker.setIcon(makeHighlightIcon(cfg.color))
-          } else {
-            const opacity = poi.state === 'disabled' ? 0.35 : 1
-            marker.setIcon(makePinIcon(cfg.color, opacity))
-          }
-        })
+      // The session index to query against
+      const selIdx = session === null ? MAX_SESSION_IDX : sessionIndex(session.id)
 
-        zoneRefsRef.current.forEach(({ zone, poly }) => {
-          if (zone.state === 'removed') {
-            poly.remove()
-            return
-          }
-          if (!map.hasLayer(poly) && showZones) poly.addTo(map)
-          const isHighlighted = highlightId === zone.id
-          if (isHighlighted) {
-            poly.setStyle({ fillOpacity: 0.35, opacity: 1, weight: 3 })
-          } else {
-            const opacity = zone.state === 'disabled' ? 0.08 : 0.15
-            const strokeOpacity = zone.state === 'disabled' ? 0.2 : 0.6
-            poly.setStyle({ fillOpacity: opacity, opacity: strokeOpacity, weight: 2 })
-          }
-        })
-        return
-      }
+      // ── POIs ──────────────────────────────────────────────────────────────
+      poiRefsRef.current.forEach(({ id, marker }) => {
+        const entry = canonicalAt(id, selIdx, pointsOfInterest)
 
-      const selIdx = sessionIndex(session.id)
-
-      // ── POIs ──
-      poiRefsRef.current.forEach(({ poi, marker }) => {
-        const vis = resolveVisibility(poi.id, poi.sessionId, selIdx, pointsOfInterest)
-
-        if (vis === 'hidden') {
-          marker.remove()
-          return
-        }
-
-        // Determine effective state from the canonical entry
-        const canonicalEntry = pointsOfInterest
-          .filter((p) => p.id === poi.id && sessionIndex(p.sessionId) <= selIdx)
-          .sort((a, b) => sessionIndex(b.sessionId) - sessionIndex(a.sessionId))[0]
-
-        if (canonicalEntry?.state === 'removed') {
-          marker.remove()
+        // No entry at or before this session, or explicitly removed → hide
+        if (!entry || entry.state === 'removed') {
+          if (map.hasLayer(marker)) marker.remove()
           return
         }
 
         if (showPoi && !map.hasLayer(marker)) marker.addTo(map)
 
-        const cfg = categoryConfig[poi.category]
-        const isHighlighted = highlightId === poi.id
+        const cfg = categoryConfig[entry.category]
+        const isHighlighted = highlightId === id
+        // isCurrent only matters when a session is selected
+        const isCurrent = session !== null && sessionIndex(entry.sessionId) === selIdx
 
         if (isHighlighted) {
-          marker.setIcon(makeHighlightIcon(cfg.color))
+          marker.setIcon(makeHighlightIcon(entry.state === 'disabled' ? DISABLED_COLOR : cfg.color))
+        } else if (entry.state === 'disabled') {
+          // Disabled: always full opacity, light-grey (rule 3)
+          marker.setIcon(makePinIcon(DISABLED_COLOR, 1))
+        } else if (session === null || isCurrent) {
+          // No session selected, or introduced/updated this session → normal
+          marker.setIcon(makePinIcon(cfg.color, 1))
         } else {
-          let opacity: number
-          if (canonicalEntry?.state === 'disabled') {
-            opacity = 0.3
-          } else if (vis === 'highlight') {
-            opacity = 1
-          } else {
-            // dim (past session)
-            opacity = 0.45
-          }
-          marker.setIcon(makePinIcon(cfg.color, opacity))
+          // From an earlier session → dim (rule 2.3)
+          marker.setIcon(makePinIcon(cfg.color, 0.4))
         }
+
+        // Update tooltip to reflect the current entry's name
+        marker.unbindTooltip()
+        marker.bindTooltip(
+          `<span style="font-family:Georgia,serif;font-size:12px;color:#fef3c7">${entry.name}</span>`,
+          { direction: 'top', offset: [0, -34], className: 'leaflet-tooltip-poi' },
+        )
+
+        // Update click handler data to the current canonical entry
+        marker.off('click')
+        marker.on('click', () => {
+          setSelectedItem({ type: 'poi', data: entry })
+          setHighlightedItemId(id)
+        })
       })
 
-      // ── Zones ──
-      zoneRefsRef.current.forEach(({ zone, poly }) => {
-        const vis = resolveVisibility(zone.id, zone.sessionId, selIdx, mapZones)
+      // ── Zones ──────────────────────────────────────────────────────────────
+      zoneRefsRef.current.forEach(({ id, poly }) => {
+        const entry = canonicalAt(id, selIdx, mapZones)
 
-        if (vis === 'hidden') {
-          poly.remove()
-          return
-        }
-
-        const canonicalEntry = mapZones
-          .filter((z) => z.id === zone.id && sessionIndex(z.sessionId) <= selIdx)
-          .sort((a, b) => sessionIndex(b.sessionId) - sessionIndex(a.sessionId))[0]
-
-        if (canonicalEntry?.state === 'removed') {
-          poly.remove()
+        // No entry at or before this session, or explicitly removed → hide
+        if (!entry || entry.state === 'removed') {
+          if (map.hasLayer(poly)) poly.remove()
           return
         }
 
         if (showZones && !map.hasLayer(poly)) poly.addTo(map)
 
-        const isHighlighted = highlightId === zone.id
+        const isHighlighted = highlightId === id
+        const isCurrent = session !== null && sessionIndex(entry.sessionId) === selIdx
 
         if (isHighlighted) {
           poly.setStyle({ fillOpacity: 0.35, opacity: 1, weight: 3 })
+        } else if (entry.state === 'disabled') {
+          // Disabled zone: visually subdued
+          poly.setStyle({ fillOpacity: 0.08, opacity: 0.3, weight: 2 })
+        } else if (session === null || isCurrent) {
+          // No session selected, or current session → normal
+          poly.setStyle({ fillOpacity: 0.15, opacity: 0.6, weight: 2 })
         } else {
-          let fillOpacity: number
-          let strokeOpacity: number
-          if (canonicalEntry?.state === 'disabled') {
-            fillOpacity = 0.06
-            strokeOpacity = 0.2
-          } else if (vis === 'highlight') {
-            fillOpacity = 0.22
-            strokeOpacity = 0.8
-          } else {
-            // dim
-            fillOpacity = 0.07
-            strokeOpacity = 0.25
-          }
-          poly.setStyle({ fillOpacity, opacity: strokeOpacity, weight: 2 })
+          // From an earlier session → dim (rule 2.3)
+          poly.setStyle({ fillOpacity: 0.07, opacity: 0.25, weight: 2 })
         }
+
+        // Update tooltip and click handler to reflect current entry
+        poly.unbindTooltip()
+        poly.bindTooltip(
+          `<span style="font-family:Georgia,serif;font-size:12px;color:#fef3c7">${entry.name}</span>`,
+          { permanent: false, direction: 'center', className: 'leaflet-tooltip-zone' },
+        )
+        poly.off('click')
+        poly.on('click', () => {
+          setSelectedItem({ type: 'zone', data: entry })
+          setHighlightedItemId(id)
+        })
       })
     },
     [showPoi, showZones],
@@ -281,21 +243,43 @@ export default function MapPage() {
 
     const map = L.map(mapContainerRef.current, {
       crs: L.CRS.Simple,
-      minZoom: -2,
-      maxZoom: 2,
+      minZoom: 0,
+      maxZoom: 6,
       zoomSnap: 0.25,
       attributionControl: false,
     })
 
-    map.fitBounds(BOUNDS)
-    L.imageOverlay('/image.png', BOUNDS).addTo(map)
+    const rc = new L.RasterCoords(map, [IMG_W, IMG_H])
+    rcRef.current = rc
+
+    map.setView(rc.unproject([IMG_W, IMG_H]), 2)
+
+    L.tileLayer('/tiles/{z}/{x}/{y}.png', {
+      tms: true,
+      minZoom: 0,
+      maxZoom: 6,
+      noWrap: true,
+      bounds: rc.getMaxBounds(),
+    }).addTo(map)
 
     // ── POI markers ──────────────────────────────────────────────────────────
-    pointsOfInterest.forEach((poi) => {
-      if (poi.state === 'removed') return
+    // Create ONE marker per unique POI id, positioned at the earliest entry's
+    // coords. Visibility and styling are handled entirely by applySessionFilter.
+    const seenPoiIds = new Set<string>()
+    // Sort by sessionIndex ascending so we always pick the earliest entry first
+    const sortedPois = [...pointsOfInterest].sort(
+      (a, b) => sessionIndex(a.sessionId) - sessionIndex(b.sessionId),
+    )
+
+    sortedPois.forEach((poi) => {
+      if (seenPoiIds.has(poi.id)) return
+      seenPoiIds.add(poi.id)
+
       const cfg = categoryConfig[poi.category]
-      const marker = L.marker(poi.coords as L.LatLngExpression, {
-        icon: makePinIcon(cfg.color, poi.state === 'disabled' ? 0.35 : 1),
+      const latlng = rc.unproject([poi.coords[1], poi.coords[0]])
+      // Initial icon — will be immediately overridden by applySessionFilter
+      const marker = L.marker(latlng, {
+        icon: makePinIcon(cfg.color, 1),
       })
       marker.bindTooltip(
         `<span style="font-family:Georgia,serif;font-size:12px;color:#fef3c7">${poi.name}</span>`,
@@ -304,21 +288,29 @@ export default function MapPage() {
       marker.on('click', () => {
         setSelectedItem({ type: 'poi', data: poi })
         setHighlightedItemId(poi.id)
-        // Do NOT close the layers panel
       })
-      marker.addTo(map)
-      poiRefsRef.current.push({ poi, marker })
+      // Do NOT add to map yet — applySessionFilter will decide
+      poiRefsRef.current.push({ id: poi.id, baseEntry: poi, marker })
     })
 
     // ── Zone polygons ────────────────────────────────────────────────────────
-    mapZones.forEach((zone) => {
-      if (zone.state === 'removed') return
-      const poly = L.polygon(zone.polygon as L.LatLngExpression[], {
+    // Create ONE polygon per unique zone id, using the earliest entry's polygon.
+    const seenZoneIds = new Set<string>()
+    const sortedZones = [...mapZones].sort(
+      (a, b) => sessionIndex(a.sessionId) - sessionIndex(b.sessionId),
+    )
+
+    sortedZones.forEach((zone) => {
+      if (seenZoneIds.has(zone.id)) return
+      seenZoneIds.add(zone.id)
+
+      const latlngs = zone.polygon.map(([y, x]) => rc.unproject([x, y]))
+      const poly = L.polygon(latlngs, {
         color: zone.color,
         fillColor: zone.color,
-        fillOpacity: zone.state === 'disabled' ? 0.08 : 0.15,
+        fillOpacity: 0.15,
         weight: 2,
-        opacity: zone.state === 'disabled' ? 0.2 : 0.6,
+        opacity: 0.6,
         dashArray: '6 4',
       })
       poly.bindTooltip(
@@ -328,10 +320,9 @@ export default function MapPage() {
       poly.on('click', () => {
         setSelectedItem({ type: 'zone', data: zone })
         setHighlightedItemId(zone.id)
-        // Do NOT close the layers panel
       })
-      poly.addTo(map)
-      zoneRefsRef.current.push({ zone, poly })
+      // Do NOT add to map yet — applySessionFilter will decide
+      zoneRefsRef.current.push({ id: zone.id, baseEntry: zone, poly })
     })
 
     mapRef.current = map
@@ -339,6 +330,7 @@ export default function MapPage() {
     return () => {
       map.remove()
       mapRef.current = null
+      rcRef.current = null
       poiRefsRef.current = []
       zoneRefsRef.current = []
     }
@@ -349,49 +341,29 @@ export default function MapPage() {
     applySessionFilter(selectedSession, highlightedItemId)
   }, [selectedSession, showPoi, showZones, highlightedItemId, applySessionFilter])
 
-  // ── Pan to coords only if outside current viewport (no zoom change) ────────
+  // ── Pan to coords only if outside current viewport (with margin) ──────────
   const panToIfNeeded = useCallback((coords: [number, number]) => {
     const map = mapRef.current
-    if (!map) return
-    const latlng = L.latLng(coords[0], coords[1])
-    if (!map.getBounds().contains(latlng)) {
+    const rc = rcRef.current
+    if (!map || !rc) return
+    const latlng = rc.unproject([coords[1], coords[0]])
+    const bounds = map.getBounds()
+    const paddedBounds = bounds.pad(-0.2)
+    if (!paddedBounds.contains(latlng)) {
       map.panTo(latlng, { animate: true, duration: 0.6 })
     }
   }, [])
 
-  // ── Pan to highlight when session selected ─────────────────────────────────
+  // ── Pan to first active POI when session selected (no highlight marker) ────
   useEffect(() => {
-    if (!mapRef.current) return
-    const map = mapRef.current
-
-    if (highlightMarkerRef.current) {
-      highlightMarkerRef.current.remove()
-      highlightMarkerRef.current = null
-    }
-
     if (!selectedSession) return
 
-    // Find the first active POI belonging to this session to pan to
     const anchor = pointsOfInterest.find(
       (p) => p.sessionId === selectedSession.id && p.state === 'active',
     )
     if (!anchor) return
 
-    const cfg = categoryConfig[anchor.category]
     panToIfNeeded(anchor.coords)
-
-    const marker = L.marker(anchor.coords as L.LatLngExpression, {
-      icon: makeHighlightIcon(cfg.color),
-      zIndexOffset: 1000,
-    }).addTo(map)
-    highlightMarkerRef.current = marker
-
-    const timer = setTimeout(() => {
-      marker.remove()
-      if (highlightMarkerRef.current === marker) highlightMarkerRef.current = null
-    }, 3000)
-
-    return () => clearTimeout(timer)
   }, [selectedSession, panToIfNeeded])
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
@@ -402,22 +374,19 @@ export default function MapPage() {
     panToIfNeeded(poi.coords)
     setSelectedItem({ type: 'poi', data: poi })
     setHighlightedItemId(poi.id)
-    // Keep the layers panel open — do NOT call setActivePanel(null)
   }
 
   const flyToZone = (zone: MapZone) => {
-    // Pan to the centroid of the zone polygon
-    const poly = zoneRefsRef.current.find((z) => z.zone.id === zone.id)?.poly
+    const poly = zoneRefsRef.current.find((z) => z.id === zone.id)?.poly
     if (poly) {
       const center = poly.getBounds().getCenter()
       panToIfNeeded([center.lat, center.lng])
     }
     setSelectedItem({ type: 'zone', data: zone })
     setHighlightedItemId(zone.id)
-    // Keep the layers panel open
   }
 
-  // Unique POIs for the layers list (latest entry per id)
+  // Unique POIs for the layers list — use the overall canonical (latest) entry per id
   const uniquePois = Object.values(
     pointsOfInterest.reduce<Record<string, PointOfInterest>>((acc, poi) => {
       if (!acc[poi.id] || sessionIndex(poi.sessionId) > sessionIndex(acc[poi.id].sessionId)) {
@@ -425,10 +394,17 @@ export default function MapPage() {
       }
       return acc
     }, {}),
-  )
+  ).filter((poi) => poi.state !== 'removed')
 
-  // Unique zones for the layers list (latest entry per id)
-  const uniqueZones = Array.from(new Map(mapZones.map((z) => [z.id, z])).values())
+  // Unique zones for the layers list — use the overall canonical (latest) entry per id
+  const uniqueZones = Object.values(
+    mapZones.reduce<Record<string, MapZone>>((acc, zone) => {
+      if (!acc[zone.id] || sessionIndex(zone.sessionId) > sessionIndex(acc[zone.id].sessionId)) {
+        acc[zone.id] = zone
+      }
+      return acc
+    }, {}),
+  ).filter((zone) => zone.state !== 'removed')
 
   // ── Render ──────────────────────────────────────────────────────────────────
   return (
@@ -631,7 +607,6 @@ export default function MapPage() {
                   )
                   setSelectedItem(null)
                   setHighlightedItemId(null)
-                  // Switch away from layers panel when Sessions is used
                   setActivePanel('timeline')
                 }}
                 className={cn(
