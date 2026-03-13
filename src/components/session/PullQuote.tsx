@@ -8,20 +8,21 @@ interface PullQuoteProps {
 
 /**
  * PullQuote — a styled blockquote for memorable in-game lines or flavour text.
+ * Uses Art Nouveau vine border via the nouveau-quote CSS class.
  */
 export function PullQuote({ children, attribution, className }: PullQuoteProps) {
   return (
     <blockquote
       className={cn(
-        'relative my-6 border-l-2 border-amber-700/60 pl-5 py-1',
+        'nouveau-quote relative my-8 py-2',
         className,
       )}
     >
-      <p className="font-serif text-base italic leading-relaxed text-amber-200/80">
+      <p className="font-serif text-base italic leading-loose text-amber-200/85">
         {children}
       </p>
       {attribution && (
-        <footer className="mt-2 font-serif text-xs text-stone-600">
+        <footer className="mt-3 font-sc text-xs text-graphite-500">
           — {attribution}
         </footer>
       )}

@@ -15,14 +15,20 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-[2000] border-b border-amber-900/30 bg-stone-950/90 backdrop-blur-sm">
+    <header
+      className="nouveau-nav-border sticky top-0 z-[2000] backdrop-blur-sm"
+      style={{
+        backgroundColor: 'rgba(22, 22, 26, 0.92)',
+        borderBottom: '1px solid rgba(180, 120, 40, 0.2)',
+      }}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo / Title */}
         <NavLink to="/" className="flex flex-col leading-tight" onClick={() => setOpen(false)}>
-          <span className="font-serif text-xs uppercase tracking-[0.3em] text-amber-600/70">
+          <span className="font-sc text-xs uppercase tracking-[0.3em] text-amber-600/70">
             The
           </span>
-          <span className="font-serif text-xl font-bold tracking-widest text-amber-400">
+          <span className="font-display text-xl font-bold tracking-widest text-amber-600">
             BETWEEN
           </span>
         </NavLink>
@@ -36,10 +42,10 @@ export default function Navbar() {
               end={to === '/'}
               className={({ isActive }) =>
                 cn(
-                  'font-serif text-sm tracking-wide transition-colors duration-200',
+                  'font-sc text-sm tracking-wide transition-colors duration-200',
                   isActive
-                    ? 'text-amber-400'
-                    : 'text-stone-400 hover:text-amber-300',
+                    ? 'text-amber-600'
+                    : 'text-graphite-300 hover:text-amber-600',
                 )
               }
             >
@@ -50,7 +56,7 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="text-stone-400 hover:text-amber-400 md:hidden"
+          className="text-graphite-400 hover:text-amber-600 md:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -60,7 +66,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <nav className="border-t border-amber-900/20 bg-stone-950 px-4 pb-4 md:hidden">
+        <nav
+          className="px-4 pb-4 md:hidden"
+          style={{
+            backgroundColor: 'var(--graphite-950)',
+            borderTop: '1px solid rgba(180, 120, 40, 0.15)',
+          }}
+        >
           {navLinks.map(({ to, label }) => (
             <NavLink
               key={to}
@@ -69,8 +81,8 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
                 cn(
-                  'block py-2 font-serif text-sm tracking-wide transition-colors',
-                  isActive ? 'text-amber-400' : 'text-stone-400 hover:text-amber-300',
+                  'block py-2 font-sc text-sm tracking-wide transition-colors',
+                  isActive ? 'text-amber-600' : 'text-graphite-300 hover:text-amber-600',
                 )
               }
             >

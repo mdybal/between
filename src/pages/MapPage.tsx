@@ -412,7 +412,7 @@ export default function MapPage() {
       {/* ── Top bar ── */}
       <div className="flex items-center justify-between border-b border-amber-900/30 bg-stone-950/95 px-4 py-2">
         <div>
-          <h1 className="font-serif text-lg font-bold tracking-widest text-amber-400">
+          <h1 className="font-serif text-lg font-bold tracking-widest text-amber-600">
             Investigation Map
           </h1>
           <p className="font-serif text-xs tracking-widest text-stone-500 uppercase">
@@ -424,7 +424,7 @@ export default function MapPage() {
           {selectedSession && (
             <button
               onClick={() => setSelectedSession(null)}
-              className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-400 transition-colors hover:border-amber-700"
+              className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-600 transition-colors hover:border-amber-700"
             >
               <X size={12} />
               Clear session
@@ -463,7 +463,7 @@ export default function MapPage() {
               description={`${uniquePois.length} locations`}
               enabled={showPoi}
               onToggle={() => setShowPoi((v) => !v)}
-              color="text-amber-400"
+              color="text-amber-600"
             />
             <LayerToggle
               label="Zones"
@@ -517,7 +517,7 @@ export default function MapPage() {
                     <span
                       className={cn(
                         'font-serif text-xs',
-                        highlightedItemId === zone.id ? 'text-amber-300' : 'text-stone-400',
+                        highlightedItemId === zone.id ? 'text-amber-600' : 'text-stone-400',
                       )}
                     >
                       {zone.name}
@@ -555,7 +555,7 @@ export default function MapPage() {
                       <span
                         className={cn(
                           'font-serif text-xs',
-                          isHighlighted ? 'text-amber-300' : 'text-stone-300',
+                          isHighlighted ? 'text-amber-600' : 'text-stone-300',
                         )}
                       >
                         {poi.name}
@@ -583,7 +583,7 @@ export default function MapPage() {
             </p>
             <div className="space-y-1 font-serif text-xs text-stone-500">
               <div className="flex items-center gap-2">
-                <span className="inline-block h-2 w-2 rounded-full bg-amber-400" />
+                <span className="inline-block h-2 w-2 rounded-full bg-amber-600" />
                 Current session — highlighted
               </div>
               <div className="flex items-center gap-2">
@@ -622,7 +622,7 @@ export default function MapPage() {
                     className={cn(
                       'mt-1 h-3 w-3 shrink-0 rounded-full border-2',
                       selectedSession?.id === session.id
-                        ? 'border-amber-400 bg-amber-400'
+                        ? 'border-amber-600 bg-amber-600'
                         : 'border-amber-700 bg-stone-900 group-hover:border-amber-500',
                     )}
                   />
@@ -639,7 +639,7 @@ export default function MapPage() {
                     className={cn(
                       'font-serif text-sm font-semibold leading-snug',
                       selectedSession?.id === session.id
-                        ? 'text-amber-300'
+                        ? 'text-amber-600'
                         : 'text-stone-300',
                     )}
                   >
@@ -725,7 +725,7 @@ function ToolbarButton({
       className={cn(
         'flex items-center gap-1.5 rounded border px-3 py-1.5 font-serif text-xs tracking-wide transition-colors',
         active
-          ? 'border-amber-700 bg-amber-950/50 text-amber-400'
+          ? 'border-amber-700 bg-amber-950/50 text-amber-600'
           : 'border-stone-800 bg-stone-900/40 text-stone-400 hover:border-stone-700 hover:text-stone-200',
       )}
     >
@@ -756,7 +756,7 @@ function SidePanel({
       )}
     >
       <div className="sticky top-0 z-10 flex items-center justify-between border-b border-amber-900/30 bg-stone-950/95 px-4 py-3">
-        <div className="flex items-center gap-2 text-amber-400">
+        <div className="flex items-center gap-2 text-amber-600">
           {icon}
           <span className="font-serif text-sm font-semibold tracking-wide">{title}</span>
         </div>

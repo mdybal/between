@@ -11,25 +11,32 @@ interface HighlightBoxProps {
 
 const variantStyles: Record<HighlightVariant, { wrapper: string; title: string; bullet: string }> = {
   clue: {
-    wrapper: 'border-amber-800/50 bg-amber-950/20',
-    title: 'text-amber-400',
+    wrapper: 'border-amber-800/40',
+    title: 'text-amber-600',
     bullet: 'text-amber-700',
   },
   danger: {
-    wrapper: 'border-red-900/50 bg-red-950/20',
+    wrapper: 'border-red-900/40',
     title: 'text-red-400',
     bullet: 'text-red-800',
   },
   note: {
-    wrapper: 'border-stone-700/50 bg-stone-900/40',
-    title: 'text-stone-400',
-    bullet: 'text-stone-600',
+    wrapper: 'border-graphite-600/50',
+    title: 'text-graphite-300',
+    bullet: 'text-graphite-500',
   },
   lore: {
-    wrapper: 'border-violet-900/50 bg-violet-950/20',
+    wrapper: 'border-violet-900/40',
     title: 'text-violet-400',
     bullet: 'text-violet-800',
   },
+}
+
+const variantBg: Record<HighlightVariant, string> = {
+  clue:   'rgba(120, 80, 10, 0.1)',
+  danger: 'rgba(100, 20, 20, 0.1)',
+  note:   'rgba(37, 37, 40, 0.5)',
+  lore:   'rgba(60, 20, 80, 0.1)',
 }
 
 const variantDefaultTitles: Record<HighlightVariant, string> = {
@@ -41,7 +48,6 @@ const variantDefaultTitles: Record<HighlightVariant, string> = {
 
 /**
  * HighlightBox — a callout box for clues, dangers, lore, or GM notes.
- *
  * variant: "clue" | "danger" | "note" | "lore"
  */
 export function HighlightBox({
@@ -56,15 +62,16 @@ export function HighlightBox({
   return (
     <aside
       className={cn(
-        'rounded-lg border p-4 my-4',
+        'art-card rounded-lg border p-5 my-5',
         styles.wrapper,
         className,
       )}
+      style={{ backgroundColor: variantBg[variant] }}
     >
-      <p className={cn('mb-2 font-serif text-xs uppercase tracking-widest', styles.title)}>
+      <p className={cn('mb-3 font-display text-xs uppercase tracking-widest', styles.title)}>
         {displayTitle}
       </p>
-      <div className="font-serif text-sm leading-relaxed text-stone-400">
+      <div className="font-serif text-sm leading-loose text-graphite-300">
         {children}
       </div>
     </aside>
@@ -86,7 +93,7 @@ export function BulletList({ items, bulletColor = 'text-amber-700', className }:
       {items.map((item, i) => (
         <li key={i} className="flex gap-3">
           <span className={cn('mt-1 shrink-0', bulletColor)}>✦</span>
-          <span className="font-serif text-sm leading-relaxed text-stone-400">{item}</span>
+          <span className="font-serif text-sm leading-loose text-graphite-300">{item}</span>
         </li>
       ))}
     </ul>

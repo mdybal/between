@@ -48,11 +48,16 @@ export default function ThreatsPage() {
             key={value}
             onClick={() => setFilter(value)}
             className={cn(
-              'rounded border px-3 py-1 font-serif text-xs tracking-wide transition-colors',
+              'rounded border px-3 py-1 font-sc text-xs tracking-wide transition-colors',
               filter === value
-                ? 'border-amber-700 bg-amber-950/50 text-amber-400'
-                : 'border-stone-800 bg-stone-900/40 text-stone-500 hover:border-stone-700 hover:text-stone-300',
+                ? 'border-amber-700 text-amber-600'
+                : 'text-graphite-500 hover:text-graphite-300',
             )}
+            style={
+              filter === value
+                ? { backgroundColor: 'rgba(120,60,10,0.3)' }
+                : { borderColor: 'var(--graphite-700)', backgroundColor: 'rgba(30,30,34,0.4)' }
+            }
           >
             {label}
           </button>
@@ -64,7 +69,19 @@ export default function ThreatsPage() {
           <Link
             key={threat.id}
             to={`/threats/${threat.id}`}
-            className="group block rounded-lg border border-stone-800 bg-stone-900/40 p-6 transition-all hover:border-red-900/40 hover:bg-stone-900/70"
+            className="art-card group block rounded-lg p-6 transition-all"
+            style={{
+              border: '1px solid var(--graphite-700)',
+              backgroundColor: 'rgba(30,30,34,0.5)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'rgba(150,30,30,0.4)'
+              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.8)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--graphite-700)'
+              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.5)'
+            }}
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
@@ -78,15 +95,15 @@ export default function ThreatsPage() {
                   </Badge>
                 </div>
 
-                <h2 className="font-serif text-xl font-semibold text-stone-200 transition-colors group-hover:text-red-300">
+                <h2 className="font-display text-xl font-semibold text-graphite-200 transition-colors group-hover:text-red-300">
                   {threat.name}
                 </h2>
 
-                <p className="mt-2 line-clamp-2 font-serif text-sm leading-relaxed text-stone-500">
+                <p className="mt-2 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
                   {threat.description}
                 </p>
 
-                <p className="mt-3 font-serif text-xs text-stone-600">
+                <p className="mt-3 font-sc text-xs text-graphite-600">
                   {threat.knownFacts.length} known facts · {threat.suspicions.length} suspicions
                 </p>
               </div>
@@ -102,8 +119,8 @@ export default function ThreatsPage() {
 
       {filtered.length === 0 && (
         <div className="py-20 text-center">
-          <AlertTriangle size={24} className="mx-auto mb-3 text-stone-700" />
-          <p className="font-serif text-stone-600 italic">No threats identified in this category.</p>
+          <AlertTriangle size={24} className="mx-auto mb-3 text-graphite-700" />
+          <p className="font-serif text-graphite-600 italic">No threats identified in this category.</p>
         </div>
       )}
     </div>

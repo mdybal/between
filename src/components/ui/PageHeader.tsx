@@ -8,21 +8,17 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, className }: PageHeaderProps) {
   return (
-    <div className={cn('py-12 text-center', className)}>
-      <h1 className="font-serif text-4xl font-bold tracking-widest text-amber-400 md:text-5xl">
-        {title}
-      </h1>
+    <div className={cn('nouveau-page-header py-14 text-center', className)}>
       {subtitle && (
-        <p className="mt-3 font-serif text-sm tracking-widest text-stone-500 uppercase">
+        <p className="mb-2 font-sc text-xs tracking-[0.4em] uppercase text-graphite-400">
           {subtitle}
         </p>
       )}
-      {/* Ornamental divider */}
-      <div className="mx-auto mt-6 flex max-w-xs items-center gap-3">
-        <div className="h-px flex-1 bg-amber-900/40" />
-        <span className="text-amber-700 text-xs">✦</span>
-        <div className="h-px flex-1 bg-amber-900/40" />
-      </div>
+      <h1 className="nouveau-heading font-display text-4xl font-bold tracking-widest text-amber-600 md:text-5xl">
+        {title}
+      </h1>
+      {/* Art Nouveau ornamental divider */}
+      <div className="mx-auto mt-8 nouveau-divider max-w-sm" />
     </div>
   )
 }

@@ -19,7 +19,7 @@ export default function SessionDetailPage() {
       <div className="pt-8">
         <Link
           to="/actual-plays"
-          className="inline-flex items-center gap-2 font-serif text-sm text-stone-500 transition-colors hover:text-amber-400"
+          className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
           All Sessions
@@ -27,12 +27,15 @@ export default function SessionDetailPage() {
       </div>
 
       {/* Header */}
-      <header className="mt-6 border-b border-amber-900/20 pb-8">
+      <header
+        className="mt-6 pb-8"
+        style={{ borderBottom: '1px solid rgba(180,120,40,0.18)' }}
+      >
         <div className="mb-3 flex flex-wrap items-center gap-3">
-          <span className="font-serif text-xs uppercase tracking-widest text-amber-700">
+          <span className="font-sc text-xs uppercase tracking-widest text-amber-700">
             Session {session.sessionNumber}
           </span>
-          <span className="flex items-center gap-1 font-serif text-xs text-stone-600">
+          <span className="flex items-center gap-1 font-sc text-xs text-graphite-600">
             <Calendar size={11} />
             {new Date(session.date).toLocaleDateString('en-GB', {
               day: 'numeric',
@@ -42,14 +45,14 @@ export default function SessionDetailPage() {
           </span>
         </div>
 
-        <h1 className="font-serif text-3xl font-bold text-amber-400 md:text-4xl">
+        <h1 className="nouveau-heading font-display text-3xl font-bold text-amber-600 md:text-4xl">
           {session.title}
         </h1>
 
         {/* Players */}
         {session.players && session.players.length > 0 && (
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <Users size={13} className="text-stone-600" />
+            <Users size={13} className="text-graphite-600" />
             {session.players.map((p) => (
               <Badge key={p} variant="muted">
                 {p}
@@ -75,7 +78,7 @@ export default function SessionDetailPage() {
         <div className="mt-8">
           <Suspense
             fallback={
-              <p className="font-serif text-sm italic text-stone-600 py-8 text-center">
+              <p className="font-serif text-sm italic text-graphite-600 py-8 text-center">
                 Loading session…
               </p>
             }
@@ -88,10 +91,10 @@ export default function SessionDetailPage() {
         <div className="mt-8 space-y-8">
           {/* Summary */}
           <section>
-            <h2 className="mb-4 font-serif text-xs uppercase tracking-widest text-stone-500">
+            <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
               Session Summary
             </h2>
-            <p className="font-serif text-base leading-relaxed text-stone-300">
+            <p className="font-serif text-base leading-loose text-graphite-200">
               {session.summary}
             </p>
           </section>
@@ -99,7 +102,7 @@ export default function SessionDetailPage() {
           {/* Highlights */}
           {session.highlights.length > 0 && (
             <section>
-              <h2 className="mb-4 flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-stone-500">
+              <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
                 <Star size={12} className="text-amber-700" />
                 Key Moments
               </h2>
@@ -107,7 +110,7 @@ export default function SessionDetailPage() {
                 {session.highlights.map((highlight, i) => (
                   <li key={i} className="flex gap-3">
                     <span className="mt-1 shrink-0 text-amber-700">✦</span>
-                    <span className="font-serif text-sm leading-relaxed text-stone-400">
+                    <span className="font-serif text-sm leading-loose text-graphite-300">
                       {highlight}
                     </span>
                   </li>
@@ -119,7 +122,10 @@ export default function SessionDetailPage() {
       )}
 
       {/* Navigation between sessions */}
-      <nav className="mt-12 flex justify-between border-t border-stone-800 pt-6">
+      <nav
+        className="mt-12 flex justify-between pt-6"
+        style={{ borderTop: '1px solid var(--graphite-700)' }}
+      >
         {(() => {
           const prev = sessions.find((s) => s.sessionNumber === session.sessionNumber - 1)
           const next = sessions.find((s) => s.sessionNumber === session.sessionNumber + 1)
@@ -131,8 +137,8 @@ export default function SessionDetailPage() {
                     to={`/actual-plays/${prev.id}`}
                     className="group flex flex-col font-serif text-sm"
                   >
-                    <span className="text-xs text-stone-600">← Previous</span>
-                    <span className="text-stone-400 transition-colors group-hover:text-amber-400">
+                    <span className="text-xs text-graphite-600">← Previous</span>
+                    <span className="text-graphite-400 transition-colors group-hover:text-amber-600">
                       Session {prev.sessionNumber}: {prev.title}
                     </span>
                   </Link>
@@ -144,8 +150,8 @@ export default function SessionDetailPage() {
                     to={`/actual-plays/${next.id}`}
                     className="group flex flex-col font-serif text-sm"
                   >
-                    <span className="text-xs text-stone-600">Next →</span>
-                    <span className="text-stone-400 transition-colors group-hover:text-amber-400">
+                    <span className="text-xs text-graphite-600">Next →</span>
+                    <span className="text-graphite-400 transition-colors group-hover:text-amber-600">
                       Session {next.sessionNumber}: {next.title}
                     </span>
                   </Link>

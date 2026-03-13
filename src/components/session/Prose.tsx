@@ -13,7 +13,7 @@ export function Prose({ children, className }: ProseProps) {
   return (
     <p
       className={cn(
-        'font-serif text-base leading-relaxed text-stone-300',
+        'font-serif text-base leading-loose text-graphite-200',
         className,
       )}
     >
@@ -33,9 +33,9 @@ interface ProseSectionProps {
 
 export function ProseSection({ heading, children, className }: ProseSectionProps) {
   return (
-    <section className={cn('space-y-4', className)}>
+    <section className={cn('space-y-5', className)}>
       {heading && (
-        <h3 className="font-serif text-xs uppercase tracking-widest text-stone-500 mb-2">
+        <h3 className="font-display text-xs uppercase tracking-widest text-graphite-400 mb-3">
           {heading}
         </h3>
       )}

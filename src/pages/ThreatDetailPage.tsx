@@ -35,7 +35,7 @@ export default function ThreatDetailPage() {
       <div className="pt-8">
         <Link
           to="/threats"
-          className="inline-flex items-center gap-2 font-serif text-sm text-stone-500 transition-colors hover:text-amber-400"
+          className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
           All Threats
@@ -43,7 +43,10 @@ export default function ThreatDetailPage() {
       </div>
 
       {/* Header */}
-      <header className="mt-6 border-b border-red-900/20 pb-8">
+      <header
+        className="mt-6 pb-8"
+        style={{ borderBottom: '1px solid rgba(150,30,30,0.2)' }}
+      >
         <div className="mb-3 flex flex-wrap gap-2">
           <Badge variant={threatLevelVariant[threat.threatLevel]}>
             {threatLevelLabel[threat.threatLevel]}
@@ -62,12 +65,12 @@ export default function ThreatDetailPage() {
           </Badge>
         </div>
 
-        <h1 className="font-serif text-3xl font-bold text-red-400 md:text-4xl">
+        <h1 className="nouveau-heading font-display text-3xl font-bold text-red-400 md:text-4xl">
           {threat.name}
         </h1>
 
         {firstSession && (
-          <p className="mt-3 font-serif text-xs text-stone-600">
+          <p className="mt-3 font-sc text-xs text-graphite-600">
             First encountered:{' '}
             <Link
               to={`/actual-plays/${firstSession.id}`}
@@ -81,17 +84,17 @@ export default function ThreatDetailPage() {
 
       {/* Description */}
       <section className="mt-8">
-        <h2 className="mb-3 font-serif text-xs uppercase tracking-widest text-stone-500">
+        <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
           Overview
         </h2>
-        <p className="font-serif text-base leading-relaxed text-stone-300">
+        <p className="font-serif text-base leading-loose text-graphite-200">
           {threat.description}
         </p>
       </section>
 
       {/* Known Facts */}
       <section className="mt-10">
-        <h2 className="mb-4 flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-stone-500">
+        <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
           <Eye size={12} className="text-amber-700" />
           Known Facts
         </h2>
@@ -99,7 +102,7 @@ export default function ThreatDetailPage() {
           {threat.knownFacts.map((fact, i) => (
             <li key={i} className="flex gap-3">
               <span className="mt-1 shrink-0 text-amber-700">✦</span>
-              <span className="font-serif text-sm leading-relaxed text-stone-400">{fact}</span>
+              <span className="font-serif text-sm leading-loose text-graphite-300">{fact}</span>
             </li>
           ))}
         </ul>
@@ -107,7 +110,7 @@ export default function ThreatDetailPage() {
 
       {/* Suspicions */}
       <section className="mt-10">
-        <h2 className="mb-4 flex items-center gap-2 font-serif text-xs uppercase tracking-widest text-stone-500">
+        <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
           <HelpCircle size={12} className="text-red-800" />
           Suspicions & Theories
         </h2>
@@ -115,7 +118,7 @@ export default function ThreatDetailPage() {
           {threat.suspicions.map((suspicion, i) => (
             <li key={i} className="flex gap-3">
               <span className="mt-1 shrink-0 text-red-900">?</span>
-              <span className="font-serif text-sm italic leading-relaxed text-stone-500">
+              <span className="font-serif text-sm italic leading-loose text-graphite-500">
                 {suspicion}
               </span>
             </li>

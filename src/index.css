@@ -2,27 +2,199 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────────────────────────────────────── */
 @layer base {
+  :root {
+    --graphite-950: #16161a;
+    --graphite-900: #1e1e22;
+    --graphite-800: #252528;
+    --graphite-700: #323238;
+    --graphite-600: #42424f;
+    --graphite-500: #58586a;
+    --graphite-400: #78788a;
+    --graphite-300: #a8a8b8;
+    --graphite-200: #c8c8d2;
+    --amber-glow: rgba(180, 120, 40, 0.08);
+  }
+
+  html {
+    font-size: 17px;
+  }
+
   body {
-    @apply bg-stone-950 text-stone-200;
-    font-family: 'Georgia', 'Times New Roman', serif;
+    background-color: var(--graphite-950);
+    color: var(--graphite-200);
+    font-family: 'IM Fell English', Georgia, 'Times New Roman', serif;
+    /* Subtle Art Nouveau micro-texture: tiny repeating vine/dot pattern */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1' fill='%23ffffff' fill-opacity='0.018'/%3E%3Ccircle cx='0' cy='0' r='0.7' fill='%23ffffff' fill-opacity='0.012'/%3E%3Ccircle cx='60' cy='0' r='0.7' fill='%23ffffff' fill-opacity='0.012'/%3E%3Ccircle cx='0' cy='60' r='0.7' fill='%23ffffff' fill-opacity='0.012'/%3E%3Ccircle cx='60' cy='60' r='0.7' fill='%23ffffff' fill-opacity='0.012'/%3E%3Cpath d='M28 30 Q30 26 32 30 Q30 34 28 30Z' fill='%23b87828' fill-opacity='0.025'/%3E%3Cpath d='M0 28 Q2 30 0 32' stroke='%23b87828' stroke-width='0.4' fill='none' stroke-opacity='0.03'/%3E%3Cpath d='M60 28 Q58 30 60 32' stroke='%23b87828' stroke-width='0.4' fill='none' stroke-opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', Georgia, serif;
+  }
+
+  /* Improve readability for all body text */
+  p {
+    line-height: 1.85;
   }
 }
 
-/* Victorian ornamental divider */
+/* ─────────────────────────────────────────────────────────────────────────────
+   COMPONENTS
+───────────────────────────────────────────────────────────────────────────── */
 @layer components {
+
+  /* ── Ornamental divider ─────────────────────────────────────────────────── */
   .ornament {
-    @apply flex items-center gap-4 my-6;
+    @apply flex items-center gap-4 my-8;
   }
   .ornament::before,
   .ornament::after {
     content: '';
-    @apply flex-1 border-t border-amber-700/40;
+    @apply flex-1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(180,120,40,0.5), transparent);
+  }
+  .ornament-symbol {
+    @apply font-serif text-amber-700 text-sm;
+    letter-spacing: 0.5em;
   }
 
-  /* Parchment card style */
+  /* ── Parchment card ─────────────────────────────────────────────────────── */
   .parchment {
-    background: linear-gradient(135deg, hsl(35 25% 10%) 0%, hsl(25 20% 8%) 100%);
-    border: 1px solid hsl(35 30% 20%);
+    background: linear-gradient(135deg, #1e1e24 0%, #1a1a1e 100%);
+    border: 1px solid rgba(180, 120, 40, 0.22);
+    position: relative;
+  }
+
+  /* Art Nouveau corner flourishes on parchment cards */
+  .parchment::before,
+  .parchment::after {
+    content: '';
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M2 26 Q2 2 26 2' stroke='%23b87828' stroke-width='1' fill='none' stroke-opacity='0.6'/%3E%3Cpath d='M2 26 Q8 14 14 8 Q18 4 26 2' stroke='%23b87828' stroke-width='0.5' fill='none' stroke-opacity='0.35'/%3E%3Ccircle cx='2' cy='26' r='1.5' fill='%23b87828' fill-opacity='0.5'/%3E%3Ccircle cx='26' cy='2' r='1.5' fill='%23b87828' fill-opacity='0.5'/%3E%3Cpath d='M6 22 Q6 18 10 16' stroke='%23b87828' stroke-width='0.6' fill='none' stroke-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+  .parchment::before {
+    top: 6px;
+    left: 6px;
+  }
+  .parchment::after {
+    bottom: 6px;
+    right: 6px;
+    transform: rotate(180deg);
+  }
+
+  /* ── Art Nouveau card (for general cards) ───────────────────────────────── */
+  .art-card {
+    position: relative;
+    overflow: visible;
+  }
+  .art-card::before,
+  .art-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M1 19 Q1 1 19 1' stroke='%23b87828' stroke-width='0.8' fill='none' stroke-opacity='0.45'/%3E%3Ccircle cx='1' cy='19' r='1.2' fill='%23b87828' fill-opacity='0.4'/%3E%3Ccircle cx='19' cy='1' r='1.2' fill='%23b87828' fill-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .art-card::before {
+    top: 4px;
+    left: 4px;
+  }
+  .art-card::after {
+    bottom: 4px;
+    right: 4px;
+    transform: rotate(180deg);
+  }
+
+  /* ── Nouveau heading flourish ───────────────────────────────────────────── */
+  .nouveau-heading {
+    position: relative;
+    display: inline-block;
+  }
+  .nouveau-heading::after {
+    content: '';
+    display: block;
+    margin: 0.35em auto 0;
+    height: 8px;
+    width: 80%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4 Q25 0 50 4 Q75 8 100 4 Q125 0 150 4 Q175 8 200 4' stroke='%23b87828' stroke-width='1' fill='none' stroke-opacity='0.55'/%3E%3Ccircle cx='100' cy='4' r='2' fill='%23b87828' fill-opacity='0.6'/%3E%3Ccircle cx='50' cy='4' r='1.2' fill='%23b87828' fill-opacity='0.4'/%3E%3Ccircle cx='150' cy='4' r='1.2' fill='%23b87828' fill-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ── Nouveau divider (richer than plain line) ───────────────────────────── */
+  .nouveau-divider {
+    @apply flex items-center justify-center gap-0 my-10;
+    height: 20px;
+    position: relative;
+  }
+  .nouveau-divider::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 20' preserveAspectRatio='none'%3E%3Cline x1='0' y1='10' x2='160' y2='10' stroke='%23b87828' stroke-width='0.6' stroke-opacity='0.35'/%3E%3Cline x1='240' y1='10' x2='400' y2='10' stroke='%23b87828' stroke-width='0.6' stroke-opacity='0.35'/%3E%3Cpath d='M160 10 Q170 4 180 10 Q190 16 200 10 Q210 4 220 10 Q230 16 240 10' stroke='%23b87828' stroke-width='1' fill='none' stroke-opacity='0.6'/%3E%3Ccircle cx='200' cy='10' r='2.5' fill='%23b87828' fill-opacity='0.55'/%3E%3Ccircle cx='180' cy='10' r='1.5' fill='%23b87828' fill-opacity='0.4'/%3E%3Ccircle cx='220' cy='10' r='1.5' fill='%23b87828' fill-opacity='0.4'/%3E%3Ccircle cx='160' cy='10' r='1' fill='%23b87828' fill-opacity='0.3'/%3E%3Ccircle cx='240' cy='10' r='1' fill='%23b87828' fill-opacity='0.3'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ── Nouveau pull-quote border ──────────────────────────────────────────── */
+  .nouveau-quote {
+    position: relative;
+    border-left: none !important;
+    padding-left: 1.5rem;
+  }
+  .nouveau-quote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 100' preserveAspectRatio='none'%3E%3Cline x1='2' y1='0' x2='2' y2='100' stroke='%23b87828' stroke-width='1.2' stroke-opacity='0.55'/%3E%3Ccircle cx='2' cy='50' r='3' fill='none' stroke='%23b87828' stroke-width='0.8' stroke-opacity='0.5'/%3E%3Ccircle cx='2' cy='50' r='1.2' fill='%23b87828' fill-opacity='0.5'/%3E%3Cpath d='M2 20 Q6 30 2 40' stroke='%23b87828' stroke-width='0.6' fill='none' stroke-opacity='0.4'/%3E%3Cpath d='M2 60 Q6 70 2 80' stroke='%23b87828' stroke-width='0.6' fill='none' stroke-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 12px 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ── Nouveau navbar border ──────────────────────────────────────────────── */
+  .nouveau-nav-border {
+    position: relative;
+  }
+  .nouveau-nav-border::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 3' preserveAspectRatio='none'%3E%3Cpath d='M0 1.5 Q100 0 200 1.5 Q300 3 400 1.5 Q500 0 600 1.5 Q700 3 800 1.5' stroke='%23b87828' stroke-width='0.8' fill='none' stroke-opacity='0.4'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ── Page header Art Nouveau frame ─────────────────────────────────────── */
+  .nouveau-page-header {
+    position: relative;
+  }
+  .nouveau-page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 120'%3E%3Cpath d='M20 10 Q10 10 10 20' stroke='%23b87828' stroke-width='1.2' fill='none' stroke-opacity='0.4'/%3E%3Cpath d='M580 10 Q590 10 590 20' stroke='%23b87828' stroke-width='1.2' fill='none' stroke-opacity='0.4'/%3E%3Cpath d='M20 110 Q10 110 10 100' stroke='%23b87828' stroke-width='1.2' fill='none' stroke-opacity='0.4'/%3E%3Cpath d='M580 110 Q590 110 590 100' stroke='%23b87828' stroke-width='1.2' fill='none' stroke-opacity='0.4'/%3E%3Cpath d='M10 20 L10 100' stroke='%23b87828' stroke-width='0.6' fill='none' stroke-opacity='0.2'/%3E%3Cpath d='M590 20 L590 100' stroke='%23b87828' stroke-width='0.6' fill='none' stroke-opacity='0.2'/%3E%3Ccircle cx='10' cy='60' r='2' fill='%23b87828' fill-opacity='0.25'/%3E%3Ccircle cx='590' cy='60' r='2' fill='%23b87828' fill-opacity='0.25'/%3E%3Cpath d='M30 10 Q60 4 100 8' stroke='%23b87828' stroke-width='0.5' fill='none' stroke-opacity='0.2'/%3E%3Cpath d='M570 10 Q540 4 500 8' stroke='%23b87828' stroke-width='0.5' fill='none' stroke-opacity='0.2'/%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
   }
 }

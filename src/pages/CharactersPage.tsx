@@ -52,11 +52,16 @@ export default function CharactersPage() {
             key={value}
             onClick={() => setFilter(value)}
             className={cn(
-              'rounded border px-3 py-1 font-serif text-xs tracking-wide transition-colors',
+              'rounded border px-3 py-1 font-sc text-xs tracking-wide transition-colors',
               filter === value
-                ? 'border-amber-700 bg-amber-950/50 text-amber-400'
-                : 'border-stone-800 bg-stone-900/40 text-stone-500 hover:border-stone-700 hover:text-stone-300',
+                ? 'border-amber-700 text-amber-600'
+                : 'text-graphite-500 hover:text-graphite-300',
             )}
+            style={
+              filter === value
+                ? { backgroundColor: 'rgba(120,60,10,0.3)' }
+                : { borderColor: 'var(--graphite-700)', backgroundColor: 'rgba(30,30,34,0.4)' }
+            }
           >
             {label}
           </button>
@@ -69,7 +74,19 @@ export default function CharactersPage() {
           <Link
             key={character.id}
             to={`/characters/${character.id}`}
-            className="group flex flex-col rounded-lg border border-stone-800 bg-stone-900/40 p-5 transition-all hover:border-amber-800/40 hover:bg-stone-900/70"
+            className="art-card group flex flex-col rounded-lg p-5 transition-all"
+            style={{
+              border: '1px solid var(--graphite-700)',
+              backgroundColor: 'rgba(30,30,34,0.5)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'rgba(180,120,40,0.35)'
+              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.8)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--graphite-700)'
+              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.5)'
+            }}
           >
             <div className="mb-3 flex items-start justify-between gap-2">
               <div className="flex flex-wrap gap-2">
@@ -86,24 +103,24 @@ export default function CharactersPage() {
               />
             </div>
 
-            <h2 className="font-serif text-lg font-semibold text-stone-200 transition-colors group-hover:text-amber-300">
+            <h2 className="mt-1 font-display text-xl font-semibold text-amber-600 group-hover:text-amber-200 transition-colors">
               {character.name}
               {character.alias && (
-                <span className="ml-2 font-serif text-sm font-normal italic text-stone-500">
+                <span className="ml-2 font-serif text-sm font-normal italic text-graphite-500">
                   "{character.alias}"
                 </span>
               )}
             </h2>
-            <p className="mt-0.5 font-serif text-xs text-amber-700/80">{character.occupation}</p>
+            <p className="mt-0.5 font-sc text-xs text-amber-700/80">{character.occupation}</p>
 
-            <p className="mt-3 line-clamp-2 font-serif text-sm leading-relaxed text-stone-500">
+            <p className="mt-3 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
               {character.description}
             </p>
 
             {/* Conditions (Hunters only) */}
             {character.type === 'hunter' && character.conditions && character.conditions.length > 0 && (
               <div className="mt-3">
-                <p className="mb-1 font-serif text-xs uppercase tracking-widest text-stone-600">
+                <p className="mb-1 font-sc text-xs uppercase tracking-widest text-graphite-600">
                   Conditions
                 </p>
                 <div className="flex flex-wrap gap-1">
@@ -132,7 +149,7 @@ export default function CharactersPage() {
 
       {filtered.length === 0 && (
         <div className="py-20 text-center">
-          <p className="font-serif text-stone-600 italic">No characters found.</p>
+          <p className="font-serif text-graphite-600 italic">No characters found.</p>
         </div>
       )}
     </div>
