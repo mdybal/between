@@ -205,6 +205,13 @@ export default function MapPage() {
 
         if (showZones && !map.hasLayer(poly)) poly.addTo(map)
 
+        // Update polygon geometry to match the canonical entry's polygon
+        const rc = rcRef.current
+        if (rc) {
+          const latlngs = entry.polygon.map(([y, x]: [number, number]) => rc.unproject([x, y]))
+          poly.setLatLngs(latlngs)
+        }
+
         const isHighlighted = highlightId === id
         const isCurrent = session !== null && sessionIndex(entry.sessionId) === selIdx
 
