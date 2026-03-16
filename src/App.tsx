@@ -3,6 +3,7 @@ import Layout from '@/components/layout/Layout'
 import HomePage from '@/pages/HomePage'
 import ActualPlaysPage from '@/pages/ActualPlaysPage'
 import SessionDetailPage from '@/pages/SessionDetailPage'
+import { Analytics } from '@vercel/analytics/react'
 import CharactersPage from '@/pages/CharactersPage'
 import CharacterDetailPage from '@/pages/CharacterDetailPage'
 import ThreatsPage from '@/pages/ThreatsPage'
@@ -12,6 +13,7 @@ import MapPage from '@/pages/MapPage'
 export default function App() {
   return (
     <BrowserRouter>
+      <Analytics />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
@@ -37,5 +39,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    
   )
 }
