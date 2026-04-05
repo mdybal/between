@@ -10,8 +10,8 @@ import type { PointOfInterest, MapZone, MapSession, PoiCategory } from '@/types'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const IMG_W = 3500
-const IMG_H = 1952
+const IMG_W = 6000
+const IMG_H = 4145
 
 // ─── Session ordering ─────────────────────────────────────────────────────────
 
