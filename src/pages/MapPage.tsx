@@ -6,7 +6,7 @@ import { Layers, Clock, X, ChevronRight, Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
 import { pointsOfInterest, mapZones, mapSessions } from '@/data/mapData'
-import type { PointOfInterest, MapZone, MapSession, PoiCategory } from '@/types'
+import type { PointOfInterest, MapZone, PoiCategory } from '@/types'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -17,7 +17,7 @@ const IMG_H = 4145
 
 // Ordered list of session ids (index = chronological order)
 const SESSION_ORDER = mapSessions.map((s) => s.id)
-const MAX_SESSION_IDX = SESSION_ORDER.length - 1
+//const MAX_SESSION_IDX = SESSION_ORDER.length - 1
 
 function sessionIndex(sessionId: string): number {
   return SESSION_ORDER.indexOf(sessionId)
