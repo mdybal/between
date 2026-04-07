@@ -25,16 +25,16 @@ function sessionIndex(sessionId: string): number {
 
 // ─── Canonical entry helper ───────────────────────────────────────────────────
 //
-// Returns the entry with the highest sessionIdx that is <= selIdx, or null.
-// This is the "what did this element look like at session selIdx?" query.
+// Returns the entry with the highest sessionIdx among the selected sessions, or null.
+// This is the "what did this element look like in the selected sessions?" query.
 
 function canonicalAt<T extends { id: string; sessionId: string }>(
   id: string,
-  selIdx: number,
+  selectedSessions: Set<string>,
   all: T[],
 ): T | null {
   const candidates = all
-    .filter((e) => e.id === id && sessionIndex(e.sessionId) <= selIdx)
+    .filter((e) => e.id === id && selectedSessions.has(e.sessionId))
     .sort((a, b) => sessionIndex(b.sessionId) - sessionIndex(a.sessionId))
   return candidates[0] ?? null
 }
@@ -118,7 +118,9 @@ export default function MapPage() {
 
   const [activePanel, setActivePanel] = useState<ActivePanel>(null)
   const [selectedItem, setSelectedItem] = useState<SelectedItem>(null)
-  const [selectedSession, setSelectedSession] = useState<MapSession | null>(null)
+  const [selectedSessions, setSelectedSessions] = useState<Set<string>>(
+    () => new Set(mapSessions.map((s) => s.id))
+  )
   const [highlightedItemId, setHighlightedItemId] = useState<string | null>(null)
 
   const [showPoi, setShowPoi] = useState(true)
@@ -141,16 +143,17 @@ export default function MapPage() {
   //     POI disabled: always full opacity, light-grey (regardless of current/past)
   //
   const applySessionFilter = useCallback(
-    (session: MapSession | null, highlightId: string | null) => {
+    (selected: Set<string>, highlightId: string | null) => {
       const map = mapRef.current
       if (!map) return
 
-      // The session index to query against
-      const selIdx = session === null ? MAX_SESSION_IDX : sessionIndex(session.id)
+      const maxSelectedIdx = selected.size > 0
+        ? Math.max(...Array.from(selected).map(id => sessionIndex(id)))
+        : -1
 
       // ── POIs ──────────────────────────────────────────────────────────────
       poiRefsRef.current.forEach(({ id, marker }) => {
-        const entry = canonicalAt(id, selIdx, pointsOfInterest)
+        const entry = canonicalAt(id, selected, pointsOfInterest)
 
         // No entry at or before this session, or explicitly removed → hide
         if (!entry || entry.state === 'removed') {
@@ -162,19 +165,18 @@ export default function MapPage() {
 
         const cfg = categoryConfig[entry.category]
         const isHighlighted = highlightId === id
-        // isCurrent only matters when a session is selected
-        const isCurrent = session !== null && sessionIndex(entry.sessionId) === selIdx
+        const isCurrent = sessionIndex(entry.sessionId) === maxSelectedIdx
 
         if (isHighlighted) {
           marker.setIcon(makeHighlightIcon(entry.state === 'disabled' ? DISABLED_COLOR : cfg.color))
         } else if (entry.state === 'disabled') {
-          // Disabled: always full opacity, light-grey (rule 3)
+          // Disabled: always full opacity, light-grey
           marker.setIcon(makePinIcon(DISABLED_COLOR, 1))
-        } else if (session === null || isCurrent) {
-          // No session selected, or introduced/updated this session → normal
+        } else if (isCurrent) {
+          // Latest selected session → normal
           marker.setIcon(makePinIcon(cfg.color, 1))
         } else {
-          // From an earlier session → dim (rule 2.3)
+          // From an earlier selected session → dim
           marker.setIcon(makePinIcon(cfg.color, 0.4))
         }
 
@@ -195,9 +197,9 @@ export default function MapPage() {
 
       // ── Zones ──────────────────────────────────────────────────────────────
       zoneRefsRef.current.forEach(({ id, poly }) => {
-        const entry = canonicalAt(id, selIdx, mapZones)
+        const entry = canonicalAt(id, selected, mapZones)
 
-        // No entry at or before this session, or explicitly removed → hide
+        // No entry in selected sessions, or explicitly removed → hide
         if (!entry || entry.state === 'removed') {
           if (map.hasLayer(poly)) poly.remove()
           return
@@ -213,18 +215,18 @@ export default function MapPage() {
         }
 
         const isHighlighted = highlightId === id
-        const isCurrent = session !== null && sessionIndex(entry.sessionId) === selIdx
+        const isCurrent = sessionIndex(entry.sessionId) === maxSelectedIdx
 
         if (isHighlighted) {
           poly.setStyle({ fillOpacity: 0.35, opacity: 1, weight: 3 })
         } else if (entry.state === 'disabled') {
           // Disabled zone: visually subdued
           poly.setStyle({ fillOpacity: 0.08, opacity: 0.3, weight: 2 })
-        } else if (session === null || isCurrent) {
-          // No session selected, or current session → normal
+        } else if (isCurrent) {
+          // Latest selected session → normal
           poly.setStyle({ fillOpacity: 0.15, opacity: 0.6, weight: 2 })
         } else {
-          // From an earlier session → dim (rule 2.3)
+          // From an earlier selected session → dim
           poly.setStyle({ fillOpacity: 0.07, opacity: 0.25, weight: 2 })
         }
 
@@ -258,6 +260,9 @@ export default function MapPage() {
 
     const rc = new L.RasterCoords(map, [IMG_W, IMG_H])
     rcRef.current = rc
+
+    // Add padding to the bounds so the user can pan past the strict image edges
+    map.setMaxBounds(rc.getMaxBounds().pad(0.5))
 
     map.setView(rc.unproject([IMG_W, IMG_H]), 2)
 
@@ -345,8 +350,8 @@ export default function MapPage() {
 
   // ── Re-apply filter when session, layer visibility, or highlight changes ───
   useEffect(() => {
-    applySessionFilter(selectedSession, highlightedItemId)
-  }, [selectedSession, showPoi, showZones, highlightedItemId, applySessionFilter])
+    applySessionFilter(selectedSessions, highlightedItemId)
+  }, [selectedSessions, showPoi, showZones, highlightedItemId, applySessionFilter])
 
   // ── Pan to coords only if outside current viewport (with margin) ──────────
   const panToIfNeeded = useCallback((coords: [number, number]) => {
@@ -361,17 +366,27 @@ export default function MapPage() {
     }
   }, [])
 
-  // ── Pan to first active POI when session selected (no highlight marker) ────
+  const isFirstRender = useRef(true)
+
+  // ── Pan to first active POI when latest selected session changes ────
   useEffect(() => {
-    if (!selectedSession) return
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
+    }
+
+    if (selectedSessions.size === 0) return
+
+    const maxSelectedIdx = Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id)))
+    const latestSessionId = SESSION_ORDER[maxSelectedIdx]
 
     const anchor = pointsOfInterest.find(
-      (p) => p.sessionId === selectedSession.id && p.state === 'active',
+      (p) => p.sessionId === latestSessionId && p.state === 'active',
     )
     if (!anchor) return
 
     panToIfNeeded(anchor.coords)
-  }, [selectedSession, panToIfNeeded])
+  }, [selectedSessions, panToIfNeeded])
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
   const togglePanel = (panel: ActivePanel) =>
@@ -385,9 +400,11 @@ export default function MapPage() {
 
   const flyToZone = (zone: MapZone) => {
     const poly = zoneRefsRef.current.find((z) => z.id === zone.id)?.poly
-    if (poly) {
+    const rc = rcRef.current
+    if (poly && rc) {
       const center = poly.getBounds().getCenter()
-      panToIfNeeded([center.lat, center.lng])
+      const pt = rc.project(center)
+      panToIfNeeded([pt.y, pt.x])
     }
     setSelectedItem({ type: 'zone', data: zone })
     setHighlightedItemId(zone.id)
@@ -428,13 +445,20 @@ export default function MapPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          {selectedSession && (
+          {selectedSessions.size > 0 ? (
             <button
-              onClick={() => setSelectedSession(null)}
+              onClick={() => setSelectedSessions(new Set())}
               className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-600 transition-colors hover:border-amber-700"
             >
               <X size={12} />
-              Clear session
+              Clear selections
+            </button>
+          ) : (
+            <button
+              onClick={() => setSelectedSessions(new Set(mapSessions.map(s => s.id)))}
+              className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-600 transition-colors hover:border-amber-700"
+            >
+              Select all
             </button>
           )}
           <ToolbarButton
@@ -591,84 +615,100 @@ export default function MapPage() {
             <div className="space-y-1 font-serif text-xs text-stone-500">
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-amber-600" />
-                Current session — highlighted
+                Latest selected session — highlighted
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-stone-500" />
-                Earlier sessions — dimmed
+                Earlier selected sessions — dimmed
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-stone-800" />
-                Later sessions — hidden
+                Deselected sessions — hidden
               </div>
             </div>
           </div>
 
           <div className="relative">
-            {mapSessions.map((session, idx) => (
-              <button
-                key={session.id}
-                onClick={() => {
-                  setSelectedSession((prev) =>
-                    prev?.id === session.id ? null : session,
-                  )
-                  setSelectedItem(null)
-                  setHighlightedItemId(null)
-                  setActivePanel('timeline')
-                }}
-                className={cn(
-                  'group relative flex w-full gap-4 rounded-lg px-3 py-3 text-left transition-colors',
-                  selectedSession?.id === session.id
-                    ? 'bg-amber-950/40'
-                    : 'hover:bg-stone-800/50',
-                )}
-              >
-                {/* Timeline spine */}
-                <div className="flex flex-col items-center">
-                  <div
-                    className={cn(
-                      'mt-1 h-3 w-3 shrink-0 rounded-full border-2',
-                      selectedSession?.id === session.id
-                        ? 'border-amber-600 bg-amber-600'
-                        : 'border-amber-700 bg-stone-900 group-hover:border-amber-500',
-                    )}
-                  />
-                  {idx < mapSessions.length - 1 && (
-                    <div className="mt-1 w-px flex-1 bg-amber-900/30" style={{ minHeight: 24 }} />
-                  )}
-                </div>
+            {mapSessions.map((session, idx) => {
+              const isSelected = selectedSessions.has(session.id)
+              const maxSelectedIdx = selectedSessions.size > 0 ? Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id))) : -1
+              const isLatest = isSelected && sessionIndex(session.id) === maxSelectedIdx
 
-                <div className="flex-1 pb-2">
-                  <p className="font-serif text-xs text-amber-600/80">
-                    Session {idx + 1}
-                  </p>
-                  <p
-                    className={cn(
-                      'font-serif text-sm font-semibold leading-snug',
-                      selectedSession?.id === session.id
-                        ? 'text-amber-600'
-                        : 'text-stone-300',
+              return (
+                <button
+                  key={session.id}
+                  onClick={() => {
+                    setSelectedSessions((prev) => {
+                      const next = new Set(prev)
+                      if (next.has(session.id)) {
+                        next.delete(session.id)
+                      } else {
+                        next.add(session.id)
+                      }
+                      return next
+                    })
+                    setSelectedItem(null)
+                    setHighlightedItemId(null)
+                  }}
+                  className={cn(
+                    'group relative flex w-full gap-4 rounded-lg px-3 py-3 text-left transition-colors',
+                    isSelected
+                      ? 'bg-amber-950/40'
+                      : 'hover:bg-stone-800/50',
+                  )}
+                >
+                  {/* Timeline spine */}
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={cn(
+                        'mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors',
+                        isSelected
+                          ? isLatest
+                            ? 'border-amber-600 bg-amber-600'
+                            : 'border-amber-600/50 bg-amber-600/20'
+                          : 'border-stone-700 bg-stone-900 group-hover:border-stone-500',
+                      )}
+                    >
+                      {isSelected && (
+                        <svg className={cn("h-3 w-3", isLatest ? "text-stone-950" : "text-amber-600/80")} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    {idx < mapSessions.length - 1 && (
+                      <div className="mt-2 w-px flex-1 bg-amber-900/30" style={{ minHeight: 24 }} />
                     )}
-                  >
-                    {session.title}
-                  </p>
-                  <p className="mt-1 font-serif text-xs leading-relaxed text-stone-500">
-                    {session.description}
-                  </p>
-                  <p className="mt-1.5 font-serif text-xs text-amber-700/60 italic">
-                    {selectedSession?.id === session.id
-                      ? '✦ Active — click to deselect'
-                      : 'Click to filter map'}
-                  </p>
-                </div>
-              </button>
-            ))}
+                  </div>
+
+                  <div className="flex-1 pb-2">
+                    <p className={cn("font-serif text-xs", isLatest ? "text-amber-600/80" : "text-stone-500")}>
+                      Session {idx + 1}
+                    </p>
+                    <p
+                      className={cn(
+                        'font-serif text-sm font-semibold leading-snug',
+                        isSelected
+                          ? isLatest
+                            ? 'text-amber-600'
+                            : 'text-amber-600/60'
+                          : 'text-stone-500',
+                      )}
+                    >
+                      {session.title}
+                    </p>
+                    <p className={cn("mt-1 font-serif text-xs leading-relaxed", isSelected ? "text-stone-400" : "text-stone-600")}>
+                      {session.description}
+                    </p>
+                  </div>
+                </button>
+              )
+            })}
           </div>
         </SidePanel>
 
         {/* ── Detail card (POI / Zone) ── */}
         {selectedItem && (
-          <div className="absolute bottom-4 left-1/2 z-[1000] w-full max-w-sm -translate-x-1/2 px-4">
+          <div className="absolute bottom-6 left-6 z-[1000] w-full max-w-sm">
             <div className="rounded-lg border border-amber-900/40 bg-stone-950/95 p-4 shadow-2xl backdrop-blur-sm">
               <button
                 onClick={() => {
