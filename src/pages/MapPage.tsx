@@ -126,6 +126,11 @@ export default function MapPage() {
   const [showPoi, setShowPoi] = useState(true)
   const [showZones, setShowZones] = useState(true)
 
+  // Drag state for the detail card
+  const [cardOffset, setCardOffset] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStartPos = useRef({ x: 0, y: 0 })
+
   // ── Apply session filter to all markers/polygons ──────────────────────────
   //
   // Rules:
@@ -155,13 +160,13 @@ export default function MapPage() {
       poiRefsRef.current.forEach(({ id, marker }) => {
         const entry = canonicalAt(id, selected, pointsOfInterest)
 
-        // No entry at or before this session, or explicitly removed → hide
-        if (!entry || entry.state === 'removed') {
+        // No entry at or before this session, explicitly removed, or POIs toggled off → hide
+        if (!showPoi || !entry || entry.state === 'removed') {
           if (map.hasLayer(marker)) marker.remove()
           return
         }
 
-        if (showPoi && !map.hasLayer(marker)) marker.addTo(map)
+        if (!map.hasLayer(marker)) marker.addTo(map)
 
         const cfg = categoryConfig[entry.category]
         const isHighlighted = highlightId === id
@@ -199,13 +204,13 @@ export default function MapPage() {
       zoneRefsRef.current.forEach(({ id, poly }) => {
         const entry = canonicalAt(id, selected, mapZones)
 
-        // No entry in selected sessions, or explicitly removed → hide
-        if (!entry || entry.state === 'removed') {
+        // No entry in selected sessions, explicitly removed, or Zones toggled off → hide
+        if (!showZones || !entry || entry.state === 'removed') {
           if (map.hasLayer(poly)) poly.remove()
           return
         }
 
-        if (showZones && !map.hasLayer(poly)) poly.addTo(map)
+        if (!map.hasLayer(poly)) poly.addTo(map)
 
         // Update polygon geometry to match the canonical entry's polygon
         const rc = rcRef.current
@@ -365,6 +370,13 @@ export default function MapPage() {
       map.panTo(latlng, { animate: true, duration: 0.6 })
     }
   }, [])
+
+  // ── Reset detail card position when it closes ─────────────────────────────
+  useEffect(() => {
+    if (!selectedItem) {
+      setCardOffset({ x: 0, y: 0 })
+    }
+  }, [selectedItem])
 
   const isFirstRender = useRef(true)
 
@@ -708,8 +720,39 @@ export default function MapPage() {
 
         {/* ── Detail card (POI / Zone) ── */}
         {selectedItem && (
-          <div className="absolute bottom-6 left-6 z-[1000] w-full max-w-sm">
-            <div className="rounded-lg border border-amber-900/40 bg-stone-950/95 p-4 shadow-2xl backdrop-blur-sm">
+          <div
+            className="absolute bottom-6 left-6 z-[1000] w-full max-w-sm touch-none"
+            style={{ transform: `translate(${cardOffset.x}px, ${cardOffset.y}px)` }}
+            onPointerDown={(e) => {
+              if (e.button !== 0) return // Only left clicks
+              if ((e.target as HTMLElement).closest('button')) return // Ignore if clicking a button
+              e.currentTarget.setPointerCapture(e.pointerId)
+              setIsDragging(true)
+              dragStartPos.current = {
+                x: e.clientX - cardOffset.x,
+                y: e.clientY - cardOffset.y,
+              }
+            }}
+            onPointerMove={(e) => {
+              if (!isDragging) return
+              setCardOffset({
+                x: e.clientX - dragStartPos.current.x,
+                y: e.clientY - dragStartPos.current.y,
+              })
+            }}
+            onPointerUp={(e) => {
+              setIsDragging(false)
+              e.currentTarget.releasePointerCapture(e.pointerId)
+            }}
+            onPointerCancel={(e) => {
+              setIsDragging(false)
+              e.currentTarget.releasePointerCapture(e.pointerId)
+            }}
+          >
+            <div className={cn(
+              "rounded-lg border border-amber-900/40 bg-stone-950/95 p-4 shadow-2xl backdrop-blur-sm select-none",
+              isDragging ? "cursor-grabbing" : "cursor-grab"
+            )}>
               <button
                 onClick={() => {
                   setSelectedItem(null)
