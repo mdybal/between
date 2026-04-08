@@ -4,15 +4,10 @@ import { ChevronRight } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
 import { characters } from '@/data/characters'
+import { charactersPl } from '@/data/characters_pl'
 import type { CharacterType } from '@/types'
 import { cn } from '@/lib/utils'
-
-const typeLabels: Record<CharacterType, string> = {
-  hunter: 'Hunter',
-  npc: 'NPC',
-  ally: 'Ally',
-  antagonist: 'Antagonist',
-}
+import { useLanguage } from '@/i18n/LanguageContext'
 
 const typeBadgeVariant: Record<CharacterType, 'amber' | 'green' | 'muted' | 'red'> = {
   hunter: 'amber',
@@ -28,22 +23,25 @@ const statusBadgeVariant = {
   unknown: 'muted',
 } as const
 
-const filters: { value: CharacterType | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'hunter', label: 'Hunters' },
-  { value: 'npc', label: 'NPCs' },
-  { value: 'ally', label: 'Allies' },
-  { value: 'antagonist', label: 'Antagonists' },
-]
-
 export default function CharactersPage() {
   const [filter, setFilter] = useState<CharacterType | 'all'>('all')
+  const { lang, t } = useLanguage()
 
-  const filtered = filter === 'all' ? characters : characters.filter((c) => c.type === filter)
+  const activeCharacters = lang === 'pl' ? charactersPl : characters
+
+  const filters: { value: CharacterType | 'all'; label: string }[] = [
+    { value: 'all', label: t.characters.filters.all },
+    { value: 'hunter', label: t.characters.filters.hunter },
+    { value: 'npc', label: t.characters.filters.npc },
+    { value: 'ally', label: t.characters.filters.ally },
+    { value: 'antagonist', label: t.characters.filters.antagonist },
+  ]
+
+  const filtered = filter === 'all' ? activeCharacters : activeCharacters.filter((c) => c.type === filter)
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-16">
-      <PageHeader title="Characters" subtitle="Dramatis Personae" />
+      <PageHeader title={t.characters.title} subtitle={t.characters.subtitle} />
 
       {/* Filter tabs */}
       <div className="mb-8 flex flex-wrap gap-2">
@@ -91,10 +89,10 @@ export default function CharactersPage() {
             <div className="mb-3 flex items-start justify-between gap-2">
               <div className="flex flex-wrap gap-2">
                 <Badge variant={typeBadgeVariant[character.type]}>
-                  {typeLabels[character.type]}
+                  {t.characters.typeLabels[character.type]}
                 </Badge>
                 <Badge variant={statusBadgeVariant[character.status]}>
-                  {character.status}
+                  {t.characters.statusLabels[character.status]}
                 </Badge>
               </div>
               <ChevronRight
@@ -121,7 +119,7 @@ export default function CharactersPage() {
             {character.type === 'hunter' && character.conditions && character.conditions.length > 0 && (
               <div className="mt-3">
                 <p className="mb-1 font-sc text-xs uppercase tracking-widest text-graphite-600">
-                  Conditions
+                  {t.characters.conditions}
                 </p>
                 <div className="flex flex-wrap gap-1">
                   {character.conditions.map((condition) => (
@@ -149,7 +147,7 @@ export default function CharactersPage() {
 
       {filtered.length === 0 && (
         <div className="py-20 text-center">
-          <p className="font-serif text-graphite-600 italic">No characters found.</p>
+          <p className="font-serif text-graphite-600 italic">{t.characters.empty}</p>
         </div>
       )}
     </div>

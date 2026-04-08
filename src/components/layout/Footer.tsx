@@ -1,4 +1,8 @@
+import { useLanguage } from '@/i18n/LanguageContext'
+
 export default function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer
       className="mt-auto py-8 text-center"
@@ -10,10 +14,10 @@ export default function Footer() {
       {/* Art Nouveau footer ornament */}
       <div className="nouveau-divider mx-auto max-w-xs mb-5" />
       <p className="font-sc text-xs tracking-widest text-graphite-500 uppercase">
-        ✦ &nbsp; The Between &nbsp; · &nbsp; A Victorian TTRPG Campaign &nbsp; ✦
+        {t.footer.tagline}
       </p>
       <p className="mt-1 font-serif text-xs text-graphite-600 italic">
-        London, 1893
+        {t.footer.location}
       </p>
     </footer>
   )

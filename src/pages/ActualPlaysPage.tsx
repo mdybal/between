@@ -3,15 +3,20 @@ import { Calendar, ChevronRight } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
 import { sessions } from '@/data/sessions'
+import { sessionsPl } from '@/data/sessions_pl'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 export default function ActualPlaysPage() {
-  const sorted = [...sessions].sort((a, b) => b.sessionNumber - a.sessionNumber)
+  const { lang, t } = useLanguage()
+
+  const activeSessions = lang === 'pl' ? sessionsPl : sessions
+  const sorted = [...activeSessions].sort((a, b) => b.sessionNumber - a.sessionNumber)
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-16">
       <PageHeader
-        title="Actual Plays"
-        subtitle="Chronicles of the Investigation"
+        title={t.actualPlays.title}
+        subtitle={t.actualPlays.subtitle}
       />
 
       <div className="space-y-4">
@@ -38,11 +43,11 @@ export default function ActualPlaysPage() {
                 {/* Session number + date */}
                 <div className="mb-2 flex flex-wrap items-center gap-3">
                   <span className="font-sc text-xs uppercase tracking-widest text-amber-700">
-                    Session {session.sessionNumber}
+                    {t.actualPlays.session} {session.sessionNumber}
                   </span>
                   <span className="flex items-center gap-1 font-sc text-xs text-graphite-600">
                     <Calendar size={11} />
-                    {new Date(session.date).toLocaleDateString('en-GB', {
+                    {new Date(session.date).toLocaleDateString(lang === 'pl' ? 'pl-PL' : 'en-GB', {
                       day: 'numeric',
                       month: 'long',
                       year: 'numeric',
@@ -81,10 +86,10 @@ export default function ActualPlaysPage() {
         ))}
       </div>
 
-      {sessions.length === 0 && (
+      {activeSessions.length === 0 && (
         <div className="py-20 text-center">
           <p className="font-serif text-graphite-600 italic">
-            The chronicles have yet to be written…
+            {t.actualPlays.empty}
           </p>
         </div>
       )}

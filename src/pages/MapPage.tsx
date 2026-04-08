@@ -6,7 +6,9 @@ import { Layers, Clock, X, ChevronRight, Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Badge from '@/components/ui/Badge'
 import { pointsOfInterest, mapZones, mapSessions } from '@/data/mapData'
+import { pointsOfInterestPl, mapZonesPl, mapSessionsPl } from '@/data/mapData_pl'
 import type { PointOfInterest, MapZone, PoiCategory } from '@/types'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -17,16 +19,12 @@ const IMG_H = 4145
 
 // Ordered list of session ids (index = chronological order)
 const SESSION_ORDER = mapSessions.map((s) => s.id)
-//const MAX_SESSION_IDX = SESSION_ORDER.length - 1
 
 function sessionIndex(sessionId: string): number {
   return SESSION_ORDER.indexOf(sessionId)
 }
 
 // ─── Canonical entry helper ───────────────────────────────────────────────────
-//
-// Returns the entry with the highest sessionIdx among the selected sessions, or null.
-// This is the "what did this element look like in the selected sessions?" query.
 
 function canonicalAt<T extends { id: string; sessionId: string }>(
   id: string,
@@ -41,20 +39,18 @@ function canonicalAt<T extends { id: string; sessionId: string }>(
 
 // ─── POI styling ─────────────────────────────────────────────────────────────
 
-const categoryConfig: Record<
-  PoiCategory,
-  {
-    label: string
-    color: string
-    badgeVariant: 'amber' | 'red' | 'green' | 'muted' | 'default'
-  }
-> = {
-  location:      { label: 'Location',    color: '#f59e0b', badgeVariant: 'amber' },
-  'crime-scene': { label: 'Crime Scene', color: '#ef4444', badgeVariant: 'red' },
-  'safe-house':  { label: 'Safe House',  color: '#10b981', badgeVariant: 'green' },
-  danger:        { label: 'Danger',      color: '#f97316', badgeVariant: 'red' },
-  clue:          { label: 'Clue',        color: '#a78bfa', badgeVariant: 'default' },
-  unknown:       { label: 'Unknown',     color: '#6b7280', badgeVariant: 'muted' },
+type CategoryConfig = {
+  color: string
+  badgeVariant: 'amber' | 'red' | 'green' | 'muted' | 'default'
+}
+
+const categoryConfigBase: Record<PoiCategory, CategoryConfig> = {
+  location:      { color: '#f59e0b', badgeVariant: 'amber' },
+  'crime-scene': { color: '#ef4444', badgeVariant: 'red' },
+  'safe-house':  { color: '#10b981', badgeVariant: 'green' },
+  danger:        { color: '#f97316', badgeVariant: 'red' },
+  clue:          { color: '#a78bfa', badgeVariant: 'default' },
+  unknown:       { color: '#6b7280', badgeVariant: 'muted' },
 }
 
 // ─── Icon factories ───────────────────────────────────────────────────────────
@@ -91,18 +87,14 @@ type SelectedItem =
 
 // ─── Leaflet layer refs ───────────────────────────────────────────────────────
 
-// Each ref stores the element id and the Leaflet object.
-// The actual entry data is always looked up dynamically via canonicalAt.
 interface PoiRef {
   id: string
-  // The earliest entry — used for stable coords, category, name for tooltip
   baseEntry: PointOfInterest
   marker: L.Marker
 }
 
 interface ZoneRef {
   id: string
-  // The earliest entry — used for stable coords, color, name for tooltip
   baseEntry: MapZone
   poly: L.Polygon
 }
@@ -115,6 +107,13 @@ export default function MapPage() {
   const rcRef = useRef<L.RasterCoords | null>(null)
   const poiRefsRef = useRef<PoiRef[]>([])
   const zoneRefsRef = useRef<ZoneRef[]>([])
+
+  const { lang, t } = useLanguage()
+
+  // Pick the right data source based on language
+  const activePois = lang === 'pl' ? pointsOfInterestPl : pointsOfInterest
+  const activeZones = lang === 'pl' ? mapZonesPl : mapZones
+  const activeSessions = lang === 'pl' ? mapSessionsPl : mapSessions
 
   const [activePanel, setActivePanel] = useState<ActivePanel>(null)
   const [selectedItem, setSelectedItem] = useState<SelectedItem>(null)
@@ -131,22 +130,17 @@ export default function MapPage() {
   const [isDragging, setIsDragging] = useState(false)
   const dragStartPos = useRef({ x: 0, y: 0 })
 
+  // Build category config with translated labels
+  const categoryConfig: Record<PoiCategory, CategoryConfig & { label: string }> = {
+    location:      { ...categoryConfigBase.location,      label: t.map.categoryLabels.location },
+    'crime-scene': { ...categoryConfigBase['crime-scene'], label: t.map.categoryLabels['crime-scene'] },
+    'safe-house':  { ...categoryConfigBase['safe-house'],  label: t.map.categoryLabels['safe-house'] },
+    danger:        { ...categoryConfigBase.danger,         label: t.map.categoryLabels.danger },
+    clue:          { ...categoryConfigBase.clue,           label: t.map.categoryLabels.clue },
+    unknown:       { ...categoryConfigBase.unknown,        label: t.map.categoryLabels.unknown },
+  }
+
   // ── Apply session filter to all markers/polygons ──────────────────────────
-  //
-  // Rules:
-  //   No session selected:
-  //     • Use canonicalAt(id, MAX_SESSION_IDX) — the overall latest entry
-  //     • If state='removed' → hide
-  //     • If state='disabled' → show grey at full opacity
-  //     • If state='active' → show normally
-  //
-  //   Session selected (selIdx = index of selected session):
-  //     2.1  canonicalAt returns null (no entry at or before selIdx) → hide
-  //     2.1  canonicalAt returns entry with state='removed' → hide
-  //     2.2  entry.sessionId == session.id (isCurrent) → show normally
-  //     2.3  entry.sessionId < session.id (isPast) → show dimmed
-  //     POI disabled: always full opacity, light-grey (regardless of current/past)
-  //
   const applySessionFilter = useCallback(
     (selected: Set<string>, highlightId: string | null) => {
       const map = mapRef.current
@@ -158,9 +152,8 @@ export default function MapPage() {
 
       // ── POIs ──────────────────────────────────────────────────────────────
       poiRefsRef.current.forEach(({ id, marker }) => {
-        const entry = canonicalAt(id, selected, pointsOfInterest)
+        const entry = canonicalAt(id, selected, activePois)
 
-        // No entry at or before this session, explicitly removed, or POIs toggled off → hide
         if (!showPoi || !entry || entry.state === 'removed') {
           if (map.hasLayer(marker)) marker.remove()
           return
@@ -168,31 +161,26 @@ export default function MapPage() {
 
         if (!map.hasLayer(marker)) marker.addTo(map)
 
-        const cfg = categoryConfig[entry.category]
+        const cfg = categoryConfigBase[entry.category]
         const isHighlighted = highlightId === id
         const isCurrent = sessionIndex(entry.sessionId) === maxSelectedIdx
 
         if (isHighlighted) {
           marker.setIcon(makeHighlightIcon(entry.state === 'disabled' ? DISABLED_COLOR : cfg.color))
         } else if (entry.state === 'disabled') {
-          // Disabled: always full opacity, light-grey
           marker.setIcon(makePinIcon(DISABLED_COLOR, 1))
         } else if (isCurrent) {
-          // Latest selected session → normal
           marker.setIcon(makePinIcon(cfg.color, 1))
         } else {
-          // From an earlier selected session → dim
           marker.setIcon(makePinIcon(cfg.color, 0.4))
         }
 
-        // Update tooltip to reflect the current entry's name
         marker.unbindTooltip()
         marker.bindTooltip(
           `<span style="font-family:Georgia,serif;font-size:12px;color:#fef3c7">${entry.name}</span>`,
           { direction: 'top', offset: [0, -34], className: 'leaflet-tooltip-poi' },
         )
 
-        // Update click handler data to the current canonical entry
         marker.off('click')
         marker.on('click', () => {
           setSelectedItem({ type: 'poi', data: entry })
@@ -202,9 +190,8 @@ export default function MapPage() {
 
       // ── Zones ──────────────────────────────────────────────────────────────
       zoneRefsRef.current.forEach(({ id, poly }) => {
-        const entry = canonicalAt(id, selected, mapZones)
+        const entry = canonicalAt(id, selected, activeZones)
 
-        // No entry in selected sessions, explicitly removed, or Zones toggled off → hide
         if (!showZones || !entry || entry.state === 'removed') {
           if (map.hasLayer(poly)) poly.remove()
           return
@@ -212,7 +199,6 @@ export default function MapPage() {
 
         if (!map.hasLayer(poly)) poly.addTo(map)
 
-        // Update polygon geometry to match the canonical entry's polygon
         const rc = rcRef.current
         if (rc) {
           const latlngs = entry.polygon.map(([y, x]: [number, number]) => rc.unproject([x, y]))
@@ -225,17 +211,13 @@ export default function MapPage() {
         if (isHighlighted) {
           poly.setStyle({ fillOpacity: 0.35, opacity: 1, weight: 3 })
         } else if (entry.state === 'disabled') {
-          // Disabled zone: visually subdued
           poly.setStyle({ fillOpacity: 0.08, opacity: 0.3, weight: 2 })
         } else if (isCurrent) {
-          // Latest selected session → normal
           poly.setStyle({ fillOpacity: 0.15, opacity: 0.6, weight: 2 })
         } else {
-          // From an earlier selected session → dim
           poly.setStyle({ fillOpacity: 0.07, opacity: 0.25, weight: 2 })
         }
 
-        // Update tooltip and click handler to reflect current entry
         poly.unbindTooltip()
         poly.bindTooltip(
           `<span style="font-family:Georgia,serif;font-size:12px;color:#fef3c7">${entry.name}</span>`,
@@ -248,7 +230,7 @@ export default function MapPage() {
         })
       })
     },
-    [showPoi, showZones],
+    [showPoi, showZones, activePois, activeZones],
   )
 
   // ── Initialise map ──────────────────────────────────────────────────────────
@@ -266,9 +248,7 @@ export default function MapPage() {
     const rc = new L.RasterCoords(map, [IMG_W, IMG_H])
     rcRef.current = rc
 
-    // Add padding to the bounds so the user can pan past the strict image edges
     map.setMaxBounds(rc.getMaxBounds().pad(0.5))
-
     map.setView(rc.unproject([IMG_W, IMG_H]), 2)
 
     L.tileLayer('/tiles/{z}/{x}/{y}.png', {
@@ -280,10 +260,7 @@ export default function MapPage() {
     }).addTo(map)
 
     // ── POI markers ──────────────────────────────────────────────────────────
-    // Create ONE marker per unique POI id, positioned at the earliest entry's
-    // coords. Visibility and styling are handled entirely by applySessionFilter.
     const seenPoiIds = new Set<string>()
-    // Sort by sessionIndex ascending so we always pick the earliest entry first
     const sortedPois = [...pointsOfInterest].sort(
       (a, b) => sessionIndex(a.sessionId) - sessionIndex(b.sessionId),
     )
@@ -292,9 +269,8 @@ export default function MapPage() {
       if (seenPoiIds.has(poi.id)) return
       seenPoiIds.add(poi.id)
 
-      const cfg = categoryConfig[poi.category]
+      const cfg = categoryConfigBase[poi.category]
       const latlng = rc.unproject([poi.coords[1], poi.coords[0]])
-      // Initial icon — will be immediately overridden by applySessionFilter
       const marker = L.marker(latlng, {
         icon: makePinIcon(cfg.color, 1),
       })
@@ -306,12 +282,10 @@ export default function MapPage() {
         setSelectedItem({ type: 'poi', data: poi })
         setHighlightedItemId(poi.id)
       })
-      // Do NOT add to map yet — applySessionFilter will decide
       poiRefsRef.current.push({ id: poi.id, baseEntry: poi, marker })
     })
 
     // ── Zone polygons ────────────────────────────────────────────────────────
-    // Create ONE polygon per unique zone id, using the earliest entry's polygon.
     const seenZoneIds = new Set<string>()
     const sortedZones = [...mapZones].sort(
       (a, b) => sessionIndex(a.sessionId) - sessionIndex(b.sessionId),
@@ -338,7 +312,6 @@ export default function MapPage() {
         setSelectedItem({ type: 'zone', data: zone })
         setHighlightedItemId(zone.id)
       })
-      // Do NOT add to map yet — applySessionFilter will decide
       zoneRefsRef.current.push({ id: zone.id, baseEntry: zone, poly })
     })
 
@@ -392,13 +365,13 @@ export default function MapPage() {
     const maxSelectedIdx = Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id)))
     const latestSessionId = SESSION_ORDER[maxSelectedIdx]
 
-    const anchor = pointsOfInterest.find(
+    const anchor = activePois.find(
       (p) => p.sessionId === latestSessionId && p.state === 'active',
     )
     if (!anchor) return
 
     panToIfNeeded(anchor.coords)
-  }, [selectedSessions, panToIfNeeded])
+  }, [selectedSessions, panToIfNeeded, activePois])
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
   const togglePanel = (panel: ActivePanel) =>
@@ -424,7 +397,7 @@ export default function MapPage() {
 
   // Unique POIs for the layers list — use the overall canonical (latest) entry per id
   const uniquePois = Object.values(
-    pointsOfInterest.reduce<Record<string, PointOfInterest>>((acc, poi) => {
+    activePois.reduce<Record<string, PointOfInterest>>((acc, poi) => {
       if (!acc[poi.id] || sessionIndex(poi.sessionId) > sessionIndex(acc[poi.id].sessionId)) {
         acc[poi.id] = poi
       }
@@ -434,7 +407,7 @@ export default function MapPage() {
 
   // Unique zones for the layers list — use the overall canonical (latest) entry per id
   const uniqueZones = Object.values(
-    mapZones.reduce<Record<string, MapZone>>((acc, zone) => {
+    activeZones.reduce<Record<string, MapZone>>((acc, zone) => {
       if (!acc[zone.id] || sessionIndex(zone.sessionId) > sessionIndex(acc[zone.id].sessionId)) {
         acc[zone.id] = zone
       }
@@ -449,10 +422,10 @@ export default function MapPage() {
       <div className="flex items-center justify-between border-b border-amber-900/30 bg-stone-950/95 px-4 py-2">
         <div>
           <h1 className="font-serif text-lg font-bold tracking-widest text-amber-600">
-            Investigation Map
+            {t.map.title}
           </h1>
           <p className="font-serif text-xs tracking-widest text-stone-500 uppercase">
-            London, 1893
+            {t.map.subtitle}
           </p>
         </div>
 
@@ -463,25 +436,25 @@ export default function MapPage() {
               className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-600 transition-colors hover:border-amber-700"
             >
               <X size={12} />
-              Clear selections
+              {t.map.clearSelections}
             </button>
           ) : (
             <button
               onClick={() => setSelectedSessions(new Set(mapSessions.map(s => s.id)))}
               className="flex items-center gap-1.5 rounded border border-amber-800/50 bg-amber-950/40 px-3 py-1.5 font-serif text-xs text-amber-600 transition-colors hover:border-amber-700"
             >
-              Select all
+              {t.map.selectAll}
             </button>
           )}
           <ToolbarButton
             icon={<Layers size={16} />}
-            label="Layers"
+            label={t.map.layers}
             active={activePanel === 'layers'}
             onClick={() => togglePanel('layers')}
           />
           <ToolbarButton
             icon={<Clock size={16} />}
-            label="Sessions"
+            label={t.map.sessions}
             active={activePanel === 'timeline'}
             onClick={() => togglePanel('timeline')}
           />
@@ -496,30 +469,34 @@ export default function MapPage() {
         {/* ── Layers panel ── */}
         <SidePanel
           open={activePanel === 'layers'}
-          title="Map Layers"
+          title={t.map.mapLayers}
           icon={<Layers size={15} />}
           onClose={() => setActivePanel(null)}
         >
           <div className="space-y-4">
             <LayerToggle
-              label="Points of Interest"
-              description={`${uniquePois.length} locations`}
+              label={t.map.pointsOfInterest}
+              description={`${uniquePois.length} ${t.map.locations}`}
               enabled={showPoi}
               onToggle={() => setShowPoi((v) => !v)}
               color="text-amber-600"
+              visibleLabel={t.map.visible}
+              hiddenLabel={t.map.hidden}
             />
             <LayerToggle
-              label="Zones"
-              description={`${uniqueZones.length} districts`}
+              label={t.map.zones}
+              description={`${uniqueZones.length} ${t.map.districts}`}
               enabled={showZones}
               onToggle={() => setShowZones((v) => !v)}
               color="text-blue-400"
+              visibleLabel={t.map.visible}
+              hiddenLabel={t.map.hidden}
             />
 
             {/* POI legend */}
             <div className="mt-4 border-t border-stone-800 pt-4">
               <p className="mb-2 font-serif text-xs uppercase tracking-widest text-stone-500">
-                POI Legend
+                {t.map.poiLegend}
               </p>
               <div className="space-y-1.5">
                 {(Object.entries(categoryConfig) as [PoiCategory, (typeof categoryConfig)[PoiCategory]][]).map(
@@ -539,7 +516,7 @@ export default function MapPage() {
             {/* Zone legend / clickable list */}
             <div className="border-t border-stone-800 pt-4">
               <p className="mb-2 font-serif text-xs uppercase tracking-widest text-stone-500">
-                Districts
+                {t.map.districtsLabel}
               </p>
               <div className="space-y-1">
                 {uniqueZones.map((zone) => (
@@ -574,7 +551,7 @@ export default function MapPage() {
             {/* POI list */}
             <div className="border-t border-stone-800 pt-4">
               <p className="mb-2 font-serif text-xs uppercase tracking-widest text-stone-500">
-                All Locations
+                {t.map.allLocations}
               </p>
               <div className="space-y-1">
                 {uniquePois.map((poi) => {
@@ -615,33 +592,33 @@ export default function MapPage() {
         {/* ── Sessions / Timeline panel ── */}
         <SidePanel
           open={activePanel === 'timeline'}
-          title="Sessions"
+          title={t.map.sessions}
           icon={<Clock size={15} />}
           onClose={() => setActivePanel(null)}
         >
           {/* Legend */}
           <div className="mb-4 rounded border border-stone-800 bg-stone-900/50 p-3">
             <p className="mb-2 font-serif text-xs uppercase tracking-widest text-stone-500">
-              Session filter
+              {t.map.sessionFilter}
             </p>
             <div className="space-y-1 font-serif text-xs text-stone-500">
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-amber-600" />
-                Latest selected session — highlighted
+                {t.map.sessionFilterLegend.latest}
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-stone-500" />
-                Earlier selected sessions — dimmed
+                {t.map.sessionFilterLegend.earlier}
               </div>
               <div className="flex items-center gap-2">
                 <span className="inline-block h-2 w-2 rounded-full bg-stone-800" />
-                Deselected sessions — hidden
+                {t.map.sessionFilterLegend.deselected}
               </div>
             </div>
           </div>
 
           <div className="relative">
-            {mapSessions.map((session, idx) => {
+            {activeSessions.map((session, idx) => {
               const isSelected = selectedSessions.has(session.id)
               const maxSelectedIdx = selectedSessions.size > 0 ? Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id))) : -1
               const isLatest = isSelected && sessionIndex(session.id) === maxSelectedIdx
@@ -687,14 +664,14 @@ export default function MapPage() {
                         </svg>
                       )}
                     </div>
-                    {idx < mapSessions.length - 1 && (
+                    {idx < activeSessions.length - 1 && (
                       <div className="mt-2 w-px flex-1 bg-amber-900/30" style={{ minHeight: 24 }} />
                     )}
                   </div>
 
                   <div className="flex-1 pb-2">
                     <p className={cn("font-serif text-xs", isLatest ? "text-amber-600/80" : "text-stone-500")}>
-                      Session {idx + 1}
+                      {t.map.session} {idx + 1}
                     </p>
                     <p
                       className={cn(
@@ -724,8 +701,8 @@ export default function MapPage() {
             className="absolute bottom-6 left-6 z-[1000] w-full max-w-sm touch-none"
             style={{ transform: `translate(${cardOffset.x}px, ${cardOffset.y}px)` }}
             onPointerDown={(e) => {
-              if (e.button !== 0) return // Only left clicks
-              if ((e.target as HTMLElement).closest('button')) return // Ignore if clicking a button
+              if (e.button !== 0) return
+              if ((e.target as HTMLElement).closest('button')) return
               e.currentTarget.setPointerCapture(e.pointerId)
               setIsDragging(true)
               dragStartPos.current = {
@@ -763,8 +740,21 @@ export default function MapPage() {
                 <X size={14} />
               </button>
 
-              {selectedItem.type === 'poi' && <PoiCard poi={selectedItem.data} />}
-              {selectedItem.type === 'zone' && <ZoneCard zone={selectedItem.data} />}
+              {selectedItem.type === 'poi' && (
+                <PoiCard
+                  poi={selectedItem.data}
+                  categoryConfig={categoryConfig}
+                  linkedLabel={t.map.linked}
+                  sessionLabel={t.map.session}
+                />
+              )}
+              {selectedItem.type === 'zone' && (
+                <ZoneCard
+                  zone={selectedItem.data}
+                  districtLabel={t.map.district}
+                  sessionLabel={t.map.session}
+                />
+              )}
             </div>
           </div>
         )}
@@ -865,12 +855,16 @@ function LayerToggle({
   enabled,
   onToggle,
   color,
+  visibleLabel,
+  hiddenLabel,
 }: {
   label: string
   description: string
   enabled: boolean
   onToggle: () => void
   color: string
+  visibleLabel: string
+  hiddenLabel: string
 }) {
   return (
     <div className="flex items-center justify-between">
@@ -888,20 +882,30 @@ function LayerToggle({
         )}
       >
         {enabled ? <Eye size={12} /> : <EyeOff size={12} />}
-        {enabled ? 'Visible' : 'Hidden'}
+        {enabled ? visibleLabel : hiddenLabel}
       </button>
     </div>
   )
 }
 
-function PoiCard({ poi }: { poi: PointOfInterest }) {
+function PoiCard({
+  poi,
+  categoryConfig,
+  linkedLabel,
+  sessionLabel,
+}: {
+  poi: PointOfInterest
+  categoryConfig: Record<PoiCategory, { label: string; color: string; badgeVariant: 'amber' | 'red' | 'green' | 'muted' | 'default' }>
+  linkedLabel: string
+  sessionLabel: string
+}) {
   const cfg = categoryConfig[poi.category]
   return (
     <>
       <div className="mb-2 flex flex-wrap items-center gap-2">
         <Badge variant={cfg.badgeVariant}>{cfg.label}</Badge>
         <Badge variant="muted">
-          {poi.sessionId.replace('session-', 'Session ')}
+          {poi.sessionId.replace('session-', `${sessionLabel} `)}
         </Badge>
         {poi.state !== 'active' && (
           <Badge variant={poi.state === 'disabled' ? 'muted' : 'red'}>
@@ -913,7 +917,7 @@ function PoiCard({ poi }: { poi: PointOfInterest }) {
       <p className="mt-2 font-serif text-xs leading-relaxed text-stone-400">{poi.description}</p>
       {poi.linkedCharacters && poi.linkedCharacters.length > 0 && (
         <p className="mt-2 font-serif text-xs text-stone-600">
-          <span className="text-stone-500">Linked: </span>
+          <span className="text-stone-500">{linkedLabel}: </span>
           {poi.linkedCharacters.join(', ')}
         </p>
       )}
@@ -921,7 +925,15 @@ function PoiCard({ poi }: { poi: PointOfInterest }) {
   )
 }
 
-function ZoneCard({ zone }: { zone: MapZone }) {
+function ZoneCard({
+  zone,
+  districtLabel,
+  sessionLabel,
+}: {
+  zone: MapZone
+  districtLabel: string
+  sessionLabel: string
+}) {
   return (
     <>
       <div className="mb-2 flex items-center gap-2">
@@ -929,9 +941,9 @@ function ZoneCard({ zone }: { zone: MapZone }) {
           className="inline-block h-3 w-3 rounded border border-stone-700"
           style={{ backgroundColor: zone.color, opacity: 0.8 }}
         />
-        <Badge variant="muted">District</Badge>
+        <Badge variant="muted">{districtLabel}</Badge>
         <Badge variant="muted">
-          {zone.sessionId.replace('session-', 'Session ')}
+          {zone.sessionId.replace('session-', `${sessionLabel} `)}
         </Badge>
         {zone.state !== 'active' && (
           <Badge variant={zone.state === 'disabled' ? 'muted' : 'red'}>

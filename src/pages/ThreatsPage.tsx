@@ -4,8 +4,10 @@ import { ChevronRight, AlertTriangle } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
 import { threats } from '@/data/threats'
+import { threatsPl } from '@/data/threats_pl'
 import type { ThreatLevel } from '@/types'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'> = {
   minor: 'muted',
@@ -14,32 +16,28 @@ const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'>
   catastrophic: 'red',
 }
 
-const threatLevelLabel: Record<ThreatLevel, string> = {
-  minor: 'Minor',
-  moderate: 'Moderate',
-  severe: 'Severe',
-  catastrophic: '⚠ Catastrophic',
-}
-
-const typeFilters = [
-  { value: 'all', label: 'All' },
-  { value: 'mastermind', label: 'Masterminds' },
-  { value: 'cult', label: 'Cults' },
-  { value: 'creature', label: 'Creatures' },
-  { value: 'conspiracy', label: 'Conspiracies' },
-  { value: 'supernatural', label: 'Supernatural' },
-] as const
-
-type FilterValue = (typeof typeFilters)[number]['value']
+type FilterValue = 'all' | 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
 
 export default function ThreatsPage() {
   const [filter, setFilter] = useState<FilterValue>('all')
+  const { lang, t } = useLanguage()
 
-  const filtered = filter === 'all' ? threats : threats.filter((t) => t.type === filter)
+  const activeThreats = lang === 'pl' ? threatsPl : threats
+
+  const typeFilters: { value: FilterValue; label: string }[] = [
+    { value: 'all', label: t.threats.filters.all },
+    { value: 'mastermind', label: t.threats.filters.mastermind },
+    { value: 'cult', label: t.threats.filters.cult },
+    { value: 'creature', label: t.threats.filters.creature },
+    { value: 'conspiracy', label: t.threats.filters.conspiracy },
+    { value: 'supernatural', label: t.threats.filters.supernatural },
+  ]
+
+  const filtered = filter === 'all' ? activeThreats : activeThreats.filter((t) => t.type === filter)
 
   return (
     <div className="mx-auto max-w-5xl px-4 pb-16">
-      <PageHeader title="Threats & Masterminds" subtitle="Known Dangers to the Investigation" />
+      <PageHeader title={t.threats.title} subtitle={t.threats.subtitle} />
 
       {/* Filter tabs */}
       <div className="mb-8 flex flex-wrap gap-2">
@@ -87,7 +85,7 @@ export default function ThreatsPage() {
               <div className="flex-1">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
                   <Badge variant={threatLevelVariant[threat.threatLevel]}>
-                    {threatLevelLabel[threat.threatLevel]}
+                    {t.threats.threatLevelLabels[threat.threatLevel]}
                   </Badge>
                   <Badge variant="muted">{threat.type}</Badge>
                   <Badge variant={threat.status === 'active' ? 'red' : threat.status === 'neutralised' ? 'green' : 'muted'}>
@@ -104,7 +102,7 @@ export default function ThreatsPage() {
                 </p>
 
                 <p className="mt-3 font-sc text-xs text-graphite-600">
-                  {threat.knownFacts.length} known facts · {threat.suspicions.length} suspicions
+                  {threat.knownFacts.length} {t.threats.knownFacts} · {threat.suspicions.length} {t.threats.suspicions}
                 </p>
               </div>
 
@@ -120,7 +118,7 @@ export default function ThreatsPage() {
       {filtered.length === 0 && (
         <div className="py-20 text-center">
           <AlertTriangle size={24} className="mx-auto mb-3 text-graphite-700" />
-          <p className="font-serif text-graphite-600 italic">No threats identified in this category.</p>
+          <p className="font-serif text-graphite-600 italic">{t.threats.empty}</p>
         </div>
       )}
     </div>
