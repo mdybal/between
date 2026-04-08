@@ -1,264 +1,452 @@
 {
   "sessions": [
     {
-      "id": "session-01",
-      "title": "Session I — The First Body",
-      "description": "The investigators are drawn together by a gruesome discovery in Whitechapel. Lady Pemberton makes contact."
-    },
-    {
-      "id": "session-02",
-      "title": "Session II — Into the Fog",
-      "description": "Following leads into the East End, the group uncovers evidence of a cult operating out of a Limehouse warehouse."
-    },
-    {
-      "id": "session-03",
-      "title": "Session III — The Southwark Shipment",
-      "description": "A suspicious cargo arrives at the docks. The warehouse is raided — but the cult has already moved on."
+      "id": "session-00",
+      "title": "Session 0",
+      "description": ""
     }
   ],
   "pointsOfInterest": [
     {
-      "id": "whitechapel-mortuary",
-      "name": "Whitechapel Mortuary",
-      "category": "crime-scene",
-      "description": "The site where the first victim was discovered. Strange symbols were carved into the stone floor beneath the body.",
-      "coords": [980, 2100],
-      "sessionId": "session-01",
-      "state": "active",
-      "linkedCharacters": ["cornelius-vane"]
-    },
-    {
-      "id": "whitechapel-mortuary",
-      "name": "Whitechapel Mortuary",
-      "category": "crime-scene",
-      "description": "The mortuary has been cleared by police. The symbols were scrubbed away — someone with influence intervened.",
-      "coords": [980, 2100],
-      "sessionId": "session-03",
-      "state": "active",
-      "linkedCharacters": ["cornelius-vane"]
-    },
-    {
-      "id": "lady-pemberton-townhouse",
-      "name": "Lady Pemberton's Townhouse",
+      "id": "f9fcf849-dbb1-4611-a945-1305c1058411",
+      "name": "Abbey Mills",
       "category": "location",
-      "description": "A grand Mayfair residence that serves as a nexus of rumour and intrigue. The investigators were first invited here in Session 1.",
-      "coords": [700, 1200],
-      "sessionId": "session-01",
-      "state": "active",
-      "linkedCharacters": ["lady-pemberton"]
-    },
-    {
-      "id": "lady-pemberton-townhouse",
-      "name": "Lady Pemberton's Townhouse",
-      "category": "location",
-      "description": "Lady Pemberton has gone quiet. Her butler claims she is \"indisposed.\" The curtains remain drawn.",
-      "coords": [700, 1200],
-      "sessionId": "session-02",
-      "state": "removed",
-      "linkedCharacters": ["lady-pemberton"]
-    },
-    {
-      "id": "vane-harley-street",
-      "name": "Dr. Vane's Harley Street Practice",
-      "category": "safe-house",
-      "description": "The consulting rooms of Dr. Cornelius Vane. A respectable front concealing a library of occult research.",
-      "coords": [620, 1050],
-      "sessionId": "session-01",
-      "state": "active",
-      "linkedCharacters": ["cornelius-vane"]
-    },
-    {
-      "id": "vane-harley-street",
-      "name": "Dr. Vane's Harley Street Practice",
-      "category": "safe-house",
-      "description": "The practice has been broken into. Files are scattered. Vane suspects the cult knows who he is.",
-      "coords": [620, 1050],
-      "sessionId": "session-02",
-      "state": "disabled",
-      "linkedCharacters": ["cornelius-vane"]
-    },
-    {
-      "id": "vane-harley-street",
-      "name": "Dr. Vane's Harley Street Practice",
-      "category": "safe-house",
-      "description": "Vane has abandoned the practice and relocated. The rooms are empty — a precaution after the break-in.",
-      "coords": [620, 1050],
-      "sessionId": "session-03",
-      "state": "removed",
-      "linkedCharacters": ["cornelius-vane"]
-    },
-    {
-      "id": "east-end-warehouse",
-      "name": "Abandoned Warehouse, Limehouse",
-      "category": "danger",
-      "description": "A derelict warehouse near the docks where cult activity has been reported. Approach with extreme caution.",
-      "coords": [1100, 2600],
-      "sessionId": "session-02",
+      "description": "On the south side of the river nearly 20 square miles could be drained by gravity but 22 square miles could not. Two pumping stations were built, one at Abbey Mills near Stratford, east London, for the north levels, and the other at Crossness, on the south bank of the river,",
+      "coords": [
+        1264.2756295686863,
+        5264.011559488254
+      ],
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "east-end-warehouse",
-      "name": "Abandoned Warehouse, Limehouse",
-      "category": "danger",
-      "description": "The warehouse was raided and found empty. The cult cleared out before the investigators arrived.",
-      "coords": [1100, 2600],
-      "sessionId": "session-03",
-      "state": "removed"
-    },
-    {
-      "id": "illustrated-london-news",
-      "name": "Illustrated London News Office",
+      "id": "25f4cd09-1219-41c9-9aea-bdcf5932af46",
+      "name": "Prison Hulks",
       "category": "location",
-      "description": "Evelyn Ashworth's place of employment. The archive here holds records stretching back decades.",
-      "coords": [800, 900],
-      "sessionId": "session-01",
-      "state": "active",
-      "linkedCharacters": ["evelyn-ashworth"]
-    },
-    {
-      "id": "fog-alley",
-      "name": "Fog Alley",
-      "category": "clue",
-      "description": "A narrow passage where a witness reported seeing a figure that \"moved like smoke.\" A torn piece of black fabric was recovered here.",
-      "coords": [1300, 1800],
-      "sessionId": "session-02",
+      "description": "Further down the river at Woolwich lay the dreaded prison hulks, two old men-of-war, and a smaller ship which relieved the black tragedy of the hulks by drying the prisoners’ washing, like bunting strung between her shortened masts.24 The Pool",
+      "coords": [
+        2753.0931151639234,
+        5788.730922606571
+      ],
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "fog-alley",
-      "name": "Fog Alley",
-      "category": "clue",
-      "description": "The alley has been thoroughly searched. Nothing further was found, but locals refuse to walk through it after dark.",
-      "coords": [1300, 1800],
-      "sessionId": "session-03",
-      "state": "disabled"
-    },
-    {
-      "id": "morrow-office",
-      "name": "Silas Morrow's Office",
-      "category": "safe-house",
-      "description": "A cramped but functional office in Clerkenwell. Morrow keeps his informant ledger and case files here.",
-      "coords": [750, 1400],
-      "sessionId": "session-01",
-      "state": "active",
-      "linkedCharacters": ["silas-morrow"]
-    },
-    {
-      "id": "river-thames-dock",
-      "name": "Suspicious Dock, Southwark",
-      "category": "danger",
-      "description": "Cargo manifests suggest unusual shipments arriving here at irregular hours. The dock master refuses to speak.",
-      "coords": [1400, 2000],
-      "sessionId": "session-02",
+      "id": "6297436e-6bf5-4382-8e3b-1e406146ed12",
+      "name": "Samuda Brothers shipyard/ Millwall Dock",
+      "category": "location",
+      "description": "first dock to provide hydraulic cranes and lifts for raising ships in a pontoon dock, and was well served by rail links with the Great Eastern line. The Millwall Dock on the Isle of Dogs, opened in 1868, offered similar modern facilities.\n\nFurther down the river on the Isle of Dogs, Millwall Iron Works Company employed 4,000 men and boys in 1867, building the Great Eastern for Brunel,",
+      "coords": [
+        2729.2152721985567,
+        4971.379606979961
+      ],
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "river-thames-dock",
-      "name": "Suspicious Dock, Southwark",
-      "category": "danger",
-      "description": "The shipment has arrived. Crates bearing occult markings were unloaded under cover of darkness. The dock master has vanished.",
-      "coords": [1400, 2000],
-      "sessionId": "session-03",
-      "state": "disabled"
+      "id": "d73344f6-07fb-41b8-80de-78d2da76dc5b",
+      "name": "St. Thomas Hospital",
+      "category": "location",
+      "description": "Work on the Albert Embankment on the other side of the river – a comparatively simple engineering project to Bazalgette, merely designed for flood prevention – began in 1866 and was completed in four years. It extended from Lambeth Palace to Vauxhall Bridge, resulting in a mile of reclaimed river bank on which Florence Nightingale’s newly designed St Thomas’s Hospital could be built.",
+      "coords": [
+        3017.459252479358,
+        2778.9296500631317
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "59d2ce21-4e92-4436-bd8a-ade4de23d284",
+      "name": "St Pancras Station",
+      "category": "location",
+      "description": "In 1868 St Pancras station opened as the terminus of the Midland Railway. Yet again, Victorian technology still amazes the observant traveller who has time to stand and stare. The single arch over the tracks spans 240 feet, and rises to 100 feet.",
+      "coords": [
+        1572.914877137122,
+        2773.2727958136393
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "ae08b70b-4c09-47e5-b43e-1518b09f562d",
+      "name": "Grosvernor Hotel",
+      "category": "location",
+      "description": "The Grosvenor Hotel at Victoria (1861) was opulently built, again in a mixture of Renaissance styles, with a hydraulic lift, then known as a ‘rising room’. The rising room in the Charing Cross Hotel (1865) even had seats;",
+      "coords": [
+        2788.559912286813,
+        2344.7660864145914
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "400aa5ae-e1c9-4f6b-87a9-3c44395e19d9",
+      "name": "Peabody Estate",
+      "category": "location",
+      "description": "The first Peabody Buildings were opened in Commercial Street, Spitalfields, in 1864. They were five-storey blocks round a central courtyard where the tenants’ children could play, safe from the dangers of the street – and the neighbouring slum-dwellers.",
+      "coords": [
+        1942.5339624754156,
+        3764.636503037179
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "c9048808-b524-4bd4-8995-c875f8ad70e1",
+      "name": "Victoria and Albert Museum",
+      "category": "location",
+      "description": "The fine art collection housed in Lancaster House had become a treasure house of masterpieces, but like many treasure houses it was higgledy-piggledy, and badly needing some kind of rationalisation. This came with the building of the Victoria and Albert Museum, begun in 1859 but not completed in its present form until 1909. To visit it is to experience some of the elation and despair of the visitors to the Great Exhibition. It is superlative, exhausting, and best taken in small and repeated doses (it has seven miles of corridors and the lofty display halls necessarily imply interminable stairs).",
+      "coords": [
+        2875.561373742019,
+        1804.536505588069
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "c50ed28f-3c33-416d-bf54-8012e6bf29a3",
+      "name": "Royal Albert Hall",
+      "category": "location",
+      "description": "the sale, on 999-year leases, of individual seats, entitling the leaseholder to attend any performance in the Hall free, subject to rare exceptions. Over 1,300 seats were sold in this way, at £100 each. In 1867 the Queen laid the foundation stone, and announced that the words ‘Royal Albert’ were to be added to the existing title of the Hall of Arts and Sciences. Her son declared it open four years later,]",
+      "coords": [
+        2614.22339799753,
+        1749.7357300461117
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "aabe4b8a-1ac3-43f6-bdd5-3c2e814b51bc",
+      "name": "Fullwood Rents",
+      "category": "location",
+      "description": "In Fulwood’s Rents nearby, there was a thieves’ kitchen ‘up an alley, through an iron gate, down a narrow passage, down a rude old stair, across a rude lobby … a large long antique cellar [where there were] men and boys, perhaps 15 in all, all thieves’.",
+      "coords": [
+        1942.809305472338,
+        2942.271316517224
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "6ee876d8-0c2e-4dc7-b9eb-ffc12f09aacf",
+      "name": "Monster School",
+      "category": "location",
+      "description": "Central London District School for Pauper Children which had over 1,000 pupils. It was popularly called the ‘Monster School’, ‘monster’ being a favourite Victorian word for ‘huge’.",
+      "coords": [
+        2437.9036521535745,
+        180
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "f655448d-eca3-402c-b7de-44343c9355c8",
+      "name": "Billingsly Fish Market",
+      "category": "location",
+      "description": "Billingsgate Market was bought for resale, by costermongers, three or four thousand of them in the winter, slightly fewer in the summer; which, considering the size of the place, must have made it extremely crowded – and noisy: the auctions were conducted by shouting. Trading was confined to regular fishmongers until 7 a.m. when the costers could move in. Eels, a favourite fish with Londoners, were sold live, from the Dutch eelboats moored midstream.",
+      "coords": [
+        2274.1161882088513,
+        5128
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "f3220762-8dfe-4a7a-b355-eb231ea04196",
+      "name": "Black Eagle brewery",
+      "category": "location",
+      "description": "The Black Eagle in Brick Lane produced a famous porter (black stout) and by 1873 had taken over the title to be ‘the largest company in the world’.",
+      "coords": [
+        1970.0546449341582,
+        3802
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "5bd1310c-ff79-4464-953b-8f8e12f24c5e",
+      "name": "The Garrick",
+      "category": "location",
+      "description": "The Garrick, named after the famous actor David Garrick, was founded in 1831 for actors, writers, painters and other artists.",
+      "coords": [
+        2170.169804878119,
+        2697
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "eca58e52-ae3f-457a-9242-31bdcb04cae9",
+      "name": "The White's",
+      "category": "location",
+      "description": "White’s, also in St James’s Street, is the oldest of them all, tracing its history to 1693. It was at one time notorious for gambling, but by the nineteenth century was principally a social club for the rich, including the Prince of Wales.",
+      "coords": [
+        2390.4001304897683,
+        2456
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "a4f634e8-1e78-46ac-aec5-0ee0224c3ea9",
+      "name": "Royal Exchange",
+      "category": "location",
+      "description": "room above the Royal Exchange, where in 1859 the Lutine bell was installed which still signals good news, with two strokes, or bad news with one.",
+      "coords": [
+        2178.0655151629962,
+        3489
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "0df90989-9bbe-487b-aa4e-656be6ec68b4",
+      "name": "Devonshire House",
+      "category": "location",
+      "description": "Devonshire House, in Piccadilly, had a magnificent ballroom fit for many ‘a magnificent ball… to which “all the world” went – all the world, that is, who mattered.",
+      "coords": [
+        2401.179499947083,
+        2387
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "c43e8ecf-d2fa-4583-8283-6cb60bf19833",
+      "name": "London Society for the Encouragement of Faithful Servants",
+      "category": "location",
+      "description": "The registry run by the London Society for the Encouragement of Faithful Servants, in Hatton Garden",
+      "coords": [
+        1972.6273522276579,
+        3088.5
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "10d25344-9c76-468e-9de2-6ca59b0f384c",
+      "name": "Marble Working Company",
+      "category": "location",
+      "description": "If the antique was what you were aiming at, especially in your library, and you had not picked up a supply of marble antiques in Italy on your Continental wedding journey, the best place to go would be the London Marble Working Company in Millbank, up-river from Chelsea, where you could find newly made antique urns and pillars and busts, as well as fireplaces, in white marble from Carrara or black marble from Ireland.",
+      "coords": [
+        2836.164075973732,
+        2658
+      ],
+      "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "673b2d4b-3afa-48a0-af39-a10251f4eedd",
+      "name": "Garden Nursery",
+      "category": "location",
+      "description": "Of the many nursery gardens ringing London, perhaps the most famous was Loddiges Nursery in Hackney. It had begun in 1756. The vast palm house had been designed by Joseph Paxton in the early 1830s, before he built the hothouse at Chatsworth. Loddige pioneered steam heating so effectively that by 1845 the nursery could offer for sale nearly 2,000 species and varieties of orchid, and nearly 300 varieties of palms, as well as supplying Wardian cases filled with ferns. By 1849 there were spectacular hothouses, a ‘tropical rain forest’, and an arboretum that attracted visitors from all over Europe.",
+      "coords": [
+        1299.1019336716477,
+        4361
+      ],
+      "sessionId": "session-00",
+      "state": "active"
     }
   ],
   "zones": [
     {
-      "id": "mayfair",
-      "name": "Mayfair",
-      "description": "The wealthy heart of London. Aristocrats, politicians, and hidden conspiracies.",
-      "color": "#b45309",
+      "id": "463e76d7-ebce-4ee9-b1e0-66798fb59906",
+      "name": "Bermondsey Tanneries",
+      "description": "Bermondsey, on the south bank of the Thames opposite the Tower of London. This was where skins and hides were turned into leather, by a long and skilful process including the use of dog turds.\n\n\n\nThe leather industry in Bermondsey, down-river opposite the Tower of London, was the fourth manufacture in England, after cotton, wool and iron. It reached its zenith in the nineteenth century.26 It was a major employer of every level of skill, from the multilingual clerks who dealt with overseas suppliers and customers, and the skilled workers, to the labourers heaving the raw hides about. The skins from nearly all the sheep slaughtered in London were dealt with there. Exotic imports included buffalo and seal; goat skins came from Switzerland, Germany, the Baltic, North Africa, the East Indies, the Cape (South Africa) and Asia Minor (Turkey). One of the many and complicated processes – all stinking – depended on a shrub, sumach, which was brought in from Sicily, Italy and Hungary. Fine kid skins from Italy were treated with the yolks of 70,000 eggs imported from France annually. (How did they survive the Channel crossing unbroken?) At an early stage the hides were de-haired by soaking them in lime pits for four or five weeks, and the hair was sold to carpet-manufacturers and plasterers. Then the ‘pure’ – dogs’ turds – which had been so laboriously collected by the very poor removed the lime.",
+      "color": "#533483",
       "polygon": [
-        [550, 900],
-        [550, 1300],
-        [850, 1300],
-        [850, 900]
+        [
+          2714.0220688828304,
+          3684.808091641777
+        ],
+        [
+          2682.89976078198,
+          3913.5319165907877
+        ],
+        [
+          2637.478013823982,
+          3912.691020175534
+        ],
+        [
+          2620.6551445802797,
+          3782.352075811208
+        ],
+        [
+          2528.129363739914,
+          3673.876438243479
+        ],
+        [
+          2636.3871629863033,
+          3531.291265245618
+        ]
       ],
-      "sessionId": "session-01",
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "mayfair",
-      "name": "Mayfair",
-      "description": "Mayfair grows quiet. Several of Lady Pemberton's associates have left the city without explanation.",
-      "color": "#b45309",
-      "polygon": [
-        [550, 900],
-        [550, 1300],
-        [850, 1300],
-        [850, 900]
-      ],
-      "sessionId": "session-02",
-      "state": "disabled"
-    },
-    {
-      "id": "east-end",
-      "name": "East End",
-      "description": "The fog-choked streets of Whitechapel and Stepney. Poverty, crime, and something far worse lurk here.",
-      "color": "#991b1b",
-      "polygon": [
-        [850, 1800],
-        [850, 2700],
-        [1350, 2700],
-        [1350, 1800]
-      ],
-      "sessionId": "session-01",
-      "state": "active"
-    },
-    {
-      "id": "east-end",
-      "name": "East End",
-      "description": "Cult activity confirmed in Limehouse. The East End is now considered extremely dangerous after dark.",
-      "color": "#991b1b",
-      "polygon": [
-        [850, 1800],
-        [850, 2700],
-        [1350, 2700],
-        [1350, 1800]
-      ],
-      "sessionId": "session-02",
-      "state": "active"
-    },
-    {
-      "id": "city-of-london",
+      "id": "5920ef40-9e8a-4bfc-8aea-49d39959b5da",
       "name": "City of London",
-      "description": "The financial district. Ancient institutions hide older secrets beneath their marble facades.",
-      "color": "#1e40af",
+      "description": "the City, with its maze of winding illogical streets still preserving its medieval layout, fascinating to historians but incomprehensible to strangers",
+      "color": "#b6c497",
       "polygon": [
-        [700, 1300],
-        [700, 1800],
-        [1100, 1800],
-        [1100, 1300]
+        [
+          2261.267327178158,
+          3046.216013351646
+        ],
+        [
+          2187.0213228944503,
+          3017.931742104184
+        ],
+        [
+          2144.4927366628317,
+          3076.534245534356
+        ],
+        [
+          2034.3029431165783,
+          3040.3756996784464
+        ],
+        [
+          2051.9669558224664,
+          3145.487751585161
+        ],
+        [
+          1935.8891580409168,
+          3340.5757199240225
+        ],
+        [
+          2041.0320908140588,
+          3583.5947839323458
+        ],
+        [
+          1951.8708838224343,
+          3666.8435290424636
+        ],
+        [
+          2101.5944200913896,
+          3724.86538169497
+        ],
+        [
+          2186.549909772089,
+          3817.3639873728785
+        ],
+        [
+          2225.242509032605,
+          3767.7510988729096
+        ],
+        [
+          2295.8985598561576,
+          3810.636816050849
+        ],
+        [
+          2327.0208679570073,
+          3762.705720381387
+        ],
+        [
+          2292.5339860074164,
+          3698.797592822105
+        ],
+        [
+          2374.1249018393755,
+          3674.411596779747
+        ],
+        [
+          2343.298361503927,
+          3452.0953057527245
+        ],
+        [
+          2271.8755908229887,
+          3242.791698521506
+        ]
       ],
-      "sessionId": "session-01",
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "southwark",
-      "name": "Southwark",
-      "description": "South of the Thames. Theatres, tanneries, and the docks where strange cargo arrives by night.",
-      "color": "#065f46",
+      "id": "f9bcf3af-183b-48ff-bc77-3f840e852d94",
+      "name": "Charing Street - Cannon Street stations",
+      "description": "Charing Cross station for the South Eastern line was opened in 1864 and is still a monument to Victorian technology; the six tracks were roofed by a single arch 164 feet wide and nearly 100 feet high at its apex. The line was extended to Cannon Street two years later; the arch over the tracks there was 680 feet long, 106 feet high and almost semicircular.",
+      "color": "#00878a",
       "polygon": [
-        [1200, 1300],
-        [1200, 2200],
-        [1650, 2200],
-        [1650, 1300]
+        [
+          2395.6180310853606,
+          2678.520487134642
+        ],
+        [
+          2405.5385078507547,
+          2694.0768363207458
+        ],
+        [
+          2271.869150855739,
+          2869.4393180550096
+        ],
+        [
+          2182.0350130314337,
+          3089.3495270040257
+        ],
+        [
+          2219.5428335661763,
+          3320.573444452027
+        ],
+        [
+          2294.5144335693053,
+          3541.897866963416
+        ],
+        [
+          2283.1932463986755,
+          3544.019187306976
+        ],
+        [
+          2203.988977270621,
+          3323.401871576773
+        ],
+        [
+          2167.9132360138483,
+          3077.3287117238547
+        ],
+        [
+          2261.9607230613287,
+          2863.782463805517
+        ]
       ],
-      "sessionId": "session-02",
+      "sessionId": "session-00",
       "state": "active"
     },
     {
-      "id": "southwark",
-      "name": "Southwark",
-      "description": "The cult's shipment has arrived in Southwark. The docks are now a primary area of investigation.",
-      "color": "#065f46",
+      "id": "d30ba162-8e07-4245-bcf5-63e26bda68a6",
+      "name": "Silkweavers",
+      "description": "The silk weavers in Spitalfields hung on to their declining trade by their fingertips. They had always been known for their love of flowers, and still, in 1849, some of the houses had back gardens ‘filled with many-coloured dahlias’.",
+      "color": "#bca638",
       "polygon": [
-        [200, 1300],
-        [1200, 2200],
-        [1650, 2200],
-        [1650, 1300]
+        [
+          1848.4218680145555,
+          3732.1095911025977
+        ],
+        [
+          1979.9823691187544,
+          3688.2689706690317
+        ],
+        [
+          2072.6405715093456,
+          3722.9172029471724
+        ],
+        [
+          2006.8603209572466,
+          3954.1411203951734
+        ],
+        [
+          1820.836601653998,
+          3879.894908370586
+        ],
+        [
+          1849.1291825366216,
+          3733.5238046649706
+        ],
+        [
+          1849.1291825366216,
+          3733.5238046649706
+        ]
       ],
-      "sessionId": "session-03",
+      "sessionId": "session-00",
       "state": "active"
     }
   ]
