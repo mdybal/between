@@ -114,4 +114,5 @@ export interface Threat {
   suspicions: string[]
   status: 'active' | 'neutralised' | 'unknown'
   firstEncountered?: string  // session id
+  clueImages?: string[]      // filenames from public/img/clues/
 }

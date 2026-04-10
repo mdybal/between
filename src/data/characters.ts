@@ -111,6 +111,20 @@ export const characters: Character[] = [
     status: 'active',
   },
   {
+    id: 'theodora-brathwaite',
+    name: 'Theodora Brathwaite',
+    alias: 'the mastermind',
+    type: 'antagonist',
+    occupation: 'Unknown',
+    description:
+      'A shadowy figure whose true motives remain obscured. Known only by reputation and whispered warnings.',
+    background:
+      'Little is known of Theodora Brathwaite\'s origins. She moves through London\'s underworld with unsettling ease, leaving chaos in her wake.',
+    traits: ['Calculating', 'Elusive', 'Dangerous'],
+    status: 'active',
+    imageUrl: '/img/characters/theodora.svg',
+  },
+  {
     id: 'lady-pemberton',
     name: 'Lady Cecilia Pemberton',
     type: 'npc',

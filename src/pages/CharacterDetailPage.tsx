@@ -75,61 +75,76 @@ export default function CharacterDetailPage() {
         <p className="mt-2 font-sc text-sm text-amber-700/80">{character.occupation}</p>
       </header>
 
-      {/* Description */}
-      <section className="mt-8">
-        <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-          {t.characterDetail.description}
-        </h2>
-        <p className="font-serif text-base leading-loose text-graphite-200">
-          {character.description}
-        </p>
-      </section>
-
-      {/* Background */}
-      <section className="mt-8">
-        <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-          {t.characterDetail.background}
-        </h2>
-        <p className="font-serif text-base leading-loose text-graphite-300">
-          {character.background}
-        </p>
-      </section>
-
-      {/* Traits (NPCs / non-hunters only) */}
-      {!isHunter && (
-        <section className="mt-8">
-          <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            {t.characterDetail.traits}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {character.traits.map((trait) => (
-              <Badge key={trait} variant="amber">
-                {trait}
-              </Badge>
-            ))}
+      {/* Main content — portrait floats top-right, text wraps around it */}
+      <div className="mt-8">
+        {character.imageUrl && (
+          <div className="float-right ml-6 mb-4 w-58 sm:w-58">
+            <div className="rounded bg-[#eacfa9] p-2">
+              <img
+                src={character.imageUrl}
+                alt={character.name}
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
-        </section>
-      )}
+        )}
 
-      {/* Conditions (Hunters only) */}
-      {isHunter && (
+        {/* Description */}
+        <section>
+          <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
+            {t.characterDetail.description}
+          </h2>
+          <p className="font-serif text-base leading-loose text-graphite-200">
+            {character.description}
+          </p>
+        </section>
+
+        {/* Background */}
         <section className="mt-8">
           <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            {t.characterDetail.conditions}
+            {t.characterDetail.background}
           </h2>
-          {character.conditions && character.conditions.length > 0 ? (
+          <p className="font-serif text-base leading-loose text-graphite-300">
+            {character.background}
+          </p>
+        </section>
+
+        {/* Traits (NPCs / non-hunters only) */}
+        {!isHunter && (
+          <section className="mt-8">
+            <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
+              {t.characterDetail.traits}
+            </h2>
             <div className="flex flex-wrap gap-2">
-              {character.conditions.map((condition) => (
-                <Badge key={condition} variant="red">
-                  {condition}
+              {character.traits.map((trait) => (
+                <Badge key={trait} variant="amber">
+                  {trait}
                 </Badge>
               ))}
             </div>
-          ) : (
-            <p className="font-serif text-sm italic text-graphite-600">{t.characterDetail.noConditions}</p>
-          )}
-        </section>
-      )}
+          </section>
+        )}
+
+        {/* Conditions (Hunters only) */}
+        {isHunter && (
+          <section className="mt-8">
+            <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
+              {t.characterDetail.conditions}
+            </h2>
+            {character.conditions && character.conditions.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {character.conditions.map((condition) => (
+                  <Badge key={condition} variant="red">
+                    {condition}
+                  </Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="font-serif text-sm italic text-graphite-600">{t.characterDetail.noConditions}</p>
+            )}
+          </section>
+        )}
+      </div>
 
       {/* Private Quarters (Hunters only) */}
       {isHunter && character.privateQuarters && character.privateQuarters.length > 0 && (
@@ -213,7 +228,7 @@ export default function CharacterDetailPage() {
         </section>
       )}
 
-      {/* Image placeholder */}
+      {/* No portrait placeholder (only when no image) */}
       {!character.imageUrl && (
         <div
           className="mt-8 flex h-48 items-center justify-center rounded-lg border border-dashed"
@@ -222,18 +237,6 @@ export default function CharacterDetailPage() {
           <p className="font-serif text-xs italic text-graphite-700">
             {t.characterDetail.noPortrait}
           </p>
-        </div>
-      )}
-      {character.imageUrl && (
-        <div
-          className="mt-8 overflow-hidden rounded-lg"
-          style={{ border: '1px solid var(--graphite-700)' }}
-        >
-          <img
-            src={character.imageUrl}
-            alt={character.name}
-            className="w-full object-cover"
-          />
         </div>
       )}
     </div>

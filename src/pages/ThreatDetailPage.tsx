@@ -126,6 +126,30 @@ export default function ThreatDetailPage() {
           ))}
         </ul>
       </section>
+
+      {/* Clue Images */}
+      {threat.clueImages && threat.clueImages.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
+            {t.threatDetail.clues}
+          </h2>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+            {threat.clueImages.map((filename, i) => (
+              <div
+                key={i}
+                className="rounded bg-[#eacfa9] p-2"
+                style={{ aspectRatio: '114 / 65' }}
+              >
+                <img
+                  src={`/img/clues/${filename}`}
+                  alt={`Clue ${i + 1}`}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }

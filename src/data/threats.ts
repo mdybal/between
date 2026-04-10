@@ -21,6 +21,7 @@ export const threats: Threat[] = [
     ],
     status: 'active',
     firstEncountered: 'session-02',
+    clueImages: ['brathwaite01.svg','brathwaite01.svg','brathwaite03.svg','brathwaite01.svg'],
   },
   {
     id: 'the-hollow-congregation',
