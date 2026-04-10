@@ -45,30 +45,30 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pb-16">
+    <div className="mx-auto max-w-6xl px-4 pb-10">
       {/* Hero */}
-      <section className="relative flex flex-col items-center py-24 text-center">
+      <section className="relative flex flex-col items-center py-5 text-center">
         <p className="relative font-sc text-xs uppercase tracking-[0.4em] text-amber-600/70">
           {t.home.eyebrow}
         </p>
-        <h1 className="nouveau-heading relative mt-4 font-display text-6xl font-bold tracking-widest text-amber-600 md:text-8xl">
+        <h1 className="nouveau-heading relative mt-2 font-display text-6xl font-bold tracking-widest text-amber-600 md:text-8xl">
           THE BETWEEN
         </h1>
 
         {/* Art Nouveau ornamental divider */}
-        <div className="relative mx-auto mt-6 nouveau-divider max-w-sm" />
+        <div className="relative mx-auto mt-1 nouveau-divider max-w-sm" />
 
-        <p className="relative mt-6 max-w-2xl font-serif text-base leading-loose text-graphite-300 md:text-lg">
+        <p className="relative max-w-2xl font-serif text-base leading-loose text-graphite-300 md:text-base">
           {t.home.intro}
         </p>
         <p className="relative mt-3 font-serif text-sm italic text-graphite-500">
           {t.home.quote}
         </p>
       </section>
-
+<div className="mx-auto nouveau-divider max-w-sm " />
       {/* Latest Session Banner */}
       {latestSession && (
-        <section className="mb-12">
+        <section className="mb-5">
           <Link
             to={`/actual-plays/${latestSession.id}`}
             className="art-card group block rounded-lg p-6 transition-colors"
@@ -107,6 +107,7 @@ export default function HomePage() {
       )}
 
       {/* Section Cards */}
+      <div className="mx-auto nouveau-divider max-w-sm " />
       <section className="grid gap-6 md:grid-cols-3">
         {sections.map(({ to, icon: Icon, label, description, count, countLabel }) => (
           <Link
@@ -157,29 +158,6 @@ export default function HomePage() {
             </div>
           </Link>
         ))}
-      </section>
-
-      {/* Campaign Overview */}
-      <section className="mt-16">
-        <div className="mx-auto nouveau-divider max-w-sm mb-10" />
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="parchment rounded-lg p-6">
-            <h3 className="mb-3 font-display text-base font-semibold text-amber-600">
-              {t.home.overview.heading}
-            </h3>
-            <p className="font-serif text-sm leading-loose text-graphite-300">
-              {t.home.overview.settingText}
-            </p>
-          </div>
-          <div className="parchment rounded-lg p-6">
-            <h3 className="mb-3 font-display text-base font-semibold text-amber-600">
-              {t.home.overview.systemHeading}
-            </h3>
-            <p className="font-serif text-sm leading-loose text-graphite-300">
-              <em>{t.home.overview.systemText}</em>
-            </p>
-          </div>
-        </div>
       </section>
     </div>
   )

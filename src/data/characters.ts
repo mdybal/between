@@ -113,9 +113,8 @@ export const characters: Character[] = [
   {
     id: 'theodora-brathwaite',
     name: 'Theodora Brathwaite',
-    alias: 'the mastermind',
     type: 'antagonist',
-    occupation: 'Unknown',
+    occupation: 'The Antagonist',
     description:
       'A shadowy figure whose true motives remain obscured. Known only by reputation and whispered warnings.',
     background:
