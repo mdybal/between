@@ -3,15 +3,23 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Calendar, Users, Star } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { sessions } from '@/data/sessions'
+import { sessionsPl } from '@/data/sessions_pl'
 import { sessionContentRegistry } from '@/sessions/registry'
+import { sessionContentRegistryPl } from '@/sessions/registry_pl'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
-  const session = sessions.find((s) => s.id === id)
+  const { lang, t } = useLanguage()
+
+  const activeSessions = lang === 'pl' ? sessionsPl : sessions
+  const activeRegistry = lang === 'pl' ? sessionContentRegistryPl : sessionContentRegistry
+
+  const session = activeSessions.find((s) => s.id === id)
 
   if (!session) return <Navigate to="/actual-plays" replace />
 
-  const SessionContent = id ? sessionContentRegistry[id] : undefined
+  const SessionContent = id ? activeRegistry[id] : undefined
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -22,7 +30,7 @@ export default function SessionDetailPage() {
           className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
-          All Sessions
+          {t.sessionDetail.backLink}
         </Link>
       </div>
 
@@ -33,11 +41,11 @@ export default function SessionDetailPage() {
       >
         <div className="mb-3 flex flex-wrap items-center gap-3">
           <span className="font-sc text-xs uppercase tracking-widest text-amber-700">
-            Session {session.sessionNumber}
+            {t.sessionDetail.session} {session.sessionNumber}
           </span>
           <span className="flex items-center gap-1 font-sc text-xs text-graphite-600">
             <Calendar size={11} />
-            {new Date(session.date).toLocaleDateString('en-GB', {
+            {new Date(session.date).toLocaleDateString(lang === 'pl' ? 'pl-PL' : 'en-GB', {
               day: 'numeric',
               month: 'long',
               year: 'numeric',
@@ -79,7 +87,7 @@ export default function SessionDetailPage() {
           <Suspense
             fallback={
               <p className="font-serif text-sm italic text-graphite-600 py-8 text-center">
-                Loading session…
+                {t.sessionDetail.loading}
               </p>
             }
           >
@@ -92,7 +100,7 @@ export default function SessionDetailPage() {
           {/* Summary */}
           <section>
             <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
-              Session Summary
+              {t.sessionDetail.summaryHeading}
             </h2>
             <p className="font-serif text-base leading-loose text-graphite-200">
               {session.summary}
@@ -104,7 +112,7 @@ export default function SessionDetailPage() {
             <section>
               <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
                 <Star size={12} className="text-amber-700" />
-                Key Moments
+                {t.sessionDetail.keyMomentsHeading}
               </h2>
               <ul className="space-y-3">
                 {session.highlights.map((highlight, i) => (
@@ -127,8 +135,8 @@ export default function SessionDetailPage() {
         style={{ borderTop: '1px solid var(--graphite-700)' }}
       >
         {(() => {
-          const prev = sessions.find((s) => s.sessionNumber === session.sessionNumber - 1)
-          const next = sessions.find((s) => s.sessionNumber === session.sessionNumber + 1)
+          const prev = activeSessions.find((s) => s.sessionNumber === session.sessionNumber - 1)
+          const next = activeSessions.find((s) => s.sessionNumber === session.sessionNumber + 1)
           return (
             <>
               <div>
@@ -137,9 +145,9 @@ export default function SessionDetailPage() {
                     to={`/actual-plays/${prev.id}`}
                     className="group flex flex-col font-serif text-sm"
                   >
-                    <span className="text-xs text-graphite-600">← Previous</span>
+                    <span className="text-xs text-graphite-600">{t.sessionDetail.previous}</span>
                     <span className="text-graphite-400 transition-colors group-hover:text-amber-600">
-                      Session {prev.sessionNumber}: {prev.title}
+                      {t.sessionDetail.session} {prev.sessionNumber}: {prev.title}
                     </span>
                   </Link>
                 )}
@@ -150,9 +158,9 @@ export default function SessionDetailPage() {
                     to={`/actual-plays/${next.id}`}
                     className="group flex flex-col font-serif text-sm"
                   >
-                    <span className="text-xs text-graphite-600">Next →</span>
+                    <span className="text-xs text-graphite-600">{t.sessionDetail.next}</span>
                     <span className="text-graphite-400 transition-colors group-hover:text-amber-600">
-                      Session {next.sessionNumber}: {next.title}
+                      {t.sessionDetail.session} {next.sessionNumber}: {next.title}
                     </span>
                   </Link>
                 )}

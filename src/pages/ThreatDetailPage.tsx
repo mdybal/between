@@ -2,8 +2,11 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { threats } from '@/data/threats'
+import { threatsPl } from '@/data/threats_pl'
 import { sessions } from '@/data/sessions'
+import { sessionsPl } from '@/data/sessions_pl'
 import type { ThreatLevel } from '@/types'
+import { useLanguage } from '@/i18n/LanguageContext'
 
 const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'> = {
   minor: 'muted',
@@ -12,21 +15,19 @@ const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'>
   catastrophic: 'red',
 }
 
-const threatLevelLabel: Record<ThreatLevel, string> = {
-  minor: 'Minor Threat',
-  moderate: 'Moderate Threat',
-  severe: 'Severe Threat',
-  catastrophic: '⚠ Catastrophic Threat',
-}
-
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()
-  const threat = threats.find((t) => t.id === id)
+  const { lang, t } = useLanguage()
+
+  const activeThreats = lang === 'pl' ? threatsPl : threats
+  const activeSessions = lang === 'pl' ? sessionsPl : sessions
+
+  const threat = activeThreats.find((t) => t.id === id)
 
   if (!threat) return <Navigate to="/threats" replace />
 
   const firstSession = threat.firstEncountered
-    ? sessions.find((s) => s.id === threat.firstEncountered)
+    ? activeSessions.find((s) => s.id === threat.firstEncountered)
     : null
 
   return (
@@ -38,7 +39,7 @@ export default function ThreatDetailPage() {
           className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
-          All Threats
+          {t.threatDetail.backLink}
         </Link>
       </div>
 
@@ -49,7 +50,7 @@ export default function ThreatDetailPage() {
       >
         <div className="mb-3 flex flex-wrap gap-2">
           <Badge variant={threatLevelVariant[threat.threatLevel]}>
-            {threatLevelLabel[threat.threatLevel]}
+            {t.threatDetail.threatLevelLabels[threat.threatLevel]}
           </Badge>
           <Badge variant="muted">{threat.type}</Badge>
           <Badge
@@ -71,12 +72,12 @@ export default function ThreatDetailPage() {
 
         {firstSession && (
           <p className="mt-3 font-sc text-xs text-graphite-600">
-            First encountered:{' '}
+            {t.threatDetail.firstEncountered}:{' '}
             <Link
               to={`/actual-plays/${firstSession.id}`}
               className="text-amber-700 hover:text-amber-500 transition-colors"
             >
-              Session {firstSession.sessionNumber}: {firstSession.title}
+              {t.sessionDetail.session} {firstSession.sessionNumber}: {firstSession.title}
             </Link>
           </p>
         )}
@@ -85,7 +86,7 @@ export default function ThreatDetailPage() {
       {/* Description */}
       <section className="mt-8">
         <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-          Overview
+          {t.threatDetail.overview}
         </h2>
         <p className="font-serif text-base leading-loose text-graphite-200">
           {threat.description}
@@ -96,7 +97,7 @@ export default function ThreatDetailPage() {
       <section className="mt-10">
         <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
           <Eye size={12} className="text-amber-700" />
-          Known Facts
+          {t.threatDetail.knownFacts}
         </h2>
         <ul className="space-y-3">
           {threat.knownFacts.map((fact, i) => (
@@ -112,7 +113,7 @@ export default function ThreatDetailPage() {
       <section className="mt-10">
         <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
           <HelpCircle size={12} className="text-red-800" />
-          Suspicions & Theories
+          {t.threatDetail.suspicions}
         </h2>
         <ul className="space-y-3">
           {threat.suspicions.map((suspicion, i) => (

@@ -2,14 +2,9 @@ import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { characters } from '@/data/characters'
+import { charactersPl } from '@/data/characters_pl'
 import type { CharacterType } from '@/types'
-
-const typeLabels: Record<CharacterType, string> = {
-  hunter: 'Hunter',
-  npc: 'NPC',
-  ally: 'Ally',
-  antagonist: 'Antagonist',
-}
+import { useLanguage } from '@/i18n/LanguageContext'
 
 const typeBadgeVariant: Record<CharacterType, 'amber' | 'green' | 'muted' | 'red'> = {
   hunter: 'amber',
@@ -27,7 +22,10 @@ const statusBadgeVariant = {
 
 export default function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>()
-  const character = characters.find((c) => c.id === id)
+  const { lang, t } = useLanguage()
+
+  const activeCharacters = lang === 'pl' ? charactersPl : characters
+  const character = activeCharacters.find((c) => c.id === id)
 
   if (!character) return <Navigate to="/characters" replace />
 
@@ -42,7 +40,7 @@ export default function CharacterDetailPage() {
           className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
-          All Characters
+          {t.characterDetail.backLink}
         </Link>
       </div>
 
@@ -53,10 +51,10 @@ export default function CharacterDetailPage() {
       >
         <div className="mb-3 flex flex-wrap gap-2">
           <Badge variant={typeBadgeVariant[character.type]}>
-            {typeLabels[character.type]}
+            {t.characters.typeLabels[character.type]}
           </Badge>
           <Badge variant={statusBadgeVariant[character.status]}>
-            {character.status}
+            {t.characters.statusLabels[character.status]}
           </Badge>
           {/* Conditions inline in header for hunters */}
           {isHunter && character.conditions && character.conditions.map((condition) => (
@@ -71,7 +69,7 @@ export default function CharacterDetailPage() {
         </h1>
         {character.alias && (
           <p className="mt-1 font-serif text-base italic text-graphite-500">
-            Known as "{character.alias}"
+            {t.characterDetail.knownAs} "{character.alias}"
           </p>
         )}
         <p className="mt-2 font-sc text-sm text-amber-700/80">{character.occupation}</p>
@@ -80,7 +78,7 @@ export default function CharacterDetailPage() {
       {/* Description */}
       <section className="mt-8">
         <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-          Description
+          {t.characterDetail.description}
         </h2>
         <p className="font-serif text-base leading-loose text-graphite-200">
           {character.description}
@@ -90,7 +88,7 @@ export default function CharacterDetailPage() {
       {/* Background */}
       <section className="mt-8">
         <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-          Background
+          {t.characterDetail.background}
         </h2>
         <p className="font-serif text-base leading-loose text-graphite-300">
           {character.background}
@@ -101,7 +99,7 @@ export default function CharacterDetailPage() {
       {!isHunter && (
         <section className="mt-8">
           <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            Traits
+            {t.characterDetail.traits}
           </h2>
           <div className="flex flex-wrap gap-2">
             {character.traits.map((trait) => (
@@ -117,7 +115,7 @@ export default function CharacterDetailPage() {
       {isHunter && (
         <section className="mt-8">
           <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            Conditions
+            {t.characterDetail.conditions}
           </h2>
           {character.conditions && character.conditions.length > 0 ? (
             <div className="flex flex-wrap gap-2">
@@ -128,7 +126,7 @@ export default function CharacterDetailPage() {
               ))}
             </div>
           ) : (
-            <p className="font-serif text-sm italic text-graphite-600">No active conditions.</p>
+            <p className="font-serif text-sm italic text-graphite-600">{t.characterDetail.noConditions}</p>
           )}
         </section>
       )}
@@ -137,7 +135,7 @@ export default function CharacterDetailPage() {
       {isHunter && character.privateQuarters && character.privateQuarters.length > 0 && (
         <section className="mt-8">
           <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            Private Quarters
+            {t.characterDetail.privateQuarters}
           </h2>
           <div className="flex flex-wrap gap-2">
             {character.privateQuarters.map((item) => (
@@ -167,7 +165,7 @@ export default function CharacterDetailPage() {
       {isHunter && character.masks && character.masks.length > 0 && (
         <section className="mt-8">
           <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
-            Masks
+            {t.characterDetail.masks}
           </h2>
           <div className="grid grid-cols-2 gap-6">
             {character.masks.map((group) => (
@@ -203,7 +201,7 @@ export default function CharacterDetailPage() {
                       </span>
                       {mask.used && (
                         <span className="ml-auto font-sc text-[10px] text-yellow-700">
-                          used
+                          {t.characterDetail.used}
                         </span>
                       )}
                     </li>
@@ -222,7 +220,7 @@ export default function CharacterDetailPage() {
           style={{ borderColor: 'var(--graphite-700)', backgroundColor: 'rgba(30,30,34,0.3)' }}
         >
           <p className="font-serif text-xs italic text-graphite-700">
-            No portrait available
+            {t.characterDetail.noPortrait}
           </p>
         </div>
       )}
