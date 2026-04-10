@@ -13,7 +13,9 @@ export interface Session {
 
 // ─── Character ────────────────────────────────────────────────────────────────
 
-export type CharacterType = 'hunter' | 'npc' | 'ally' | 'antagonist'
+export type CharacterType = 'hunter' | 'npc'
+
+export type NpcSubtype = 'neutral' | 'antagonist' | 'ally'
 
 export interface PrivateQuartersItem {
   name: string
@@ -35,6 +37,7 @@ export interface Character {
   name: string
   alias?: string
   type: CharacterType
+  subtype?: NpcSubtype   // only relevant when type === 'npc'
   occupation: string
   description: string
   background: string
@@ -43,7 +46,7 @@ export interface Character {
   privateQuarters?: PrivateQuartersItem[]
   masks?: MaskGroup[]
   imageUrl?: string
-  status: 'active' | 'deceased' | 'missing' | 'unknown'
+  status?: 'active' | 'retired'
 }
 
 // ─── Map ─────────────────────────────────────────────────────────────────────

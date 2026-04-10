@@ -65,20 +65,26 @@ export const en = {
     title: 'Characters',
     subtitle: 'Dramatis Personae',
     filters: {
-      all: 'All',
       hunter: 'Hunters',
       npc: 'NPCs',
-      ally: 'Allies',
-      antagonist: 'Antagonists',
+    },
+    subFilters: {
+      all: 'All',
+      active: 'Active',
+      retired: 'Retired',
     },
     typeLabels: {
       hunter: 'Hunter',
       npc: 'NPC',
+    },
+    subtypeLabels: {
+      neutral: 'Neutral',
       ally: 'Ally',
       antagonist: 'Antagonist',
     },
     statusLabels: {
       active: 'active',
+      retired: 'retired',
       deceased: 'deceased',
       missing: 'missing',
       unknown: 'unknown',

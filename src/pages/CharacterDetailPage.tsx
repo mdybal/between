@@ -3,22 +3,22 @@ import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { characters } from '@/data/characters'
 import { charactersPl } from '@/data/characters_pl'
-import type { CharacterType } from '@/types'
+import type { NpcSubtype } from '@/types'
 import { useLanguage } from '@/i18n/LanguageContext'
 
-const typeBadgeVariant: Record<CharacterType, 'amber' | 'green' | 'muted' | 'red'> = {
-  hunter: 'amber',
+const npcSubtypeBadgeVariant: Record<NpcSubtype, 'amber' | 'green' | 'muted' | 'red'> = {
+  neutral: 'muted',
   ally: 'green',
-  npc: 'muted',
   antagonist: 'red',
 }
 
-const statusBadgeVariant = {
+const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted'> = {
   active: 'green',
+  retired: 'amber',
   deceased: 'red',
   missing: 'amber',
   unknown: 'muted',
-} as const
+}
 
 export default function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -50,12 +50,27 @@ export default function CharacterDetailPage() {
         style={{ borderBottom: '1px solid rgba(180,120,40,0.18)' }}
       >
         <div className="mb-3 flex flex-wrap gap-2">
-          <Badge variant={typeBadgeVariant[character.type]}>
-            {t.characters.typeLabels[character.type]}
-          </Badge>
-          <Badge variant={statusBadgeVariant[character.status]}>
-            {t.characters.statusLabels[character.status]}
-          </Badge>
+          {character.type === 'npc' ? (
+            <>
+              <Badge variant="muted">
+                {t.characters.typeLabels.npc}
+              </Badge>
+              {character.subtype && (
+                <Badge variant={npcSubtypeBadgeVariant[character.subtype]}>
+                  {t.characters.subtypeLabels[character.subtype]}
+                </Badge>
+              )}
+            </>
+          ) : (
+            <Badge variant="amber">
+              {t.characters.typeLabels.hunter}
+            </Badge>
+          )}
+          {character.status && (
+            <Badge variant={statusBadgeVariant[character.status]}>
+              {t.characters.statusLabels[character.status]}
+            </Badge>
+          )}
           {/* Conditions inline in header for hunters */}
           {isHunter && character.conditions && character.conditions.map((condition) => (
             <Badge key={condition} variant="red">

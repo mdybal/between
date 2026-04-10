@@ -65,20 +65,26 @@ export const pl = {
     title: 'Postacie',
     subtitle: 'Dramatis Personae',
     filters: {
-      all: 'Wszystkie',
       hunter: 'Łowcy',
       npc: 'BN',
-      ally: 'Sojusznicy',
-      antagonist: 'Antagoniści',
+    },
+    subFilters: {
+      all: 'Wszystkie',
+      active: 'Aktywni',
+      retired: 'Na emeryturze',
     },
     typeLabels: {
       hunter: 'Łowca',
       npc: 'BN',
+    },
+    subtypeLabels: {
+      neutral: 'Postronny',
       ally: 'Sojusznik',
       antagonist: 'Antagonista',
     },
     statusLabels: {
       active: 'aktywna',
+      retired: 'na emeryturze',
       deceased: 'nieżyjąca',
       missing: 'zaginiona',
       unknown: 'nieznana',
