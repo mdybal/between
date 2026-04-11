@@ -3,18 +3,23 @@ import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
+import { session01 } from '@/data/sessions/session-01'
+import { session02 } from '@/data/sessions/session-02'
+import { session03 } from '@/data/sessions/session-03'
 import { cn } from '@/lib/utils'
 import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Session } from '@/types'
+
+const sessions: Session[] = [session01, session02, session03]
 
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
   const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
+  // For now, sessions are only in English (same data for both languages)
+  const activeSessions = sessions
 
   const threat = activeThreats.find((t) => t.id === id)
 

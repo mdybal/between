@@ -1,25 +1,31 @@
-import { Suspense } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Calendar, Users, Star } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
-import { sessionContentRegistry } from '@/sessions/registry'
-import { sessionContentRegistryPl } from '@/sessions/registry_pl'
+import { SessionContentRenderer } from '@/components/session/SessionContentRenderer'
+import { session01 } from '@/data/sessions/session-01'
+import { session02 } from '@/data/sessions/session-02'
+import { session03 } from '@/data/sessions/session-03'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Session } from '@/types'
+
+const sessionsById: Record<string, Session> = {
+  'session-01': session01,
+  'session-02': session02,
+  'session-03': session03,
+}
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
-  const activeRegistry = lang === 'pl' ? sessionContentRegistryPl : sessionContentRegistry
-
-  const session = activeSessions.find((s) => s.id === id)
+  const session = id ? sessionsById[id] : undefined
 
   if (!session) return <Navigate to="/actual-plays" replace />
 
-  const SessionContent = id ? activeRegistry[id] : undefined
+  // All sessions for navigation
+  const activeSessions = Object.values(sessionsById).sort(
+    (a, b) => a.sessionNumber - b.sessionNumber
+  )
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -81,21 +87,13 @@ export default function SessionDetailPage() {
         )}
       </header>
 
-      {/* ── Custom session content (from src/sessions/session-XX.tsx) ── */}
-      {SessionContent ? (
+      {/* ── Custom session content from scenes ── */}
+      {session.scenes && session.scenes.length > 0 ? (
         <div className="mt-8">
-          <Suspense
-            fallback={
-              <p className="font-serif text-sm italic text-graphite-600 py-8 text-center">
-                {t.sessionDetail.loading}
-              </p>
-            }
-          >
-            <SessionContent />
-          </Suspense>
+          <SessionContentRenderer scenes={session.scenes} />
         </div>
       ) : (
-        /* Fallback: render the plain data from sessions.ts if no custom file exists yet */
+        /* Fallback: render the plain data (summary + highlights) */
         <div className="mt-8 space-y-8">
           {/* Summary */}
           <section>

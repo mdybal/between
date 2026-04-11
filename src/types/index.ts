@@ -1,5 +1,26 @@
 // ─── Session / Actual Play ────────────────────────────────────────────────────
 
+type HighlightVariant = 'clue' | 'danger' | 'note' | 'lore'
+
+export interface ScenePullQuote {
+  text: string
+  attribution?: string
+}
+
+export interface SceneHighlightBox {
+  variant: HighlightVariant
+  title?: string
+  items?: string[]
+  content?: string
+}
+
+export interface Scene {
+  label: string
+  prose: string[]
+  highlightBox?: SceneHighlightBox
+  pullQuote?: ScenePullQuote
+}
+
 export interface Session {
   id: string
   sessionNumber: number
@@ -9,6 +30,7 @@ export interface Session {
   highlights: string[]
   players?: string[]
   tags?: string[]
+  scenes?: Scene[]
 }
 
 // ─── Character ────────────────────────────────────────────────────────────────

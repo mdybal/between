@@ -2,15 +2,24 @@ import { Link } from 'react-router-dom'
 import { Calendar, ChevronRight } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Session } from '@/types'
+
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const allSessions: Session[] = Object.values(sessionModules)
+  .map((module) => {
+    const mod = module as Record<string, unknown>
+    // Handle both default exports and named exports
+    if (mod.default) return mod.default as Session
+    // For named exports like session01, session02, etc.
+    const keys = Object.keys(mod).filter(k => k.startsWith('session'))
+    return mod[keys[0]] as Session
+  })
+  .sort((a, b) => b.sessionNumber - a.sessionNumber)
 
 export default function ActualPlaysPage() {
   const { lang, t } = useLanguage()
-
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
-  const sorted = [...activeSessions].sort((a, b) => b.sessionNumber - a.sessionNumber)
 
   return (
     <div className="mx-auto max-w-4xl px-4 pb-16">
@@ -20,7 +29,7 @@ export default function ActualPlaysPage() {
       />
 
       <div className="space-y-4">
-        {sorted.map((session) => (
+        {allSessions.map((session) => (
           <Link
             key={session.id}
             to={`/actual-plays/${session.id}`}
@@ -86,7 +95,7 @@ export default function ActualPlaysPage() {
         ))}
       </div>
 
-      {activeSessions.length === 0 && (
+      {allSessions.length === 0 && (
         <div className="py-20 text-center">
           <p className="font-serif text-graphite-600 italic">
             {t.actualPlays.empty}
