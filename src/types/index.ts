@@ -128,7 +128,7 @@ export type ThreatLevel = string // e.g., "2-4", "1-3", "0-5"
  */
 export interface ThreatBase {
   id: string
-  type: 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
+  type: 'mastermind' | 'threat'
   threatLevel?: ThreatLevel
   status: 'active' | 'neutralised' | 'unknown'
   firstEncountered?: string

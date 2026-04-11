@@ -106,15 +106,21 @@ export const pl = {
     noPortrait: 'Brak portretu',
   },
   threats: {
-    title: 'Zagrożenia i Architekci',
+    title: 'Zagrożenia i Spiski',
     subtitle: 'Znane zagrożenia dla śledztwa',
     filters: {
       all: 'Wszystkie',
-      mastermind: 'Architekci',
-      cult: 'Kulty',
-      creature: 'Stworzenia',
-      conspiracy: 'Spiski',
-      supernatural: 'Nadprzyrodzone',
+      mastermind: 'Spisek',
+      threat: "Zagrożenia",
+    },
+    typeLabels: {
+      mastermind: 'Spisek',
+      threat: 'Zagrożenie',
+    },
+    statusLabels: {
+      active: 'aktywne',
+      neutralised: 'zneutralizowane',
+      unknown: 'nieznane',
     },
     knownFacts: 'znanych faktów',
     suspicions: 'podejrzeń',

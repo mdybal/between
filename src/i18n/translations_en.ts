@@ -111,10 +111,16 @@ export const en = {
     filters: {
       all: 'All',
       mastermind: 'Masterminds',
-      cult: 'Cults',
-      creature: 'Creatures',
-      conspiracy: 'Conspiracies',
-      supernatural: 'Supernatural',
+      threat: 'Threat',
+    },
+    typeLabels: {
+      mastermind: 'Mastermind',
+      threat: 'Threat',
+    },
+    statusLabels: {
+      active: 'Active',
+      neutralised: 'Neutralised',
+      unknown: 'Unknown',
     },
     knownFacts: 'known facts',
     suspicions: 'suspicions',

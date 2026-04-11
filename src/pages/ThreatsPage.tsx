@@ -9,8 +9,7 @@ import { cn } from '@/lib/utils'
 import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
 
-type FilterValue = 'all' | 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
-
+type FilterValue = 'all' | 'mastermind' | 'threat'
 export default function ThreatsPage() {
   const [filter, setFilter] = useState<FilterValue>('all')
   const { lang, t } = useLanguage()
@@ -20,10 +19,7 @@ export default function ThreatsPage() {
   const typeFilters: { value: FilterValue; label: string }[] = [
     { value: 'all', label: t.threats.filters.all },
     { value: 'mastermind', label: t.threats.filters.mastermind },
-    { value: 'cult', label: t.threats.filters.cult },
-    { value: 'creature', label: t.threats.filters.creature },
-    { value: 'conspiracy', label: t.threats.filters.conspiracy },
-    { value: 'supernatural', label: t.threats.filters.supernatural },
+    { value: 'threat', label: t.threats.filters.threat },
   ]
 
   const filtered = filter === 'all' ? activeThreats : activeThreats.filter((t) => t.type === filter)
@@ -96,9 +92,11 @@ export default function ThreatsPage() {
                       </span>
                     )
                   })()}
-                  <Badge variant="muted">{threat.type}</Badge>
-                  <Badge variant={threat.status === 'active' ? 'red' : threat.status === 'neutralised' ? 'green' : 'muted'}>
-                    {threat.status}
+                  <Badge variant={threat.type === 'mastermind' ? 'red' : 'amber'}>
+                    {t.threats.typeLabels[threat.type]}
+                  </Badge>
+                  <Badge variant={threat.status === 'active' ? 'red' : threat.status === 'neutralised' ? 'muted' : 'muted'}>
+                    {t.threats.statusLabels[threat.status]}
                   </Badge>
                 </div>
 

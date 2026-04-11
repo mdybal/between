@@ -62,17 +62,19 @@ export default function ThreatDetailPage() {
               </span>
             )
           })()}
-          <Badge variant="muted">{threat.type}</Badge>
+          <Badge variant={threat.type === 'mastermind' ? 'red' : 'amber'}>
+            {t.threats.typeLabels[threat.type]}
+          </Badge>
           <Badge
             variant={
               threat.status === 'active'
                 ? 'red'
                 : threat.status === 'neutralised'
-                  ? 'green'
+                  ? 'muted'
                   : 'muted'
             }
           >
-            {threat.status}
+            {t.threats.statusLabels[threat.status]}
           </Badge>
         </div>
 
