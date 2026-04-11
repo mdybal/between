@@ -1,18 +1,24 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { ArrowLeft, Calendar, Users, Star } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
+import CharacterCard from '@/components/ui/CharacterCard'
 import { SessionContentRenderer } from '@/components/session/SessionContentRenderer'
-import { session01 } from '@/data/sessions/session-01'
-import { session02 } from '@/data/sessions/session-02'
-import { session03 } from '@/data/sessions/session-03'
+import { getCharactersEn } from '@/data/characters_en'
+import { getCharactersPl } from '@/data/characters_pl'
 import { useLanguage } from '@/i18n/LanguageContext'
 import type { Session } from '@/types'
 
-const sessionsById: Record<string, Session> = {
-  'session-01': session01,
-  'session-02': session02,
-  'session-03': session03,
-}
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const sessionsById: Record<string, Session> = {}
+Object.values(sessionModules).forEach((module) => {
+  const mod = module as Record<string, unknown>
+  // Handle both default exports and named exports
+  const session = mod.default 
+    ? mod.default as Session 
+    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
+  if (session) sessionsById[session.id] = session
+})
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -26,6 +32,12 @@ export default function SessionDetailPage() {
   const activeSessions = Object.values(sessionsById).sort(
     (a, b) => a.sessionNumber - b.sessionNumber
   )
+
+  // Get characters for NPC lookup
+  const allCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
+  const sessionNpcs = session.npcIds
+    ? allCharacters.filter((c) => session.npcIds?.includes(c.id))
+    : []
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -63,18 +75,6 @@ export default function SessionDetailPage() {
           {session.title}
         </h1>
 
-        {/* Players */}
-        {session.players && session.players.length > 0 && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <Users size={13} className="text-graphite-600" />
-            {session.players.map((p) => (
-              <Badge key={p} variant="muted">
-                {p}
-              </Badge>
-            ))}
-          </div>
-        )}
-
         {/* Tags */}
         {session.tags && session.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -93,9 +93,8 @@ export default function SessionDetailPage() {
           <SessionContentRenderer scenes={session.scenes} />
         </div>
       ) : (
-        /* Fallback: render the plain data (summary + highlights) */
+        /* Fallback: render the summary */
         <div className="mt-8 space-y-8">
-          {/* Summary */}
           <section>
             <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
               {t.sessionDetail.summaryHeading}
@@ -104,27 +103,21 @@ export default function SessionDetailPage() {
               {session.summary}
             </p>
           </section>
-
-          {/* Highlights */}
-          {session.highlights.length > 0 && (
-            <section>
-              <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
-                <Star size={12} className="text-amber-700" />
-                {t.sessionDetail.keyMomentsHeading}
-              </h2>
-              <ul className="space-y-3">
-                {session.highlights.map((highlight, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="mt-1 shrink-0 text-amber-700">✦</span>
-                    <span className="font-serif text-sm leading-loose text-graphite-300">
-                      {highlight}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
         </div>
+      )}
+
+      {/* ── NPCs Section ── */}
+      {sessionNpcs.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-6 font-display text-xs uppercase tracking-widest text-graphite-500">
+            {t.sessionDetail.npcsHeading}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {sessionNpcs.map((npc) => (
+              <CharacterCard key={npc.id} character={npc} />
+            ))}
+          </div>
+        </section>
       )}
 
       {/* Navigation between sessions */}

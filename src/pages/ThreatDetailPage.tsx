@@ -3,15 +3,20 @@ import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
-import { session01 } from '@/data/sessions/session-01'
-import { session02 } from '@/data/sessions/session-02'
-import { session03 } from '@/data/sessions/session-03'
 import { cn } from '@/lib/utils'
 import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
 import type { Session } from '@/types'
 
-const sessions: Session[] = [session01, session02, session03]
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const sessions: Session[] = Object.values(sessionModules).map((module) => {
+  const mod = module as Record<string, unknown>
+  // Handle both default exports and named exports
+  return mod.default 
+    ? mod.default as Session 
+    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
+}).filter(Boolean)
 
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()

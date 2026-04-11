@@ -2,6 +2,8 @@
 
 type HighlightVariant = 'clue' | 'danger' | 'note' | 'lore'
 
+export type ScenePhase = 'Dawn' | 'Day' | 'Dusk' | 'Night'
+
 export interface ScenePullQuote {
   text: string
   attribution?: string
@@ -19,6 +21,7 @@ export interface Scene {
   prose: string[]
   highlightBox?: SceneHighlightBox
   pullQuote?: ScenePullQuote
+  phase?: ScenePhase
 }
 
 export interface Session {
@@ -27,8 +30,7 @@ export interface Session {
   title: string
   date: string          // ISO date string, e.g. "1893-10-14"
   summary: string
-  highlights: string[]
-  players?: string[]
+  npcIds?: string[]      // IDs of NPCs that appear in this session (link to characters)
   tags?: string[]
   scenes?: Scene[]
 }

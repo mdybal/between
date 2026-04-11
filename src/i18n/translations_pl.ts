@@ -60,6 +60,7 @@ export const pl = {
     summaryHeading: 'Podsumowanie sesji',
     keyMomentsHeading: 'Kluczowe momenty',
     loading: 'Ładowanie sesji…',
+    npcsHeading: 'Napotkane postacie',
   },
   characters: {
     title: 'Postacie',

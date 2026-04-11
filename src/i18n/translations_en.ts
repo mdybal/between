@@ -60,6 +60,7 @@ export const en = {
     summaryHeading: 'Session Summary',
     keyMomentsHeading: 'Key Moments',
     loading: 'Loading session…',
+    npcsHeading: 'Characters Encountered',
   },
   characters: {
     title: 'Characters',

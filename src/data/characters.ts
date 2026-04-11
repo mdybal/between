@@ -96,7 +96,7 @@ export const characters: CharacterBase[] = [
     id: 'theodora-brathwaite',
     type: 'npc',
     subtype: 'antagonist',
-    imageUrl: '/img/characters/theodora.svg',
+    imageUrl: '/img/characters/portrait_theodora.svg',
     portraitUrl: '/img/characters/portrait_theodora.svg',
   },
   {

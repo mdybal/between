@@ -32,55 +32,25 @@ export default function CharacterDetailPage() {
 
       {/* Header */}
       <header
-        className="mt-6 pb-8"
+        className="relative mt-6 pb-6 pt-4"
         style={{ borderBottom: '1px solid rgba(180,120,40,0.18)' }}
       >
-        <div className="mb-3 flex flex-wrap gap-2">
-          {character.type === 'npc' ? (
-            <>
-              <Badge variant="muted">
-                {t.characters.typeLabels.npc}
-              </Badge>
-              {character.subtype && (
-                <Badge variant={npcSubtypeBadgeVariant[character.subtype]}>
-                  {t.characters.subtypeLabels[character.subtype]}
-                </Badge>
-              )}
-            </>
-          ) : (
-            <Badge variant="amber">
-              {t.characters.typeLabels.hunter}
-            </Badge>
-          )}
-          {character.status && (
-            <Badge variant={statusBadgeVariant[character.status]}>
-              {t.characters.statusLabels[character.status]}
-            </Badge>
-          )}
-          {/* Conditions inline in header for hunters */}
-          {isHunter && character.conditions && character.conditions.map((condition) => (
-            <Badge key={condition} variant="red">
-              {condition}
-            </Badge>
-          ))}
-        </div>
-
-        <h1 className="nouveau-heading font-display text-3xl font-bold text-amber-600 md:text-4xl">
-          {character.name}
-        </h1>
-        {character.alias && (
-          <p className="mt-1 font-serif text-base italic text-graphite-500">
-            {t.characterDetail.knownAs} "{character.alias}"
-          </p>
-        )}
-        <p className="mt-2 font-sc text-sm text-amber-700/80">{character.occupation}</p>
-      </header>
-
-      {/* Main content — portrait floats top-right, text wraps around it */}
-      <div className="mt-8">
+        {/* Portrait - floating left, doesn't affect header centering */}
         {character.imageUrl && (
-          <div className="float-right ml-6 mb-4 w-58 sm:w-58">
-            <div className="rounded bg-[#eacfa9] p-2">
+          <div
+            className="absolute left-0 top-1/2 -translate-y-1/2"
+            style={{ paddingLeft: '1rem' }}
+          >
+            <div
+              className="flex items-center justify-center overflow-hidden"
+              style={{
+                width: '122px',
+                height: '162px',
+                borderRadius: '50%',
+                backgroundColor: '#eacfa9',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.4)',
+              }}
+            >
               <img
                 src={character.imageUrl}
                 alt={character.name}
@@ -90,6 +60,51 @@ export default function CharacterDetailPage() {
           </div>
         )}
 
+        {/* Text content - centered across full page width */}
+        <div className="flex flex-col items-center">
+          <div className="mb-3 flex flex-wrap justify-center gap-2">
+            {character.type === 'npc' ? (
+              <>
+                <Badge variant="muted">
+                  {t.characters.typeLabels.npc}
+                </Badge>
+                {character.subtype && (
+                  <Badge variant={npcSubtypeBadgeVariant[character.subtype]}>
+                    {t.characters.subtypeLabels[character.subtype]}
+                  </Badge>
+                )}
+              </>
+            ) : (
+              <Badge variant="amber">
+                {t.characters.typeLabels.hunter}
+              </Badge>
+            )}
+            {character.status && (
+              <Badge variant={statusBadgeVariant[character.status]}>
+                {t.characters.statusLabels[character.status]}
+              </Badge>
+            )}
+            {/* Conditions inline in header for hunters */}
+            {isHunter && character.conditions && character.conditions.map((condition) => (
+              <Badge key={condition} variant="red">
+                {condition}
+              </Badge>
+            ))}
+          </div>
+
+          <h1 className="nouveau-heading font-display text-3xl font-bold text-amber-600 md:text-4xl">
+            {character.name}
+          </h1>
+          {character.alias && (
+            <p className="mt-1 font-serif text-base italic text-graphite-500">
+              {t.characterDetail.knownAs} "{character.alias}"
+            </p>
+          )}
+          <p className="mt-2 font-sc text-sm text-amber-700/80">{character.occupation}</p>
+        </div>
+      </header>
+      {/* Main content */}
+      <div className="mt-8">
         {/* Description */}
         <section>
           <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">

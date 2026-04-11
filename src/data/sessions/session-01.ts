@@ -7,17 +7,12 @@ export const session01: Session = {
   date: '1893-10-07',
   summary:
     'The investigators are drawn together by a series of peculiar disappearances near the Whitechapel docks. A cryptic letter leads them to a derelict warehouse where they discover evidence of occult rituals and a trail of black ichor.',
-  highlights: [
-    'First meeting of the investigators at the Diogenes Club',
-    'Discovery of the warehouse on Wapping High Street',
-    'Encounter with the hooded figure on the rooftop',
-    'Recovery of the brass cipher-box',
-  ],
-  players: ['Evelyn Ashworth', 'Dr. Cornelius Vane', 'Silas Morrow'],
+  npcIds: ['lady-pemberton', 'theodora-brathwaite'],
   tags: ['introduction', 'whitechapel', 'occult'],
   scenes: [
     {
       label: 'Prologue',
+      phase: 'Dawn',
       prose: [
         'The letter arrived without postage, slipped beneath three separate doors on the same fog-choked Tuesday morning. Each recipient — a journalist, a physician, and a disgraced inspector — found the same words written in a cramped, urgent hand: "Come to the Diogenes Club. Ask for Mr. Voss. Do not delay."',
         'None of them knew the others. None of them knew Mr. Voss. And yet, by half past nine, all three sat in the club\'s Stranger\'s Room, eyeing one another across a table of cold tea and unanswered questions.',
@@ -25,6 +20,7 @@ export const session01: Session = {
     },
     {
       label: 'Scene I — The Diogenes Club',
+      phase: 'Day',
       prose: [
         'Mr. Voss proved to be a small, precise man with ink-stained fingers and the eyes of someone who had not slept in several days. He spread a map of Whitechapel across the table and pointed to a cluster of marks along the waterfront.',
         'Seven people had vanished from the Wapping docks in the past three weeks. The police had logged them as runaways or river accidents. Voss believed otherwise.',
@@ -42,6 +38,7 @@ export const session01: Session = {
     },
     {
       label: 'Scene II — Warehouse 14',
+      phase: 'Dusk',
       prose: [
         'The warehouse smelled of river mud and something else — something sweet and wrong, like flowers left too long in standing water. The investigators found the ground floor empty save for scattered crates and a trail of black ichor leading toward a trapdoor.',
         'Below, in a vaulted cellar lit by a single lantern, they found the evidence of ritual: chalk circles, burned offerings, and a brass box engraved with a symbol none of them recognised — an inverted clock face, its hands pointing to the same hour.',
@@ -55,6 +52,7 @@ export const session01: Session = {
     },
     {
       label: 'Scene III — Recovery',
+      phase: 'Night',
       prose: [
         'The brass cipher-box was taken to Dr. Vane\'s surgery on Harley Street. Initial examination revealed a hidden compartment containing a strip of paper covered in substitution cipher. The cipher remains unsolved.',
       ],

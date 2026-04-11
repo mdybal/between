@@ -3,73 +3,60 @@ import type { Session } from '@/types'
 export const session02: Session = {
   id: 'session-02',
   sessionNumber: 2,
-  title: 'The Clockwork Séance',
-  date: '1893-10-14',
+  title: 'Fog on the Thames 2',
+  date: '1893-10-07',
   summary:
-    'Following the cipher-box clues, the investigators attend a fashionable séance in Mayfair, only to find the medium dead and the guests in a state of supernatural terror. The parlour hides more than candlelight and velvet.',
-  highlights: [
-    "Infiltration of Lady Pemberton's soirée",
-    "The medium's final, horrifying message",
-    'Discovery of the hidden passage behind the fireplace',
-    'First mention of "The Architect of Ruin"',
-  ],
-  players: ['Evelyn Ashworth', 'Dr. Cornelius Vane', 'Silas Morrow'],
-  tags: ['mayfair', 'séance', 'mastermind'],
+    'The investigators are drawn together by a series of peculiar disappearances near the Whitechapel docks. A cryptic letter leads them to a derelict warehouse where they discover evidence of occult rituals and a trail of black ichor.',
+  npcIds: ['lady-pemberton', 'theodora-brathwaite'],
+  tags: ['introduction', 'whitechapel', 'occult'],
   scenes: [
     {
-      label: 'Previously…',
+      label: 'Prologue',
       prose: [
-        'The investigators recovered a brass cipher-box from a derelict warehouse in Wapping, witnessed a hooded figure vanish from a rooftop, and began decoding a substitution cipher that pointed toward a fashionable address in Mayfair.',
+        'The letter arrived without postage, slipped beneath three separate doors on the same fog-choked Tuesday morning. Each recipient — a journalist, a physician, and a disgraced inspector — found the same words written in a cramped, urgent hand: "Come to the Diogenes Club. Ask for Mr. Voss. Do not delay."',
+        'None of them knew the others. None of them knew Mr. Voss. And yet, by half past nine, all three sat in the club\'s Stranger\'s Room, eyeing one another across a table of cold tea and unanswered questions.',
       ],
     },
     {
-      label: 'Scene I — Lady Pemberton\'s Soirée',
+      label: 'Scene I — The Diogenes Club',
       prose: [
-        'The cipher resolved to an address: 14 Cavendish Square, and a date — the following Thursday. Evelyn secured invitations through her editor\'s connections. The soirée was hosted by Lady Cecilia Pemberton, a widow of considerable means and, it emerged, considerable credulity regarding the supernatural.',
-        'The evening\'s entertainment was a séance conducted by one Madame Isolde, a medium of Continental reputation. Thirty guests gathered in the darkened drawing room. The investigators positioned themselves at different points around the table.',
-      ],
-      pullQuote: {
-        text: 'He is here. He has always been here. He calls himself the Architect, and he says — he says you should not have opened the box.',
-        attribution: 'Madame Isolde, moments before her death',
-      },
-    },
-    {
-      label: 'Scene II — The Medium\'s Death',
-      prose: [
-        'Madame Isolde died at the table. No wound, no poison — the physician present could find no cause. Her eyes were open and her expression was one of absolute terror. In her clenched fist, the investigators found a playing card: the Architect of a standard tarot deck, defaced with the same inverted clock symbol from the cipher-box.',
-      ],
-      highlightBox: {
-        variant: 'danger',
-        title: 'Incident — Death of Madame Isolde',
-        content:
-          'Cause of death: unknown. No physical trauma. The medium appeared to die of fright during the séance. Metropolitan Police were called; the investigators have approximately 20 minutes before their presence becomes difficult to explain.',
-      },
-    },
-    {
-      label: 'Scene III — The Hidden Passage',
-      prose: [
-        'While the other guests were occupied with the police\'s arrival, Silas noticed a draught from behind the fireplace. A concealed door, operated by a mechanism hidden in the mantelpiece carving, opened onto a narrow passage leading to a basement room.',
-        'The room had been used recently. A writing desk held correspondence in the same cipher as the box. A locked cabinet contained three items: a photograph of a man the investigators did not recognise, a vial of black ichor, and a folded letter addressed simply to "When They Come."',
+        'Mr. Voss proved to be a small, precise man with ink-stained fingers and the eyes of someone who had not slept in several days. He spread a map of Whitechapel across the table and pointed to a cluster of marks along the waterfront.',
+        'Seven people had vanished from the Wapping docks in the past three weeks. The police had logged them as runaways or river accidents. Voss believed otherwise.',
       ],
       highlightBox: {
         variant: 'clue',
-        title: 'Items Found in the Hidden Room',
+        title: 'Information from Voss',
         items: [
-          "Correspondence in the same substitution cipher — partially decoded, references \"the Architect's design\" and a date six weeks hence",
-          'A photograph: a tall man in formal dress, face partially obscured, standing before what appears to be a large mechanical device',
-          'A vial of black ichor — identical to the substance found in Wapping',
-          'A sealed letter addressed "When They Come" — the investigators chose not to open it',
+          'Seven disappearances, all within 400 yards of Wapping High Street',
+          'Each victim was last seen near Warehouse 14 — now supposedly derelict',
+          'A dockworker reported hearing "a sound like a clock running backwards" the night before each disappearance',
+          'Voss has a contact — a street child named Pip — who claims to have seen hooded figures',
         ],
       },
     },
     {
-      label: 'Lore',
-      prose: [],
+      label: 'Scene II — Warehouse 14',
+      prose: [
+        'The warehouse smelled of river mud and something else — something sweet and wrong, like flowers left too long in standing water. The investigators found the ground floor empty save for scattered crates and a trail of black ichor leading toward a trapdoor.',
+        'Below, in a vaulted cellar lit by a single lantern, they found the evidence of ritual: chalk circles, burned offerings, and a brass box engraved with a symbol none of them recognised — an inverted clock face, its hands pointing to the same hour.',
+      ],
       highlightBox: {
-        variant: 'lore',
-        title: 'First Mention — The Architect of Ruin',
+        variant: 'danger',
+        title: 'Encounter — The Rooftop Figure',
         content:
-          'The name "The Architect of Ruin" appears for the first time in the decoded correspondence. The phrase is used reverentially, as a title rather than a description. Whoever — or whatever — this entity is, those who serve it do so with devotion bordering on worship.',
+          'As the investigators prepared to leave, a hooded figure was spotted on the warehouse roof. It did not flee. It watched. When Silas raised his lantern, the figure turned and stepped backward off the edge — and was not heard to land.',
+      },
+    },
+    {
+      label: 'Scene III — Recovery',
+      prose: [
+        'The brass cipher-box was taken to Dr. Vane\'s surgery on Harley Street. Initial examination revealed a hidden compartment containing a strip of paper covered in substitution cipher. The cipher remains unsolved.',
+      ],
+      highlightBox: {
+        variant: 'clue',
+        title: 'Item Recovered — The Brass Cipher-Box',
+        content:
+          'A small brass box, approximately 4 inches by 2 inches. The lid bears an inverted clock symbol. Inside: a folded strip of paper in substitution cipher, and traces of the same black ichor found on the warehouse floor. The box itself appears to be of recent manufacture, despite its antique styling.',
       },
     },
     {
@@ -79,7 +66,7 @@ export const session02: Session = {
         variant: 'note',
         title: 'Session Notes',
         content:
-          'The séance scene landed well — the moment of Isolde\'s death was genuinely unsettling. The players are now invested in the Architect mystery. The sealed letter is a good dangling thread; they\'ll want to open it eventually. Lady Pemberton\'s reaction to the hidden room (genuine shock, or performance?) is worth developing.',
+          'First session. Players established their characters\' voices well — Evelyn\'s instinct to photograph everything, Vane\'s clinical detachment masking genuine unease, Silas\'s professional scepticism cracking at the rooftop encounter. The cipher-box will be the thread into Session 2.',
       },
     },
   ],
