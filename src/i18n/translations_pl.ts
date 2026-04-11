@@ -101,7 +101,6 @@ export const pl = {
     traits: 'Cechy',
     conditions: 'Stany',
     noConditions: 'Brak aktywnych stanów.',
-    privateQuarters: 'Prywatne kwatery',
     masks: 'Maski',
     used: 'użyta',
     noPortrait: 'Brak portretu',

@@ -41,11 +41,6 @@ export type CharacterType = 'hunter' | 'npc'
 
 export type NpcSubtype = 'neutral' | 'antagonist' | 'ally'
 
-export interface PrivateQuartersItem {
-  name: string
-  used: boolean
-}
-
 export interface MaskEntry {
   name: string
   used: boolean
@@ -66,8 +61,6 @@ export interface CharacterBase {
   subtype?: NpcSubtype   // only relevant when type === 'npc'
   status?: 'active' | 'retired'
   imageUrl?: string
-  privateQuarters?: PrivateQuartersItem[]
-  masks?: MaskGroup[]
 }
 
 /**
@@ -80,8 +73,9 @@ export interface Character extends CharacterBase {
   occupation: string
   description: string
   background: string
-  traits: string[]
+  traits?: string[]
   conditions?: string[]
+  masks?: MaskGroup[]
 }
 
 // ─── Map ─────────────────────────────────────────────────────────────────────

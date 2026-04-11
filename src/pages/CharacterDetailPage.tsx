@@ -132,11 +132,11 @@ export default function CharacterDetailPage() {
               {t.characterDetail.traits}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {character.traits.map((trait) => (
+              {character.traits?.map((trait) => (
                 <Badge key={trait} variant="amber">
                   {trait}
                 </Badge>
-              ))}
+              )) ?? []}
             </div>
           </section>
         )}
@@ -161,36 +161,6 @@ export default function CharacterDetailPage() {
           </section>
         )}
       </div>
-
-      {/* Private Quarters (Hunters only) */}
-      {isHunter && character.privateQuarters && character.privateQuarters.length > 0 && (
-        <section className="mt-8">
-          <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
-            {t.characterDetail.privateQuarters}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {character.privateQuarters.map((item) => (
-              <span
-                key={item.name}
-                className={[
-                  'inline-flex items-center gap-1.5 rounded border px-2 py-0.5 font-sc text-xs tracking-wide',
-                  item.used
-                    ? 'border-yellow-700/50 text-yellow-400'
-                    : 'border-yellow-900/30 text-yellow-700/60 line-through',
-                ].join(' ')}
-                style={{
-                  backgroundColor: item.used ? 'rgba(100,70,10,0.3)' : 'rgba(60,50,10,0.15)',
-                }}
-              >
-                {item.name}
-                {item.used && (
-                  <span className="text-[10px] text-yellow-600/70">✓</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* Masks (Hunters only) — two-column layout, one column per category */}
       {isHunter && character.masks && character.masks.length > 0 && (

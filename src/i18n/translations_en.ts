@@ -101,7 +101,6 @@ export const en = {
     traits: 'Traits',
     conditions: 'Conditions',
     noConditions: 'No active conditions.',
-    privateQuarters: 'Private Quarters',
     masks: 'Masks',
     used: 'used',
     noPortrait: 'No portrait available',

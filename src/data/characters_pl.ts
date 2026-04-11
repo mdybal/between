@@ -6,9 +6,9 @@ import type { Character } from '@/types'
  * Polish character text data.
  *
  * This file contains Polish translations of text fields (name, alias, occupation,
- * description, background, traits, conditions, privateQuarters[].name,
- * masks[].category, masks[].masks[].name). The non-text fields (id, type,
- * subtype, imageUrl, portraitUrl, status, used flags) are stored in characters.ts.
+ * description, background, traits, conditions, masks[].category,
+ * masks[].masks[].name). The non-text fields (id, type, subtype, imageUrl,
+ * status, used flags) are stored in characters.ts.
  *
  * To add Polish translations, add entries with the same id as in characters_en.ts
  * and replace the text fields with Polish translations.
@@ -36,15 +36,11 @@ export function getCharactersPl(): Character[] {
       background: text.background,
       traits: text.traits,
       conditions: text.conditions,
-      privateQuarters: text.privateQuarters?.map((pq, i) => ({
-        ...pq,
-        used: char.privateQuarters?.[i]?.used ?? false,
-      })),
-      masks: text.masks?.map((maskGroup, i) => ({
+      masks: text.masks?.map((maskGroup) => ({
         ...maskGroup,
-        masks: maskGroup.masks.map((m, j) => ({
+        masks: maskGroup.masks.map((m) => ({
           ...m,
-          used: char.masks?.[i]?.masks[j]?.used ?? false,
+          used: false,
         })),
       })),
     }

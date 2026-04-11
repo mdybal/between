@@ -75,11 +75,11 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
           {/* Traits (NPCs only) */}
           {character.type === 'npc' && (
             <div className="mt-3 flex flex-wrap gap-1">
-              {character.traits.map((trait) => (
+              {character.traits?.map((trait) => (
                 <Badge key={trait} variant="muted">
                   {trait}
                 </Badge>
-              ))}
+              )) ?? []}
             </div>
           )}
         </div>
