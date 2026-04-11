@@ -66,7 +66,6 @@ export interface CharacterBase {
   subtype?: NpcSubtype   // only relevant when type === 'npc'
   status?: 'active' | 'retired'
   imageUrl?: string
-  portraitUrl?: string
   privateQuarters?: PrivateQuartersItem[]
   masks?: MaskGroup[]
 }

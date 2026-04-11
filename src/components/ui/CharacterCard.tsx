@@ -85,7 +85,7 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
         </div>
 
         {/* Portrait medallion */}
-        {character.portraitUrl && (
+        {character.imageUrl && (
           <div
             className="shrink-0 self-center flex items-center justify-center overflow-hidden"
             style={{
@@ -97,7 +97,7 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
             }}
           >
             <img
-              src={character.portraitUrl}
+              src={character.imageUrl}
               alt={character.name}
               className="w-full h-full object-contain"
             />

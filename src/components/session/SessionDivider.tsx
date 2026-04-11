@@ -15,25 +15,25 @@ const phaseStyles: Record<ScenePhase, { bg: string; text: string; gradient: stri
     bg: 'bg-amber-950/30',
     text: 'text-amber-400',
     gradient: 'rgba(245,158,11,0.35)',
-    flourish: '☀',
+    flourish: '𖤓',
   },
   Day: {
     bg: 'bg-yellow-950/30',
     text: 'text-yellow-100',
     gradient: 'rgba(250,204,21,0.4)',
-    flourish: '☀☀',
+    flourish: '☀',
   },
   Dusk: {
     bg: 'bg-stone-800/40',
     text: 'text-stone-300',
     gradient: 'rgba(168,162,158,0.4)',
-    flourish: '☀',
+    flourish: '☁',
   },
   Night: {
     bg: 'bg-purple-950/50',
     text: 'text-purple-300',
     gradient: 'rgba(147,51,234,0.35)',
-    flourish: '☽',
+    flourish: '☾',
   },
 }
 

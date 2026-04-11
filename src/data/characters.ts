@@ -2,7 +2,7 @@ import type { CharacterBase } from '@/types'
 
 /**
  * Character data containing non-text fields (id, type, subtype, imageUrl,
- * portraitUrl, status, used flags). Text fields (name, alias, occupation,
+ * status, used flags). Text fields (name, alias, occupation,
  * description, background, traits, conditions, privateQuarters[].name,
  * masks[].category, masks[].masks[].name) are stored in characters_en.ts (English)
  * and can be translated for other languages.
@@ -96,8 +96,7 @@ export const characters: CharacterBase[] = [
     id: 'theodora-brathwaite',
     type: 'npc',
     subtype: 'antagonist',
-    imageUrl: '/img/characters/portrait_theodora.svg',
-    portraitUrl: '/img/characters/portrait_theodora.svg',
+    imageUrl: '/img/characters/theodora.svg',
   },
   {
     id: 'lady-pemberton',
