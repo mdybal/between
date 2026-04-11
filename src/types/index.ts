@@ -32,22 +32,33 @@ export interface MaskGroup {
   masks: MaskEntry[]
 }
 
-export interface Character {
+/**
+ * Base character fields stored in src/data/characters.ts.
+ * Non-text fields only (text fields are merged in from characters_en.ts / characters_pl.ts).
+ */
+export interface CharacterBase {
   id: string
-  name: string
-  alias?: string
   type: CharacterType
   subtype?: NpcSubtype   // only relevant when type === 'npc'
+  status?: 'active' | 'retired'
+  imageUrl?: string
+  portraitUrl?: string
+  privateQuarters?: PrivateQuartersItem[]
+  masks?: MaskGroup[]
+}
+
+/**
+ * Full character with translatable text fields.
+ * Produced by merging CharacterBase with data from characters_en.ts / characters_pl.ts.
+ */
+export interface Character extends CharacterBase {
+  name: string
+  alias?: string
   occupation: string
   description: string
   background: string
   traits: string[]
   conditions?: string[]
-  privateQuarters?: PrivateQuartersItem[]
-  masks?: MaskGroup[]
-  imageUrl?: string
-  portraitUrl?: string
-  status?: 'active' | 'retired'
 }
 
 // ─── Map ─────────────────────────────────────────────────────────────────────
@@ -111,15 +122,26 @@ export interface MapZone {
  */
 export type ThreatLevel = string // e.g., "2-4", "1-3", "0-5"
 
-export interface Threat {
+/**
+ * Base threat fields stored in src/data/threats.ts.
+ * Non-text fields only (text fields are merged in from threats_en.ts / threats_pl.ts).
+ */
+export interface ThreatBase {
   id: string
-  //name: string
   type: 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
-  threatLevel?: ThreatLevel // optional, e.g., "2-4"
-  //description: string
-  //knownFacts: string[]
-  //suspicions: string[]
+  threatLevel?: ThreatLevel
   status: 'active' | 'neutralised' | 'unknown'
-  firstEncountered?: string  // session id
-  clueImages?: string[]      // filenames from public/img/clues/
+  firstEncountered?: string
+  clueImages?: string[]
+}
+
+/**
+ * Full threat with translatable text fields.
+ * Produced by merging ThreatBase with data from threats_en.ts / threats_pl.ts.
+ */
+export interface Threat extends ThreatBase {
+  name: string
+  description: string
+  knownFacts: string[]
+  suspicions: string[]
 }

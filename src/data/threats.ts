@@ -1,4 +1,4 @@
-import type { Threat } from '@/types'
+import type { ThreatBase } from '@/types'
 
 /**
  * Threat data containing non-text fields (id, type, threatLevel, status,
@@ -6,7 +6,7 @@ import type { Threat } from '@/types'
  * suspicions) are stored in threats_en.ts (English) and can be translated
  * for other languages.
  */
-export const threats: Threat[] = [
+export const threats: ThreatBase[] = [
   {
     id: 'architect-of-ruin',
     type: 'mastermind',

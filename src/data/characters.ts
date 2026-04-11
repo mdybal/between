@@ -1,4 +1,4 @@
-import type { Character } from '@/types'
+import type { CharacterBase } from '@/types'
 
 /**
  * Character data containing non-text fields (id, type, subtype, imageUrl,
@@ -7,7 +7,7 @@ import type { Character } from '@/types'
  * masks[].category, masks[].masks[].name) are stored in characters_en.ts (English)
  * and can be translated for other languages.
  */
-export const characters: Character[] = [
+export const characters: CharacterBase[] = [
   {
     id: 'evelyn-ashworth',
     type: 'hunter',
