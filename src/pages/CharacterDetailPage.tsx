@@ -3,22 +3,8 @@ import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
-import type { NpcSubtype } from '@/types'
+import { npcSubtypeBadgeVariant, statusBadgeVariant } from '@/lib/characterUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
-
-const npcSubtypeBadgeVariant: Record<NpcSubtype, 'amber' | 'green' | 'muted' | 'red'> = {
-  neutral: 'muted',
-  ally: 'green',
-  antagonist: 'red',
-}
-
-const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted'> = {
-  active: 'green',
-  retired: 'amber',
-  deceased: 'red',
-  missing: 'amber',
-  unknown: 'muted',
-}
 
 export default function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>()

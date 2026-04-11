@@ -6,25 +6,12 @@ import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
 import type { NpcSubtype } from '@/types'
 import { cn } from '@/lib/utils'
+import { npcSubtypeBadgeVariant, statusBadgeVariant } from '@/lib/characterUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
 
 type MainFilter = 'hunter' | 'npc'
 type HunterSubFilter = 'all' | 'active' | 'retired'
 type NpcSubFilter = 'all' | NpcSubtype
-
-const npcSubtypeBadgeVariant: Record<NpcSubtype, 'amber' | 'green' | 'muted' | 'red'> = {
-  neutral: 'muted',
-  ally: 'green',
-  antagonist: 'red',
-}
-
-const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted'> = {
-  active: 'green',
-  retired: 'amber',
-  deceased: 'red',
-  missing: 'amber',
-  unknown: 'muted',
-}
 
 export default function CharactersPage() {
   const [mainFilter, setMainFilter] = useState<MainFilter>('hunter')
