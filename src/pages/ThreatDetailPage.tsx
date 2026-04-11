@@ -1,25 +1,53 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
-import { threats } from '@/data/threats'
-import { threatsPl } from '@/data/threats_pl'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
 import { sessions } from '@/data/sessions'
 import { sessionsPl } from '@/data/sessions_pl'
-import type { ThreatLevel } from '@/types'
+import { cn } from '@/lib/utils'
 import { useLanguage } from '@/i18n/LanguageContext'
 
-const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'> = {
-  minor: 'muted',
-  moderate: 'amber',
-  severe: 'red',
-  catastrophic: 'red',
+/**
+ * Parses a threat level string (e.g., "2-4") and returns styling classes.
+ * Format: "filled-total" where filled = number of filled circles, total = total circles
+ */
+function getThreatLevelStyle(level: string | undefined): { colorClass: string; circles: string } {
+  if (!level) return { colorClass: '', circles: '' }
+
+  const parts = level.split('-')
+  if (parts.length !== 2) return { colorClass: '', circles: '' }
+
+  const filled = parseInt(parts[0], 10)
+  const total = parseInt(parts[1], 10)
+
+  if (isNaN(filled) || isNaN(total) || total === 0) return { colorClass: '', circles: '' }
+
+  const difference = total - filled
+
+  // Determine color based on difference
+  let colorClass: string
+  if (difference === 0) {
+    colorClass = 'text-red-400' // red - no empty circles
+  } else if (difference === 1) {
+    colorClass = 'text-amber-500' // orange - one empty circle
+  } else {
+    colorClass = 'text-emerald-400' // green - multiple empty circles
+  }
+
+  // Build circles string: filled circles + empty circles
+  const filledCircles = '⬤'.repeat(filled)
+  const emptyCircles = '◯'.repeat(difference)
+  const circles = filledCircles + emptyCircles
+
+  return { colorClass, circles }
 }
 
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const activeThreats = lang === 'pl' ? threatsPl : threats
+  const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
   const activeSessions = lang === 'pl' ? sessionsPl : sessions
 
   const threat = activeThreats.find((t) => t.id === id)
@@ -49,9 +77,25 @@ export default function ThreatDetailPage() {
         style={{ borderBottom: '1px solid rgba(150,30,30,0.2)' }}
       >
         <div className="mb-3 flex flex-wrap gap-2">
-          <Badge variant={threatLevelVariant[threat.threatLevel]}>
-            {t.threatDetail.threatLevelLabels[threat.threatLevel]}
-          </Badge>
+          {(() => {
+            const { colorClass, circles } = getThreatLevelStyle(threat.threatLevel)
+            if (!circles) return null
+            return (
+              <span
+                className={cn(
+                  'rounded border px-2 py-0.5 font-sc text-xs tracking-wide',
+                  colorClass,
+                  colorClass === 'text-red-400'
+                    ? 'border-red-800/50 bg-rgba(100, 20, 20, 0.25)'
+                    : colorClass === 'text-amber-500'
+                      ? 'border-amber-800/50 bg-rgba(120, 60, 10, 0.25)'
+                      : 'border-emerald-800/50 bg-rgba(10, 80, 40, 0.25)',
+                )}
+              >
+                {circles}
+              </span>
+            )
+          })()}
           <Badge variant="muted">{threat.type}</Badge>
           <Badge
             variant={

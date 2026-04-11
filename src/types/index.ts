@@ -46,6 +46,7 @@ export interface Character {
   privateQuarters?: PrivateQuartersItem[]
   masks?: MaskGroup[]
   imageUrl?: string
+  portraitUrl?: string
   status?: 'active' | 'retired'
 }
 
@@ -105,16 +106,19 @@ export interface MapZone {
 
 // ─── Threat / Mastermind ──────────────────────────────────────────────────────
 
-export type ThreatLevel = 'minor' | 'moderate' | 'severe' | 'catastrophic'
+/**
+ * Threat level in format "filled-total" (e.g., "2-4" means 2 filled circles out of 4)
+ */
+export type ThreatLevel = string // e.g., "2-4", "1-3", "0-5"
 
 export interface Threat {
   id: string
-  name: string
+  //name: string
   type: 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
-  threatLevel: ThreatLevel
-  description: string
-  knownFacts: string[]
-  suspicions: string[]
+  threatLevel?: ThreatLevel // optional, e.g., "2-4"
+  //description: string
+  //knownFacts: string[]
+  //suspicions: string[]
   status: 'active' | 'neutralised' | 'unknown'
   firstEncountered?: string  // session id
   clueImages?: string[]      // filenames from public/img/clues/

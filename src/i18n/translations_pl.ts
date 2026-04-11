@@ -3,7 +3,7 @@ export const pl = {
     home: 'Strona główna',
     actualPlays: 'Sesje',
     characters: 'Postacie',
-    threats: 'Zagrożenia i Architekci',
+    threats: 'Zagrożenia i Spisek',
     map: 'Mapa',
     toggleMenu: 'Przełącz menu',
   },
@@ -14,8 +14,8 @@ export const pl = {
   home: {
     eyebrow: 'Kampania TTRPG w epoce wiktoriańskiej',
     intro:
-      'Londyn, 1893. Pod gazowymi latarniami i za aksamitnymi zasłonami wyższych sfer coś pradawnego się porusza. Banda śledczych stoi między miastem a ciemnością, która go pożąda.',
-    quote: '„Mgła nie tylko przesłania — ona ukrywa."',
+      'Londyn, 1893. Poza kręgiem światła gazowych lamp i za aksamitnymi zasłonami wyższych sfer kryje się coś pradawnego. Grupa Myśliwych stoi między miastem a ciemnością, która go pożąda.',
+    quote: '„Mgła nie tylko przesłania — ale równiez skrywa."',
     latestSession: 'Ostatnia sesja',
     sections: {
       actualPlays: {
@@ -31,7 +31,7 @@ export const pl = {
         countLabel: 'postaci skatalogowanych',
       },
       threats: {
-        label: 'Zagrożenia i Architekci',
+        label: 'Zagrożenia i Spisek',
         description:
           'Siły skierowane przeciwko śledczym — kulty, spiski i cienie pociągające za sznurki.',
         countLabel: 'zagrożeń zidentyfikowanych',
@@ -116,12 +116,6 @@ export const pl = {
       conspiracy: 'Spiski',
       supernatural: 'Nadprzyrodzone',
     },
-    threatLevelLabels: {
-      minor: 'Małe',
-      moderate: 'Umiarkowane',
-      severe: 'Poważne',
-      catastrophic: '⚠ Katastrofalne',
-    },
     knownFacts: 'znanych faktów',
     suspicions: 'podejrzeń',
     empty: 'Nie zidentyfikowano zagrożeń w tej kategorii.',
@@ -133,12 +127,6 @@ export const pl = {
     suspicions: 'Podejrzenia i teorie',
     clues: 'Poszlaki',
     firstEncountered: 'Pierwsze spotkanie',
-    threatLevelLabels: {
-      minor: 'Małe zagrożenie',
-      moderate: 'Umiarkowane zagrożenie',
-      severe: 'Poważne zagrożenie',
-      catastrophic: '⚠ Katastrofalne zagrożenie',
-    },
   },
   map: {
     title: 'Mapa śledztwa',

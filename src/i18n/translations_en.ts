@@ -3,7 +3,7 @@ export const en = {
     home: 'Home',
     actualPlays: 'Actual Plays',
     characters: 'Characters',
-    threats: 'Threats & Masterminds',
+    threats: 'Threats & Conspiracy',
     map: 'Map',
     toggleMenu: 'Toggle menu',
   },
@@ -31,7 +31,7 @@ export const en = {
         countLabel: 'characters catalogued',
       },
       threats: {
-        label: 'Threats & Masterminds',
+        label: 'Threats & Conspiracy',
         description:
           'The forces arrayed against the investigators — cults, conspiracies, and the shadowy figures who pull the strings.',
         countLabel: 'threats identified',
@@ -116,12 +116,6 @@ export const en = {
       conspiracy: 'Conspiracies',
       supernatural: 'Supernatural',
     },
-    threatLevelLabels: {
-      minor: 'Minor',
-      moderate: 'Moderate',
-      severe: 'Severe',
-      catastrophic: '⚠ Catastrophic',
-    },
     knownFacts: 'known facts',
     suspicions: 'suspicions',
     empty: 'No threats identified in this category.',
@@ -133,12 +127,6 @@ export const en = {
     suspicions: 'Suspicions & Theories',
     clues: 'Clues',
     firstEncountered: 'First encountered',
-    threatLevelLabels: {
-      minor: 'Minor Threat',
-      moderate: 'Moderate Threat',
-      severe: 'Severe Threat',
-      catastrophic: '⚠ Catastrophic Threat',
-    },
   },
   map: {
     title: 'Investigation Map',

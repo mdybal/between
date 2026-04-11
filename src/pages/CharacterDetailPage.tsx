@@ -1,8 +1,8 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
-import { characters } from '@/data/characters'
-import { charactersPl } from '@/data/characters_pl'
+import { getCharactersEn } from '@/data/characters_en'
+import { getCharactersPl } from '@/data/characters_pl'
 import type { NpcSubtype } from '@/types'
 import { useLanguage } from '@/i18n/LanguageContext'
 
@@ -24,7 +24,7 @@ export default function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const activeCharacters = lang === 'pl' ? charactersPl : characters
+  const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
   const character = activeCharacters.find((c) => c.id === id)
 
   if (!character) return <Navigate to="/characters" replace />
