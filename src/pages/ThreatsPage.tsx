@@ -109,7 +109,7 @@ export default function ThreatsPage() {
                 </p>
 
                 <p className="mt-3 font-sc text-xs text-graphite-600">
-                  {threat.knownFacts.length} {t.threats.knownFacts} · {threat.suspicions.length} {t.threats.suspicions}
+                  {threat.knownFacts.length} {t.threats.knownFacts} · {threat.questions.length} {t.threats.questions}
                 </p>
               </div>
 
