@@ -46,8 +46,12 @@ export const threatsEn: ThreatText[] = [
       {
         question: 'How can we get this ghost to pass on to the next world? (Complexity: 6)',
       },
-      
     ],
+    mask: {
+      title: 'The Mask of the Unquiet',
+      description:
+        'Each Hunter narrates a flashback to their childhood when they experienced a haunting.',
+    },
   },
 ]
 

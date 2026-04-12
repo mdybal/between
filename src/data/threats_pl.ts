@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { Threat, ThreatQuestion } from '@/types'
+import type { Threat, ThreatQuestion, MaskSection } from '@/types'
 
 /**
  * Polish threat text data.
@@ -7,6 +7,9 @@ import type { Threat, ThreatQuestion } from '@/types'
  * This file contains Polish translations of text fields (name, description,
  * knownFacts, questions) for threats. The non-text fields (id, type,
  * threatLevel, status, firstEncountered, clueImages) are stored in threats.ts.
+ *
+ * To add Polish translations, add entries with the same id as in threats_en.ts
+ * and replace the text fields with Polish translations.
  */
 export interface ThreatText {
   id: string
@@ -14,6 +17,7 @@ export interface ThreatText {
   description: string
   knownFacts?: string[]
   questions: ThreatQuestion[]
+  mask?: MaskSection
 }
 
 export const threatsPl: ThreatText[] = [
@@ -38,6 +42,11 @@ export const threatsPl: ThreatText[] = [
         question: 'Jak sprawić, by ten duch przeszedł do następnego świata? (Złożoność: 6)',
       },
     ],
+    mask: {
+      title: 'Maska Niespokojnych',
+      description:
+        'Każdy Łowca opowiada retrospekcję ze swojego dzieciństwa, gdy doświadczył nawiedzenia.',
+    },
   },
 ]
 
