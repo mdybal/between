@@ -1,4 +1,4 @@
-import { useParams, Link, Navigate } from 'react-router-dom'
+import { useParams, Link, Navigate, useLocation } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { getCharactersEn } from '@/data/characters_en'
@@ -9,6 +9,7 @@ import { useLanguage } from '@/i18n/LanguageContext'
 export default function CharacterDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
+  const location = useLocation()
 
   const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
   const character = activeCharacters.find((c) => c.id === id)
@@ -17,12 +18,18 @@ export default function CharacterDetailPage() {
 
   const isHunter = character.type === 'hunter'
 
+  // Preserve search params when going back to characters page
+  const backToCharacters = location.state?.fromCharacters
+    ? '/characters' + location.state.fromCharacters
+    : '/characters'
+
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
       {/* Back link */}
       <div className="pt-8">
         <Link
-          to="/characters"
+          to={backToCharacters}
+          state={location.state}
           className="inline-flex items-center gap-2 font-sc text-sm text-graphite-500 transition-colors hover:text-amber-600"
         >
           <ArrowLeft size={14} />
@@ -214,17 +221,6 @@ export default function CharacterDetailPage() {
         </section>
       )}
 
-      {/* No portrait placeholder (only when no image) */}
-      {!character.imageUrl && (
-        <div
-          className="mt-8 flex h-48 items-center justify-center rounded-lg border border-dashed"
-          style={{ borderColor: 'var(--graphite-700)', backgroundColor: 'rgba(30,30,34,0.3)' }}
-        >
-          <p className="font-serif text-xs italic text-graphite-700">
-            {t.characterDetail.noPortrait}
-          </p>
-        </div>
-      )}
     </div>
   )
 }

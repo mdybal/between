@@ -37,6 +37,7 @@ export const threatsEn: ThreatText[] = [
       },
       {
         question: 'The brass cipher-box may be a key to their identity',
+        answer: "Test"
       },
     ],
   },
@@ -45,19 +46,11 @@ export const threatsEn: ThreatText[] = [
     name: 'The St. James\'s Street Ghost',
     description:
       'A back issue of The Illustrated Police News, a tabloid notorious for carrying salacious, blood-curdling tales of dubious provenance, has a story about a young maid, Ginny Hess, who was found dead— apparently from shock—in her employer’s St. James’s Street townhouse some months ago. The story claims the townhouse is haunted, and that it was almost certainly the appearance of a ghost that caused the young maid to die of fright. After a cursory inquiry, you learn the precise address of the haunting, 18 St. James’s Street, and the name of the family that lives there, the Beales.',
-    knownFacts: [
-      '',
-    ],
     questions: [
       {
-        question: 'May be taking orders from The Architect of Ruin',
+        question: 'How can we get this ghost to pass on to the next world? (Complexity: 6)',
       },
-      {
-        question: 'Their rituals may be summoning or feeding something',
-      },
-      {
-        question: 'A member may have infiltrated the Metropolitan Police',
-      },
+      
     ],
   },
 ]

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import PageHeader from '@/components/ui/PageHeader'
 import CharacterCard from '@/components/ui/CharacterCard'
 import { getCharactersEn } from '@/data/characters_en'
@@ -12,10 +12,38 @@ type HunterSubFilter = 'all' | 'active' | 'retired'
 type NpcSubFilter = 'all' | NpcSubtype
 
 export default function CharactersPage() {
-  const [mainFilter, setMainFilter] = useState<MainFilter>('hunter')
-  const [hunterSub, setHunterSub] = useState<HunterSubFilter>('all')
-  const [npcSub, setNpcSub] = useState<NpcSubFilter>('all')
+  const [searchParams, setSearchParams] = useSearchParams()
   const { lang, t } = useLanguage()
+
+  const mainFilter: MainFilter = (searchParams.get('main') as MainFilter) || 'hunter'
+  const subParam = searchParams.get('sub') || 'all'
+
+  const hunterSub: HunterSubFilter = mainFilter === 'hunter' ? (subParam as HunterSubFilter) : 'all'
+  const npcSub: NpcSubFilter = mainFilter === 'npc' ? (subParam as NpcSubFilter) : 'all'
+
+  const setMainFilter = (value: MainFilter) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('main', value)
+    // Reset sub filter when switching main filter
+    if (value === 'hunter') {
+      newParams.set('sub', hunterSub)
+    } else {
+      newParams.set('sub', npcSub)
+    }
+    setSearchParams(newParams)
+  }
+
+  const setHunterSub = (value: HunterSubFilter) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('sub', value)
+    setSearchParams(newParams)
+  }
+
+  const setNpcSub = (value: NpcSubFilter) => {
+    const newParams = new URLSearchParams(searchParams)
+    newParams.set('sub', value)
+    setSearchParams(newParams)
+  }
 
   const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
 
