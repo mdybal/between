@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { Threat, ThreatQuestion } from '@/types'
+import type { MaskSection, Threat, ThreatQuestion } from '@/types'
 
 /**
  * English threat text data.
@@ -14,6 +14,7 @@ export interface ThreatText {
   description: string
   knownFacts?: string[]
   questions: ThreatQuestion[]
+  mask?: MaskSection
 }
 
 export const threatsEn: ThreatText[] = [
@@ -30,6 +31,11 @@ export const threatsEn: ThreatText[] = [
         question: 'How does the Mastermind intend to destroy the Crown? (Complexity: 8)',
       }
     ],
+    mask: {
+      title: 'The Mask of the Architect',
+      description:
+        'A finely crafted brass mask adorned with intricate engravings and a single, unblinking eye. It is said to grant the wearer insight into hidden truths, but at a cost.',
+    },
   },
   {
     id: 'james-street-ghost',
@@ -60,6 +66,7 @@ export function getThreatsEn(): Threat[] {
       description: text.description,
       knownFacts: text.knownFacts,
       questions: text.questions,
+      mask: text.mask,
     }
   })
 }
