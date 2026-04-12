@@ -110,12 +110,12 @@ export const charactersEn: CharacterText[] = [
   {
     id: 'theodora-brathwaite',
     name: 'Theodora Brathwaite',
-    occupation: 'The Antagonist',
+    occupation: 'The Mastermind',
     description:
-      'A shadowy figure whose true motives remain obscured. Known only by reputation and whispered warnings.',
+      'Theodora Brathwaite is a stately, middle-aged black woman, always impeccably dressed and never seen without her signature sapphire choker.',
     background:
-      "Little is known of Theodora Brathwaite's origins. She moves through London's underworld with unsettling ease, leaving chaos in her wake.",
-    traits: ['Calculating', 'Elusive', 'Dangerous'],
+      "She is a native of Montserrat, and a completely self-made woman, having built her vast fortune first as a pirate queen and later as a legitimate merchant. She arrived in London in her ate-20s, already fabulously wealthy.",
+    traits: ['Wealthy', 'Dangerous', 'Connected'],
   },
   {
     id: 'harold-beale',

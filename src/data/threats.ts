@@ -8,12 +8,11 @@ import type { ThreatBase } from '@/types'
  */
 export const threats: ThreatBase[] = [
   {
-    id: 'architect-of-ruin',
+    id: 'mastermind-conspiracy',
     type: 'mastermind',
-    threatLevel: '5-5',
-    status: 'neutralised',
-    firstEncountered: 'session-02',
-    clueImages: ['brathwaite01.svg','brathwaite01.svg','brathwaite03.svg','brathwaite01.svg'],
+    status: 'active',
+    firstEncountered: 'session-01',
+    //clueImages: ['brathwaite01.svg','brathwaite01.svg','brathwaite03.svg','brathwaite01.svg'],
   },
   {
     id: 'james-street-ghost',

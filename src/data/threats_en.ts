@@ -18,27 +18,17 @@ export interface ThreatText {
 
 export const threatsEn: ThreatText[] = [
   {
-    id: 'architect-of-ruin',
-    name: 'The Architect of Ruin',
+    id: 'mastermind-conspiracy',
+    name: 'Theodora Brathwaite’s Conspiracy',
     description:
-      'A shadowy figure who appears to be orchestrating a grand design across London\'s underworld and high society alike. Their true identity and ultimate goal remain unknown.',
-    knownFacts: [
-      'Communicates through intermediaries and coded messages',
-      'Has agents embedded in both the criminal underworld and aristocracy',
-      'Possesses knowledge of pre-Victorian occult rituals',
-      'Referenced in the cipher-box recovered from Wapping',
-    ],
+      'Theodora Brathwaite is pondering an enormous map of London mounted to the study wall. There are brass pins shaped like daggers marking out various places in the city, locations important for some grand scheme (one might notice a pin on Hargrave House). Suddenly she stands up, crosses the room, and plunges one of the brass daggers into Buckingham Palace',
+    /*knownFacts: [
+            'Referenced in the cipher-box recovered from Wapping',
+    ],*/
     questions: [
       {
-        question: 'May be connected to a series of disappearances dating back to 1887',
-      },
-      {
-        question: 'Possibly a former member of a secret society',
-      },
-      {
-        question: 'The brass cipher-box may be a key to their identity',
-        answer: "Test"
-      },
+        question: 'How does the Mastermind intend to destroy the Crown? (Complexity: 8)',
+      }
     ],
   },
   {
