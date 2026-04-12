@@ -35,15 +35,12 @@ export const threatsEn: ThreatText[] = [
     ],
   },
   {
-    id: 'the-hollow-congregation',
-    name: 'The Hollow Congregation',
+    id: 'james-street-ghost',
+    name: 'The St. James\'s Street Ghost',
     description:
-      'A cult operating out of the Whitechapel docks, performing rituals that seem designed to thin the boundary between the living world and something else entirely.',
+      'A back issue of The Illustrated Police News, a tabloid notorious for carrying salacious, blood-curdling tales of dubious provenance, has a story about a young maid, Ginny Hess, who was found dead— apparently from shock—in her employer’s St. James’s Street townhouse some months ago. The story claims the townhouse is haunted, and that it was almost certainly the appearance of a ghost that caused the young maid to die of fright. After a cursory inquiry, you learn the precise address of the haunting, 18 St. James’s Street, and the name of the family that lives there, the Beales.',
     knownFacts: [
-      'Use black ichor as part of their rituals',
-      'Wear hooded robes bearing a symbol of an inverted clock',
-      'Have been active for at least six months',
-      'Recruit from the desperate and destitute of the East End',
+      '',
     ],
     suspicions: [
       'May be taking orders from The Architect of Ruin',

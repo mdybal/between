@@ -16,9 +16,9 @@ export const threats: ThreatBase[] = [
     clueImages: ['brathwaite01.svg','brathwaite01.svg','brathwaite03.svg','brathwaite01.svg'],
   },
   {
-    id: 'the-hollow-congregation',
+    id: 'james-street-ghost',
     type: 'threat',
-    threatLevel: '2-4',
+    threatLevel: '0-3',
     status: 'active',
     firstEncountered: 'session-01',
   },
