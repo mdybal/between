@@ -107,10 +107,6 @@ export default function ThreatsPage() {
                 <p className="mt-2 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
                   {threat.description}
                 </p>
-
-                <p className="mt-3 font-sc text-xs text-graphite-600">
-                  {threat.knownFacts?.length ?? 0} {t.threats.knownFacts} · {threat.questions.length} {t.threats.questions}
-                </p>
               </div>
 
               <ChevronRight
