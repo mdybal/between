@@ -116,34 +116,47 @@ export default function ThreatDetailPage() {
       </section>
 
       {/* Known Facts */}
-      <section className="mt-10">
-        <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
-          <Eye size={12} className="text-amber-700" />
-          {t.threatDetail.knownFacts}
-        </h2>
-        <ul className="space-y-3">
-          {threat.knownFacts.map((fact, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="mt-1 shrink-0 text-amber-700">✦</span>
-              <span className="font-serif text-sm leading-loose text-graphite-300">{fact}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {threat.knownFacts && threat.knownFacts.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
+            <Eye size={12} className="text-amber-700" />
+            {t.threatDetail.knownFacts}
+          </h2>
+          <ul className="space-y-3">
+            {threat.knownFacts.map((fact, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-1 shrink-0 text-amber-700">✦</span>
+                <span className="font-serif text-sm leading-loose text-graphite-300">{fact}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-      {/* Suspicions */}
+      {/* Questions */}
       <section className="mt-10">
         <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
           <HelpCircle size={12} className="text-red-800" />
-          {t.threatDetail.suspicions}
+          {t.threatDetail.questions}
         </h2>
-        <ul className="space-y-3">
-          {threat.suspicions.map((suspicion, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="mt-1 shrink-0 text-red-900">?</span>
-              <span className="font-serif text-sm italic leading-loose text-graphite-500">
-                {suspicion}
-              </span>
+        <ul className="space-y-4">
+          {threat.questions.map((q, i) => (
+            <li key={i} className="flex flex-col gap-2">
+              <div className="flex gap-3">
+                <span className="mt-1 shrink-0 text-red-900">?</span>
+                <span className={q.answer ? 'font-serif text-sm italic leading-loose text-emerald-400' : 'font-serif text-sm italic leading-loose text-graphite-500'}>
+                  {q.question}
+                </span>
+              </div>
+              {q.answer && (
+                <div className="ml-6 flex gap-3">
+                  <span className="mt-1 shrink-0 text-emerald-600">✓</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-sc text-xs uppercase tracking-wide text-emerald-600">{t.threatDetail.answer}</span>
+                    <span className="font-serif text-sm leading-loose text-emerald-300">{q.answer}</span>
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>

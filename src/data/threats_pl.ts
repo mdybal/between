@@ -6,7 +6,7 @@ import type { Threat } from '@/types'
  * Polish threat text data.
  *
  * This file contains Polish translations of text fields (name, description,
- * knownFacts, suspicions) for threats. The non-text fields (id, type,
+ * knownFacts, questions) for threats. The non-text fields (id, type,
  * threatLevel, status, firstEncountered, clueImages) are stored in threats.ts.
  *
  * To add Polish translations, add entries with the same id as in threats_en.ts
@@ -31,7 +31,7 @@ export function getThreatsPl(): Threat[] {
       name: text.name,
       description: text.description,
       knownFacts: text.knownFacts,
-      suspicions: text.suspicions,
+      questions: text.questions,
     }
   })
 }

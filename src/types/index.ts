@@ -153,12 +153,20 @@ export interface ThreatBase {
 }
 
 /**
+ * A question about a threat, optionally with an answer discovered.
+ */
+export interface ThreatQuestion {
+  question: string
+  answer?: string
+}
+
+/**
  * Full threat with translatable text fields.
  * Produced by merging ThreatBase with data from threats_en.ts / threats_pl.ts.
  */
 export interface Threat extends ThreatBase {
   name: string
   description: string
-  knownFacts: string[]
-  suspicions: string[]
+  knownFacts?: string[]
+  questions: ThreatQuestion[]
 }

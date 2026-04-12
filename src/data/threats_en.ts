@@ -1,19 +1,19 @@
 import { threats } from './threats'
-import type { Threat } from '@/types'
+import type { Threat, ThreatQuestion } from '@/types'
 
 /**
  * English threat text data.
  *
  * This file contains all translatable text fields (name, description,
- * knownFacts, suspicions) for threats. The id, type, threatLevel, status,
+ * knownFacts, questions) for threats. The id, type, threatLevel, status,
  * firstEncountered, and clueImages fields are stored in threats.ts.
  */
 export interface ThreatText {
   id: string
   name: string
   description: string
-  knownFacts: string[]
-  suspicions: string[]
+  knownFacts?: string[]
+  questions: ThreatQuestion[]
 }
 
 export const threatsEn: ThreatText[] = [
@@ -28,10 +28,16 @@ export const threatsEn: ThreatText[] = [
       'Possesses knowledge of pre-Victorian occult rituals',
       'Referenced in the cipher-box recovered from Wapping',
     ],
-    suspicions: [
-      'May be connected to a series of disappearances dating back to 1887',
-      'Possibly a former member of a secret society',
-      'The brass cipher-box may be a key to their identity',
+    questions: [
+      {
+        question: 'May be connected to a series of disappearances dating back to 1887',
+      },
+      {
+        question: 'Possibly a former member of a secret society',
+      },
+      {
+        question: 'The brass cipher-box may be a key to their identity',
+      },
     ],
   },
   {
@@ -42,10 +48,16 @@ export const threatsEn: ThreatText[] = [
     knownFacts: [
       '',
     ],
-    suspicions: [
-      'May be taking orders from The Architect of Ruin',
-      'Their rituals may be summoning or feeding something',
-      'A member may have infiltrated the Metropolitan Police',
+    questions: [
+      {
+        question: 'May be taking orders from The Architect of Ruin',
+      },
+      {
+        question: 'Their rituals may be summoning or feeding something',
+      },
+      {
+        question: 'A member may have infiltrated the Metropolitan Police',
+      },
     ],
   },
 ]
@@ -64,7 +76,7 @@ export function getThreatsEn(): Threat[] {
       name: text.name,
       description: text.description,
       knownFacts: text.knownFacts,
-      suspicions: text.suspicions,
+      questions: text.questions,
     }
   })
 }
