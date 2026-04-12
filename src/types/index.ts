@@ -167,6 +167,6 @@ export interface ThreatQuestion {
 export interface Threat extends ThreatBase {
   name: string
   description: string
-  knownFacts: string[]
+  knownFacts?: string[]
   questions: ThreatQuestion[]
 }

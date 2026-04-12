@@ -12,7 +12,7 @@ export interface ThreatText {
   id: string
   name: string
   description: string
-  knownFacts: string[]
+  knownFacts?: string[]
   questions: ThreatQuestion[]
 }
 
