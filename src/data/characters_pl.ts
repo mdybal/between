@@ -110,12 +110,12 @@ export const charactersPl: CharacterText[] = [
   {
     id: 'theodora-brathwaite',
     name: 'Theodora Brathwaite',
-    occupation: 'Antagonistka',
+    occupation: 'Mistrzyni Zbrodni',
     description:
-      'Mroczna postać, której prawdziwe motywy pozostają ukryte. Znana jedynie z reputacji i szeptanych ostrzeżeń.',
+      'Theodora Brathwaite to dystyngowana, czarnoskóra kobieta w średnim wieku, zawsze nienagannie ubrana i nigdy nie widywana bez swojego charakterystyczne aksamitnego dusika z ogromnym szafirem.',
     background:
-      "Niewiele wiadomo o pochodzeniu Theodory Brathwaite. Porusza się przez podziemia Londynu z niepokojącą łatwością, zostawiając za sobą chaos.",
-    traits: ['Kalkulująca', 'Unikająca', 'Niebezpieczna'],
+      'Jest rdzenną mieszkanką Montserrat, która doszła do wszystkiego sama. Zbudowała swoją ogromną fortunę najpierw jako królowa piratów, a później jako włącicielka floty statków handlowych. Przybyła do Londynu w wieku dwudziestu kilku lat, już bajecznie bogata.',
+    traits: ['Bogata', 'Niebezpieczna', 'Z koneksjami'],
   },
   {
     id: 'harold-beale',
