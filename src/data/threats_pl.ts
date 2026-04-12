@@ -58,6 +58,11 @@ export const threatsPl: ThreatText[] = [
         question: 'Czy wampir jest młody czy stary? (Złożoność: 4)',
       },
     ],
+    mask: {
+      title: 'Maska Słońca',
+      description:
+        'Każdy Łowca opowiada sen, który kiedyś miał o pierwotnej Ziemi: cofając się w czas starożytnego morza, cofając się w czas, gdy duchy chodziły po ziemi, gdy Słońce było nowe, a starożytni Bogowie władali światem.',
+    },
   },
 ]
 

@@ -62,8 +62,11 @@ export const threatsEn: ThreatText[] = [
       {
         question: 'Is the vampire young or old? (Complexity: 4)',
       },
-      
     ],
+    mask: {
+      title: 'The Mask of the Sun',
+      description:'Each Hunter narrates a dream they once had of primordial Earth: back in time across the ancient seas, back in time when the spirits walked, when the Sun was new, and the Old Gods held court.',
+    },
   },
 ]
 
