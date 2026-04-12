@@ -43,6 +43,18 @@ export const threatsEn: ThreatText[] = [
       
     ],
   },
+  {
+    id: 'limehouse-lurker',
+    name: 'The Limehouse Lurker',
+    description:
+      'Jen Johnson, the proprietor of an opium den in Limehouse, tells you a story that has not yet reached Scotland Yard or the papers: three people have been found dead in recent days, the bodies completely exsanguinated. The first was a prostitute called Soft Jimmy, found in a dark corner of the opium den; the second was a young mother, Charla Bell, found in an alleyway behind the Limehouse School; and the third was a Chinese sailor, Zhao Donghai, found outside a pub near the Regent’s Canal Dock, the Dog & Whistle. Jen, an informal community leader in Limehouse, has been keeping the bodies in her basement; she’s hesitant to go to the authorities because she fears it will cause trouble for the small but thriving Chinese immigrant community in the district. She heard that Hargrave House has experience with matters such as this, and has asked for your help.',
+    questions: [
+      {
+        question: 'Is the vampire young or old? (Complexity: 4)',
+      },
+      
+    ],
+  },
 ]
 
 /**

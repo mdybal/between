@@ -28,7 +28,7 @@ export const threatsPl: ThreatText[] = [
       }
     ],
   },
-  {
+    {
     id: 'james-street-ghost',
     name: 'Duch z St. James\'s Street',
     description:
@@ -36,6 +36,17 @@ export const threatsPl: ThreatText[] = [
     questions: [
       {
         question: 'Jak sprawić, by ten duch przeszedł do następnego świata? (Złożoność: 6)',
+      },
+    ],
+  },
+  {
+    id: 'limehouse-lurker',
+    name: 'Zmora z Limehouse',
+    description:
+      'Jen Johnson, właścicielka palarni opium w Limehouse, opowiada wam historię, która jeszcze nie dotarła do Scotland Yardu ani do gazet: trzy osoby zostały znalezione martwe w ostatnich dniach, ciała całkowicie pozbawione krwi. Pierwszą był prostytutka o imieniu Miękki Jimmy, znaleziony w ciemnym rogu palarni opium; drugą była młoda matka, Charla Bell, znaleziona w zaułku za szkołą w Limehouse; a trzecią był chiński żeglarz, Zhao Donghai, znaleziony przed barem w pobliżu Regent\'s Canal Dock, „Dog & Whistle". Jen, nieformalna liderka społeczności w Limehouse, trzyma ciała w piwnicy; waha się, czy iść do władz, ponieważ obawia się, że to sprawi kłopoty niewielkiej, ale kwitnącej chińskiej społeczności imigrantów w dzielnicy. Słyszała, że Dom Hargrave ma doświadczenie w sprawach takich jak ta, i poprosiła was o pomoc.',
+    questions: [
+      {
+        question: 'Czy wampir jest młody czy stary? (Złożoność: 4)',
       },
     ],
   },

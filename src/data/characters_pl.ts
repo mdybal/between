@@ -187,6 +187,90 @@ export const charactersPl: CharacterText[] = [
       "Constance jest wdową i sąsiadką Beale'ów. Podobnie jak pani Thicket, wie co nieco o domu pod numerem 18 przy St. James's Street, mieszkając obok przez większość swojego dorosłego życia. Z pewnością chętnie podzieli się tym, co wie, w zamian za trochę soczystych plotek.",
     traits: ['Plotkarska', 'Wścibska', 'Dobrze Poinformowana'],
     },
+
+    // Limehouse Lurker
+    {
+    id: 'chen-bao',
+    name: 'Chen Bao',
+    alias: 'Jen Johnson',
+    occupation: 'liderka społeczności',
+    description:
+      'Kojące usposobienie. Ciemna suknia z tafty. Włosy spięte w orientalny kok jadeitową spinką.',
+    background:
+      "Jen prowadzi zyskowny lokal z opium i jest nieformalną liderką niewielkiej chińskiej społeczności imigrantów w Limehouse. Poważnie podchodzi do swojej roli i opiekuje się prawie każdym, kto przychodzi do niej po pomoc.",
+    traits: ['Spokojna', 'Pomysłowa', 'Opiekuńcza'],
+    },
+    {
+    id: 'sun-mask',
+    name: 'Człowiek w Słonecznej Masce',
+    occupation: 'bywalec palarni opium',
+    description:
+      'Złota smokingowa marynarka i żółte jedwabne spodnie. Miękkie kapcie na nogach. Półmaska w kształcie słońca ukrywająca jego tożsamość.',
+    background:
+      "Człowiek w Słonecznej Masce twierdzi, że jest członkiem Rodziny Królewskiej lub innym ważnym członkiem społeczeństwa, w zależności od tego, kiedy go zapytacie; mówi, że nosi maskę, aby ukryć swoją tożsamość.",
+    traits: [' Kryptyczny', 'Wyluzowany', 'Bezceremonialny'],
+    },
+    {
+    id: 'rory-bell',
+    name: 'Rory Bell',
+    occupation: 'mąż',
+    description:
+      'Umazany sadzą. Kwaśny zapach. Przybity i przygięty życiem',
+    background:
+      "Rory jest robotnikiem portowym w Regent's Canal Dock. Chce zgłosić na policję sprawę śmierci jego żony, Charly, ale Jen Johnson wywiera na niego dużą presję, aby był cicho i pozwolił jej zająć się sprawą.",
+    traits: ['Przepraszający', 'Onieśmielony', 'Niewykształcony'],
+    },
+    {
+    id: 'franklin-horsford',
+    name: 'Franklin Horsford',
+    occupation: 'właściciel pubu „Dog & Whistle"',
+    description:
+      'Spocona twarz. Owłosione ramiona. Czarny fartuch',
+    background:
+      "Franklin prowadzi dochodowy pub „Dog & Whistle\" i zgadza się z Jen, że nic dobrego nie wyniknie z wciągania władz w obecne kłopoty.",
+    traits: ['Przyjazny', 'Szczery do bólu', 'Bezpośredni'],
+    },
+    {
+    id: 'elma-thorpe',
+    name: 'Elma Thorpe',
+    occupation: 'stała klientka „Dog & Whistle"',
+    description:
+      'Zaniedbane siwe włosy. Owinięta kocem, narzekająca na zimno. Właśnie kończy swoje ale',
+    background:
+      "Elma jest stałą bywalczynią „Dog & Whistle\". Wie co się dzieje wokół Canal Dock i chętnie opowie, co wie, jeśli postawisz jej drinka.",
+    traits: ['Pijana', 'Wulgarna', 'Obrotna'],
+    },
+    {
+    id: 'lin-bohai',
+    name: 'Lin Bohai',
+    occupation: 'żeglarz',
+    description:
+      'Przystojny uśmiech. Zapach morza. Zniszczony biały mundur marynarza',
+    background:
+      "Lin Bohai i Zhao Donghai byli przyjaciółmi i służyli na tym samym statku. Ich statek ma odpłynąć za tydzień; chciałby dowiedzieć się, co stało się z jego przyjacielem przedtem.",
+    traits: ['Współczujący', 'Hazardzista', 'Obieżyświat'],
+    },
+    {
+    id: 'lawrence-chesterfield',
+    name: 'Lawrence Chesterfield',
+    occupation: 'dyrektor szkoły',
+    description:
+      'Niespokojny. Brązowy, trzyczęściowy garnitur . Głos zawsze zaczyna się nisko, ale kończy wysoko.',
+    background:
+      "Lawrence jest dyrektorem szkoły w Limehouse. Jest przepracowany, wyczerpany i robi wszystko, aby stłumić plotki o krwiopijczych potworach.",
+    traits: ['Surowy', 'Oficjalny', 'Wyczerpany'],
+    },
+    {
+    id: 'limehouse-lurker',
+    name: 'Zmora z Limehouse',
+    occupation: 'wampir',
+    description:
+      'Ciało dziecka. Blady i wychudzony. Czai się w cieniu krokwi.',
+    background:
+      "Wampir fizycznie jest dzieckiem, ale to nie znaczy, że jest młody. Wampiry nigdy nie starzeją się fizycznie poza wiek, w którym zostały 'przemienione', a stary wampir wymaga zupełnie innego podejścia niż młody...",
+    traits: ['Pragnący krwi', 'Niebezpieczny', 'Ukryty w cieniu'],
+    },
+    
 ]
 
 /**
