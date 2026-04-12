@@ -32,6 +32,7 @@ export function getThreatsPl(): Threat[] {
       description: text.description,
       knownFacts: text.knownFacts,
       questions: text.questions,
+      mask: text.mask,
     }
   })
 }

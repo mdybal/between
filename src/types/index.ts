@@ -161,6 +161,14 @@ export interface ThreatQuestion {
 }
 
 /**
+ * A mask section for threats, providing additional thematic or hidden information.
+ */
+export interface MaskSection {
+  title: string
+  description: string
+}
+
+/**
  * Full threat with translatable text fields.
  * Produced by merging ThreatBase with data from threats_en.ts / threats_pl.ts.
  */
@@ -169,4 +177,5 @@ export interface Threat extends ThreatBase {
   description: string
   knownFacts?: string[]
   questions: ThreatQuestion[]
+  mask?: MaskSection
 }

@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { Threat, ThreatQuestion } from '@/types'
+import type { MaskSection, Threat, ThreatQuestion } from '@/types'
 
 /**
  * English threat text data.
@@ -14,6 +14,7 @@ export interface ThreatText {
   description: string
   knownFacts?: string[]
   questions: ThreatQuestion[]
+  mask?: MaskSection
 }
 
 export const threatsEn: ThreatText[] = [
@@ -39,6 +40,11 @@ export const threatsEn: ThreatText[] = [
         question: 'The brass cipher-box may be a key to their identity',
       },
     ],
+    mask: {
+      title: 'The Mask of the Architect',
+      description:
+        'A finely crafted brass mask adorned with intricate engravings and a single, unblinking eye. It is said to grant the wearer insight into hidden truths, but at a cost.',
+    },
   },
   {
     id: 'the-hollow-congregation',
@@ -80,6 +86,7 @@ export function getThreatsEn(): Threat[] {
       description: text.description,
       knownFacts: text.knownFacts,
       questions: text.questions,
+      mask: text.mask,
     }
   })
 }

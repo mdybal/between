@@ -162,6 +162,53 @@ export default function ThreatDetailPage() {
         </ul>
       </section>
 
+      {/* Mask Section */}
+      {threat.mask && (
+        <section
+          className="mt-10 rounded-lg p-6"
+          style={{
+            backgroundColor: 'rgba(40, 38, 34, 0.7)',
+            border: '1px solid rgba(180, 150, 60, 0.3)',
+          }}
+        >
+          {/* Flourish Header */}
+          <div className="mb-4 flex items-center gap-3">
+            <div
+              className="h-px flex-1"
+              style={{
+                background: 'linear-gradient(to right, transparent, rgba(180, 150, 60, 0.4))',
+              }}
+            />
+            <div className="flex items-center gap-2 px-2 py-1">
+              <img 
+                src="/img/mask.svg" 
+                alt="" 
+                className="h-4 w-4" 
+                style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(26%) saturate(667%) hue-rotate(3deg) brightness(97%) contrast(88%)' }}
+              />
+              <span className="font-display text-xs uppercase tracking-widest text-amber-600">
+                {threat.mask.title}
+              </span>
+              <img 
+                src="/img/mask.svg" 
+                alt="" 
+                className="h-4 w-4" 
+                style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(26%) saturate(667%) hue-rotate(3deg) brightness(97%) contrast(88%)' }}
+              />
+            </div>
+            <div
+              className="h-px flex-1"
+              style={{
+                background: 'linear-gradient(to left, transparent, rgba(180, 150, 60, 0.4))',
+              }}
+            />
+          </div>
+          <p className="font-serif text-sm leading-loose text-graphite-300">
+            {threat.mask.description}
+          </p>
+        </section>
+      )}
+
       {/* Clue Images */}
       {threat.clueImages && threat.clueImages.length > 0 && (
         <section className="mt-10">
