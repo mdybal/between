@@ -1,19 +1,31 @@
 import { Link } from 'react-router-dom'
 import { BookOpen, Users, Skull, ChevronRight } from 'lucide-react'
 import { useLanguage } from '@/i18n/LanguageContext'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
-import { characters } from '@/data/characters'
-import { charactersPl } from '@/data/characters_pl'
-import { threats } from '@/data/threats'
-import { threatsPl } from '@/data/threats_pl'
+import { getCharactersEn } from '@/data/characters_en'
+import { getCharactersPl } from '@/data/characters_pl'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
+import type { Session } from '@/types'
+
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const sessions: Session[] = Object.values(sessionModules)
+  .map((module) => {
+    const mod = module as Record<string, unknown>
+    // Handle both default exports and named exports
+    if (mod.default) return mod.default as Session
+    // For named exports like session01, session02, etc.
+    const keys = Object.keys(mod).filter(k => k.startsWith('session'))
+    return mod[keys[0]] as Session
+  })
 
 export default function HomePage() {
   const { lang, t } = useLanguage()
 
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
-  const activeCharacters = lang === 'pl' ? charactersPl : characters
-  const activeThreats = lang === 'pl' ? threatsPl : threats
+  // For now, sessions are only in English (same data for both languages)
+  const activeSessions = sessions
+  const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
+  const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
 
   const latestSession = activeSessions.at(-1)
 
@@ -54,18 +66,13 @@ export default function HomePage() {
         <h1 className="nouveau-heading relative mt-2 font-display text-6xl font-bold tracking-widest text-amber-600 md:text-8xl">
           THE BETWEEN
         </h1>
-
         {/* Art Nouveau ornamental divider */}
         <div className="relative mx-auto mt-1 nouveau-divider max-w-sm" />
-
         <p className="relative max-w-2xl font-serif text-base leading-loose text-graphite-300 md:text-base">
           {t.home.intro}
         </p>
-        <p className="relative mt-3 font-serif text-sm italic text-graphite-500">
-          {t.home.quote}
-        </p>
       </section>
-<div className="mx-auto nouveau-divider max-w-sm " />
+      <div className="mx-auto nouveau-divider max-w-sm " />
       {/* Latest Session Banner */}
       {latestSession && (
         <section className="mb-5">

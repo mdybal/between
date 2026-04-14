@@ -1,14 +1,38 @@
 // ─── Session / Actual Play ────────────────────────────────────────────────────
 
+type HighlightVariant = 'clue' | 'danger' | 'note' | 'lore'
+
+export type ScenePhase = 'Dawn' | 'Day' | 'Dusk' | 'Night'
+
+export interface ScenePullQuote {
+  text: string
+  attribution?: string
+}
+
+export interface SceneHighlightBox {
+  variant: HighlightVariant
+  title?: string
+  items?: string[]
+  content?: string
+}
+
+export interface Scene {
+  label: string
+  prose: string[]
+  highlightBox?: SceneHighlightBox
+  pullQuote?: ScenePullQuote
+  phase?: ScenePhase
+}
+
 export interface Session {
   id: string
   sessionNumber: number
   title: string
   date: string          // ISO date string, e.g. "1893-10-14"
   summary: string
-  highlights: string[]
-  players?: string[]
+  npcIds?: string[]      // IDs of NPCs that appear in this session (link to characters)
   tags?: string[]
+  scenes?: Scene[]
 }
 
 // ─── Character ────────────────────────────────────────────────────────────────
@@ -16,11 +40,6 @@ export interface Session {
 export type CharacterType = 'hunter' | 'npc'
 
 export type NpcSubtype = 'neutral' | 'antagonist' | 'ally'
-
-export interface PrivateQuartersItem {
-  name: string
-  used: boolean
-}
 
 export interface MaskEntry {
   name: string
@@ -32,21 +51,31 @@ export interface MaskGroup {
   masks: MaskEntry[]
 }
 
-export interface Character {
+/**
+ * Base character fields stored in src/data/characters.ts.
+ * Non-text fields only (text fields are merged in from characters_en.ts / characters_pl.ts).
+ */
+export interface CharacterBase {
   id: string
-  name: string
-  alias?: string
   type: CharacterType
   subtype?: NpcSubtype   // only relevant when type === 'npc'
+  status?: 'active' | 'retired'
+  imageUrl?: string
+}
+
+/**
+ * Full character with translatable text fields.
+ * Produced by merging CharacterBase with data from characters_en.ts / characters_pl.ts.
+ */
+export interface Character extends CharacterBase {
+  name: string
+  alias?: string
   occupation: string
   description: string
   background: string
-  traits: string[]
+  traits?: string[]
   conditions?: string[]
-  privateQuarters?: PrivateQuartersItem[]
   masks?: MaskGroup[]
-  imageUrl?: string
-  status?: 'active' | 'retired'
 }
 
 // ─── Map ─────────────────────────────────────────────────────────────────────
@@ -107,17 +136,48 @@ export interface MapZone {
 
 // ─── Threat / Mastermind ──────────────────────────────────────────────────────
 
-export type ThreatLevel = 'minor' | 'moderate' | 'severe' | 'catastrophic'
+/**
+ * Threat level in format "filled-total" (e.g., "2-4" means 2 filled circles out of 4)
+ */
+export type ThreatLevel = string // e.g., "2-4", "1-3", "0-5"
 
-export interface Threat {
+/**
+ * Base threat fields stored in src/data/threats.ts.
+ * Non-text fields only (text fields are merged in from threats_en.ts / threats_pl.ts).
+ */
+export interface ThreatBase {
   id: string
-  name: string
-  type: 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
-  threatLevel: ThreatLevel
-  description: string
-  knownFacts: string[]
-  suspicions: string[]
+  type: 'mastermind' | 'threat'
+  threatLevel?: ThreatLevel
   status: 'active' | 'neutralised' | 'unknown'
-  firstEncountered?: string  // session id
-  clueImages?: string[]      // filenames from public/img/clues/
+  firstEncountered?: string
+  clueImages?: string[]
+}
+
+/**
+ * A question about a threat, optionally with an answer discovered.
+ */
+export interface ThreatQuestion {
+  question: string
+  answer?: string
+}
+
+/**
+ * A mask section for threats, providing additional thematic or hidden information.
+ */
+export interface MaskSection {
+  title: string
+  description: string
+}
+
+/**
+ * Full threat with translatable text fields.
+ * Produced by merging ThreatBase with data from threats_en.ts / threats_pl.ts.
+ */
+export interface Threat extends ThreatBase {
+  name: string
+  description: string
+  knownFacts?: string[]
+  questions: ThreatQuestion[]
+  mask?: MaskSection
 }

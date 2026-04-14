@@ -1,11 +1,38 @@
+import { threats } from './threats'
+import { threatsEn, type ThreatText } from './threats_en'
+import type { Threat } from '@/types'
+
 /**
- * Polish threat data.
+ * Polish threat text data.
  *
- * To add Polish translations, copy the structure from threats.ts and
- * replace the narrative fields (name, description, knownFacts, suspicions)
- * with Polish text. The id, type, threatLevel, status, and firstEncountered
- * fields should remain unchanged.
+ * This file contains Polish translations of text fields (name, description,
+ * knownFacts, questions) for threats. The non-text fields (id, type,
+ * threatLevel, status, firstEncountered, clueImages) are stored in threats.ts.
+ *
+ * To add Polish translations, add entries with the same id as in threats_en.ts
+ * and replace the text fields with Polish translations.
  *
  * Until translated, this file re-exports the English data as a fallback.
  */
-export { threats as threatsPl } from './threats'
+export const threatsPl: ThreatText[] = threatsEn
+
+/**
+ * Merges threat base data with Polish text to produce full Threat objects.
+ * Currently falls back to English text.
+ */
+export function getThreatsPl(): Threat[] {
+  return threats.map((threat) => {
+    const text = threatsPl.find((t) => t.id === threat.id)
+    if (!text) {
+      throw new Error(`Missing Polish text for threat: ${threat.id}`)
+    }
+    return {
+      ...threat,
+      name: text.name,
+      description: text.description,
+      knownFacts: text.knownFacts,
+      questions: text.questions,
+      mask: text.mask,
+    }
+  })
+}

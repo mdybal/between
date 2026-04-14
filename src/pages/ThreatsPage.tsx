@@ -3,34 +3,23 @@ import { Link } from 'react-router-dom'
 import { ChevronRight, AlertTriangle } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
-import { threats } from '@/data/threats'
-import { threatsPl } from '@/data/threats_pl'
-import type { ThreatLevel } from '@/types'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
 import { cn } from '@/lib/utils'
+import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
 
-const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'> = {
-  minor: 'muted',
-  moderate: 'amber',
-  severe: 'red',
-  catastrophic: 'red',
-}
-
-type FilterValue = 'all' | 'mastermind' | 'cult' | 'creature' | 'conspiracy' | 'supernatural'
-
+type FilterValue = 'all' | 'mastermind' | 'threat'
 export default function ThreatsPage() {
   const [filter, setFilter] = useState<FilterValue>('all')
   const { lang, t } = useLanguage()
 
-  const activeThreats = lang === 'pl' ? threatsPl : threats
+  const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
 
   const typeFilters: { value: FilterValue; label: string }[] = [
     { value: 'all', label: t.threats.filters.all },
     { value: 'mastermind', label: t.threats.filters.mastermind },
-    { value: 'cult', label: t.threats.filters.cult },
-    { value: 'creature', label: t.threats.filters.creature },
-    { value: 'conspiracy', label: t.threats.filters.conspiracy },
-    { value: 'supernatural', label: t.threats.filters.supernatural },
+    { value: 'threat', label: t.threats.filters.threat },
   ]
 
   const filtered = filter === 'all' ? activeThreats : activeThreats.filter((t) => t.type === filter)
@@ -84,12 +73,30 @@ export default function ThreatsPage() {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <Badge variant={threatLevelVariant[threat.threatLevel]}>
-                    {t.threats.threatLevelLabels[threat.threatLevel]}
+                  {(() => {
+                    const { colorClass, circles } = getThreatLevelStyle(threat.threatLevel)
+                    if (!circles) return null
+                    return (
+                      <span
+                        className={cn(
+                          'rounded border px-2 py-0.5 font-sc text-xs tracking-wide',
+                          colorClass,
+                          colorClass === 'text-red-400'
+                            ? 'border-red-800/50 bg-rgba(100, 20, 20, 0.25)'
+                            : colorClass === 'text-amber-500'
+                              ? 'border-amber-800/50 bg-rgba(120, 60, 10, 0.25)'
+                              : 'border-emerald-800/50 bg-rgba(10, 80, 40, 0.25)',
+                        )}
+                      >
+                        {circles}
+                      </span>
+                    )
+                  })()}
+                  <Badge variant={threat.type === 'mastermind' ? 'red' : 'amber'}>
+                    {t.threats.typeLabels[threat.type]}
                   </Badge>
-                  <Badge variant="muted">{threat.type}</Badge>
-                  <Badge variant={threat.status === 'active' ? 'red' : threat.status === 'neutralised' ? 'green' : 'muted'}>
-                    {threat.status}
+                  <Badge variant={threat.status === 'active' ? 'red' : threat.status === 'neutralised' ? 'muted' : 'muted'}>
+                    {t.threats.statusLabels[threat.status]}
                   </Badge>
                 </div>
 
@@ -99,10 +106,6 @@ export default function ThreatsPage() {
 
                 <p className="mt-2 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
                   {threat.description}
-                </p>
-
-                <p className="mt-3 font-sc text-xs text-graphite-600">
-                  {threat.knownFacts.length} {t.threats.knownFacts} · {threat.suspicions.length} {t.threats.suspicions}
                 </p>
               </div>
 

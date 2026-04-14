@@ -1,26 +1,30 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
-import { threats } from '@/data/threats'
-import { threatsPl } from '@/data/threats_pl'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
-import type { ThreatLevel } from '@/types'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
+import { cn } from '@/lib/utils'
+import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Session } from '@/types'
 
-const threatLevelVariant: Record<ThreatLevel, 'muted' | 'amber' | 'red' | 'red'> = {
-  minor: 'muted',
-  moderate: 'amber',
-  severe: 'red',
-  catastrophic: 'red',
-}
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const sessions: Session[] = Object.values(sessionModules).map((module) => {
+  const mod = module as Record<string, unknown>
+  // Handle both default exports and named exports
+  return mod.default 
+    ? mod.default as Session 
+    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
+}).filter(Boolean)
 
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const activeThreats = lang === 'pl' ? threatsPl : threats
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
+  const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
+  // For now, sessions are only in English (same data for both languages)
+  const activeSessions = sessions
 
   const threat = activeThreats.find((t) => t.id === id)
 
@@ -49,20 +53,38 @@ export default function ThreatDetailPage() {
         style={{ borderBottom: '1px solid rgba(150,30,30,0.2)' }}
       >
         <div className="mb-3 flex flex-wrap gap-2">
-          <Badge variant={threatLevelVariant[threat.threatLevel]}>
-            {t.threatDetail.threatLevelLabels[threat.threatLevel]}
+          {(() => {
+            const { colorClass, circles } = getThreatLevelStyle(threat.threatLevel)
+            if (!circles) return null
+            return (
+              <span
+                className={cn(
+                  'rounded border px-2 py-0.5 font-sc text-xs tracking-wide',
+                  colorClass,
+                  colorClass === 'text-red-400'
+                    ? 'border-red-800/50 bg-rgba(100, 20, 20, 0.25)'
+                    : colorClass === 'text-amber-500'
+                      ? 'border-amber-800/50 bg-rgba(120, 60, 10, 0.25)'
+                      : 'border-emerald-800/50 bg-rgba(10, 80, 40, 0.25)',
+                )}
+              >
+                {circles}
+              </span>
+            )
+          })()}
+          <Badge variant={threat.type === 'mastermind' ? 'red' : 'amber'}>
+            {t.threats.typeLabels[threat.type]}
           </Badge>
-          <Badge variant="muted">{threat.type}</Badge>
           <Badge
             variant={
               threat.status === 'active'
                 ? 'red'
                 : threat.status === 'neutralised'
-                  ? 'green'
+                  ? 'muted'
                   : 'muted'
             }
           >
-            {threat.status}
+            {t.threats.statusLabels[threat.status]}
           </Badge>
         </div>
 
@@ -94,38 +116,98 @@ export default function ThreatDetailPage() {
       </section>
 
       {/* Known Facts */}
+      {threat.knownFacts && threat.knownFacts.length > 0 && (
+        <section className="mt-10">
+          <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
+            <Eye size={12} className="text-amber-700" />
+            {t.threatDetail.knownFacts}
+          </h2>
+          <ul className="space-y-3">
+            {threat.knownFacts.map((fact, i) => (
+              <li key={i} className="flex gap-3">
+                <span className="mt-1 shrink-0 text-amber-700">✦</span>
+                <span className="font-serif text-sm leading-loose text-graphite-300">{fact}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* Questions */}
       <section className="mt-10">
         <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
-          <Eye size={12} className="text-amber-700" />
-          {t.threatDetail.knownFacts}
+          <HelpCircle size={12} className="text-red-800" />
+          {t.threatDetail.questions}
         </h2>
-        <ul className="space-y-3">
-          {threat.knownFacts.map((fact, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="mt-1 shrink-0 text-amber-700">✦</span>
-              <span className="font-serif text-sm leading-loose text-graphite-300">{fact}</span>
+        <ul className="space-y-4">
+          {threat.questions.map((q, i) => (
+            <li key={i} className="flex flex-col gap-2">
+              <div className="flex gap-3">
+                <span className="mt-1 shrink-0 text-red-900">?</span>
+                <span className={q.answer ? 'font-serif text-sm italic leading-loose text-emerald-400' : 'font-serif text-sm italic leading-loose text-graphite-500'}>
+                  {q.question}
+                </span>
+              </div>
+              {q.answer && (
+                <div className="ml-6 flex gap-3">
+                  <span className="mt-1 shrink-0 text-emerald-600">✓</span>
+                  <div className="flex flex-col gap-1">
+                    <span className="font-sc text-xs uppercase tracking-wide text-emerald-600">{t.threatDetail.answer}</span>
+                    <span className="font-serif text-sm leading-loose text-emerald-300">{q.answer}</span>
+                  </div>
+                </div>
+              )}
             </li>
           ))}
         </ul>
       </section>
 
-      {/* Suspicions */}
-      <section className="mt-10">
-        <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
-          <HelpCircle size={12} className="text-red-800" />
-          {t.threatDetail.suspicions}
-        </h2>
-        <ul className="space-y-3">
-          {threat.suspicions.map((suspicion, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="mt-1 shrink-0 text-red-900">?</span>
-              <span className="font-serif text-sm italic leading-loose text-graphite-500">
-                {suspicion}
+      {/* Mask Section */}
+      {threat.mask && (
+        <section
+          className="mt-10 rounded-lg p-6"
+          style={{
+            backgroundColor: 'rgba(40, 38, 34, 0.7)',
+            border: '1px solid rgba(180, 150, 60, 0.3)',
+          }}
+        >
+          {/* Flourish Header */}
+          <div className="mb-4 flex items-center gap-3">
+            <div
+              className="h-px flex-1"
+              style={{
+                background: 'linear-gradient(to right, transparent, rgba(180, 150, 60, 0.4))',
+              }}
+            />
+            <div className="flex items-center gap-2 px-2 py-1">
+              <img 
+                src="/img/mask.svg" 
+                alt="" 
+                className="h-4 w-4" 
+                style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(26%) saturate(667%) hue-rotate(3deg) brightness(97%) contrast(88%)' }}
+              />
+              <span className="font-display text-xs uppercase tracking-widest text-amber-600">
+                {threat.mask.title}
               </span>
-            </li>
-          ))}
-        </ul>
-      </section>
+              <img 
+                src="/img/mask.svg" 
+                alt="" 
+                className="h-4 w-4" 
+                style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(26%) saturate(667%) hue-rotate(3deg) brightness(97%) contrast(88%)' }}
+              />
+            </div>
+            <div
+              className="h-px flex-1"
+              style={{
+                background: 'linear-gradient(to left, transparent, rgba(180, 150, 60, 0.4))',
+              }}
+            />
+          </div>
+          <p className="font-serif text-sm leading-loose text-graphite-300">
+            {threat.mask.description}
+          </p>
+        </section>
+      )}
 
       {/* Clue Images */}
       {threat.clueImages && threat.clueImages.length > 0 && (

@@ -1,25 +1,43 @@
-import { Suspense } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { ArrowLeft, Calendar, Users, Star } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
-import { sessions } from '@/data/sessions'
-import { sessionsPl } from '@/data/sessions_pl'
-import { sessionContentRegistry } from '@/sessions/registry'
-import { sessionContentRegistryPl } from '@/sessions/registry_pl'
+import CharacterCard from '@/components/ui/CharacterCard'
+import { SessionContentRenderer } from '@/components/session/SessionContentRenderer'
+import { getCharactersEn } from '@/data/characters_en'
+import { getCharactersPl } from '@/data/characters_pl'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Session } from '@/types'
+
+const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
+
+const sessionsById: Record<string, Session> = {}
+Object.values(sessionModules).forEach((module) => {
+  const mod = module as Record<string, unknown>
+  // Handle both default exports and named exports
+  const session = mod.default 
+    ? mod.default as Session 
+    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
+  if (session) sessionsById[session.id] = session
+})
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const activeSessions = lang === 'pl' ? sessionsPl : sessions
-  const activeRegistry = lang === 'pl' ? sessionContentRegistryPl : sessionContentRegistry
-
-  const session = activeSessions.find((s) => s.id === id)
+  const session = id ? sessionsById[id] : undefined
 
   if (!session) return <Navigate to="/actual-plays" replace />
 
-  const SessionContent = id ? activeRegistry[id] : undefined
+  // All sessions for navigation
+  const activeSessions = Object.values(sessionsById).sort(
+    (a, b) => a.sessionNumber - b.sessionNumber
+  )
+
+  // Get characters for NPC lookup
+  const allCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
+  const sessionNpcs = session.npcIds
+    ? allCharacters.filter((c) => session.npcIds?.includes(c.id))
+    : []
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -57,18 +75,6 @@ export default function SessionDetailPage() {
           {session.title}
         </h1>
 
-        {/* Players */}
-        {session.players && session.players.length > 0 && (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            <Users size={13} className="text-graphite-600" />
-            {session.players.map((p) => (
-              <Badge key={p} variant="muted">
-                {p}
-              </Badge>
-            ))}
-          </div>
-        )}
-
         {/* Tags */}
         {session.tags && session.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-2">
@@ -81,23 +87,14 @@ export default function SessionDetailPage() {
         )}
       </header>
 
-      {/* ── Custom session content (from src/sessions/session-XX.tsx) ── */}
-      {SessionContent ? (
+      {/* ── Custom session content from scenes ── */}
+      {session.scenes && session.scenes.length > 0 ? (
         <div className="mt-8">
-          <Suspense
-            fallback={
-              <p className="font-serif text-sm italic text-graphite-600 py-8 text-center">
-                {t.sessionDetail.loading}
-              </p>
-            }
-          >
-            <SessionContent />
-          </Suspense>
+          <SessionContentRenderer scenes={session.scenes} />
         </div>
       ) : (
-        /* Fallback: render the plain data from sessions.ts if no custom file exists yet */
+        /* Fallback: render the summary */
         <div className="mt-8 space-y-8">
-          {/* Summary */}
           <section>
             <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
               {t.sessionDetail.summaryHeading}
@@ -106,27 +103,21 @@ export default function SessionDetailPage() {
               {session.summary}
             </p>
           </section>
-
-          {/* Highlights */}
-          {session.highlights.length > 0 && (
-            <section>
-              <h2 className="mb-4 flex items-center gap-2 font-display text-xs uppercase tracking-widest text-graphite-500">
-                <Star size={12} className="text-amber-700" />
-                {t.sessionDetail.keyMomentsHeading}
-              </h2>
-              <ul className="space-y-3">
-                {session.highlights.map((highlight, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="mt-1 shrink-0 text-amber-700">✦</span>
-                    <span className="font-serif text-sm leading-loose text-graphite-300">
-                      {highlight}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
         </div>
+      )}
+
+      {/* ── NPCs Section ── */}
+      {sessionNpcs.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-6 font-display text-xs uppercase tracking-widest text-graphite-500">
+            {t.sessionDetail.npcsHeading}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {sessionNpcs.map((npc) => (
+              <CharacterCard key={npc.id} character={npc} />
+            ))}
+          </div>
+        </section>
       )}
 
       {/* Navigation between sessions */}

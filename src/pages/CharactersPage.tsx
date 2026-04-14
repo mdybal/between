@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ChevronRight } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
-import Badge from '@/components/ui/Badge'
-import { characters } from '@/data/characters'
-import { charactersPl } from '@/data/characters_pl'
+import CharacterCard from '@/components/ui/CharacterCard'
+import { getCharactersEn } from '@/data/characters_en'
+import { getCharactersPl } from '@/data/characters_pl'
 import type { NpcSubtype } from '@/types'
 import { cn } from '@/lib/utils'
 import { useLanguage } from '@/i18n/LanguageContext'
@@ -13,27 +11,13 @@ type MainFilter = 'hunter' | 'npc'
 type HunterSubFilter = 'all' | 'active' | 'retired'
 type NpcSubFilter = 'all' | NpcSubtype
 
-const npcSubtypeBadgeVariant: Record<NpcSubtype, 'amber' | 'green' | 'muted' | 'red'> = {
-  neutral: 'muted',
-  ally: 'green',
-  antagonist: 'red',
-}
-
-const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted'> = {
-  active: 'green',
-  retired: 'amber',
-  deceased: 'red',
-  missing: 'amber',
-  unknown: 'muted',
-}
-
 export default function CharactersPage() {
   const [mainFilter, setMainFilter] = useState<MainFilter>('hunter')
   const [hunterSub, setHunterSub] = useState<HunterSubFilter>('all')
   const [npcSub, setNpcSub] = useState<NpcSubFilter>('all')
   const { lang, t } = useLanguage()
 
-  const activeCharacters = lang === 'pl' ? charactersPl : characters
+  const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
 
   const filtered = activeCharacters.filter((c) => {
     if (c.type !== mainFilter) return false
@@ -142,95 +126,7 @@ export default function CharactersPage() {
       {/* Character grid */}
       <div className="grid gap-4 sm:grid-cols-2">
         {filtered.map((character) => (
-          <Link
-            key={character.id}
-            to={`/characters/${character.id}`}
-            className="art-card group flex flex-col rounded-lg p-5 transition-all"
-            style={{
-              border: '1px solid var(--graphite-700)',
-              backgroundColor: 'rgba(30,30,34,0.5)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'rgba(180,120,40,0.35)'
-              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.8)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--graphite-700)'
-              e.currentTarget.style.backgroundColor = 'rgba(30,30,34,0.5)'
-            }}
-          >
-            <div className="mb-3 flex items-start justify-between gap-2">
-              <div className="flex flex-wrap gap-2">
-                {/* For NPCs show type badge + subtype badge */}
-                {character.type === 'npc' ? (
-                  <>
-                    <Badge variant="muted">
-                      {t.characters.typeLabels.npc}
-                    </Badge>
-                    {character.subtype && (
-                      <Badge variant={npcSubtypeBadgeVariant[character.subtype]}>
-                        {t.characters.subtypeLabels[character.subtype]}
-                      </Badge>
-                    )}
-                  </>
-                ) : (
-                  <Badge variant="amber">
-                    {t.characters.typeLabels.hunter}
-                  </Badge>
-                )}
-                {character.status && (
-                  <Badge variant={statusBadgeVariant[character.status]}>
-                    {t.characters.statusLabels[character.status]}
-                  </Badge>
-                )}
-              </div>
-              <ChevronRight
-                size={16}
-                className="mt-0.5 shrink-0 text-amber-900 transition-transform group-hover:translate-x-1 group-hover:text-amber-600"
-              />
-            </div>
-
-            <h2 className="mt-1 font-display text-xl font-semibold text-amber-600 group-hover:text-amber-200 transition-colors">
-              {character.name}
-              {character.alias && (
-                <span className="ml-2 font-serif text-sm font-normal italic text-graphite-500">
-                  "{character.alias}"
-                </span>
-              )}
-            </h2>
-            <p className="mt-0.5 font-sc text-xs text-amber-700/80">{character.occupation}</p>
-
-            <p className="mt-3 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
-              {character.description}
-            </p>
-
-            {/* Conditions (Hunters only) */}
-            {character.type === 'hunter' && character.conditions && character.conditions.length > 0 && (
-              <div className="mt-3">
-                <p className="mb-1 font-sc text-xs uppercase tracking-widest text-graphite-600">
-                  {t.characters.conditions}
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {character.conditions.map((condition) => (
-                    <Badge key={condition} variant="red">
-                      {condition}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Traits (NPCs only) */}
-            {character.type === 'npc' && (
-              <div className="mt-3 flex flex-wrap gap-1">
-                {character.traits.map((trait) => (
-                  <Badge key={trait} variant="muted">
-                    {trait}
-                  </Badge>
-                ))}
-              </div>
-            )}
-          </Link>
+          <CharacterCard key={character.id} character={character} />
         ))}
       </div>
 
