@@ -381,7 +381,7 @@ export default function MapPage() {
     }
   }, [selectedItem])
 
-  const isFirstRender = useRef(true)
+  //const isFirstRender = useRef(true)
 
   // ── Pan to first active POI when latest selected session changes ────
   // Disabled: panning on session selection can be disruptive
