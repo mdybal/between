@@ -17,8 +17,8 @@ const IMG_H = 4145
 
 // ─── Session ordering ─────────────────────────────────────────────────────────
 
-// Ordered list of session ids (index = chronological order)
-const SESSION_ORDER = mapSessions.map((s) => s.id)
+// Ordered list of session ids (index = chronological order) - sorted ascending by id
+const SESSION_ORDER = mapSessions.map((s) => s.id).sort()
 
 function sessionIndex(sessionId: string): number {
   return SESSION_ORDER.indexOf(sessionId)
@@ -45,12 +45,12 @@ type CategoryConfig = {
 }
 
 const categoryConfigBase: Record<PoiCategory, CategoryConfig> = {
-  location:      { color: '#f59e0b', badgeVariant: 'amber' },
-  'crime-scene': { color: '#ef4444', badgeVariant: 'red' },
-  'safe-house':  { color: '#10b981', badgeVariant: 'green' },
-  danger:        { color: '#f97316', badgeVariant: 'red' },
-  clue:          { color: '#a78bfa', badgeVariant: 'default' },
-  unknown:       { color: '#6b7280', badgeVariant: 'muted' },
+  location:      { color: '#2980b9', badgeVariant: 'amber' },
+  'player-character': { color: '#27ae60', badgeVariant: 'red' },
+  'non-player-character':  { color: '#e1e11a', badgeVariant: 'green' },
+  danger:        { color: '#c0392b', badgeVariant: 'red' },
+  clue:          { color: '#8e44ad', badgeVariant: 'default' },
+  other:       { color: '#7f8c8d', badgeVariant: 'muted' },
 }
 
 // ─── Icon factories ───────────────────────────────────────────────────────────
@@ -58,23 +58,53 @@ const categoryConfigBase: Record<PoiCategory, CategoryConfig> = {
 const DISABLED_COLOR = '#9ca3af'
 
 function makePinIcon(color: string, opacity = 1) {
+  // Compass rose/navigation needle - classic Victorian cartography style (1:3 ratio - larger diamond, shorter stem) - 20% larger
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32" width="24" height="32" opacity="${opacity}">
-      <path d="M12 0C5.373 0 0 5.373 0 12c0 9 12 20 12 20S24 21 24 12C24 5.373 18.627 0 12 0z"
-            fill="${color}" stroke="#1c1917" stroke-width="1.5"/>
-      <circle cx="12" cy="12" r="4" fill="#1c1917" opacity="0.6"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="26" height="34" opacity="${opacity}">
+      <!-- Pin shaft (shorter - 1 part) -->
+      <line x1="12" y1="20" x2="12" y2="26" stroke="#2c2416" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Pin point -->
+      <path d="M9.5 26 L12 28 L14.5 26" fill="#2c2416"/>
+      <!-- Compass rose outer diamond (larger - 3 parts) -->
+      <polygon points="12,0 19,11 12,22 5,11" fill="${color}" stroke="#2c2416" stroke-width="1.2" stroke-linejoin="round"/>
+      <!-- Compass rose inner detail -->
+      <polygon points="12,3 17,11 12,19 7,11" fill="${color}" stroke="#2c2416" stroke-width="0.8" stroke-linejoin="round" opacity="0.8"/>
+      <!-- North pointer (darker) -->
+      <polygon points="12,0 15,8 12,11 9,8" fill="${color}" stroke="#2c2416" stroke-width="0.5"/>
+      <!-- South pointer (lighter/dimmed) -->
+      <polygon points="12,22 15,14 12,11 9,14" fill="${color}" stroke="#2c2416" stroke-width="0.5" opacity="0.6"/>
+      <!-- Center compass rose circle -->
+      <circle cx="12" cy="11" r="3" fill="#2c2416" opacity="0.6"/>
+      <!-- Center highlight -->
+      <circle cx="11.5" cy="10.5" r="1.2" fill="#fef3c7" opacity="0.3"/>
     </svg>`
-  return L.divIcon({ html: svg, className: '', iconSize: [24, 32], iconAnchor: [12, 32], popupAnchor: [0, -34] })
+  return L.divIcon({ html: svg, className: '', iconSize: [26, 34], iconAnchor: [13, 33], popupAnchor: [0, -36] })
 }
 
 function makeHighlightIcon(color: string) {
+  // Compass rose highlight icon - larger and with gold outline for selection state
   const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 42" width="32" height="42">
-      <path d="M16 0C7.163 0 0 7.163 0 16c0 12 16 26 16 26S32 28 32 16C32 7.163 24.837 0 16 0z"
-            fill="${color}" stroke="#fef3c7" stroke-width="2"/>
-      <circle cx="16" cy="16" r="5" fill="#1c1917" opacity="0.7"/>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="30" height="38" opacity="1">
+      <!-- Outer glow/gold ring -->
+      <circle cx="12" cy="11" r="13" fill="none" stroke="#d4a855" stroke-width="2" opacity="0.6"/>
+      <!-- Pin shaft (shorter - 1 part) -->
+      <line x1="12" y1="20" x2="12" y2="26" stroke="#d4a855" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Pin point -->
+      <path d="M9.5 26 L12 28 L14.5 26" fill="#d4a855"/>
+      <!-- Compass rose outer diamond (larger - 3 parts) with gold border -->
+      <polygon points="12,0 19,11 12,22 5,11" fill="${color}" stroke="#d4a855" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Compass rose inner detail -->
+      <polygon points="12,3 17,11 12,19 7,11" fill="${color}" stroke="#d4a855" stroke-width="1" stroke-linejoin="round" opacity="0.8"/>
+      <!-- North pointer (lighter - highlighted) -->
+      <polygon points="12,0 15,8 12,11 9,8" fill="${color}" stroke="#d4a855" stroke-width="0.8"/>
+      <!-- South pointer (lighter) -->
+      <polygon points="12,22 15,14 12,11 9,14" fill="${color}" stroke="#d4a855" stroke-width="0.8" opacity="0.8"/>
+      <!-- Center compass rose circle -->
+      <circle cx="12" cy="11" r="3.5" fill="#d4a855" opacity="0.7"/>
+      <!-- Center highlight -->
+      <circle cx="11.5" cy="10.5" r="1.5" fill="#fef3c7" opacity="0.5"/>
     </svg>`
-  return L.divIcon({ html: svg, className: '', iconSize: [32, 42], iconAnchor: [16, 42], popupAnchor: [0, -44] })
+  return L.divIcon({ html: svg, className: '', iconSize: [30, 38], iconAnchor: [15, 37], popupAnchor: [0, -40] })
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -133,13 +163,13 @@ export default function MapPage() {
   // Build category config with translated labels
   const categoryConfig: Record<PoiCategory, CategoryConfig & { label: string }> = {
     location:      { ...categoryConfigBase.location,      label: t.map.categoryLabels.location },
-    'crime-scene': { ...categoryConfigBase['crime-scene'], label: t.map.categoryLabels['crime-scene'] },
-    'safe-house':  { ...categoryConfigBase['safe-house'],  label: t.map.categoryLabels['safe-house'] },
+    'player-character': { ...categoryConfigBase['player-character'], label: t.map.categoryLabels['player-character'] },
+    'non-player-character':  { ...categoryConfigBase['non-player-character'],  label: t.map.categoryLabels['non-player-character'] },
     danger:        { ...categoryConfigBase.danger,         label: t.map.categoryLabels.danger },
     clue:          { ...categoryConfigBase.clue,           label: t.map.categoryLabels.clue },
-    unknown:       { ...categoryConfigBase.unknown,        label: t.map.categoryLabels.unknown },
+    other:       { ...categoryConfigBase.other,        label: t.map.categoryLabels.other },
   }
-
+  
   // ── Apply session filter to all markers/polygons ──────────────────────────
   const applySessionFilter = useCallback(
     (selected: Set<string>, highlightId: string | null) => {
@@ -354,24 +384,25 @@ export default function MapPage() {
   const isFirstRender = useRef(true)
 
   // ── Pan to first active POI when latest selected session changes ────
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-
-    if (selectedSessions.size === 0) return
-
-    const maxSelectedIdx = Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id)))
-    const latestSessionId = SESSION_ORDER[maxSelectedIdx]
-
-    const anchor = activePois.find(
-      (p) => p.sessionId === latestSessionId && p.state === 'active',
-    )
-    if (!anchor) return
-
-    panToIfNeeded(anchor.coords)
-  }, [selectedSessions, panToIfNeeded, activePois])
+  // Disabled: panning on session selection can be disruptive
+  // useEffect(() => {
+  //   if (isFirstRender.current) {
+  //     isFirstRender.current = false
+  //     return
+  //   }
+  //
+  //   if (selectedSessions.size === 0) return
+  //
+  //   const maxSelectedIdx = Math.max(...Array.from(selectedSessions).map(id => sessionIndex(id)))
+  //   const latestSessionId = SESSION_ORDER[maxSelectedIdx]
+  //
+  //   const anchor = activePois.find(
+  //     (p) => p.sessionId === latestSessionId && p.state === 'active',
+  //   )
+  //   if (!anchor) return
+  //
+  //   panToIfNeeded(anchor.coords)
+  // }, [selectedSessions, panToIfNeeded, activePois])
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
   const togglePanel = (panel: ActivePanel) =>
@@ -395,24 +426,28 @@ export default function MapPage() {
     setHighlightedItemId(zone.id)
   }
 
-  // Unique POIs for the layers list — use the overall canonical (latest) entry per id
+  // Unique POIs for the layers list — filter by selected sessions and use canonical (latest) entry per id
   const uniquePois = Object.values(
-    activePois.reduce<Record<string, PointOfInterest>>((acc, poi) => {
-      if (!acc[poi.id] || sessionIndex(poi.sessionId) > sessionIndex(acc[poi.id].sessionId)) {
-        acc[poi.id] = poi
-      }
-      return acc
-    }, {}),
+    activePois
+      .filter(poi => selectedSessions.has(poi.sessionId))
+      .reduce<Record<string, PointOfInterest>>((acc, poi) => {
+        if (!acc[poi.id] || sessionIndex(poi.sessionId) > sessionIndex(acc[poi.id].sessionId)) {
+          acc[poi.id] = poi
+        }
+        return acc
+      }, {}),
   ).filter((poi) => poi.state !== 'removed')
 
-  // Unique zones for the layers list — use the overall canonical (latest) entry per id
+  // Unique zones for the layers list — filter by selected sessions and use canonical (latest) entry per id
   const uniqueZones = Object.values(
-    activeZones.reduce<Record<string, MapZone>>((acc, zone) => {
-      if (!acc[zone.id] || sessionIndex(zone.sessionId) > sessionIndex(acc[zone.id].sessionId)) {
-        acc[zone.id] = zone
-      }
-      return acc
-    }, {}),
+    activeZones
+      .filter(zone => selectedSessions.has(zone.sessionId))
+      .reduce<Record<string, MapZone>>((acc, zone) => {
+        if (!acc[zone.id] || sessionIndex(zone.sessionId) > sessionIndex(acc[zone.id].sessionId)) {
+          acc[zone.id] = zone
+        }
+        return acc
+      }, {}),
   ).filter((zone) => zone.state !== 'removed')
 
   // ── Render ──────────────────────────────────────────────────────────────────

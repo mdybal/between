@@ -168,11 +168,11 @@ export const en = {
     district: 'District',
     categoryLabels: {
       location: 'Location',
-      'crime-scene': 'Crime Scene',
-      'safe-house': 'Safe House',
+      'player-character': 'Player Characters',
+      'non-player-character': 'Non-Player Characters',
       danger: 'Danger',
       clue: 'Clue',
-      unknown: 'Unknown',
+      other: 'Other',
     },
   },
   notFound: {

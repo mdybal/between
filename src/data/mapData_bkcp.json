@@ -1,13 +1,8 @@
 {
   "sessions": [
     {
-      "id": "session-01",
-      "title": "Session 01",
-      "description": "St. James's Street Ghost introduction"
-    },
-    {
       "id": "session-00",
-      "title": "Session 00",
+      "title": "Session 0",
       "description": ""
     }
   ],
@@ -250,42 +245,6 @@
         4361
       ],
       "sessionId": "session-00",
-      "state": "active"
-    },
-    {
-      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
-      "name": "Hargrave House",
-      "category": "player-character",
-      "description": "",
-      "coords": [
-        2628.4312294574547,
-        2123.8772009881727
-      ],
-      "sessionId": "session-00",
-      "state": "active"
-    },
-    {
-      "id": "229bc44d-7eed-41c1-8839-c8315735bed4",
-      "name": "Beales House",
-      "category": "danger",
-      "description": "Crime scene for \"St. James's Street Ghost\" threat.\nHome of Beales family.",
-      "coords": [
-        2436.057248202732,
-        2467.114431727249
-      ],
-      "sessionId": "session-01",
-      "state": "active"
-    },
-    {
-      "id": "33bb9d25-1252-4f86-86f2-2e497cb2e854",
-      "name": "The Illustrated Police News",
-      "category": "location",
-      "description": "A tabloid headquarters",
-      "coords": [
-        2165.531149396853,
-        3104.1469541230645
-      ],
-      "sessionId": "session-01",
       "state": "active"
     }
   ],

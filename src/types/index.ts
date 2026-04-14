@@ -53,12 +53,14 @@ export interface Character {
 
 export type PoiCategory =
   | 'location'
-  | 'crime-scene'
-  | 'safe-house'
+  | 'player-character'
+  | 'non-player-character'
   | 'danger'
   | 'clue'
-  | 'unknown'
+  | 'other'
 
+
+  
 /**
  * State of a map element within a given session snapshot.
  * - 'active'   → shown normally

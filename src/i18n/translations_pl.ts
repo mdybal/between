@@ -168,11 +168,11 @@ export const pl = {
     district: 'Dzielnica',
     categoryLabels: {
       location: 'Lokalizacja',
-      'crime-scene': 'Miejsce zbrodni',
-      'safe-house': 'Kryjówka',
+      'player-character': 'Postaci graczy',
+      'non-player-character': 'Bohaterowie Niezależni',
       danger: 'Niebezpieczeństwo',
       clue: 'Wskazówka',
-      unknown: 'Nieznane',
+      other: 'Inne',
     },
   },
   notFound: {
