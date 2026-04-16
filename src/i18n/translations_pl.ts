@@ -9,12 +9,12 @@ export const pl = {
   },
   footer: {
     tagline: '✦ \u00a0 The Between \u00a0 · \u00a0 Kampania TTRPG w epoce wiktoriańskiej \u00a0 ✦',
-    location: 'Londyn, 1893',
+    location: 'Londyn, 1871',
   },
   home: {
     eyebrow: 'Kampania TTRPG w epoce wiktoriańskiej',
     intro:
-      'Londyn, 1893. Poza kręgiem światła gazowych lamp i za aksamitnymi zasłonami wyższych sfer kryje się coś pradawnego. Grupa Myśliwych stoi między miastem a ciemnością, która go pożąda.',
+      'Londyn, 1871. Poza kręgiem światła gazowych lamp i za aksamitnymi zasłonami wyższych sfer kryje się coś pradawnego. Grupa Myśliwych stoi między miastem a ciemnością, która go pożąda.',
     quote: '„Mgła nie tylko przesłania — ale równiez skrywa."',
     latestSession: 'Ostatnia sesja',
     sections: {
@@ -43,7 +43,7 @@ export const pl = {
         'Wiktoriański Londyn u szczytu Imperium — miasto gazowych latarni i cienia, naukowego postępu i pradawnych przesądów. The Between to horror TTRPG, który stawia śledczych na przecięciu racjonalności i niepoznawalnego.',
       systemHeading: 'System',
       systemText:
-        'The Between to gra Powered by the Apocalypse zaprojektowana przez Jasona Morningstar, skupiona na wspólnym opowiadaniu horrorów. Gracze wcielają się w śledczych wciągniętych w sieć nadprzyrodzonego spisku w Londynie lat 90. XIX wieku.',
+        'The Between to gra Powered by the Apocalypse zaprojektowana przez Jasona Morningstar, skupiona na wspólnym opowiadaniu horrorów. Gracze wcielają się w śledczych wciągniętych w sieć nadprzyrodzonego spisku w Londynie lat 70. XIX wieku.',
     },
   },
   actualPlays: {
@@ -137,7 +137,7 @@ export const pl = {
   },
   map: {
     title: 'Mapa śledztwa',
-    subtitle: 'Londyn, 1893',
+    subtitle: 'Londyn, 1871',
     clearSelections: 'Wyczyść wybór',
     selectAll: 'Zaznacz wszystkie',
     layers: 'Warstwy',

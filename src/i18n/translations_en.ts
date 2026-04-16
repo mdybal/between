@@ -9,12 +9,12 @@ export const en = {
   },
   footer: {
     tagline: '✦ \u00a0 The Between \u00a0 · \u00a0 A Victorian TTRPG Campaign \u00a0 ✦',
-    location: 'London, 1893',
+    location: 'London, 1871',
   },
   home: {
     eyebrow: 'A Victorian TTRPG Campaign',
     intro:
-      'London, 1893. Beneath the gaslit streets and behind the velvet curtains of high society, something ancient stirs. A band of investigators stands between the city and the darkness that hungers for it.',
+      'London, 1871. Beneath the gaslit streets and behind the velvet curtains of high society, something ancient stirs. A band of investigators stands between the city and the darkness that hungers for it.',
     quote: '"The fog does not merely obscure — it conceals."',
     latestSession: 'Latest Session',
     sections: {
@@ -43,7 +43,7 @@ export const en = {
         'Victorian London at the height of the Empire — a city of gaslight and shadow, of scientific progress and ancient superstition. The Between is a horror TTRPG that places investigators at the intersection of the rational and the unknowable.',
       systemHeading: 'The System',
       systemText:
-        'The Between is a Powered by the Apocalypse game designed by Jason Morningstar, focused on collaborative horror storytelling. Players take on the roles of investigators drawn into a web of supernatural conspiracy in 1890s London.',
+        'The Between is a Powered by the Apocalypse game designed by Jason Morningstar, focused on collaborative horror storytelling. Players take on the roles of investigators drawn into a web of supernatural conspiracy in 1870s London.',
     },
   },
   actualPlays: {
@@ -137,7 +137,7 @@ export const en = {
   },
   map: {
     title: 'Investigation Map',
-    subtitle: 'London, 1893',
+    subtitle: 'London, 1871',
     clearSelections: 'Clear selections',
     selectAll: 'Select all',
     layers: 'Layers',
