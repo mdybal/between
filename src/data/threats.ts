@@ -17,7 +17,7 @@ export const threats: ThreatBase[] = [
   {
     id: 'james-street-ghost',
     type: 'threat',
-    threatLevel: '0-5',
+    threatLevel: '1-5',
     status: 'active',
     firstEncountered: 'session-01',
   },
