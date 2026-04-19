@@ -3,7 +3,7 @@
     {
       "id": "session-01",
       "title": "Session 01",
-      "description": "St. James's Street Ghost introduction"
+      "description": "St. James's Street Ghost investigation\nLimehous Lurker investigation"
     },
     {
       "id": "session-00",
@@ -478,6 +478,54 @@
         2207.3530900410005
       ],
       "sessionId": "session-00",
+      "state": "active"
+    },
+    {
+      "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
+      "name": "Chen Bao Opium Den",
+      "category": "danger",
+      "description": "Dim and smoky. A heavy, ammonia-like smell. People \nlounging on cushions. People from all walks of life patronize the den.\nSoft Jimmy, a male prostitute was killed by Lurker here.\nLudwig performed a ritual to bar the vampire from ever entering this place again.",
+      "coords": [
+        2295.266749844028,
+        4608
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "a02d00f2-9250-459d-be33-a2d0e4a62328",
+      "name": "Dog & Whistle pub",
+      "category": "danger",
+      "description": "A popular sailor's pub. Limehouse Lurker killed Zhao Donghai here",
+      "coords": [
+        2414.810872197323,
+        4754.232443307752
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "bd6f1abf-6046-43c9-bd02-a1378f431d7a",
+      "name": "Limehouse School",
+      "category": "danger",
+      "description": "A workhouse for local children. Filthy children all over the place. A frustrated mistress teaching a group of girls to sew. The smell of unwashed bodies. ",
+      "coords": [
+        2276.5690035848047,
+        4728.423045794443
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "76eccce6-02ca-4015-9e3f-c2e043eebc7c",
+      "name": "Royal Explorers Club",
+      "category": "player-character",
+      "description": "A private dinner club for people who have led expeditionary forces into parts unknown, or who are members of the upper class with an interest in the geographical sciences",
+      "coords": [
+        1898.6590647968092,
+        2698.3194770078653
+      ],
+      "sessionId": "session-01",
       "state": "active"
     }
   ],
