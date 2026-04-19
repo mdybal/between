@@ -73,4 +73,53 @@ export const characters: CharacterBase[] = [
     subtype: 'neutral',
     imageUrl: '/img/characters/constance-head.png',
   },
+  {
+    id: 'chen-bao',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/chen-bao.png',
+  },
+  {
+    id: 'rory-bell',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/rory-bell.png',
+  },
+  {
+    id: 'sun-mask',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/sun-mask.png',
+  },
+  {
+    id: 'franklin-horsford',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/franklin-horsford.png',
+  },
+
+  {
+    id: 'elma-thorpe',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/elma-thorpe.png',
+  },
+  {
+    id: 'lawrence-chesterfield',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/lawrence-chesterfield.png',
+  },
+  {
+    id: 'lin-bohai',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/lin-bohai.png',
+  },
+    {
+    id: 'limehouse-lurker',
+    type: 'npc',
+    subtype: 'antagonist',
+    imageUrl: '/img/characters/limehouse-lurker.png',
+  },
 ]

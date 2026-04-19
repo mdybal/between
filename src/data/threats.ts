@@ -21,4 +21,11 @@ export const threats: ThreatBase[] = [
     status: 'active',
     firstEncountered: 'session-01',
   },
+  {
+    id: 'limehouse-lurker',
+    type: 'threat',
+    threatLevel: '0-5',
+    status: 'active',
+    firstEncountered: 'session-02',
+  },
 ]

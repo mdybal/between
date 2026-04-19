@@ -117,6 +117,8 @@ export const charactersEn: CharacterText[] = [
       "She is a native of Montserrat, and a completely self-made woman, having built her vast fortune first as a pirate queen and later as a legitimate merchant. She arrived in London in her ate-20s, already fabulously wealthy.",
     traits: ['Wealthy', 'Dangerous', 'Connected'],
   },
+
+  // St James's Street Ghosts
   {
     id: 'harold-beale',
     name: 'Harold Beale',
@@ -186,6 +188,89 @@ export const charactersEn: CharacterText[] = [
     background:
       "Constance is a widow, and the Beales’ neighbor. Like Mrs. Thicket, she knows things about the house on 18 St. James’s Street, having lived next door most of her adult life. She’s certainly happy to tell what she knows in exchange for some juicy gossip.",
     traits: ['Gossipy', 'Nosy', 'Knowledgeable'],
+    },
+
+    // Limehouse Lurker
+    {
+    id: 'chen-bao',
+    name: 'Chen Bao',
+    alias: 'Jen Johnson',
+    occupation: 'a community leader',
+    description:
+      'Soothing disposition. Dark taffeta gown. Hair propped up in an oriental bun with jade hairpin.',
+    background:
+      "Jen runs a successful opium den and is the unofficial leader of the small Chinese immigrant community in Limehouse. She takes her role seriously, and looks after almost anyone who comes to her for help.",
+    traits: ['Calm', 'Resourceful', 'Protective'],
+    },
+    {
+    id: 'sun-mask',
+    name: 'The Man in the Sun Mask',
+    occupation: 'a patron of the opium den',
+    description:
+      'Gold smoking jacket and yellow silk pants. Soft slippers on his feet. A sun-shaped half-mask obscuring his identity.',
+    background:
+      "JThe Man in the Sun Mask claims to be a member of the Royal Family, or some other important member of society, depending on when you ask him; he says he wears the mask to hide his identity.",
+    traits: ['Cryptic', 'Mellow','Nonchalant'],
+    },
+    {
+    id: 'rory-bell',
+    name: 'Rory Bell',
+    occupation: 'a husband',
+    description:
+      'Covered in soot. Sour smell. Hangdog look',
+    background:
+      "Rory is a stevedore at Regent’s Canal Dock. He wants to go to the police about his wife Charla’s murder, but Jen Johnson is putting a lot of pressure on him to be quiet and let her handle the matter",
+    traits: ['Apologetic', 'Abashed','Uneducated'],
+    },
+    {
+    id: 'franklin-horsford',
+    name: 'Franklin Horsford',
+    occupation: 'a Dog $ Whistle owner',
+    description:
+      'Sweaty forehead. Hairy arms. Black apron',
+    background:
+      "Franklin does a brisk business at The Dog & Whistle, and he agrees with Jen that no good will come of getting the authorities involved in the current troubles. ",
+    traits: ['Friendly', 'Frank', 'No-nonsense'],
+    },
+    {
+    id: 'elma-thorpe',
+    name: 'Elma Thorpe',
+    occupation: 'a Dog & Whistle patron',
+    description:
+      'Unkempt gray hair. Wrapped in a blanket, complaining of cold. Just finishing her drink',
+    background:
+      "Elma is a regular at The Dog & Whistle. She sees a lot around the Canal Dock, and she’ll talk about what she knows if you buy her a drink.",
+    traits: ['Drunk', 'Vulgar', 'Streetwise'],
+    },
+    {
+    id: 'lin-bohai',
+    name: 'Lin Bohai',
+    occupation: 'a sailor',
+    description:
+      'Handsome grin. Briny smell. Dingy sailor’s whites',
+    background:
+      "Lin Bohai was a friend and shipmate of Zhao Donghai. Their ship is set to sail in a week; he’d like to find out what happened to his friend before that.",
+    traits: ['Compassionate', 'Gambler', 'Well-traveled'],
+    },
+    {
+    id: 'lawrence-chesterfield',
+    name: 'Lawrence Chesterfield',
+    occupation: 'a headmaster',
+    description:
+      'Fidgety. Brown three-piece suit. Voice always starts low but ends high.',
+    background:
+      "Lawrence is the headmaster of the Limehouse School. He is overworked, exasperated, and doing his best to quell rumors of blood-sucking monsters.",
+    traits: ['Strict', 'Formal', 'Exhausted'],
+    },
+    {
+    id: 'limehouse-lurker',
+    name: 'The Limehouse Lurker',
+    occupation: 'a vampire',
+    description:
+      'Child-sized. Pale and gaunt. Always lurking in the rafters`s shadows.',
+    background:
+      "The vampire is physically a child but that doesn’t mean it’s young. Vampires never physically age beyond how old they were when they were “turned,” and an old vampire has to be handled in a very different way from a young one…",
+    traits: ['Blood-thirsty', 'Dangerous', 'Hidden in shadows'],
     },
 ]
 
