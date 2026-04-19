@@ -27,16 +27,50 @@ export const characters: CharacterBase[] = [
     id: 'theodora-brathwaite',
     type: 'npc',
     subtype: 'antagonist',
-    imageUrl: '/img/characters/theodora.svg',
+    imageUrl: '/img/characters/theodora-brathwaite.png',
   },
+  // St James's Street Ghost
   {
-    id: 'lady-pemberton',
+    id: 'harold-beale',
     type: 'npc',
     subtype: 'neutral',
+    imageUrl: '/img/characters/harold-beale.png',
   },
   {
-    id: 'alfred',
+    id: 'alice-beale',
     type: 'npc',
-    subtype: 'ally',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/alice-beale.png',
+
+  },
+  {
+    id: 'roger-beale',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/roger-beale.png',
+  },
+  {
+    id: 'mary-alice-beale',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/mary-alice-beale.png',
+  },
+  {
+    id: 'pythagoras',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/pythagoras.png',
+  },
+  {
+    id: 'irma-thicket',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/irma-thicket.png',
+  },
+  {
+    id: 'constance-head',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/constance-head.png',
   },
 ]

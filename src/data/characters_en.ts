@@ -110,33 +110,83 @@ export const charactersEn: CharacterText[] = [
   {
     id: 'theodora-brathwaite',
     name: 'Theodora Brathwaite',
-    occupation: 'The Antagonist',
+    occupation: 'The Mastermind',
     description:
-      'A shadowy figure whose true motives remain obscured. Known only by reputation and whispered warnings.',
+      'Theodora Brathwaite is a stately, middle-aged black woman, always impeccably dressed and never seen without her signature sapphire choker.',
     background:
-      "Little is known of Theodora Brathwaite's origins. She moves through London's underworld with unsettling ease, leaving chaos in her wake.",
-    traits: ['Calculating', 'Elusive', 'Dangerous'],
+      "She is a native of Montserrat, and a completely self-made woman, having built her vast fortune first as a pirate queen and later as a legitimate merchant. She arrived in London in her ate-20s, already fabulously wealthy.",
+    traits: ['Wealthy', 'Dangerous', 'Connected'],
   },
   {
-    id: 'lady-pemberton',
-    name: 'Lady Cecilia Pemberton',
-    occupation: 'Society Hostess',
+    id: 'harold-beale',
+    name: 'Harold Beale',
+    occupation: 'a husband and father',
     description:
-      'A widow of considerable means and questionable taste in guests. Her Mayfair townhouse is a nexus of rumour and intrigue.',
+      'Patchy beard. Constantly fiddling. Worried about the cost of things.',
     background:
-      'Widowed young, Lady Pemberton has cultivated a salon that attracts artists, politicians, and occultists in equal measure. Whether she is a victim or a conspirator remains unclear.',
-    traits: ['Charming', 'Evasive', 'Frightened', 'Well-connected'],
+      'Harold, a bookkeeper and amateur mathematician, moved his young family to St. James’s Street just a year ago, after getting a shockingly-good deal on the townhouse.',
+    traits: ['Worried', 'Restless', 'Meticulous'],
   },
   {
-    id: 'alfred',
-    name: 'Alfred Pennyworth',
-    occupation: 'Gardener & Handyman',
+    id: 'alice-beale',
+    name: 'Alice Beale',
+    occupation: 'a wife and mother',
     description:
-      'A loyal and resourceful manservant who has served the Ashworth family for decades. His knowledge of the estate and its secrets is invaluable.',
+      'Sweet disposition. Lovely, but faded. Simple tartan dress.',
     background:
-      "Alfred has been with the Ashworths since before Evelyn was born. He is fiercely protective of the family and has a deep understanding of the estate's history and hidden passages.",
-    traits: ['Dependable', 'Resourceful', 'Discreet'],
+      "Alice follows Harold’s lead in most things, but thinks he’s not taking Ginny’s death seriously enough. It was he who gave the story to The Illustrated Police News after Scotland Yard came up empty￾handed—a sad attempt to make a bit of money off their tragedy.",
+    traits: ['Quiet', 'Faded', 'Disillusioned'],
   },
+  {
+    id: 'roger-beale',
+    name: 'Roger Beale',
+    occupation: 'a young son',
+    description:
+      'Ruddy-cheeked. Sailor’s outfit. Learning to swear.',
+    background:
+      "Nine-year-old Roger is a bit of a brat, to be honest, but finds the idea of a haunting to be wonderfully exciting, and frequently gives ghost tours of the townhouse to his friends.",
+    traits: ['Adventurous', 'Curious', 'Bratty'],
+  },
+  {
+    id: 'mary-alice-beale',
+    name: 'Mary-Alice Beale',
+    occupation: 'a baby daughter',
+    description:
+      'Quite bald for her age, really. And fat—what a fat little monkey she is!',
+    background:
+      "Listen to how she babbles—don’t you wonder what they’re thinking about when they babble like that?",
+    traits: ['Adorable', 'Inquisitive', 'Fat']
+  },
+  {
+    id: 'pythagoras',
+    name: 'Pythagoras',
+    occupation: 'a dog',
+    description:
+      'Greyhound. Brindle',
+    background:
+      "Used to be quite lazy, but ever since moving to St. James’s Street, spends most of his time nervously patrolling the house.",
+    traits: ['Loyal', 'Friendly', 'Alert'],
+    },
+    {
+    id: 'irma-thicket',
+    name: 'Irma Thicket',
+    occupation: 'a cook',
+    description:
+      'Square-framed. Jowly. Smells of onion and tobacco',
+    background:
+      "Irma has lived at 18 St. James’s Street longer than anyone, having worked for the previous family, the Buckleys. She is reluctant to talk about the things she’s seen, but is genuinely sad and terrified about what happened to Ginny Hess",
+    traits: ['Superstitious', 'Blunt', 'Distressed'],
+    },
+    {
+    id: 'constance-head',
+    name: 'Constance Head',
+    occupation: 'a neighbor',
+    description:
+      'Peering eyes. Too-tight corset. Streaks of gray in her hair',
+    background:
+      "Constance is a widow, and the Beales’ neighbor. Like Mrs. Thicket, she knows things about the house on 18 St. James’s Street, having lived next door most of her adult life. She’s certainly happy to tell what she knows in exchange for some juicy gossip.",
+    traits: ['Gossipy', 'Nosy', 'Knowledgeable'],
+    },
 ]
 
 /**

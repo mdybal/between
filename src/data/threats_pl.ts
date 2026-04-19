@@ -1,6 +1,5 @@
 import { threats } from './threats'
-import { threatsEn, type ThreatText } from './threats_en'
-import type { Threat } from '@/types'
+import type { Threat, ThreatQuestion, MaskSection } from '@/types'
 
 /**
  * Polish threat text data.
@@ -11,14 +10,48 @@ import type { Threat } from '@/types'
  *
  * To add Polish translations, add entries with the same id as in threats_en.ts
  * and replace the text fields with Polish translations.
- *
- * Until translated, this file re-exports the English data as a fallback.
  */
-export const threatsPl: ThreatText[] = threatsEn
+export interface ThreatText {
+  id: string
+  name: string
+  description: string
+  knownFacts?: string[]
+  questions: ThreatQuestion[]
+  mask?: MaskSection
+}
+
+export const threatsPl: ThreatText[] = [
+  {
+    id: 'mastermind-conspiracy',
+    name: 'Spisek Theodory Brathwaite',
+    description:
+      'Theodora Brathwaite studiuje ogromną mapę Londynu zamontowaną na ścianie gabinetu. Mosiężne szpilki w kształcie sztyletów zaznaczają różne miejsca w mieście, lokalizacje ważne dla jakiegoś wielkiego planu (można zauważyć szpilkę na Domu Hargrave\'a). Nagle wstaje, przemierza pokój i wbija jeden z mosiężnych sztyletów w Pałac Buckingham.',
+    questions: [
+      {
+        question: 'Jak Mistrzyni Zbrodni zamierza zniszczyć Koronę? (Złożoność: 8)',
+      }
+    ],
+  },
+  {
+    id: 'james-street-ghost',
+    name: 'Duch z St. James\'s Street',
+    description:
+      'Stary egzemplarz „The Illustrated Police News", tabloidu słynącego z pikantnych, krwiopijczych opowieści wątpliwego pochodzenia, zawiera historię o młodej pokojówce, Ginny Hess, która została znaleziona martwa — w domu jej pracodawcy przy St. James\'s Street kilka miesięcy temu. Historia głosi, że dom jest nawiedzony i że niemal na pewno to widok ducha spowodował, że młoda pokojówka zmarła z czystego przerażenia. Po pobieżnym dochodzeniu dowiadujecie się dokładnego adresu nawiedzonego domu — 18 St. James\'s Street — oraz nazwiska rodziny, która tam mieszka, Beale\'ów.',
+    questions: [
+      {
+        question: 'Jak sprawić, by ten duch przeszedł do następnego świata? (Złożoność: 6)',
+      },
+    ],
+    mask: {
+      title: 'Maska Niespokojnych',
+      description:
+        'Każdy Łowca opowiada retrospekcję ze swojego dzieciństwa, gdy doświadczył nawiedzenia.',
+    },
+  },
+]
 
 /**
  * Merges threat base data with Polish text to produce full Threat objects.
- * Currently falls back to English text.
  */
 export function getThreatsPl(): Threat[] {
   return threats.map((threat) => {

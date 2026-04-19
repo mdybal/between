@@ -19,26 +19,17 @@ export interface ThreatText {
 
 export const threatsEn: ThreatText[] = [
   {
-    id: 'architect-of-ruin',
-    name: 'The Architect of Ruin',
+    id: 'mastermind-conspiracy',
+    name: 'Theodora Brathwaite’s Conspiracy',
     description:
-      'A shadowy figure who appears to be orchestrating a grand design across London\'s underworld and high society alike. Their true identity and ultimate goal remain unknown.',
-    knownFacts: [
-      'Communicates through intermediaries and coded messages',
-      'Has agents embedded in both the criminal underworld and aristocracy',
-      'Possesses knowledge of pre-Victorian occult rituals',
-      'Referenced in the cipher-box recovered from Wapping',
-    ],
+      'Theodora Brathwaite is pondering an enormous map of London mounted to the study wall. There are brass pins shaped like daggers marking out various places in the city, locations important for some grand scheme (one might notice a pin on Hargrave House). Suddenly she stands up, crosses the room, and plunges one of the brass daggers into Buckingham Palace',
+    /*knownFacts: [
+            'Referenced in the cipher-box recovered from Wapping',
+    ],*/
     questions: [
       {
-        question: 'May be connected to a series of disappearances dating back to 1887',
-      },
-      {
-        question: 'Possibly a former member of a secret society',
-      },
-      {
-        question: 'The brass cipher-box may be a key to their identity',
-      },
+        question: 'How does the Mastermind intend to destroy the Crown? (Complexity: 8)',
+      }
     ],
     mask: {
       title: 'The Mask of the Architect',
@@ -47,27 +38,20 @@ export const threatsEn: ThreatText[] = [
     },
   },
   {
-    id: 'the-hollow-congregation',
-    name: 'The Hollow Congregation',
+    id: 'james-street-ghost',
+    name: 'The St. James\'s Street Ghost',
     description:
-      'A cult operating out of the Whitechapel docks, performing rituals that seem designed to thin the boundary between the living world and something else entirely.',
-    knownFacts: [
-      'Use black ichor as part of their rituals',
-      'Wear hooded robes bearing a symbol of an inverted clock',
-      'Have been active for at least six months',
-      'Recruit from the desperate and destitute of the East End',
-    ],
+      'A back issue of The Illustrated Police News, a tabloid notorious for carrying salacious, blood-curdling tales of dubious provenance, has a story about a young maid, Ginny Hess, who was found dead— apparently from shock—in her employer’s St. James’s Street townhouse some months ago. The story claims the townhouse is haunted, and that it was almost certainly the appearance of a ghost that caused the young maid to die of fright. After a cursory inquiry, you learn the precise address of the haunting, 18 St. James’s Street, and the name of the family that lives there, the Beales.',
     questions: [
       {
-        question: 'May be taking orders from The Architect of Ruin',
-      },
-      {
-        question: 'Their rituals may be summoning or feeding something',
-      },
-      {
-        question: 'A member may have infiltrated the Metropolitan Police',
+        question: 'How can we get this ghost to pass on to the next world? (Complexity: 6)',
       },
     ],
+    mask: {
+      title: 'The Mask of the Unquiet',
+      description:
+        'Each Hunter narrates a flashback to their childhood when they experienced a haunting.',
+    },
   },
 ]
 

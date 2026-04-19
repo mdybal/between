@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Badge from '@/components/ui/Badge'
 import type { Character } from '@/types'
 import { npcSubtypeBadgeVariant, statusBadgeVariant } from '@/lib/characterUtils'
@@ -12,8 +12,12 @@ interface CharacterCardProps {
 
 export default function CharacterCard({ character, asCard = false }: CharacterCardProps) {
   const { t } = useLanguage()
+  const location = useLocation()
 
   const isHunter = character.type === 'hunter'
+
+  // Preserve search params when navigating to character detail
+  const searchParams = location.search
 
   const cardContent = (
     <>
@@ -133,6 +137,7 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
     <Link
       key={character.id}
       to={`/characters/${character.id}`}
+      state={{ fromCharacters: searchParams }}
       className="art-card group flex flex-col rounded-lg p-5 transition-all"
       style={{
         border: '1px solid var(--graphite-700)',

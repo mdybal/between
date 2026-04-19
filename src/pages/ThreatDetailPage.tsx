@@ -203,7 +203,7 @@ export default function ThreatDetailPage() {
               }}
             />
           </div>
-          <p className="font-serif text-sm leading-loose text-graphite-300">
+          <p className="font-serif text-sm leading-loose text-graphite-300 text-center">
             {threat.mask.description}
           </p>
         </section>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useLanguage } from '@/i18n/LanguageContext'
@@ -38,11 +38,17 @@ function LanguageToggle() {
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { t } = useLanguage()
+  const location = useLocation()
+
+  // Preserve search params when navigating to characters page
+  const charactersTo = location.pathname.startsWith('/characters')
+    ? '/characters' + location.search
+    : '/characters'
 
   const navLinks = [
     { to: '/', label: t.nav.home },
     { to: '/actual-plays', label: t.nav.actualPlays },
-    { to: '/characters', label: t.nav.characters },
+    { to: charactersTo, label: t.nav.characters },
     { to: '/threats', label: t.nav.threats },
     { to: '/map', label: t.nav.map },
   ]
