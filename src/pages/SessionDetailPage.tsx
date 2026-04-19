@@ -5,33 +5,18 @@ import CharacterCard from '@/components/ui/CharacterCard'
 import { SessionContentRenderer } from '@/components/session/SessionContentRenderer'
 import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
+import { getSessionsEn } from '@/data/sessions_en'
+import { getSessionsPl } from '@/data/sessions_pl'
 import { useLanguage } from '@/i18n/LanguageContext'
-import type { Session } from '@/types'
-
-const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
-
-const sessionsById: Record<string, Session> = {}
-Object.values(sessionModules).forEach((module) => {
-  const mod = module as Record<string, unknown>
-  // Handle both default exports and named exports
-  const session = mod.default 
-    ? mod.default as Session 
-    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
-  if (session) sessionsById[session.id] = session
-})
 
 export default function SessionDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
-  const session = id ? sessionsById[id] : undefined
+  const activeSessions = lang === 'pl' ? getSessionsPl() : getSessionsEn()
+  const session = id ? activeSessions.find((s) => s.id === id) : undefined
 
   if (!session) return <Navigate to="/actual-plays" replace />
-
-  // All sessions for navigation
-  const activeSessions = Object.values(sessionsById).sort(
-    (a, b) => a.sessionNumber - b.sessionNumber
-  )
 
   // Get characters for NPC lookup
   const allCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()

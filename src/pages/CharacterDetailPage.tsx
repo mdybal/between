@@ -99,7 +99,7 @@ export default function CharacterDetailPage() {
             ))}
           </div>
 
-          <h1 className="nouveau-heading font-display text-3xl font-bold text-amber-600 md:text-4xl">
+          <h1 className="nouveau-heading max-w-[66%] break-words text-center font-display text-3xl font-bold text-amber-600 md:text-4xl">
             {character.name}
           </h1>
           {character.alias && (
@@ -189,29 +189,26 @@ export default function CharacterDetailPage() {
                 <ul className="space-y-2">
                   {group.masks.map((mask) => (
                     <li key={mask.name} className="flex items-center gap-2">
-                      {/* Used indicator dot */}
+                      {/* Masked indicator dot - green filled circle */}
                       <span
                         className={[
                           'h-2 w-2 shrink-0 rounded-full',
-                          mask.used
+                          mask.masked
+                            ? 'bg-green-500'
+                            : mask.used
                             ? 'bg-yellow-500'
                             : 'border bg-transparent',
                         ].join(' ')}
-                        style={mask.used ? {} : { borderColor: 'var(--graphite-700)' }}
+                        style={!mask.masked && !mask.used ? { borderColor: 'var(--graphite-700)' } : {}}
                       />
                       <span
                         className={[
                           'font-serif text-sm',
-                          mask.used ? 'text-yellow-300' : 'text-graphite-600',
+                          mask.masked ? 'text-green-400' : mask.used ? 'text-yellow-300' : 'text-graphite-600',
                         ].join(' ')}
                       >
                         {mask.name}
                       </span>
-                      {mask.used && (
-                        <span className="ml-auto font-sc text-[10px] text-yellow-700">
-                          {t.characterDetail.used}
-                        </span>
-                      )}
                     </li>
                   ))}
                 </ul>

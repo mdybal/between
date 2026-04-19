@@ -1,30 +1,20 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Eye, HelpCircle } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
+import { getSessionsEn } from '@/data/sessions_en'
+import { getSessionsPl } from '@/data/sessions_pl'
 import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
 import { cn } from '@/lib/utils'
 import { getThreatLevelStyle } from '@/lib/threatUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
-import type { Session } from '@/types'
-
-const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
-
-const sessions: Session[] = Object.values(sessionModules).map((module) => {
-  const mod = module as Record<string, unknown>
-  // Handle both default exports and named exports
-  return mod.default 
-    ? mod.default as Session 
-    : mod[Object.keys(mod).find(k => k.startsWith('session')) || ''] as Session
-}).filter(Boolean)
 
 export default function ThreatDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { lang, t } = useLanguage()
 
   const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
-  // For now, sessions are only in English (same data for both languages)
-  const activeSessions = sessions
+  const activeSessions = lang === 'pl' ? getSessionsPl() : getSessionsEn()
 
   const threat = activeThreats.find((t) => t.id === id)
 

@@ -3,27 +3,15 @@ import { BookOpen, Users, Skull, ChevronRight } from 'lucide-react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
+import { getSessionsEn } from '@/data/sessions_en'
+import { getSessionsPl } from '@/data/sessions_pl'
 import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
-import type { Session } from '@/types'
-
-const sessionModules = import.meta.glob('@/data/sessions/session-*.ts', { eager: true })
-
-const sessions: Session[] = Object.values(sessionModules)
-  .map((module) => {
-    const mod = module as Record<string, unknown>
-    // Handle both default exports and named exports
-    if (mod.default) return mod.default as Session
-    // For named exports like session01, session02, etc.
-    const keys = Object.keys(mod).filter(k => k.startsWith('session'))
-    return mod[keys[0]] as Session
-  })
 
 export default function HomePage() {
   const { lang, t } = useLanguage()
 
-  // For now, sessions are only in English (same data for both languages)
-  const activeSessions = sessions
+  const activeSessions = lang === 'pl' ? getSessionsPl() : getSessionsEn()
   const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
   const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
 

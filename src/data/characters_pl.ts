@@ -1,3 +1,4 @@
+
 import { characters } from './characters'
 import type { Character } from '@/types'
 
@@ -16,93 +17,142 @@ export interface CharacterText {
   occupation: string
   description: string
   background: string
-  traits: string[]
+  traits?: string[]
   conditions?: string[]
-  masks?: { category: string; masks: { name: string }[] }[]
+  masks?: { category: string; masks: { name: string; masked?: boolean }[] }[]
 }
 
 export const charactersPl: CharacterText[] = [
   {
-    id: 'evelyn-ashworth',
-    name: 'Evelyn Ashworth',
-    occupation: 'Dziennikarka śledcza',
+    id: 'george-montegu',
+    name: 'George Montegu',
+    occupation: 'Nieuciszony',
     description:
-      'Ostra na język korespondentka „The Illustrated London News", Evelyn wykorzystuje swoje credenciamento prasowe, by dostawać się tam, gdzie inni nie śmią.',
+      'Duch zamordowanego członka domu Hargrave. Młody mężczyzna ubrany w strój z innej epoki, pachnący dymem i popiołem.',
     background:
-      'Urodzona w Bath w szanowanej, ale ubogiej rodzinie, Evelyn wdarła się do Fleet Street dzięki niezłomnej wytrwałości. Jej śledztwa w sprawie slumsów East Endu zaprowadziły ją w kręgi dziwnego i strasznego.',
-    traits: ['Przenikliwa', 'Uporczywa', 'Współczująca', 'Lekkomyślna'],
-    conditions: ['Wstrząśnięta', 'Obsesyjna'],
+      'Byłeś mieszkańcem Domu Hargrave wiele dekad temu, a teraz jesteś duchem, jesteś martwy. W rzeczy samej, spotkał Cię przedwczesny koniec w wyniku zdrady. Pojawienie się potomka zdrajcy w Londynie zbudziło Cię, i przykowało do Domu Hargrave, który będziesz nawiedzać dopóki nie dokonasz zemsty. W międzyczasie znów oddajesz się do brudnej pracy wykonywanej przez Dom Hargrave, a ci nowi Łowcy z pewnością mogliby skorzystać z Twojej pomocy. Przy odrobinie wysiłku udaje Ci się zgromadzić energię potrzebną do tymczasowego wyswobodzenia się ze swoich spektralnych więzów by znów spacerować po ulicach Londynu.',
+    conditions: ['Jeden z wielu'],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
-          { name: 'Zrozpaczona Córka' },
-          { name: 'Uliczny Spryciarz' },
-          { name: 'Debiutantka' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą jak walczyłeś i niszczyłeś potworne stwory w imieniu Domu Hargrave.', masked: true },
+          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą intymny moment z Łowcą, który ostatecznie Cię zdradził. Nazwij go.' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą nemezis Domu Hargrave w tamtych dniach.' },
+          { name: 'Opowiedz retrospekcję pokazującą, jak Łowca, który ostatecznie Cię zdradził, związał się z nemezis Domu Hargrave.' },
+          { name: 'Opowiedz retrospekcję pokazującą zdradę.' },
+          { name: 'Opowiedz retrospekcję pokazującą, jak zdrada doprowadziła do Twojej śmierci.' },
+          { name: 'Prowadzący opowiada scenę w czasach współczesnych, w której widzimy potomka Łowcy, który Cię zdradził. Nazwij go.' },
         ],
       },
       {
-        category: 'Maska Junony',
+        category: 'Maska Przyszłości',
         masks: [
-          { name: 'Nieustraszona Reporterka' },
-          { name: 'Socjalna Gwiazda' },
+          { name: 'Brama Porośnięta Mchem' },
+          { name: 'Próg Ciemności' },
+          { name: 'Kosmiczny Passaż' },
+          { name: 'Skrwawiony Portal' },
         ],
       },
     ],
   },
   {
-    id: 'cornelius-vane',
-    name: 'Dr Cornelius Vane',
-    alias: 'Doktor',
-    occupation: 'Alienista i badacz okultyzmu',
+    id: 'singh',
+    name: 'Singh',
+    occupation: 'Faktotum',
     description:
-      'Lekarz umysłu, który widział zbyt wiele, by lekceważyć nadnaturalne. Jego praktyka na Harley Street to przykrywka dla głębszych badań.',
+      'Sikh z długiej linii sług rodziny Montegu. Zawsze nienagannie ubrany i doskonale zadbany, Singh jest ucieleśnieniem spokojnej lojalności.',
     background:
-      'Wykształcony w Wiedniu pod okiem Charcota, Vane powrócił do Londynu prześladowany przez to, co widział w europejskich azylach. Teraz bada punkt przecięcia obłędu i okultyzmu.',
-    traits: ['Metodyczny', ' Tajemniczy', 'Współczujący', 'Nękany'],
-    conditions: ['Nękany'],
+      'Miałeś życie zanim wstąpiłeś w służbę do swojego Pracodawcy, ale szczegóły tego życia są nieistotne. Wszystko co teraz ma znaczenie to osoba, której służysz, i Dom Hargrave, gdzie zestarzejesz się i umrzesz — jeśli będziesz miał szczęście. Bardziej prawdopodobne, że twoarzysze Twojego Pracodawcy, ci Łowcy, będą Twoim końcem, grzebiąc w rzeczach, które powinny pozostać pochowane i drażniąc zjawiska, które zamieszkują ciemne miejsca. Zrobisz co w Twojej mocy, by im pomóc, oczywiście, by trzymać ich przy życiu, bo bez nich, kim właściwie jesteś?',
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
-          { name: 'ZrozpaczonyWdowiec' },
-          { name: 'Gorliwy Student' },
-          { name: 'Złamany Żołnierz' },
+          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą Twoje najbardziej znaczące zawodowe zwycięstwo.' },
+          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą jak urozmaicone było Twoje życie.' },
+          { name: 'Opowiedz retrospekcję z wydarzenia, które ostatecznie zmusiło Cię do służby.' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy byłeś bardziej członkiem rodziny dla swojego pracodawcy niż kimś z jego własnego ciała i krwi.' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy Twój pracodawca zachowywał się w sposób całkowicie obojętny na Twoją godność.' },
+          { name: 'Opowiedz retrospekcję pokazującą, jak musiałeś wykonywać pracę emocjonalną, aby zadowolić lub uspokoić swojego pracodawcę.' },
+          { name: 'Opowiedz retrospekcję z pierwszego razu, gdy uratowałeś życie swojemu pracodawcy.' },
         ],
       },
       {
-        category: 'Maska Junony',
+        category: 'Maska Przyszłości',
         masks: [
-          { name: 'Szanowany Lekarz' },
-          { name: 'Poszukiwacz Okultyzmu' },
+          { name: 'Złocone Drzwi' },
+          { name: 'Brama Porośnięta Mchem' },
+          { name: 'Próg Ciemności' },
+          { name: 'Kosmiczny Passaż' },
+          { name: 'Skrwawiony Portal' },
         ],
       },
     ],
   },
   {
-    id: 'silas-morrow',
-    name: 'Silas Morrow',
-    occupation: 'Były Inspektor Policji Metropolitalnej',
+    id: 'ludwig-virchow',
+    name: 'Ludwig Virchow',
+    occupation: 'Naczynie',
     description:
-      'Wyrzucony ze służby po zgłoszeniu zjawisk nadnaturalnych, Silas teraz działa jako prywatny agent dochodzeniowy, który nie ma już nic do stracenia.',
+      'Ludwig przybył do Londynu z Pomorza. Jest młody, chorowity i dumny ze swojego wąsika. Oszukuje swoją matkę, że studiuje w Królewskim Kolegium Chirurgów.',
     background:
-      "Dwadzieścia lat w policji dało Silasowi sieć informatork i głęboką nieufność wobec władzy. Sprawa, która zakończyła jego karierę, otworzyła mu oczy na to, co czai się pod szacowną powierzchnią Londynu.",
-    traits: ['Wytrwały', 'Cyniczny', 'Lojalny', 'Zmęczony'],
-    conditions: [],
+      'Odkąd pamiętasz, mroczne byty były w pobliżu. Czają się tuż na granicy Twojego widzenia, tuż za krawędzią lustra. Gdy zamykasz oczy, możesz je poczuć: ich zimny oddech, ich tłuste dotknięcia... sporadyczne gorączkowe objęcia. Chcą być w środku Ciebie; chcą ocierać się o Twoje wnętrzności i zdeponować swoją moc. Przyciągasz też innych: tych, którzy chcieliby wykorzystać Cię do opanowania tych ciemnych rzeczy, abyś służył ich celom. Niektórzy z nich, mogą być użyteczni, jak Łowcy, z którymi dzielisz dom. Innych, jak Sabat, najlepiej unikać. W obu przypadkach nie jesteś niczyją własnością, narzędziem ani bronią; nie jesteś zwykłym śmiertelnikiem. Twoje przeznaczenie należy do Ciebie.',
+    conditions: ['Najukochańszy', 'Naznaczony przez wampira'],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
-          { name: 'Lojalny Konstabl' },
-          { name: 'Nękany Detektyw' },
-          { name: 'Skompromitowany Inspektor' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy byłeś w łonie matki, pokazującą, że już wtedy ciemne byty były tobą zainteresowane.' },
+          { name: 'Opowiedz retrospekcję z dzieciństwa pokazującą pierwszą okazję, gdy spotkałeś ciemną istotę.' },
+          { name: 'Opowiedz retrospekcję z młodości pokazującą twoje pierwsze spotkanie seksualne z ciemną istotą.' },
+          { name: 'Opowiedz retrospekcję z młodości pokazującą czas, gdy wykorzystałeś swoje nadprzyrodzone zdolności do samolubnych celów.' },
+          { name: 'Opowiedz retrospekcję z młodości pokazującą, gdy pierwszy raz spotkałeś przywódczynię Sabatu. Nazwij ją.' },
+          { name: 'Opowiedz retrospekcję z młodości pokazującą część twojej inicjacji do Sabatu. Nazwij go.' },
+          { name: 'Opowiedz retrospekcję z wydarzenia, które wpłynęło na twoją decyzję o odejściu z Sabatu.' },
         ],
       },
       {
-        category: 'Maska Junony',
+        category: 'Maska Przyszłości',
         masks: [
-          { name: 'Szorstki Informatyk' },
-          { name: 'Zmęczony Weteran' },
+          { name: 'Złocone Drzwi', masked: true },
+          { name: 'Brama Porośnięta Mchem' },
+          { name: 'Próg Ciemności' },
+          { name: 'Kosmiczny Passaż' },
+          { name: 'Skrwawiony Portal' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'lord-bellows',
+    name: 'Lord Richard Abelard Jonathan Bellows III',
+    occupation: 'Odkrywca',
+    description:
+      'Trzydziesto-kilku letni, słynny odkrywca. Samouwielbiający się i słusznie arogancki. Zawsze nosi swój korkowy kapelusz i buty do jazdy konnej.',
+    background:
+      'Urodziłeś się wśród fantastycznego bogactwa i przywilejów. Mógłbyś spędzać dnie rozpieszczany przez luksus, bez niczego pilniejszego niż decydowanie, co włożyć na wieczorny obiad. Ale wybrałeś inne życie; wybrałeś służbę swojej królowej. Wykorzystałeś swoje bogactwo i koneksje, by odkrywać świat, by opisywać nieznane terytoria. I teraz masz pasmo górskie nazwane twoim imieniem — odpowiedni zaszczyt, zważywszy, że górujesz nad innymi Brytyjczykami. Twoja siła, twój intelekt, twoja przebiegłość — żaden nie może im dorównać. Żaden oprócz... Mistrzyni Zbrodni. Mistrzyni, która nieustannie knuje przeciwko Jej Królewskiej Mości, której umysł i zasoby przewyższają twoje własne. Sprostałeś każej próbie, którą bogowie przed tobą postawili, ale Mistrzyni to coś zupełnie innego. A twoja nowa praca, twoja praca z Domem Hargrave, jest z nią w jakiś sposób połączona. Spędzasz dni i noce eksplorując prawdziwe serce ciemności — potwory, które skradają się po ulicach Londynu — ale żaden nie jest tak potworny jak twój przeciwnik, ten, który siedzi po drugiej stronie szachownicy. Czy Wielka Brytania wciąż będzie stała, gdy wielka gra dobiegnie końca?',
+    conditions: ['Rozczarowany chaosem'],
+    masks: [
+      {
+        category: 'Maska Przeszłości',
+        masks: [
+          { name: 'Opowiedz retrospekcję z czasu, gdy Odkrywca po raz pierwszy przybył do twojej wsi. Czy to była radosna chwila? Czy było w tym coś złowieszczego?' },
+          { name: 'Opowiedz retrospekcję pokazującą twoją przyjaźń z Odkrywcą. Jaki to był związek? Rodzic i dziecko? Nauczyciel i uczeń? Pan i sługa?' },
+          { name: 'Opowiedz retrospekcję z czasu, gdy twoja wieś ucierpiała zbrodnię z rąk Odkrywcy. Jak pomogłeś ją popełnić?' },
+          { name: 'Opowiedz retrospekcję pokazującą, jak zmierzyłeś się z konsekwencjami zbrodni, której pomogłeś dokonać Odkrywcy.' },
+          { name: 'Opowiedz retrospekcję z niedawnej przeszłości pokazującą, jak wieś wciąż cierpi z powodu skutków okupacji Odkrywcy.' },
+          { name: 'Opowiedz retrospekcję pokazującą twoje przybycie do Londynu.' },
+          { name: 'Opowiedz retrospekcję z czasu, gdy pierwszy raz spotkałeś Mistrzynię Zbrodni.' },
+        ],
+      },
+      {
+        category: 'Maska Przyszłości',
+        masks: [
+          { name: 'Złocone Drzwi' },
+          { name: 'Brama Porośnięta Mchem' },
+          { name: 'Próg Ciemności' },
+          { name: 'Kosmiczny Passaż' },
+          { name: 'Skrwawiony Portal' },
         ],
       },
     ],
@@ -269,6 +319,26 @@ export const charactersPl: CharacterText[] = [
     background:
       "Wampir fizycznie jest dzieckiem, ale to nie znaczy, że jest młody. Wampiry nigdy nie starzeją się fizycznie poza wiek, w którym zostały 'przemienione', a stary wampir wymaga zupełnie innego podejścia niż młody...",
     traits: ['Pragnący krwi', 'Niebezpieczny', 'Ukryty w cieniu'],
+    },
+    {
+    id: 'red-katherine',
+    name: 'Ruda Katherine',
+    occupation: 'prostytutka',
+    description:
+      'Burza rudych loków. Ładna, ale postarzała ponad wiek. Ziemista cera',
+    background:
+      "Siostra/partnerla/przyjaciółka Miękkiego Jimmiego, zamordowanego przez Zmore z Limehouse. Pracuje jako prostytutka w Limehouse. Została naznaczona przez Zmorę razem z Ludwikiem.",
+    traits: ['Uzależniona od opium', 'Znerwicowana', 'Ufna'],
+    },
+    {
+    id: 'big-bertha',
+    name: 'Gruba Berta',
+    occupation: 'prostytutka',
+    description:
+      'Otyła i wielka. Mocny makijaż. Można utonąć w jej dekolcie.',
+    background:
+      "Prostytyka z Limehouse. Bardzo w guście Sikha. To ona wpuściła do palarni opium Zmorę z Limehouse.",
+    traits: ['Czułe objęcia','Wielka'],
     },
     
 ]

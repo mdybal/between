@@ -8,20 +8,30 @@ import type { CharacterBase } from '@/types'
  * and can be translated for other languages.
  */
 export const characters: CharacterBase[] = [
-  {
-    id: 'evelyn-ashworth',
+   {
+    id: 'lord-bellows',
     type: 'hunter',
     status: 'active',
+    imageUrl: '/img/characters/lord-bellows.png',
+
   },
   {
-    id: 'cornelius-vane',
+    id: 'singh',
     type: 'hunter',
     status: 'active',
+    imageUrl: '/img/characters/singh.png',
   },
   {
-    id: 'silas-morrow',
+    id: 'george-montegu',
     type: 'hunter',
     status: 'active',
+    imageUrl: '/img/characters/george-montegu.png',
+  },
+  {
+    id: 'ludwig-virchow',
+    type: 'hunter',
+    status: 'active',
+    imageUrl: '/img/characters/ludwig-virchow.png',
   },
   {
     id: 'theodora-brathwaite',
@@ -71,6 +81,7 @@ export const characters: CharacterBase[] = [
     id: 'constance-head',
     type: 'npc',
     subtype: 'neutral',
+    status: 'deceased',
     imageUrl: '/img/characters/constance-head.png',
   },
   {
@@ -79,19 +90,19 @@ export const characters: CharacterBase[] = [
     subtype: 'neutral',
     imageUrl: '/img/characters/chen-bao.png',
   },
-  {
+  /*{
     id: 'rory-bell',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/rory-bell.png',
-  },
+  },*/
   {
     id: 'sun-mask',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/sun-mask.png',
   },
-  {
+  /*{
     id: 'franklin-horsford',
     type: 'npc',
     subtype: 'neutral',
@@ -121,5 +132,17 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'antagonist',
     imageUrl: '/img/characters/limehouse-lurker.png',
+  },*/
+  {
+    id: 'red-katherine',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/red-katherine.png',
+  },
+  {
+    id: 'big-bertha',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/big-bertha.png',
   },
 ]

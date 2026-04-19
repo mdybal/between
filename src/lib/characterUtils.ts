@@ -6,10 +6,10 @@ export const npcSubtypeBadgeVariant: Record<NpcSubtype, 'amber' | 'green' | 'mut
   antagonist: 'red',
 }
 
-export const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted'> = {
+export const statusBadgeVariant: Record<string, 'green' | 'red' | 'amber' | 'muted' | 'purple'> = {
   active: 'green',
   retired: 'amber',
-  deceased: 'red',
+  deceased: 'purple',
   missing: 'amber',
   unknown: 'muted',
 }

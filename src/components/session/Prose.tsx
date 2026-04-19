@@ -5,10 +5,10 @@ import type { ScenePhase } from '@/types'
  * Phase-specific text color presets for prose (milder than dividers)
  */
 const phaseTextColors: Record<ScenePhase, string> = {
-  Dawn: 'text-amber-200/85',
-  Day: 'text-yellow-50',
-  Dusk: 'text-stone-300',
-  Night: 'text-purple-200/85',
+  Dawn: 'text-amber-300/90',
+  Day: 'text-yellow-100/90',
+  Dusk: 'text-stone-400',
+  Night: 'text-purple-300/90',
 }
 
 /**

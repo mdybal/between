@@ -44,6 +44,7 @@ export type NpcSubtype = 'neutral' | 'antagonist' | 'ally'
 export interface MaskEntry {
   name: string
   used: boolean
+  masked?: boolean
 }
 
 export interface MaskGroup {
@@ -59,7 +60,7 @@ export interface CharacterBase {
   id: string
   type: CharacterType
   subtype?: NpcSubtype   // only relevant when type === 'npc'
-  status?: 'active' | 'retired'
+  status?: 'active' | 'retired' | 'deceased' 
   imageUrl?: string
 }
 

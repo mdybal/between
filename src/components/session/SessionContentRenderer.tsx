@@ -76,11 +76,14 @@ export function SessionContentRenderer({ scenes }: SessionContentRendererProps) 
                 variant={scene.highlightBox.variant}
                 title={scene.highlightBox.title}
               >
-                {scene.highlightBox.items ? (
+                {scene.highlightBox.content && (
+                  <p className="mb-3 text-sm leading-relaxed text-graphite-300">
+                    {scene.highlightBox.content}
+                  </p>
+                )}
+                {scene.highlightBox.items && (
                   <BulletList items={scene.highlightBox.items} />
-                ) : scene.highlightBox.content ? (
-                  scene.highlightBox.content
-                ) : null}
+                )}
               </HighlightBox>
             )}
           </div>

@@ -86,7 +86,7 @@ export const pl = {
     statusLabels: {
       active: 'aktywna',
       retired: 'na emeryturze',
-      deceased: 'nieżyjąca',
+      deceased: 'nie żyje',
       missing: 'zaginiona',
       unknown: 'nieznana',
     },

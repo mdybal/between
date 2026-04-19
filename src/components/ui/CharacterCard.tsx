@@ -22,7 +22,7 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
   const cardContent = (
     <>
       {/* Card inner: text on left, portrait on right */}
-      <div className="flex gap-4">
+      <div className="flex flex-1 gap-4">
         {/* Text column */}
         <div className="flex flex-1 flex-col">
           {/* Badges row */}
