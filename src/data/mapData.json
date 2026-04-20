@@ -525,7 +525,31 @@
         1898.6590647968092,
         2698.3194770078653
       ],
-      "sessionId": "session-00",
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "0cdcee08-a03a-4738-8eff-875b5bccdb08",
+      "name": "Royal College of Surgeons Museum",
+      "category": "player-character",
+      "description": "The museum of the Royal College of Surgeons preserved all sorts of horrors for the delight of members and ‘visitors introduced by them personally’. ",
+      "coords": [
+        2091.110505742802,
+        2946.080590841389
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
+      "name": "Hargrave House",
+      "category": "player-character",
+      "description": "",
+      "coords": [
+        2628.4312294574547,
+        2123.8772009881727
+      ],
+      "sessionId": "session-01",
       "state": "active"
     }
   ],
