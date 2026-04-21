@@ -51,6 +51,7 @@ export default function Navbar() {
     { to: charactersTo, label: t.nav.characters },
     { to: '/threats', label: t.nav.threats },
     { to: '/map', label: t.nav.map },
+    { to: '/download', label: t.nav.download },
   ]
 
   return (

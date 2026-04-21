@@ -5,6 +5,7 @@ export const pl = {
     characters: 'Postacie',
     threats: 'Zagrożenia i Spisek',
     map: 'Mapa',
+    download: 'Pobierz',
     toggleMenu: 'Przełącz menu',
   },
   footer: {
@@ -134,6 +135,14 @@ export const pl = {
     answer: 'Odpowiedź',
     clues: 'Poszlaki',
     firstEncountered: 'Pierwsze spotkanie',
+  },
+    download: {
+    title: 'Do pobrania',
+    subtitle: 'Zasoby kampanii',
+    description: 'Materiały, mapy i inne zasoby kampanii dostępne do pobrania.',
+    empty: 'Brak plików do pobrania w tej chwili.',
+    download: 'Pobierz',
+    fileSize: 'Rozmiar',
   },
   map: {
     title: 'Mapa śledztwa',

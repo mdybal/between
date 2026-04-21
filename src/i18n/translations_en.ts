@@ -5,6 +5,7 @@ export const en = {
     characters: 'Characters',
     threats: 'Threats & Conspiracy',
     map: 'Map',
+    download: 'Download',
     toggleMenu: 'Toggle menu',
   },
   footer: {
@@ -134,6 +135,14 @@ export const en = {
     answer: 'Answer',
     clues: 'Clues',
     firstEncountered: 'First encountered',
+  },
+    download: {
+    title: 'Downloads',
+    subtitle: 'Campaign Resources',
+    description: 'Campaign handouts, maps, and other resources available for download.',
+    empty: 'No downloads available at this time.',
+    download: 'Download',
+    fileSize: 'Size',
   },
   map: {
     title: 'Investigation Map',

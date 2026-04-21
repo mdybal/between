@@ -9,6 +9,7 @@ import CharacterDetailPage from '@/pages/CharacterDetailPage'
 import ThreatsPage from '@/pages/ThreatsPage'
 import ThreatDetailPage from '@/pages/ThreatDetailPage'
 import MapPage from '@/pages/MapPage'
+import DownloadPage from '@/pages/DownloadPage'
 import { LanguageProvider } from '@/i18n/LanguageContext'
 import { useLanguage } from '@/i18n/LanguageContext'
 
@@ -39,6 +40,7 @@ export default function App() {
             <Route path="/threats" element={<ThreatsPage />} />
             <Route path="/threats/:id" element={<ThreatDetailPage />} />
             <Route path="/map" element={<MapPage />} />
+            <Route path="/download" element={<DownloadPage />} />
             {/* 404 fallback */}
             <Route path="*" element={<NotFound />} />
           </Route>
