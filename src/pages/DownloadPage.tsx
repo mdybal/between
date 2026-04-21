@@ -6,12 +6,21 @@ interface BlobFile {
   url: string
   filename: string
   size: number
+  uploadedAt: string
 }
 
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
+function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })
 }
 
 export default function DownloadPage() {
@@ -25,7 +34,13 @@ export default function DownloadPage() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.json()
       })
-      .then((data: BlobFile[]) => setFiles(data))
+      .then((data: BlobFile[]) =>
+        setFiles(
+          data.sort(
+            (a, b) => new Date(a.uploadedAt).getTime() - new Date(b.uploadedAt).getTime(),
+          ),
+        ),
+      )
       .catch(() => setError(t.download.empty))
   }, [t])
 
@@ -107,6 +122,9 @@ export default function DownloadPage() {
                     </p>
                     <p className="mt-1 font-sc text-xs text-graphite-600">
                       {t.download.fileSize}: {formatBytes(file.size)}
+                    </p>
+                    <p className="font-sc text-xs text-graphite-600">
+                      {formatDate(file.uploadedAt)}
                     </p>
                   </div>
                 </div>

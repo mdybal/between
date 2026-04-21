@@ -10,6 +10,7 @@ export async function GET() {
       url: blob.url,
       filename: blob.pathname.split('/').at(-1) ?? blob.pathname,
       size: blob.size,
+      uploadedAt: blob.uploadedAt,
     })),
   )
 }
