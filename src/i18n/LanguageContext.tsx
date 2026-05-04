@@ -15,7 +15,7 @@ const LanguageContext = createContext<LanguageContextValue | null>(null)
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
-function getInitialLang(): Lang {
+export function getInitialLang(): Lang {
   try {
     const stored = localStorage.getItem('lang')
     if (stored === 'en' || stored === 'pl') return stored
@@ -25,8 +25,14 @@ function getInitialLang(): Lang {
   return 'en'
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(getInitialLang)
+export function LanguageProvider({ 
+  children, 
+  urlLang 
+}: { 
+  children: ReactNode
+  urlLang?: Lang 
+}) {
+  const [lang, setLangState] = useState<Lang>(urlLang || getInitialLang())
 
   const setLang = useCallback((next: Lang) => {
     setLangState(next)

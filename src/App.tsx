@@ -12,6 +12,7 @@ import MapPage from '@/pages/MapPage'
 import DownloadPage from '@/pages/DownloadPage'
 import { LanguageProvider } from '@/i18n/LanguageContext'
 import { useLanguage } from '@/i18n/LanguageContext'
+import type { Lang } from '@/i18n/translations'
 
 function NotFound() {
   const { t } = useLanguage()
@@ -25,27 +26,35 @@ function NotFound() {
   )
 }
 
+function AppRoutes() {
+  const urlLang = (new URLSearchParams(window.location.search).get('lang')) as Lang | null
+  
+  return (
+    <LanguageProvider urlLang={urlLang === 'en' || urlLang === 'pl' ? urlLang : undefined}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/actual-plays" element={<ActualPlaysPage />} />
+          <Route path="/actual-plays/:id" element={<SessionDetailPage />} />
+          <Route path="/characters" element={<CharactersPage />} />
+          <Route path="/characters/:id" element={<CharacterDetailPage />} />
+          <Route path="/threats" element={<ThreatsPage />} />
+          <Route path="/threats/:id" element={<ThreatDetailPage />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/download" element={<DownloadPage />} />
+          {/* 404 fallback */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </LanguageProvider>
+  )
+}
+
 export default function App() {
   return (
-    <LanguageProvider>
-      <BrowserRouter>
-        <Analytics />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/actual-plays" element={<ActualPlaysPage />} />
-            <Route path="/actual-plays/:id" element={<SessionDetailPage />} />
-            <Route path="/characters" element={<CharactersPage />} />
-            <Route path="/characters/:id" element={<CharacterDetailPage />} />
-            <Route path="/threats" element={<ThreatsPage />} />
-            <Route path="/threats/:id" element={<ThreatDetailPage />} />
-            <Route path="/map" element={<MapPage />} />
-            <Route path="/download" element={<DownloadPage />} />
-            {/* 404 fallback */}
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </LanguageProvider>
+    <BrowserRouter>
+      <Analytics />
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
