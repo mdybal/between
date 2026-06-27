@@ -1,6 +1,11 @@
 {
   "sessions": [
     {
+      "id": "session-02",
+      "title": "Session 02",
+      "description": "Creature of Cremorne Gardens"
+    },
+    {
       "id": "session-01",
       "title": "Session 01",
       "description": "St. James's Street Ghost investigation\nLimehous Lurker investigation"
@@ -550,6 +555,90 @@
         2123.8772009881727
       ],
       "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
+      "name": "Cremorne Gardens",
+      "category": "danger",
+      "description": "",
+      "coords": [
+        3282.240277949689,
+        1638.066216914236
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "3363d742-335a-4770-ada1-aef783362aef",
+      "name": "Cheyne Walk",
+      "category": "location",
+      "description": "",
+      "coords": [
+        3169.8501656977687,
+        1912.2450409243756
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "710547b0-0b6f-48d6-b637-0eeb81eba00c",
+      "name": "Catherine \"Skittles\" Walters",
+      "category": "non-player-character",
+      "description": "Favourite horseback route of Catherine \"Skittles\" Walters",
+      "coords": [
+        2349.6861534333193,
+        2000.492571888587
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "714eb2d0-95eb-4254-a365-1d82d552c585",
+      "name": "Sanger's Amphitheatre",
+      "category": "location",
+      "description": "Astley’s Amphitheatre in Lambeth could be relied on for spectacular equestrian performances with dancing horses, and sometimes even elephants.\nIts final owner was \"Lord\" George Sanger, who bought it for £11,000 in 1871 and ran it as  for over 20 years. \n'Lord' George  was an English showman and circus proprietor. Born to a showman father, he grew up working in travelling peep shows.",
+      "coords": [
+        2636.852279242463,
+        2968.7847940532392
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "88e15f76-fa75-4ad8-8179-25dfb53aeaf4",
+      "name": "Abel Knox",
+      "category": "non-player-character",
+      "description": "Grizzled. Missing an eye. Briny smell. Abel \nclaims to have seen the creature and is \ndetermined to catch it. \n\nQuote: “I reckon the Zoological Society \nwould pay a very nice price for a living, \nbreathing fish man—assuming it breathes, of \ncourse. I reckon it has gills, but maybe lungs like \nus. Or both! What do you think?” ",
+      "coords": [
+        3226.337503660398,
+        2430.739343065562
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "bb3f4325-3de6-4b6a-afaf-90bfca3de1ea",
+      "name": "HM Land Registry",
+      "category": "location",
+      "description": "HM Land Registry was established in 1862. In 1870, following issues with a low number of registrations under the initial 1862 Act, a Royal Commission was appointed to investigate flaws in the system. This subsequently paved the way for the 1875 Land Transfer Act",
+      "coords": [
+        2139.041601412264,
+        2919.592353760897
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "3dcbcef8-2db5-4e98-9a72-db8ef54c2d16",
+      "name": "Battersea Park",
+      "category": "location",
+      "description": "Battersea was another new park. Its site, on the south bank of the river opposite Chelsea, was unpromising: a ‘swamp of dank pools’ separated from the river only by a narrow raised causeway, and frequently flooded.\nThe park was opened in 1853, and acquired its beautiful lake (which is still there), in 1860, and a sub-tropical garden (which is not) in 1864.",
+      "coords": [
+        3294.0128277632407,
+        2132.51330908342
+      ],
+      "sessionId": "session-02",
       "state": "active"
     }
   ],

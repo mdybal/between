@@ -703,11 +703,7 @@ export default function MapPage() {
                       <div className="mt-2 w-px flex-1 bg-amber-900/30" style={{ minHeight: 24 }} />
                     )}
                   </div>
-
                   <div className="flex-1 pb-2">
-                    <p className={cn("font-serif text-xs", isLatest ? "text-amber-600/80" : "text-stone-500")}>
-                      {t.map.session} {idx + 1}
-                    </p>
                     <p
                       className={cn(
                         'font-serif text-sm font-semibold leading-snug',
