@@ -341,6 +341,48 @@ export const charactersEn: CharacterText[] = [
       "A prostitute from Limehouse. Very much to Sikh's taste. She let the Limehouse Lurker into the opium den.",
     traits: ['Huggy', 'Huge'],
     },
+
+    //Creature of Cremorne Gardens
+    {
+    id: 'thomas-simpson',
+    name: 'Thomas Simpson',
+    occupation: 'a proprietor',
+    description:
+      'Pert mustache. Thinning hair. Nervous and excitable.',
+    background:
+      "Thomas is dismissive of or, at most, annoyed by, stories of the creature. He is very sensitive to comparisons with other, more successful pleasure gardens.",
+    traits: ['Visionary', 'Emotional'],
+    },
+    {
+    id: 'abigail-simpson',
+    name: 'Abigail Simpson',
+    occupation: 'a daughter',
+    description:
+      'Simple, utilitarian dress. Hair pulled back in a neat bun.',
+    background:
+      "No-nonsense. Her father may be the visionary of Cremorne Gardens, but Abigail is the person who makes sure everything runs smoothly. She is intimately familiar with every aspect of the Gardens, and always a little annoyed by her father’s grandiose ideas.",
+    traits: ['Strict', 'Rational', 'Smart'],
+    },
+    {
+    id: 'beulah-thrum',
+    name: 'Beulah Thrum',
+    occupation: 'a young lover',
+    description:
+      'Pale complexion. Flower print dress. Doe eyed.',
+    background:
+      "Beulah still bears the scars from where the creature tore at her coat and broke the skin underneath. She is genuinely frightened of encountering it again.",
+    traits: ['In love', 'Well-mannered'],
+    },
+    {
+    id: 'simon-piedmont',
+    name: 'Simon Piedmont',
+    occupation: 'a young lover',
+    description:
+      'Fresh-faced. Smells of lavender. Grandiose manner of speech.',
+    background:
+      "Simon is more than happy to discuss his experience with the creature, especially if you buy him an ale or flatter him.",
+    traits: ['Grandiose', 'Conceited', 'Cowardly']
+    },
     
 ]
 

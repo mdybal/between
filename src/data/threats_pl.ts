@@ -74,7 +74,7 @@ export const threatsPl: ThreatText[] = [
   },
   {
     id: 'cremorne-gardens',
-    name: 'Stworzenie z Ogrodów Cremorne',
+    name: 'Stwór z Ogrodów Cremorne',
     description:
       'Niezawodny szmatławiec „The Illustrated Police News", od jakiegoś czasu publikuje historie o tak zwanej Kreaturze z Ogrodów Cremorne (czasem nazywanym Stworem z Chelsea Harbor, a rzadziej Potworem z Cheyne Walk). Stworzenie, opisywane jako „rybolud" lub „rybi człowiek", terroryzuje z cieni spacerowiczów szukających rozrywki, strasząc ich, gdy zostanie dostrzeżone, jak się skrada, ale rzadko wchodząc w bezpośredni kontakt. Mężczyźni i kobiety byli zwabiani na koniec pobliskiego pomostu przez „dziwną pieśń" podczas przechadzki, choć po zakończeniu „zaklęcia" pieśni nie pamiętali, jak się tam znaleźli. Wszystko to można by łatwo zrzucić na histerię albo na jakiś wyrafinowany żart kogoś, kto ma urazę do Ogrodów Cremorne, gdyby nie fizyczny atak na młodą parę, Simona Piedmondta i Beulah Thrum. Pan Piedmont i panna Thrum opisali, jak stworzenie rzuciło się na nich z pozycji kucanej, niczym kot, i rozszarpało płaszcz panny Thrum. Scotland Yard prowadzi dochodzenie.',
     questions: [
