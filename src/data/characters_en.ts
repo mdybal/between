@@ -30,7 +30,7 @@ export const charactersEn: CharacterText[] = [
       'A ghost of a murdered member of the Hargrave House. A young man dressed in period clothing and smelling of smoke and ash.',
     background:
       'You were a resident of Hargrave House many decades ago, but now, ghosty-ghost, you’re dead. In fact, you met an untimely end as the result of a betrayal by one of your contemporaries. The arrival of the traitor’s descendant in London has awakened you, restless spirit, and anchored you to Hargrave House, which you’ll haunt until you can exact your revenge by destroying said descendant. In the meantime, you find yourself drawn yet again to the dark work done by Hargrave House, and these new Hunters could certainly use your help. You might even be able to summon the energy needed to temporarily slip your spectral bonds and stalk the streets of London once again.',
-    conditions: ['One of many'],
+    conditions: ['Marked by the vampire'],
     masks: [
       {
         category: 'The Mask of The Past',
@@ -63,12 +63,13 @@ export const charactersEn: CharacterText[] = [
       'A sikh from a long line of servants to the Montegu family. Always impeccably dressed and perfectly groomed, Singh is the epitome of calm loyalty.',
     background:
       'You had a life before you entered the service of your Employer, but the details of that life are unimportant. All that matters now is the person you serve, and Hargrave House, where you will grow ancient and die—if you’re lucky. More likely your Employer’s colleagues, these Hunters, will be the end of you, overturning things that should remain hidden and goading-on terrors that dwell in dark places. You’ll do your best to help them, of course, to keep them alive, because without them, what are you, really? ',
+    conditions: ['I failed George'],
     masks: [
       {
         category: 'The Mask of The Past',
         masks: [
-          { name: 'Narrate a flashback to your young adulthood, before you were a servant, that shows your most significant professional triumph.' },
-          { name: 'Narrate a flashback to your young adulthood, before you were a servant, that shows what a charmed life you lived.' },
+          { name: 'Narrate a flashback to your young adulthood, before you were a servant, that shows your most significant professional triumph.', masked: true },
+          { name: 'Narrate a flashback to your young adulthood, before you were a servant, that shows what a charmed life you lived.', masked: true },
           { name: 'Narrate a flashback to the event that eventually forced you into servitude.' },
           { name: 'Narrate a flashback to when you were more of a family member to your employer than someone of their own flesh and blood.' },
           { name: 'Narrate a flashback to when your employer behaved in a way that was utterly indifferent to your dignity.' },
@@ -96,7 +97,7 @@ export const charactersEn: CharacterText[] = [
       'Ludwig came to London from Pomerania. He\'s young, frail, and proud of his mustache. He lies to his mother that he studies at Royal College of Surgeons.',
     background:
       "For as long as you can remember, dark entities have been near. They lurk just inside your peripheral vision, just at the mirror’s edge. When you close your eyes, you can actually feel them: their cold breath, their oily touch… an occasional feverish embrace. They want to be inside you; they want to rub against your guts and deposit their power. Others are drawn to you as well: those who would use you to master these dark things in order to serve their own agenda. Some of these interlopers, these usurpers, can be of use, such as the Hunters with whom you share a home. Others, like the coven, are best avoided. In either case, you are no one’s object, tool, or weapon; you are no mere bystander. Your fate is yours to shape.",
-    conditions: ['Most Beloved','Marked by the vampire'],
+    conditions: ['Most Beloved'],
     masks: [
       {
         category: 'The Mask of The Past',
@@ -130,12 +131,12 @@ export const charactersEn: CharacterText[] = [
       'In late 30s and already legendary explorer. Self-important, righteously arrogant. Always wears his cork hat and raiding boots.',
     background:
       "You were born into a world of fantastic wealth and privilege. You could have spent your days cosseted by luxury, with nothing more pressing than deciding what to wear to that evening’s dinner party. But you chose a different life; you chose to serve your queen. You leveraged your wealth and connections to explore the world, to chart unknown territory. And now you have a mountain range named after you—a fitting honor, considering you tower over other Britons. Your strength, your intellect, your cunning—none can match it. None except… the Mastermind. The Mastermind, who plots ceaselessly against Her Majesty, whose mind and resources dwarf your own. You have conquered every trial the gods have placed before you, but the Mastermind is something altogether different. And your new work, your work with Hargrave House, is connected to them in some way. You spend your days and nights exploring the true heart of darkness—the monsters that stalk the streets of London—but none are so monstrous as your opponent, the one who sits on the other side of the chessboard. Will Great Britain still be standing when the grand game is over?",
-    conditions: ['Disappointed by chaos'],
+    conditions: [],
     masks: [
       {
         category: 'The Mask of The Past',
         masks: [
-          { name: 'Narrate a flashback to the time when the Explorer first arrived at your village. Was it a joyous moment? Was there something ominous about it?' },
+          { name: 'Narrate a flashback to the time when the Explorer first arrived at your village. Was it a joyous moment? Was there something ominous about it?', masked: true },
           { name: 'Narrate a flashback that shows your friendship with the Explorer. What kind of relationship was it? Parent and child? Teacher and pupil? Master and servant?' },
           { name: 'Narrate a flashback to when your village suffered an atrocity at the hands of the Explorer. How did you help inflict this atrocity?' },
           { name: 'Narrate a flashback showing how you faced a reckoning for the crimes you helped the Explorer commit against your village.' },
