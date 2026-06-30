@@ -75,6 +75,11 @@ export const en = {
       active: 'Active',
       retired: 'Retired',
     },
+    caseFilters: {
+      label: 'Case',
+      all: 'All cases',
+      none: 'No case',
+    },
     typeLabels: {
       hunter: 'Hunter',
       npc: 'NPC',
@@ -84,6 +89,7 @@ export const en = {
       ally: 'Ally',
       antagonist: 'Antagonist',
     },
+    caseBadgeLabel: 'Case',
     statusLabels: {
       active: 'active',
       retired: 'retired',

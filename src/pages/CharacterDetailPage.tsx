@@ -3,6 +3,8 @@ import { ArrowLeft } from 'lucide-react'
 import Badge from '@/components/ui/Badge'
 import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
 import { npcSubtypeBadgeVariant, statusBadgeVariant } from '@/lib/characterUtils'
 import { useLanguage } from '@/i18n/LanguageContext'
 
@@ -22,6 +24,13 @@ export default function CharacterDetailPage() {
   const backToCharacters = location.state?.fromCharacters
     ? '/characters' + location.state.fromCharacters
     : '/characters'
+
+  // Resolve the case (threat) display name for NPCs that have a `case` field.
+  const caseName = (() => {
+    if (!character.case) return null
+    const threats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
+    return threats.find((th) => th.id === character.case)?.name ?? null
+  })()
 
   return (
     <div className="mx-auto max-w-3xl px-4 pb-16">
@@ -78,6 +87,11 @@ export default function CharacterDetailPage() {
                 {character.subtype && (
                   <Badge variant={npcSubtypeBadgeVariant[character.subtype]}>
                     {t.characters.subtypeLabels[character.subtype]}
+                  </Badge>
+                )}
+                {caseName && (
+                  <Badge variant="amber">
+                    {t.characters.caseBadgeLabel}: {caseName}
                   </Badge>
                 )}
               </>

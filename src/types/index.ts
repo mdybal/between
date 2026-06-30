@@ -62,6 +62,12 @@ export interface CharacterBase {
   subtype?: NpcSubtype   // only relevant when type === 'npc'
   status?: 'active' | 'retired' | 'deceased' 
   imageUrl?: string
+  /**
+   * Optional reference to a threat ID (from src/data/threats.ts).
+   * Only relevant when type === 'npc'. Links the character to a specific
+   * threat/case, which is then displayed as a tag and used as a filter key.
+   */
+  case?: string
 }
 
 /**

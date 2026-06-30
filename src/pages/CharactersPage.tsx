@@ -1,8 +1,13 @@
 import { useSearchParams } from 'react-router-dom'
 import PageHeader from '@/components/ui/PageHeader'
 import CharacterCard from '@/components/ui/CharacterCard'
+import CheckboxDropdown, {
+  type CheckboxDropdownOption,
+} from '@/components/ui/CheckboxDropdown'
 import { getCharactersEn } from '@/data/characters_en'
 import { getCharactersPl } from '@/data/characters_pl'
+import { getThreatsEn } from '@/data/threats_en'
+import { getThreatsPl } from '@/data/threats_pl'
 import type { NpcSubtype } from '@/types'
 import { cn } from '@/lib/utils'
 import { useLanguage } from '@/i18n/LanguageContext'
@@ -45,7 +50,41 @@ export default function CharactersPage() {
     setSearchParams(newParams)
   }
 
+  // ─── Case filter (NPC only) ────────────────────────────────────────────────
+  // Stored in the URL as a comma-separated list of threat ids
+  // (e.g. `cases=mastermind-conspiracy,james-street-ghost`).
+  // The special sentinel `__none__` represents characters that have no
+  // associated case (i.e. `character.case` is undefined). When the list is
+  // empty, all NPCs match (no filtering by case).
+  const casesParam = searchParams.get('cases') || ''
+  const selectedCases = casesParam
+    .split(',')
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+  const includeNoCase = selectedCases.includes('__none__')
+  const selectedThreatCases = selectedCases.filter((c) => c !== '__none__')
+
+  const setSelectedCases = (next: string[]) => {
+    const newParams = new URLSearchParams(searchParams)
+    if (next.length === 0) {
+      newParams.delete('cases')
+    } else {
+      newParams.set('cases', next.join(','))
+    }
+    setSearchParams(newParams)
+  }
+
   const activeCharacters = lang === 'pl' ? getCharactersPl() : getCharactersEn()
+  const activeThreats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
+
+  // Options for the case dropdown — sourced from src/data/threats.ts (ids)
+  // and the language-specific threats text files (display names).
+  // The special `__none__` entry represents characters that have no
+  // associated case (i.e. `character.case` is undefined).
+  const caseOptions: CheckboxDropdownOption[] = [
+    ...activeThreats.map((th) => ({ value: th.id, label: th.name })),
+    { value: '__none__', label: t.characters.caseFilters.none },
+  ]
 
   const filtered = activeCharacters.filter((c) => {
     if (c.type !== mainFilter) return false
@@ -54,8 +93,16 @@ export default function CharactersPage() {
       return c.status === hunterSub
     }
     // npc
-    if (npcSub === 'all') return true
-    return c.subtype === npcSub
+    if (npcSub !== 'all' && c.subtype !== npcSub) return false
+    // Case filter — only applies when at least one case is selected
+    if (selectedCases.length > 0) {
+      if (!c.case) {
+        // Character has no case; only match if `__none__` is selected
+        return includeNoCase
+      }
+      return selectedThreatCases.includes(c.case)
+    }
+    return true
   })
 
   const hunterSubFilters: { value: HunterSubFilter; label: string }[] = [
@@ -149,6 +196,25 @@ export default function CharactersPage() {
                 </button>
               ))}
         </div>
+
+        {/* Case filter — only visible when the NPC main filter is active */}
+        {mainFilter === 'npc' && (
+          <>
+            {/* Divider */}
+            <span
+              className="h-5 w-px"
+              style={{ backgroundColor: 'var(--graphite-700)' }}
+              aria-hidden="true"
+            />
+            <CheckboxDropdown
+              label={t.characters.caseFilters.label}
+              allLabel={t.characters.caseFilters.all}
+              options={caseOptions}
+              selected={selectedCases}
+              onChange={setSelectedCases}
+            />
+          </>
+        )}
       </div>
 
       {/* Character grid */}

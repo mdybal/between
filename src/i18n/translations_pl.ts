@@ -75,6 +75,11 @@ export const pl = {
       active: 'Aktywni',
       retired: 'Na emeryturze',
     },
+    caseFilters: {
+      label: 'Sprawa',
+      all: 'Wszystkie sprawy',
+      none: 'Bez sprawy',
+    },
     typeLabels: {
       hunter: 'Łowca',
       npc: 'BN',
@@ -84,6 +89,7 @@ export const pl = {
       ally: 'Sojusznik',
       antagonist: 'Antagonista',
     },
+    caseBadgeLabel: 'Sprawa',
     statusLabels: {
       active: 'aktywna',
       retired: 'na emeryturze',
