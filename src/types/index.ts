@@ -152,7 +152,10 @@ export interface ThreatBase {
   threatLevel?: ThreatLevel
   status: 'active' | 'neutralised' | 'unknown'
   firstEncountered?: string
+  resolvedDate?: string    // e.g. 'session-03' — only relevant when status === 'neutralised'
   clueImages?: string[]
+  usedClues?: string[]    // subset of clueImages filenames that have already been used
+                          // (rendered with a greyed-out style to mark them as spent)
 }
 
 /**

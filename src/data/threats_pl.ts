@@ -26,6 +26,9 @@ export const threatsPl: ThreatText[] = [
     name: 'Spisek Theodory Brathwaite',
     description:
       'Theodora Brathwaite studiuje ogromną mapę Londynu zamontowaną na ścianie gabinetu. Mosiężne szpilki w kształcie sztyletów zaznaczają różne miejsca w mieście, lokalizacje ważne dla jakiegoś wielkiego planu (można zauważyć szpilkę na Domu Hargrave\'a). Nagle wstaje, przemierza pokój i wbija jeden z mosiężnych sztyletów w Pałac Buckingham.',
+    knownFacts: [
+            '1844: Pani Brathwaite przybywa do Londynu w wieku dwudziestu sześciu lat. Rzuca się w wir zakupów, wykupując nieruchomości i przedsiębiorstwa, które później staną się fundamentem jej ogromnej fortuny. Jest ozdobą londyńskich salonów, a skandaliczne plotki sugerują, że młoda królowa Wiktoria wzięła ją sobie za kochankę.',
+    ],
     questions: [
       {
         question: 'Jak Mistrzyni Zbrodni zamierza zniszczyć Koronę? (Złożoność: 8)',
@@ -40,6 +43,7 @@ export const threatsPl: ThreatText[] = [
     questions: [
       {
         question: 'Jak sprawić, by ten duch przeszedł do następnego świata? (Złożoność: 6)',
+        answer: 'W domu na St. James uwięzione są duchy całej rodziny i służby, która mieszkała tu 200 lat temu. Nieślubne dziecko pana domu zostało zamordownae w okrutny sposób i zemśiło się na swoich oprawcach zza grobu paląc ich żywcem. Teraz żadne z nich nie może zaznać spokoju, dopóki śmierelni nie wysłuchają historii dziecka do końca.'
       },
     ],
     mask: {
@@ -56,12 +60,32 @@ export const threatsPl: ThreatText[] = [
     questions: [
       {
         question: 'Czy wampir jest młody czy stary? (Złożoność: 4)',
+        answer: 'Wampir został przemieniony wiele dekad (wieków?) temu'
+      },
+      {
+        question: 'Gdzie znajduje się gniazdo wampira? (Złożoność: 4)',
       },
     ],
     mask: {
       title: 'Maska Słońca',
       description:
         'Każdy Łowca opowiada sen, który kiedyś miał o pierwotnej Ziemi: cofając się w czas starożytnego morza, cofając się w czas, gdy duchy chodziły po ziemi, gdy Słońce było nowe, a starożytni Bogowie władali światem.',
+    },
+  },
+  {
+    id: 'cremorne-gardens',
+    name: 'Stworzenie z Ogrodów Cremorne',
+    description:
+      'Niezawodny szmatławiec „The Illustrated Police News", od jakiegoś czasu publikuje historie o tak zwanej Kreaturze z Ogrodów Cremorne (czasem nazywanym Stworem z Chelsea Harbor, a rzadziej Potworem z Cheyne Walk). Stworzenie, opisywane jako „rybolud" lub „rybi człowiek", terroryzuje z cieni spacerowiczów szukających rozrywki, strasząc ich, gdy zostanie dostrzeżone, jak się skrada, ale rzadko wchodząc w bezpośredni kontakt. Mężczyźni i kobiety byli zwabiani na koniec pobliskiego pomostu przez „dziwną pieśń" podczas przechadzki, choć po zakończeniu „zaklęcia" pieśni nie pamiętali, jak się tam znaleźli. Wszystko to można by łatwo zrzucić na histerię albo na jakiś wyrafinowany żart kogoś, kto ma urazę do Ogrodów Cremorne, gdyby nie fizyczny atak na młodą parę, Simona Piedmondta i Beulah Thrum. Pan Piedmont i panna Thrum opisali, jak stworzenie rzuciło się na nich z pozycji kucanej, niczym kot, i rozszarpało płaszcz panny Thrum. Scotland Yard prowadzi dochodzenie.',
+    questions: [
+      {
+        question: 'Czy stworzenie jest prawdziwe, czy to mistyfikacja? (Złożoność: 4)',
+      },
+    ],
+    mask: {
+      title: 'Maska Hulaszczej Zabawy',
+      description:
+        'Każdy Łowca opowiada retrospekcję o ostatnim naprawdę zabawnym dniu, jaki przeżył.',
     },
   },
 ]

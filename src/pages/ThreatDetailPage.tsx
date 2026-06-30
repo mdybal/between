@@ -206,19 +206,22 @@ export default function ThreatDetailPage() {
             {t.threatDetail.clues}
           </h2>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
-            {threat.clueImages.map((filename, i) => (
-              <div
-                key={i}
-                className="rounded bg-[#eacfa9] p-2"
-                style={{ aspectRatio: '114 / 65' }}
-              >
-                <img
-                  src={`/img/clues/${filename}`}
-                  alt={`Clue ${i + 1}`}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            ))}
+            {threat.clueImages.map((filename, i) => {
+              const isUsed = threat.usedClues?.includes(filename) ?? false
+              return (
+                <div
+                  key={i}
+                  className={cn('rounded bg-[#eacfa9] p-2', isUsed && 'grayscale')}
+                  style={{ aspectRatio: '114 / 65' }}
+                >
+                  <img
+                    src={`/img/clues/${filename}`}
+                    alt={`Clue ${i + 1}`}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              )
+            })}
           </div>
         </section>
       )}

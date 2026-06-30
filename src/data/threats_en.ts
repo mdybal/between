@@ -23,9 +23,9 @@ export const threatsEn: ThreatText[] = [
     name: 'Theodora Brathwaite’s Conspiracy',
     description:
       'Theodora Brathwaite is pondering an enormous map of London mounted to the study wall. There are brass pins shaped like daggers marking out various places in the city, locations important for some grand scheme (one might notice a pin on Hargrave House). Suddenly she stands up, crosses the room, and plunges one of the brass daggers into Buckingham Palace',
-    /*knownFacts: [
-            'Referenced in the cipher-box recovered from Wapping',
-    ],*/
+    knownFacts: [
+            '1844: Mrs. Brathwaite arrives in London at age twenty-six. She goes on a buying spree, snapping up real estate and businesses that will later be the foundation of her vast fortune. She is the toast of London, and scandalous rumors suggest the young Queen Victoria has taken her as a lover',
+    ],
     questions: [
       {
         question: 'How does the Mastermind intend to destroy the Crown? (Complexity: 8)',
@@ -45,6 +45,7 @@ export const threatsEn: ThreatText[] = [
     questions: [
       {
         question: 'How can we get this ghost to pass on to the next world? (Complexity: 6)',
+        answer: 'In the townhouse on St. James\'s Street, the ghosts of an entire family and their household staff, who lived there 200 years ago, are trapped. The illegitimate child of the master of the house was murdered in a cruel manner and took vengeance on its tormentors from beyond the grave, burning them alive. Now none of them can rest in peace until mortals hear the child\'s story through to the end.',
       },
     ],
     mask: {
@@ -61,11 +62,30 @@ export const threatsEn: ThreatText[] = [
     questions: [
       {
         question: 'Is the vampire young or old? (Complexity: 4)',
+        answer: 'The vampire was turned many decades (centuries?) ago.',
+      },
+      {
+        question: 'Where is the vampire’s lair? (Complexity: 4)',
       },
     ],
     mask: {
       title: 'The Mask of the Sun',
       description:'Each Hunter narrates a dream they once had of primordial Earth: back in time across the ancient seas, back in time when the spirits walked, when the Sun was new, and the Old Gods held court.',
+    },
+  },
+  {
+    id: 'cremorne-gardens',
+    name: 'The Creature of Cremorne Gardens',
+    description:
+      'That ever-reliable rag, The Illustrated Police News, has lately been carrying stories about the so-called Creature of Cremorne Gardens (sometimes called the Creature of Chelsea Harbor and, more rarely, the Creature of Cheyne Walk). The creature, described as a “fish-like thing” or a “fish man,” has been terrorizing pleasure seekers from the shadows, giving a fright when glimpsed skulking about, but rarely making direct contact. Men and women alike have been lured to the end of a nearby pier by a “strange song” while promenading, though with no memory of how they got there once the song’s “spell” ended. All of this could easily be chalked-up to hysteria, or perhaps some elaborate hoax by someone who resents Cremorne Gardens, if not for a physical attack upon a young couple, Simon Piedmont and Beulah Thrum. Mr. Piedmont and Ms. Thrum described how the creature leapt at them from a crouched position, like a cat, and tore at Ms. Thrum’s coat. Scotland Yard is investigating.',
+    questions: [
+      {
+        question: 'Is the creature real or is it a hoax? (Complexity: 4)',
+      },
+    ],
+    mask: {
+      title: 'The Mask of the Revelry',
+      description:'Each Hunter narrates a flashback to the last truly fun day they had.',
     },
   },
 ]
