@@ -100,6 +100,76 @@ export const sessionsEn: SessionText[] = [
       },
     ],
   },
+  {
+    id: 'session-02',
+    title: 'Ghosts, Vampires and Seafolk',
+    summary:
+      'Hargrave House frees the poor soul haunting the St. James street. They learn that Limehouse Lurker is an ancient vampire trapped in child\'s body. New dangers lurk just below the surface of Thames.',
+    scenes: [
+      {
+        label: "The Story of the Ghost",
+        phase: "Dusk",
+        prose: [
+          `The Hunters found themselves at dusk, contemplating the the haunting at 18 St. James Street. George, outlined the prevailing theory: a 200-year-old crime involving an illegitimate child of Mr. Winterbottom, who was due to enter an arranged marriage. This child, born to a servant, was subsequently strangled and paid for ("pig gifts") by a cook. The retribution came, when the house burned with all the residents within. Now all the souls are trapped in-between the worlds, until the murdered child can tell its story to a living soul. Unfortunately, only those atuned to the occult, are wise enough to understand the child, and strong enough to survive the telling of such terrible story.`
+        ]
+      },
+      {
+        label: 'Exorcism of the St. James Street Ghost',
+        phase: 'Night',
+        prose: [
+          `The group decideds to attempt to banish the spirit immediately. Singh prepares protective sigils at the attic, under Ludwig's supervision, while George prepares to listen to the mournful tale. When the childs starts speaking, other ghosts assail the Hunters, but the magical circle holds. When the last words of the tale are spoke, the ghosts of St. James Street are pulled from Earth - and George is pulled with them! Fortunately, the spectral Hunder manages to untangle his conciousness from the ghost vortex and comes back.`,
+        ],
+      },
+      {
+        label: 'Dog & Whistle',
+        phase: 'Night',
+        prose: [
+          `Lord Richard ventured to the "Dog & Whistle" pub - where the second victim of Limehouse Lurker was found. The victim was a chinese sailor, Zhao Donghai, and Lord Richard hoped to find his crewmates there. Unfortunately, he only met an old, local drunakrd, Elma Thorpe. For a drink, she pointed the side-alley when Zhao's body was found and claimed that she heard "small, childlike voices" discouraging her from drinking coming from there late at nights.`,
+          `When investigating  the crime scene, Lord Bellows  was confronted by a street gang of street urchins, not happy that someone's interfering with Lurker. He courageously fought them off with his cane, aided by Pitagoras.  `,
+        ],
+      },
+      {
+        label: 'Ilustrated Police News',
+        phase: 'Day',
+        prose: [
+          'News soon broke in the "Illustrated Police Stories" that the house on St. James Street is no longer haunted, thanks to the Hargrave House. Still, the Beale family is moving out, as Theodora Breathwaite had acquired the property, completing her collection of houses on the street.',
+          'A couple of days later, a journalist from the same newspaper visits Hargrave Hunters. Impressed by their work on St. James Street, he wants to sell them a bit of news, before they are published - hoping for an exlcusive story, when the Hunters find more. As the story goes, a "fish monster" or "merman" prowls the grounds of Cremorne Gardens, luring people with a siren song. Allegedly, Simon Piemon and Beluah Trum, a young couple, were recent victims of its attack.',
+        ],
+      },
+      {
+        label: 'Tea Clipper and Chinese Sailor',
+        phase: 'Day',
+        prose: [
+          'Lord Dick decides to find the chinese sailors at the docks. He identifies the clipper that Zhao worked on and contacts Lin, a friend of the deceased sailor. Together they return to the alleys behind "Dog & Whistle" trying to reconstruct the events of the fatal night. Lin explained that the last time he saw Zao, he had chased some "rascals" into the alley. Lin was to drunk to follow suit, but guided Richard to the spot. When they stepped in the gloomy dark of the back alley, Lin was suddenly lifted into the air, by some unseen force. With great effort, Lord Bellows was able to pull the man back into the sunlight, where the mysterious force let go. The chinese sailor run bak to his ship, promising never to return to London.',
+        ],
+      },
+      {
+        label: 'To the Opium Den again',
+        phase: 'Day',
+        prose: [
+          `Ludwig decided to drop by Jen's opium den and ensure that his wards were still in place. There he met the mysterious man in the sun mask again. Drawn by curiosity he joined him in the private alcove and soon started hallucinating from the air filled with opium smoke. When he came to his senses, he found himself in a posh smoking room - decorated fully in saphire-blue.carpets, furnitures, floral wallpapers and curtains - all in blue. Hanging on the walls, were the weird paintings of sun (or suns) shining above strange worlds, that did not resemble Earth. Panicked he dashed out of the nearest door, and landed back in the alcove with the Man in the Sun Mask. He hastily made his goodbyes and decided to spend some time under "normal" sun. `,
+        ],
+      },
+      {
+        label: 'Afternoon in Cremorne Gardens',
+        phase: 'Day',
+        prose: [
+          `Singh revealed a personal connection to the park's owner, Thomas Simpson. He once worked for the proprietor as one of the house staff, only to be falsely accused of theft by Simpson's daughter, Abigail. As such, he was not keen to visit the Gardens. Instead, he arranged a meeting with the victim, Beulah Thrum. The young woman was still shaken by the ordeal, but it seemed she was mostly worried for the well-being of her fiancé, as he was almost "scared to death" by the monster. To aid the investigation, she gave Singh the coat that she had been wearing that night, ripped by the creature's claws.`,
+          `In one of the pockets, the inquisitive Sikh found an unopened letter. Beulah must have forgotten about it with all the commotion. Inside was a short message written by an unknown person, indicating that Abigail Simpson was attempting to steal her lover, Simon!`,
+          `Ludwik, undistracted by the numerous attractions of Cremorne Gardens, went straight to the promenade along the riverbank. There, he performed one of his blood rituals, letting his blood flow into the water as he tried to peer into the past. The current of the Thames was stronger than the young medium had anticipated. The world around him slipped out of focus. The visitors to the park, past and present alike, blurred into a flowing stream of indistinguishable shapes. The only constant, the only unchanging thing in the world, was the pair of cold eyes peering from beneath the promenade. And to his dread, Ludwik felt a profound connection to them.`,
+          `A couple hundred yards away, Lord Richard was investigating the other part of Cremorne Gardens. He was walking Pitagoras on a leash through the park's alley, when his dog suddenly got entangled with an exceptionally yappy poodle, and its even yappier owner. The rescue came from an unexpected direction—Theodora Brathwaite unleashed Pitagoras, stating that "true hounds should never be leashed," and then scooped up the Lord before the owner of the poodle could say a word. Walking arm in arm, the Mastermind thanked Hargrave House for cleaning up St. James Street so she could patrol it, but also raised a concern about keeping a ghost (George) within the house's walls. A chill ran down Lord Bellow's spine, despite the warm summer afternoon.`
+        ],
+      },
+      {
+        label: 'Unwelcome visitor at Hargrave House',
+        phase: 'Night',
+        prose: [
+          `Tired by the investigations, hunters retreated to Hargrave House to rest. The George remained vigilant, as his need of sleep disapeared along his physical body. When drifting through the corridors (aimllessly for sure), he happened to noticed (by complete accident) that the door to Ludwig's bedroom were slightly ajar. He peeked in (driven by the sense of duty) and noticed that the Limehouse Lurker sat on the young medium chest! With his supernatural senses, vampire noticed the ghost and in an instant transformed into a black cloud of smoke and disapeared behind the open window into the night.`,
+          `George roused Ludwig up - fortunately the boy was fine, but one of his books treating about ancient cultures was stolen!`
+        ],
+      }
+    ],
+  },
 ]
 
 /**

@@ -18,4 +18,10 @@ export const sessions: SessionBase[] = [
     date: '2026-04-19',
     npcIds: ['theodora-brathwaite', 'harold-beale', 'alice-beale', 'roger-beale', 'mary-alice-beale','irma-thicket','pythagoras', 'constance-head', 'chen-bao', 'sun-mask', 'red-katherine','big-bertha'],
   },
+  {
+    id: 'session-02',
+    sessionNumber: 2,
+    date: '2026-07-17',
+    npcIds: ['theodora-brathwaite', 'mary-alice-beale','pythagoras', 'sun-mask', 'franklin-horsford','beulah-thrum','thomas-simpson','limehouse-lurker','franklin-horsford','elma-thorpe','lin-bohai'],
+  },
 ]

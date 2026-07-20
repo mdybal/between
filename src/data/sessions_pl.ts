@@ -100,6 +100,76 @@ export const sessionsPl: SessionText[] = [
       },
     ],
   },
+  {
+    id: 'session-02',
+    title: 'Duchy, Wampiry i Ludzie Morza',
+    summary:
+      'Hargrave House uwalnia biedną duszę nawiedzającą St. James Street. Łowcy odkrywają, że Zmora z Limehouse to starożytny wampir uwięziony w ciele dziecka. Nowe niebezpieczeństwa czają się tuż pod powierzchnią Tamizy.',
+    scenes: [
+      {
+        label: 'Historia Ducha',
+        phase: 'Dusk',
+        prose: [
+          'O zmierzchu, Łowcy zgromadzili się by rozwiązać zagadkę nawiedzenia na St. James Street 18. George przedstawił przekonywującą teorię: zbrodnia sprzed dwustu laty, dokonana na nieślubnym dziecku pana Winterbottoma, dziedzica posiadłości na St. James Street oraz nieszczęśliwego męża w zaaranżowanym małżeństwie. Dziecko, urodzone przez służącą, zostało następnie uduszone  przez opłaconą („podarunkami dla świń") kucharkę. Zemsta nadeszła, gdy dom spłonął wraz ze wszystkimi mieszkańcami. Teraz wszystkie dusze są uwięzione między światami, dopóki zamordowane dziecko nie będzie mogło opowiedzieć swojej historii żywej duszy. Niestety, tylko ci, którzy są wrażliwi na nadnaturalne, posiadają więdzę by zrozumieć język duchów i na tyle silni, by przetrwać wysłuchanie tak strasznej opowieści.'
+        ]
+      },
+      {
+        label: 'Egzorcyzm Ducha ze St. James Street',
+        phase: 'Night',
+        prose: [
+          'Grupa postanowiła natychmiast spróbować wypędzić ducha. Singh przygotował ochronne znaki na poddaszu, pod nadzorem Ludwika, podczas gdy George przygotował się by wysłuchać żałosnej opowieści. Gdy dziecko zaczęło mówić, inne duchy zaatakowały Łowców, ale magiczny krąg wytrzymał. Gdy padły ostatnie słowa opowieści, duchy ze St. James Street zostały ściągnięte z Ziemi - a George został wciągnięty wraz z nimi! Na szczęście, widmowy Łowca zdołał oddzielić swoją świadomość od wiru duchów i powrócił.'
+        ],
+      },
+      {
+        label: 'Dog & Whistle',
+        phase: 'Night',
+        prose: [
+          'Lord Richard udał się do pubu „Dog & Whistle" - gdzie znaleziono drugą ofiarę Zmory z Limehouse. Ofiarą był chiński marynarz, Zhao Donghai, i Lord Richard miał nadzieję znaleźć tam jego współzałogantów. Niestety, spotkał tylko starą, miejscową pijaczkę, Elmę Thorpe. Za drinka wskazała boczną alejkę, gdzie znaleziono ciało Zhao, i stwierdziła, że słyszała „małe, dziecięce głosy" odstraszające ją od picia, dobiegające stamtąd późno w nocy.',
+          'Podczas badania miejsca zbrodni, Lord Bellows został skonfrontowany przez grupę ulicznych wyrostków, niezadowolonych, że ktoś miesza się w sprawy Zmory. Z iście lordowską odwagą, Richard pokonał przeciwników ciężką laską i poszczuł psem.'
+        ],
+      },
+      {
+        label: 'Ilustrowane Wiadomości Policyjne',
+        phase: 'Day',
+        prose: [
+          'Wkrótce w „Ilustrowanych Wiadomościach Policyjnych" pojawiła się informacja, że dzięki Łowcom z Hargrave House dom na St. James Street nie jest już nawiedzony. Mimo to, rodzina Beale\'ów się wyprowadza, ponieważ Theodora Brathwaite nabyła posiadłość, dopełniając tym samym swoją kolekcję domów na tej ulicy.',
+          'Kilka dni później, dziennikarz z tej samej gazety odwiedza Łowców z Hargrave. Pod wrażeniem ich pracy przy St. James Street, postanawia podsunąć im nowe informacje, zanim zostaną opublikowane - w nadziei na ekskluzywną historię, gdy Łowcy odkryją o co chodzi w całej sprawie. Według historii, „potwór morski" lub ryboludź" grasuje na terenie Cremorne Gardens, zwabiając ludzi syrenim śpiewem. Rzekomo Simon Piemon i Beulah Trum, młoda para, byli ostatnimi ofiarami jego ataku.'
+        ],
+      },
+      {
+        label: 'Kliper i Chiński Marynarz',
+        phase: 'Day',
+        prose: [
+          'Lord Dick postanawia odnaleźć chińskich marynarzy przy nabrzeżu. Identyfikuje kliper, na którym pracował Zhao i kontaktuje się z Linem, przyjacielem zmarłego marynarza. Razem wracają do alejek za „Dog & Whistle", próbując odtworzyć wydarzenia feralnej nocy. Lin wyjaśnia, że ostatni raz widział Zao, gdy ten gonił jakichś „łobuzów" w głąb alejki. Lin był zbyt pijany, by podążyć za nim, ale zaprowadził Richarda na miejsce. Gdy wkroczyli w ponury mrok bocznej alejki, Lin nagle został uniesiony w powietrze przez niewidzialną siłę. Z wielkim wysiłkiem, Lord Bellows zdołał pociągnąć mężczyznę z powrotem w promienie słońca, gdzie tajemnicza siła puściła. Chiński marynarz wrócił biegiem do swojego statku, obiecując nigdy nie wracać do Londynu.'
+        ],
+      },
+      {
+        label: 'Powrót do Palarni Opium',
+        phase: 'Day',
+        prose: [
+          'Ludwik postanowił wpaść do palarni opium Jen i upewnić się, że jego ochronne rytuały wciąż działają. Tam ponownie spotkał tajemniczego Mężczyznę w Masce Słońca. Zaintrygowany, dołączył do niego w prywatnej wnęce i wkrótce zaczął halucynować od opiumowego dymu. Gdy odzyskał zmysły, znalazł się w eleganckim saloniku - całym w kolorze szafirowego nieba: dywany, meble, kwietne tapety i zasłony - wszystko w błękicie. Na ścianach wisiały dziwne obrazy słońca (lub słońc) świecących nad niezwykłymi światami, które nie przypominały Ziemi. W panice wybiegł najbliższymi drzwiami i wylądował z powrotem we wnęce z Mężczyzną w Masce Słońca. Pośpiesznie pożegnał się i postanowił spędzić trochę czasu pod „normalnym" słońcem.'
+        ],
+      },
+      {
+        label: 'Popołudnie w Cremorne Gardens',
+        phase: 'Day',
+        prose: [
+          'Singh przyznał, że miał okazję poznać już właściciela parku, Thomasa Simpsona. Kiedyś pracował dla niego jako służba domowa, lecz został wyrzucony po fałszywych oskrażeniach o kradzież przez córkę Simpsona, Abigail. Z tego powodu nie chciał odwiedzić Ogrodów. Zamiast tego, umówił się na spotkanie z ofiarą, Beulah Thrum. Młoda kobieta była wciąż wstrząśnięta przeżyciem, ale wydawało się, że najbardziej martwi się o zdrowie swojego narzeczonego, który był niemal „przerażony na śmierć" przez potwora. By pomóc w śledztwie, dała Singhowi płaszcz, który miała na sobie tej nocy, podarty pazurami stwora.',
+          'W jednej z kieszeni, dociekliwy Sikh znalazł nieotwarty list. Beulah musiała o nim zapomnieć w całym zamieszaniu. W środku była krótka wiadomość napisana przez nieznaną osobę, wskazująca, że Abigail Simpson próbuje uwieść jej ukochanego, Simona!',
+          'Ludwik, niezwracając uwagi na liczne atrakcje Cremorne Gardens, udał się prosto na promenadę wzdłuż rzeki. Tam wykonał jeden ze swoich rytuałów krwi, pozwalając jej spływać do wody, by spróbować zajrzeć w przeszłość. Nurt Tamizy był jednak zbyt silny dla młodego medium. Świat wokół niego stracił ostrość. Odwiedzający park, przeszli i obecni, zlewali się w płynący strumień nierozróżnialnych kształtów. Jedyną stałą, jedyną niezmienną rzeczą na świecie była para zimnych oczu obserwujących spod promenady. I ku trwodze Ludwiga, poczuł on z nimi głęboką więź.',
+          'Kilkaset jardów dalej, Lord Richard badał inną część Cremorne Gardens. Prowadził Pitagorasa na smyczy przez alejkę parku, gdy jego pies nagle splątał się z wyjątkowo szczekliwym pudlem i jego jeszcze bardziej szczekliwą właścicielką. Ratunek przyszedł z nieoczekiwanej strony - Theodora Brathwaite spuściła Pitagorasa ze smyczy uwalniając go i stwierdzając, że „prawdziwe ogary nigdy nie powinny być na uwięzi". Następnie zabrała Lorda, zanim właścicielka pudla zdążyła cokolwiek powiedzieć. Idąc pod ramię, Mistrzyni Zbrodni podziękowała Hargrave House za oczyszczenie domu z St. James Street, dzięki czemu mogła go przejąć, ale także wyraziła obawę dotyczącą trzymania ducha (George\'a) w samym Hargrave. Mimo ciepłego popołudnia, zimny dreszcz przebiegł Lordowich Richardowi po plecach.'
+        ],
+      },
+      {
+        label: 'Nieproszony Gość w Hargrave House',
+        phase: 'Night',
+        prose: [
+          'Zmęczeni śledztwami, Łowcy wycofali się do Hargrave House, by odpocząć. Tylko George czuwał, jako że jego potrzeba snu zniknęła wraz z jego fizycznym ciałem. Gdy dryfował przez korytarze (bez celu, oczywiście), zauważył (całkowicie przypadkowo), że drzwi do sypialni Ludwika były lekko uchylone. Zajrzał do środka (kierowany poczuciem obowiązku) i zobaczył, że Zmora z Limehouse siedzi na piersi młodego medium! Dzięki swoim nadprzyrodzonym zmysłom, wampir zauważył ducha i w jednej chwili zamienił się w czarną chmurę dymu i zniknął za otwartym oknem w noc.',
+          'George obudził Ludwika - na szczęście chłopak był cały, ale jedna z jego książek o starożytnych kulturach została skradziona!'
+        ],
+      }
+    ],
+  },
 ]
 
 /**
