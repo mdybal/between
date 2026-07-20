@@ -102,7 +102,7 @@ export const sessionsPl: SessionText[] = [
   },
   {
     id: 'session-02',
-    title: 'Duchy, Wampiry i Ludzie Morza',
+    title: 'Duchy, Wampiry i Ryboludzie',
     summary:
       'Hargrave House uwalnia biedną duszę nawiedzającą St. James Street. Łowcy odkrywają, że Zmora z Limehouse to starożytny wampir uwięziony w ciele dziecka. Nowe niebezpieczeństwa czają się tuż pod powierzchnią Tamizy.',
     scenes: [
