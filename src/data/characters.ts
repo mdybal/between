@@ -95,7 +95,8 @@ export const characters: CharacterBase[] = [
   {
     id: 'chen-bao',
     type: 'npc',
-    subtype: 'neutral',
+    subtype: 'ally',
+    status: 'deceased',
     imageUrl: '/img/characters/chen-bao.png',
     case: ['limehouse-lurker']
   },
