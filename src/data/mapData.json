@@ -271,20 +271,8 @@
         2628.4312294574547,
         2123.8772009881727
       ],
-      "sessionId": "session-00",
+      "sessionId": "session-01",
       "state": "active"
-    },
-    {
-      "id": "229bc44d-7eed-41c1-8839-c8315735bed4",
-      "name": "Beales House",
-      "category": "danger",
-      "description": "Crime scene for \"St. James's Street Ghost\" threat.\nHome of Beales family.",
-      "coords": [
-        2436.057248202732,
-        2467.114431727249
-      ],
-      "sessionId": "Session 02",
-      "state": "disabled"
     },
     {
       "id": "33bb9d25-1252-4f86-86f2-2e497cb2e854",
@@ -539,30 +527,6 @@
       "state": "active"
     },
     {
-      "id": "0cdcee08-a03a-4738-8eff-875b5bccdb08",
-      "name": "Royal College of Surgeons Museum",
-      "category": "player-character",
-      "description": "The museum of the Royal College of Surgeons preserved all sorts of horrors for the delight of members and ‘visitors introduced by them personally’. ",
-      "coords": [
-        2091.110505742802,
-        2946.080590841389
-      ],
-      "sessionId": "session-01",
-      "state": "active"
-    },
-    {
-      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
-      "name": "Hargrave House",
-      "category": "player-character",
-      "description": "",
-      "coords": [
-        2628.4312294574547,
-        2123.8772009881727
-      ],
-      "sessionId": "session-01",
-      "state": "active"
-    },
-    {
       "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
       "name": "Cremorne Gardens",
       "category": "danger",
@@ -599,18 +563,6 @@
       "state": "active"
     },
     {
-      "id": "714eb2d0-95eb-4254-a365-1d82d552c585",
-      "name": "Sanger's Amphitheatre",
-      "category": "location",
-      "description": "Astley’s Amphitheatre in Lambeth could be relied on for spectacular equestrian performances with dancing horses, and sometimes even elephants.\nIts final owner was \"Lord\" George Sanger, who bought it for £11,000 in 1871 and ran it as  for over 20 years. \n'Lord' George  was an English showman and circus proprietor. Born to a showman father, he grew up working in travelling peep shows.",
-      "coords": [
-        2636.852279242463,
-        2968.7847940532392
-      ],
-      "sessionId": "Session 02",
-      "state": "active"
-    },
-    {
       "id": "88e15f76-fa75-4ad8-8179-25dfb53aeaf4",
       "name": "Abel Knox",
       "category": "non-player-character",
@@ -619,7 +571,7 @@
         3109.0156164074237,
         2048.4236675580487
       ],
-      "sessionId": "Session 02",
+      "sessionId": "session-03",
       "state": "active"
     },
     {
@@ -635,90 +587,6 @@
       "state": "active"
     },
     {
-      "id": "3dcbcef8-2db5-4e98-9a72-db8ef54c2d16",
-      "name": "Battersea Park",
-      "category": "location",
-      "description": "Battersea was another new park. Its site, on the south bank of the river opposite Chelsea, was unpromising: a ‘swamp of dank pools’ separated from the river only by a narrow raised causeway, and frequently flooded.\nThe park was opened in 1853, and acquired its beautiful lake (which is still there), in 1860, and a sub-tropical garden (which is not) in 1864.",
-      "coords": [
-        3294.0128277632407,
-        2132.51330908342
-      ],
-      "sessionId": "Session 02",
-      "state": "active"
-    },
-    {
-      "id": "88e15f76-fa75-4ad8-8179-25dfb53aeaf4",
-      "name": "Abel Knox",
-      "category": "non-player-character",
-      "description": "Grizzled. Missing an eye. Briny smell. Abel \nclaims to have seen the creature and is \ndetermined to catch it. \n\nQuote: “I reckon the Zoological Society \nwould pay a very nice price for a living, \nbreathing fish man—assuming it breathes, of \ncourse. I reckon it has gills, but maybe lungs like \nus. Or both! What do you think?” ",
-      "coords": [
-        3109.0156164074237,
-        2048.4236675580487
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "active"
-    },
-    {
-      "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
-      "name": "Cremorne Gardens",
-      "category": "danger",
-      "description": "",
-      "coords": [
-        3282.240277949689,
-        1638.066216914236
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "active"
-    },
-    {
-      "id": "a02d00f2-9250-459d-be33-a2d0e4a62328",
-      "name": "Dog & Whistle pub",
-      "category": "danger",
-      "description": "A popular sailor's pub. Limehouse Lurker killed Zhao Donghai here",
-      "coords": [
-        2414.810872197323,
-        4754.232443307752
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "disabled"
-    },
-    {
-      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
-      "name": "Hargrave House",
-      "category": "player-character",
-      "description": "",
-      "coords": [
-        2628.4312294574547,
-        2123.8772009881727
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "active"
-    },
-    {
-      "id": "bd6f1abf-6046-43c9-bd02-a1378f431d7a",
-      "name": "Limehouse School",
-      "category": "danger",
-      "description": "A workhouse for local children. Filthy children all over the place. A frustrated mistress teaching a group of girls to sew. The smell of unwashed bodies. ",
-      "coords": [
-        2276.5690035848047,
-        4728.423045794443
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "disabled"
-    },
-    {
-      "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
-      "name": "Chen Bao Opium Den",
-      "category": "danger",
-      "description": "Dim and smoky. A heavy, ammonia-like smell. People \nlounging on cushions. People from all walks of life patronize the den.\nSoft Jimmy, a male prostitute was killed by Lurker here.\nLudwig performed a ritual to bar the vampire from ever entering this place again.",
-      "coords": [
-        2295.266749844028,
-        4608
-      ],
-      "sessionId": "session-1789809715114",
-      "state": "disabled"
-    },
-    {
       "id": "d9f56340-af94-40b0-bf20-3236bacb6b83",
       "name": "Figg's Pigs Butchery",
       "category": "danger",
@@ -727,7 +595,7 @@
         2569.160117814539,
         3560.3554221842273
       ],
-      "sessionId": "session-1789809715114",
+      "sessionId": "session-03",
       "state": "active"
     },
     {
@@ -743,6 +611,42 @@
       "state": "active"
     },
     {
+      "id": "88e15f76-fa75-4ad8-8179-25dfb53aeaf4",
+      "name": "Abel Knox",
+      "category": "non-player-character",
+      "description": "Grizzled. Missing an eye. Briny smell. Abel \nclaims to have seen the creature and is \ndetermined to catch it. \n\nQuote: “I reckon the Zoological Society \nwould pay a very nice price for a living, \nbreathing fish man—assuming it breathes, of \ncourse. I reckon it has gills, but maybe lungs like \nus. Or both! What do you think?” ",
+      "coords": [
+        3109.0156164074237,
+        2048.4236675580487
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "3dcbcef8-2db5-4e98-9a72-db8ef54c2d16",
+      "name": "Battersea Park",
+      "category": "location",
+      "description": "Battersea was another new park. Its site, on the south bank of the river opposite Chelsea, was unpromising: a ‘swamp of dank pools’ separated from the river only by a narrow raised causeway, and frequently flooded.\nThe park was opened in 1853, and acquired its beautiful lake (which is still there), in 1860, and a sub-tropical garden (which is not) in 1864.",
+      "coords": [
+        3294.0128277632407,
+        2132.51330908342
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "229bc44d-7eed-41c1-8839-c8315735bed4",
+      "name": "Beales House",
+      "category": "danger",
+      "description": "Crime scene for \"St. James's Street Ghost\" threat.\nHome of Beales family.",
+      "coords": [
+        2436.057248202732,
+        2467.114431727249
+      ],
+      "sessionId": "session-02",
+      "state": "disabled"
+    },
+    {
       "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
       "name": "Chen Bao Opium Den",
       "category": "danger",
@@ -751,7 +655,139 @@
         2295.266749844028,
         4608
       ],
-      "sessionId": "Session 02",
+      "sessionId": "session-03",
+      "state": "disabled"
+    },
+    {
+      "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
+      "name": "Chen Bao Opium Den",
+      "category": "danger",
+      "description": "Dim and smoky. A heavy, ammonia-like smell. People \nlounging on cushions. People from all walks of life patronize the den.\nSoft Jimmy, a male prostitute was killed by Lurker here.\nLudwig performed a ritual to bar the vampire from ever entering this place again.",
+      "coords": [
+        2295.266749844028,
+        4608
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
+      "name": "Cremorne Gardens",
+      "category": "danger",
+      "description": "",
+      "coords": [
+        3282.240277949689,
+        1638.066216914236
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "a02d00f2-9250-459d-be33-a2d0e4a62328",
+      "name": "Dog & Whistle pub",
+      "category": "danger",
+      "description": "A popular sailor's pub. Limehouse Lurker killed Zhao Donghai here",
+      "coords": [
+        2414.810872197323,
+        4754.232443307752
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "a02d00f2-9250-459d-be33-a2d0e4a62328",
+      "name": "Dog & Whistle pub",
+      "category": "danger",
+      "description": "A popular sailor's pub. Limehouse Lurker killed Zhao Donghai here",
+      "coords": [
+        2414.810872197323,
+        4754.232443307752
+      ],
+      "sessionId": "session-03",
+      "state": "disabled"
+    },
+    {
+      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
+      "name": "Hargrave House",
+      "category": "player-character",
+      "description": "",
+      "coords": [
+        2628.4312294574547,
+        2123.8772009881727
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
+      "name": "Hargrave House",
+      "category": "player-character",
+      "description": "",
+      "coords": [
+        2628.4312294574547,
+        2123.8772009881727
+      ],
+      "sessionId": "session-03",
+      "state": "active"
+    },
+    {
+      "id": "bd6f1abf-6046-43c9-bd02-a1378f431d7a",
+      "name": "Limehouse School",
+      "category": "danger",
+      "description": "A workhouse for local children. Filthy children all over the place. A frustrated mistress teaching a group of girls to sew. The smell of unwashed bodies. ",
+      "coords": [
+        2276.5690035848047,
+        4728.423045794443
+      ],
+      "sessionId": "session-03",
+      "state": "disabled"
+    },
+    {
+      "id": "76eccce6-02ca-4015-9e3f-c2e043eebc7c",
+      "name": "Royal Explorers Club",
+      "category": "player-character",
+      "description": "A private dinner club for people who have led expeditionary forces into parts unknown, or who are members of the upper class with an interest in the geographical sciences",
+      "coords": [
+        1898.6590647968092,
+        2698.3194770078653
+      ],
+      "sessionId": "session-03",
+      "state": "active"
+    },
+    {
+      "id": "33bb9d25-1252-4f86-86f2-2e497cb2e854",
+      "name": "The Illustrated Police News",
+      "category": "location",
+      "description": "A tabloid headquarters",
+      "coords": [
+        2165.531149396853,
+        3104.1469541230645
+      ],
+      "sessionId": "session-02",
+      "state": "active"
+    },
+    {
+      "id": "5789e408-1873-49ce-87f3-511837368c6d",
+      "name": "Chen Bao \"Jen Johnson\"",
+      "category": "non-player-character",
+      "description": "",
+      "coords": [
+        2278.209958136754,
+        4571.112913319193
+      ],
+      "sessionId": "session-03",
+      "state": "active"
+    },
+    {
+      "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
+      "name": "Cremorne Gardens",
+      "category": "danger",
+      "description": "",
+      "coords": [
+        3282.240277949689,
+        1638.066216914236
+      ],
+      "sessionId": "session-03",
       "state": "active"
     }
   ],
