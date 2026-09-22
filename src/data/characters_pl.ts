@@ -328,7 +328,7 @@ export const charactersPl: CharacterText[] = [
     description:
       'Burza rudych loków. Ładna, ale postarzała ponad wiek. Ziemista cera',
     background:
-      "Siostra/partnerla/przyjaciółka Miękkiego Jimmiego, zamordowanego przez Zmore z Limehouse. Pracuje jako prostytutka w Limehouse. Została naznaczona przez Zmorę razem z Ludwikiem.",
+      "Siostra/partnerla/przyjaciółka Miękkiego Jimmiego, zamordowanego przez Zmore z Limehouse. Pracuje jako prostytutka w Limehouse. Została naznaczona przez Zmorę razem z Ludwigiem.",
     traits: ['Uzależniona od opium', 'Znerwicowana', 'Ufna'],
     },
     {
