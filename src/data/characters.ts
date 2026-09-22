@@ -96,7 +96,6 @@ export const characters: CharacterBase[] = [
     id: 'chen-bao',
     type: 'npc',
     subtype: 'ally',
-    status: 'deceased',
     imageUrl: '/img/characters/chen-bao.png',
     case: ['limehouse-lurker']
   },
@@ -144,6 +143,7 @@ export const characters: CharacterBase[] = [
     id: 'limehouse-lurker',
     type: 'npc',
     subtype: 'antagonist',
+    status: 'deceased',
     imageUrl: '/img/characters/limehouse-lurker.png',
     case: ['limehouse-lurker'],
   },
