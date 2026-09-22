@@ -1,11 +1,6 @@
 {
   "sessions": [
     {
-      "id": "session-02",
-      "title": "Session 02",
-      "description": "Creature of Cremorne Gardens"
-    },
-    {
       "id": "session-01",
       "title": "Session 01",
       "description": "St. James's Street Ghost investigation\nLimehous Lurker investigation"
@@ -14,6 +9,16 @@
       "id": "session-00",
       "title": "Session 00",
       "description": ""
+    },
+    {
+      "id": "session-02",
+      "title": "Session 02",
+      "description": "Creature of Cremorne Gardens"
+    },
+    {
+      "id": "session-03",
+      "title": "Session 03",
+      "description": "Close Limehouse Lurker\nInvestigate Creature of Cremorne Gardens\nIntroduce Figg's Piggs"
     }
   ],
   "pointsOfInterest": [
@@ -278,8 +283,8 @@
         2436.057248202732,
         2467.114431727249
       ],
-      "sessionId": "session-01",
-      "state": "active"
+      "sessionId": "Session 02",
+      "state": "disabled"
     },
     {
       "id": "33bb9d25-1252-4f86-86f2-2e497cb2e854",
@@ -506,7 +511,7 @@
         2414.810872197323,
         4754.232443307752
       ],
-      "sessionId": "session-01",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -518,7 +523,7 @@
         2276.5690035848047,
         4728.423045794443
       ],
-      "sessionId": "session-01",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -566,7 +571,7 @@
         3282.240277949689,
         1638.066216914236
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -578,7 +583,7 @@
         3169.8501656977687,
         1912.2450409243756
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -590,7 +595,7 @@
         2349.6861534333193,
         2000.492571888587
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -602,7 +607,7 @@
         2636.852279242463,
         2968.7847940532392
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -611,10 +616,10 @@
       "category": "non-player-character",
       "description": "Grizzled. Missing an eye. Briny smell. Abel \nclaims to have seen the creature and is \ndetermined to catch it. \n\nQuote: “I reckon the Zoological Society \nwould pay a very nice price for a living, \nbreathing fish man—assuming it breathes, of \ncourse. I reckon it has gills, but maybe lungs like \nus. Or both! What do you think?” ",
       "coords": [
-        3226.337503660398,
-        2430.739343065562
+        3109.0156164074237,
+        2048.4236675580487
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
       "state": "active"
     },
     {
@@ -638,7 +643,115 @@
         3294.0128277632407,
         2132.51330908342
       ],
-      "sessionId": "session-02",
+      "sessionId": "Session 02",
+      "state": "active"
+    },
+    {
+      "id": "88e15f76-fa75-4ad8-8179-25dfb53aeaf4",
+      "name": "Abel Knox",
+      "category": "non-player-character",
+      "description": "Grizzled. Missing an eye. Briny smell. Abel \nclaims to have seen the creature and is \ndetermined to catch it. \n\nQuote: “I reckon the Zoological Society \nwould pay a very nice price for a living, \nbreathing fish man—assuming it breathes, of \ncourse. I reckon it has gills, but maybe lungs like \nus. Or both! What do you think?” ",
+      "coords": [
+        3109.0156164074237,
+        2048.4236675580487
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "active"
+    },
+    {
+      "id": "b25a6462-f4bb-4062-aed7-bd690c05e2d3",
+      "name": "Cremorne Gardens",
+      "category": "danger",
+      "description": "",
+      "coords": [
+        3282.240277949689,
+        1638.066216914236
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "active"
+    },
+    {
+      "id": "a02d00f2-9250-459d-be33-a2d0e4a62328",
+      "name": "Dog & Whistle pub",
+      "category": "danger",
+      "description": "A popular sailor's pub. Limehouse Lurker killed Zhao Donghai here",
+      "coords": [
+        2414.810872197323,
+        4754.232443307752
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "disabled"
+    },
+    {
+      "id": "8051b59b-6080-4247-8a65-c7817183cdab",
+      "name": "Hargrave House",
+      "category": "player-character",
+      "description": "",
+      "coords": [
+        2628.4312294574547,
+        2123.8772009881727
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "active"
+    },
+    {
+      "id": "bd6f1abf-6046-43c9-bd02-a1378f431d7a",
+      "name": "Limehouse School",
+      "category": "danger",
+      "description": "A workhouse for local children. Filthy children all over the place. A frustrated mistress teaching a group of girls to sew. The smell of unwashed bodies. ",
+      "coords": [
+        2276.5690035848047,
+        4728.423045794443
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "disabled"
+    },
+    {
+      "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
+      "name": "Chen Bao Opium Den",
+      "category": "danger",
+      "description": "Dim and smoky. A heavy, ammonia-like smell. People \nlounging on cushions. People from all walks of life patronize the den.\nSoft Jimmy, a male prostitute was killed by Lurker here.\nLudwig performed a ritual to bar the vampire from ever entering this place again.",
+      "coords": [
+        2295.266749844028,
+        4608
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "disabled"
+    },
+    {
+      "id": "d9f56340-af94-40b0-bf20-3236bacb6b83",
+      "name": "Figg's Pigs Butchery",
+      "category": "danger",
+      "description": "",
+      "coords": [
+        2569.160117814539,
+        3560.3554221842273
+      ],
+      "sessionId": "session-1789809715114",
+      "state": "active"
+    },
+    {
+      "id": "229bc44d-7eed-41c1-8839-c8315735bed4",
+      "name": "Beales House",
+      "category": "danger",
+      "description": "Crime scene for \"St. James's Street Ghost\" threat.\nHome of Beales family.",
+      "coords": [
+        2436.057248202732,
+        2467.114431727249
+      ],
+      "sessionId": "session-01",
+      "state": "active"
+    },
+    {
+      "id": "d662ceec-ab6d-46ca-a512-260249a7f6d4",
+      "name": "Chen Bao Opium Den",
+      "category": "danger",
+      "description": "Dim and smoky. A heavy, ammonia-like smell. People \nlounging on cushions. People from all walks of life patronize the den.\nSoft Jimmy, a male prostitute was killed by Lurker here.\nLudwig performed a ritual to bar the vampire from ever entering this place again.",
+      "coords": [
+        2295.266749844028,
+        4608
+      ],
+      "sessionId": "Session 02",
       "state": "active"
     }
   ],

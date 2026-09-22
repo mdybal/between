@@ -84,9 +84,12 @@ export default function SessionDetailPage() {
             <h2 className="mb-4 font-display text-xs uppercase tracking-widest text-graphite-500">
               {t.sessionDetail.summaryHeading}
             </h2>
-            <p className="font-serif text-base leading-loose text-graphite-200">
-              {session.summary}
-            </p>
+            {/* Summary is an HtmlString (may contain `<br>`, `<p>`, etc.),
+                so we render it as HTML instead of inserting raw text. */}
+            <p
+              className="font-serif text-base leading-loose text-graphite-200"
+              dangerouslySetInnerHTML={{ __html: session.summary }}
+            />
           </section>
         </div>
       )}

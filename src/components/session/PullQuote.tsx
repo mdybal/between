@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils'
+import type { HtmlString } from '@/types'
 
 interface PullQuoteProps {
-  children: React.ReactNode
+  /** Quote text. May contain a small subset of inline HTML (see HtmlString). */
+  html: HtmlString
   attribution?: string
   className?: string
 }
@@ -10,7 +12,7 @@ interface PullQuoteProps {
  * PullQuote — a styled blockquote for memorable in-game lines or flavour text.
  * Uses Art Nouveau vine border via the nouveau-quote CSS class.
  */
-export function PullQuote({ children, attribution, className }: PullQuoteProps) {
+export function PullQuote({ html, attribution, className }: PullQuoteProps) {
   return (
     <blockquote
       className={cn(
@@ -18,9 +20,10 @@ export function PullQuote({ children, attribution, className }: PullQuoteProps) 
         className,
       )}
     >
-      <p className="font-serif text-base italic leading-loose text-amber-200/85">
-        {children}
-      </p>
+      <p
+        className="font-serif text-base italic leading-loose text-amber-200/85"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
       {attribution && (
         <footer className="mt-3 font-sc text-xs text-graphite-500">
           — {attribution}

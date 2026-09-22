@@ -37,7 +37,7 @@ export function SessionContentRenderer({ scenes }: SessionContentRendererProps) 
     <div className="space-y-6">
       {scenes.map((scene, index) => {
         const phaseBorder = scene.phase ? phaseBorders[scene.phase] : null
-        
+
         return (
           <div
             key={index}
@@ -56,7 +56,7 @@ export function SessionContentRenderer({ scenes }: SessionContentRendererProps) 
             {scene.prose && scene.prose.length > 0 && (
               <ProseSection phase={scene.phase}>
                 {scene.prose.map((paragraph, pIndex) => (
-                  <Prose key={pIndex} phase={scene.phase}>{paragraph}</Prose>
+                  <Prose key={pIndex} phase={scene.phase} html={paragraph} />
                 ))}
               </ProseSection>
             )}
@@ -64,10 +64,9 @@ export function SessionContentRenderer({ scenes }: SessionContentRendererProps) 
             {/* Pull quote */}
             {scene.pullQuote && (
               <PullQuote
+                html={scene.pullQuote.text}
                 attribution={scene.pullQuote.attribution}
-              >
-                {scene.pullQuote.text}
-              </PullQuote>
+              />
             )}
 
             {/* Highlight box */}
@@ -77,9 +76,10 @@ export function SessionContentRenderer({ scenes }: SessionContentRendererProps) 
                 title={scene.highlightBox.title}
               >
                 {scene.highlightBox.content && (
-                  <p className="mb-3 text-sm leading-relaxed text-graphite-300">
-                    {scene.highlightBox.content}
-                  </p>
+                  <p
+                    className="mb-3 text-sm leading-relaxed text-graphite-300"
+                    dangerouslySetInnerHTML={{ __html: scene.highlightBox.content }}
+                  />
                 )}
                 {scene.highlightBox.items && (
                   <BulletList items={scene.highlightBox.items} />

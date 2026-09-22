@@ -38,7 +38,7 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'antagonist',
     imageUrl: '/img/characters/theodora-brathwaite.png',
-    case: 'mastermind-conspiracy',
+    case: ['mastermind-conspiracy'],
   },
   // St James's Street Ghost
   {
@@ -46,14 +46,14 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/harold-beale.png',
-    case: 'james-street-ghost',
+    case: ['james-street-ghost'],
   },
   {
     id: 'alice-beale',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/alice-beale.png',
-    case: 'james-street-ghost',
+    case: ['james-street-ghost'],
 
   },
   {
@@ -61,28 +61,28 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/roger-beale.png',
-    case: 'james-street-ghost',
+    case: ['james-street-ghost'],
   },
   {
     id: 'mary-alice-beale',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/mary-alice-beale.png',
-    case: 'james-street-ghost',
+    case: ['james-street-ghost'],
   },
   {
     id: 'pythagoras',
     type: 'npc',
     subtype: 'ally',
     imageUrl: '/img/characters/pythagoras.png',
-    case: 'james-street-ghost'
+    case: ['james-street-ghost']
   },
   {
     id: 'irma-thicket',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/irma-thicket.png',
-    case: 'james-street-ghost'
+    case: ['james-street-ghost']
   },
   {
     id: 'constance-head',
@@ -90,14 +90,14 @@ export const characters: CharacterBase[] = [
     subtype: 'neutral',
     status: 'deceased',
     imageUrl: '/img/characters/constance-head.png',
-    case: 'james-street-ghost'
+    case: ['james-street-ghost']
   },
   {
     id: 'chen-bao',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/chen-bao.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
   /*{
     id: 'rory-bell',
@@ -110,82 +110,135 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/sun-mask.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
   {
     id: 'franklin-horsford',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/franklin-horsford.png',
-    case: 'limehouse-lurker'
-  },/*
+    case: ['limehouse-lurker']
+  },
   {
     id: 'lawrence-chesterfield',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/lawrence-chesterfield.png',
-  },*/
+  },
   {
     id: 'elma-thorpe',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/elma-thorpe.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
   {
     id: 'lin-bohai',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/lin-bohai.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
     {
     id: 'limehouse-lurker',
     type: 'npc',
     subtype: 'antagonist',
     imageUrl: '/img/characters/limehouse-lurker.png',
-    case: 'limehouse-lurker',
+    case: ['limehouse-lurker'],
   },
   {
     id: 'red-katherine',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/red-katherine.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
   {
     id: 'big-bertha',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/big-bertha.png',
-    case: 'limehouse-lurker'
+    case: ['limehouse-lurker']
   },
+
+  // Cremorne Gardens
   {
     id: 'thomas-simpson',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/thomas-simpson.png',
-    case: 'cremorne-gardens'
+    case: ['cremorne-gardens']
   },
   {
     id: 'abigail-simpson',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/abigail-simpson.png',
-    case: 'cremorne-gardens'
+    case: ['cremorne-gardens']
   },
   {
     id: 'beulah-thrum',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/beulah-thrum.png',
-    case: 'cremorne-gardens'
+    case: ['cremorne-gardens']
   },
   {
     id: 'simon-piedmont',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/simon-piedmont.png',
-    case: 'cremorne-gardens'
+    case: ['cremorne-gardens']
+  },
+  {
+    id: 'greco',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/greco.png',
+    case: ['cremorne-gardens']
+  },
+  {
+    id: 'abel-knox',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/abel-knox.png',
+    case: ['cremorne-gardens']
+  },
+
+  // Figgs Pigs
+  {
+    id: 'dj-pettigrew',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/dj-pettigrew.png',
+    case: ['figgs-pigs', 'cremorne-gardens']
+  },
+  {
+    id: 'mr-figgs',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/mr-figgs.png',
+    case: ['figgs-pigs']
+  },
+  {
+    id: 'hortencia-figgs',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/hortencia-figgs.png',
+    case: ['figgs-pigs']
+  },
+  {
+    id: 'obert-figgs',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/obert-figgs.png',
+    case: ['figgs-pigs']
+  },
+  {
+    id: 'patrick-figgs',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/patrick-figgs.png',
+    case: ['figgs-pigs']
   },
 ]

@@ -30,7 +30,7 @@ export const charactersEn: CharacterText[] = [
       'A ghost of a murdered member of the Hargrave House. A young man dressed in period clothing and smelling of smoke and ash.',
     background:
       'You were a resident of Hargrave House many decades ago, but now, ghosty-ghost, you’re dead. In fact, you met an untimely end as the result of a betrayal by one of your contemporaries. The arrival of the traitor’s descendant in London has awakened you, restless spirit, and anchored you to Hargrave House, which you’ll haunt until you can exact your revenge by destroying said descendant. In the meantime, you find yourself drawn yet again to the dark work done by Hargrave House, and these new Hunters could certainly use your help. You might even be able to summon the energy needed to temporarily slip your spectral bonds and stalk the streets of London once again.',
-    conditions: ['Marked by the vampire'],
+    conditions: ['Marked by the vampire', 'Panta Rei'],
     masks: [
       {
         category: 'The Mask of The Past',
@@ -97,7 +97,7 @@ export const charactersEn: CharacterText[] = [
       'Ludwig came to London from Pomerania. He\'s young, frail, and proud of his mustache. He lies to his mother that he studies at Royal College of Surgeons.',
     background:
       "For as long as you can remember, dark entities have been near. They lurk just inside your peripheral vision, just at the mirror’s edge. When you close your eyes, you can actually feel them: their cold breath, their oily touch… an occasional feverish embrace. They want to be inside you; they want to rub against your guts and deposit their power. Others are drawn to you as well: those who would use you to master these dark things in order to serve their own agenda. Some of these interlopers, these usurpers, can be of use, such as the Hunters with whom you share a home. Others, like the coven, are best avoided. In either case, you are no one’s object, tool, or weapon; you are no mere bystander. Your fate is yours to shape.",
-    conditions: ['Most Beloved'],
+    conditions: ['Most Beloved', 'Enemy of the urchins'],
     masks: [
       {
         category: 'The Mask of The Past',
@@ -131,13 +131,13 @@ export const charactersEn: CharacterText[] = [
       'In late 30s and already legendary explorer. Self-important, righteously arrogant. Always wears his cork hat and raiding boots.',
     background:
       "You were born into a world of fantastic wealth and privilege. You could have spent your days cosseted by luxury, with nothing more pressing than deciding what to wear to that evening’s dinner party. But you chose a different life; you chose to serve your queen. You leveraged your wealth and connections to explore the world, to chart unknown territory. And now you have a mountain range named after you—a fitting honor, considering you tower over other Britons. Your strength, your intellect, your cunning—none can match it. None except… the Mastermind. The Mastermind, who plots ceaselessly against Her Majesty, whose mind and resources dwarf your own. You have conquered every trial the gods have placed before you, but the Mastermind is something altogether different. And your new work, your work with Hargrave House, is connected to them in some way. You spend your days and nights exploring the true heart of darkness—the monsters that stalk the streets of London—but none are so monstrous as your opponent, the one who sits on the other side of the chessboard. Will Great Britain still be standing when the grand game is over?",
-    conditions: [],
+    conditions: ['Concussion'],
     masks: [
       {
         category: 'The Mask of The Past',
         masks: [
           { name: 'Narrate a flashback to the time when the Explorer first arrived at your village. Was it a joyous moment? Was there something ominous about it?', masked: true },
-          { name: 'Narrate a flashback that shows your friendship with the Explorer. What kind of relationship was it? Parent and child? Teacher and pupil? Master and servant?' },
+          { name: 'Narrate a flashback that shows your friendship with the Explorer. What kind of relationship was it? Parent and child? Teacher and pupil? Master and servant?', masked: true },
           { name: 'Narrate a flashback to when your village suffered an atrocity at the hands of the Explorer. How did you help inflict this atrocity?' },
           { name: 'Narrate a flashback showing how you faced a reckoning for the crimes you helped the Explorer commit against your village.' },
           { name: 'Narrate a flashback to the recent past showing how the village still suffers the consequences of the Explorer’s occupation.' },
@@ -342,6 +342,16 @@ export const charactersEn: CharacterText[] = [
       "A prostitute from Limehouse. Very much to Sikh's taste. She let the Limehouse Lurker into the opium den.",
     traits: ['Huggy', 'Huge'],
     },
+    {
+    id: 'joseph-bazalgette',
+    name: 'Sir Joseph Bazalgette',
+    occupation: 'a civil engineer',
+    description:
+      'Bushy mutton chops. Calm and confident. Always carries a notebook.',
+    background:
+      "A brilliant civil engineer who transformed London's infrastructure by creating the city's first comprehensive underground sewer system. His work protected London from return of The Big Stink of '58",
+    traits: ['Confident', 'Rational', 'Dedicated'],
+    },
 
     //Creature of Cremorne Gardens
     {
@@ -384,6 +394,79 @@ export const charactersEn: CharacterText[] = [
       "Simon is more than happy to discuss his experience with the creature, especially if you buy him an ale or flatter him.",
     traits: ['Grandiose', 'Conceited', 'Cowardly']
     },
+    {
+    id: 'greco',
+    name: 'Greco',
+    occupation: 'the second-sighted boy',
+    description:
+      'Dark skin, chubby face. Fake ruby glued to forehead.',
+    background:
+      "Greco is the famous medium of Cremorne Gardens. Greco sees much—and “sees” much—around the Gardens. He likes Mr. Simpson, but is less fond of Abigail, who he believes is a bit pushy. Enjoys sweets.",
+    traits: ['Mysterious', 'Childish', 'Knowledgeable beyond his years']
+    },
+    {
+    id: 'abel-knox',
+    name: 'Abel Knox',
+    occupation: 'a harbour worker',
+    description:
+      'Eye-patch. Bushy beard. Rough around the edges.',
+    background:
+      "Abel claims to have seen the creature and is determined to catch it",
+    traits: ['Hardened', 'Grizzled']
+    },
+
+    //Figgs Pigs
+    {
+    id: 'dj-pettigrew',
+    name: 'D.J. Pettigrew',
+    occupation: 'Scotland Yard detective',
+    description:
+      'Droopy mustache. Tweed Jacket. Smokes pipe. No-nonsense attitude',
+    background:
+      "D.J Pettigrew is an decorated officer of the Scotland Yard. He is aware of Hargrave House and the work they do, but does not approve and he won’t hesitate to knock the Hunters down a few pegs if the opportunity presents itself.",
+    traits: ['Serious', 'Law-abiding', 'Courageous'],
+    },
+    {
+    id: 'mr-figgs',
+    name: 'Titus Figg',
+    occupation: 'The Butcher',
+    description:
+      'Muscular, hair arms. Deranged smile. Sings his song all the time',
+    background:
+      `Head of the Figg family, and owner of the infamous "Figg's Pigs". Arrested by Scotland Yard for serving human meat in his products`,
+    traits: ['Strong', 'Crazy', 'Murderous'],
+    },
+    {
+    id: 'hortencia-figgs',
+    name: 'Hortencia Figg',
+    occupation: 'The Loving Mother',
+    description:
+      'Loves her children above anything else. Missing arm.',
+    background:
+      `Wife of Mr. Figg and mother to Obert and Patrick. She would (and have) do anything for their beloved sons.`,
+    traits: ['Sneaky', 'Crazy', 'Murderous'],
+    },
+    {
+    id: 'obert-figgs',
+    name: 'Obert Figg',
+    occupation: 'The Blade',
+    description:
+      'Long, bloody apron. Thin, oily smile. A butcher’s knife as long as your leg.',
+    background:
+      ` Obert Figg is the maestro of the Figg family, a real wizard when it comes to catching and cutting up the meat.`,
+    traits: ['Deadly', 'Crazy', 'Murderous'],
+    },
+    {
+    id: 'patrick-figgs',
+    name: 'Patrick Figg',
+    occupation: 'The Feral Boy',
+    description:
+      'Sweet disposition. Easily-frightened. Crawling on all fours.',
+    background:
+      `Patrick has believed himself to be an animal ever since he was little.`,
+    traits: ['Feral', 'Crazy', 'Murderous'],
+    },
+
     
 ]
 

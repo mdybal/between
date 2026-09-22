@@ -1,0 +1,21 @@
+# EditorConfig: https://editorconfig.org
+# Enforced for this repo so formatting stays consistent across editors
+# and operating systems (especially the Windows/Linux line-ending gotchas).
+
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Markdown uses two trailing spaces to mean "hard line break" — don't strip them.
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefiles MUST use tabs for recipe lines.
+[Makefile]
+indent_style = tab

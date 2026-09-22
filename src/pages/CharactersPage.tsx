@@ -54,8 +54,10 @@ export default function CharactersPage() {
   // Stored in the URL as a comma-separated list of threat ids
   // (e.g. `cases=mastermind-conspiracy,james-street-ghost`).
   // The special sentinel `__none__` represents characters that have no
-  // associated case (i.e. `character.case` is undefined). When the list is
-  // empty, all NPCs match (no filtering by case).
+  // associated case (i.e. `character.case` is undefined or empty). When the
+  // list is empty, all NPCs match (no filtering by case).
+  // A character can belong to multiple cases — it matches the filter when
+  // at least one of its case ids is in the selected list.
   const casesParam = searchParams.get('cases') || ''
   const selectedCases = casesParam
     .split(',')
@@ -80,7 +82,7 @@ export default function CharactersPage() {
   // Options for the case dropdown — sourced from src/data/threats.ts (ids)
   // and the language-specific threats text files (display names).
   // The special `__none__` entry represents characters that have no
-  // associated case (i.e. `character.case` is undefined).
+  // associated case (i.e. `character.case` is undefined or empty).
   const caseOptions: CheckboxDropdownOption[] = [
     ...activeThreats.map((th) => ({ value: th.id, label: th.name })),
     { value: '__none__', label: t.characters.caseFilters.none },
@@ -96,11 +98,12 @@ export default function CharactersPage() {
     if (npcSub !== 'all' && c.subtype !== npcSub) return false
     // Case filter — only applies when at least one case is selected
     if (selectedCases.length > 0) {
-      if (!c.case) {
+      if (!c.case || c.case.length === 0) {
         // Character has no case; only match if `__none__` is selected
         return includeNoCase
       }
-      return selectedThreatCases.includes(c.case)
+      // Match if any of the character's cases is in the selected list
+      return c.case.some((caseId) => selectedThreatCases.includes(caseId))
     }
     return true
   })

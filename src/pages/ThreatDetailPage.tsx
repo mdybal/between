@@ -100,9 +100,12 @@ export default function ThreatDetailPage() {
         <h2 className="mb-3 font-display text-xs uppercase tracking-widest text-graphite-500">
           {t.threatDetail.overview}
         </h2>
-        <p className="font-serif text-base leading-loose text-graphite-200">
-          {threat.description}
-        </p>
+        <p
+          className="font-serif text-base leading-loose text-graphite-200"
+          // Description is an HtmlString (may contain `<br>`, `<p>`, etc.),
+          // so we render it as HTML instead of inserting raw text.
+          dangerouslySetInnerHTML={{ __html: threat.description }}
+        />
       </section>
 
       {/* Known Facts */}

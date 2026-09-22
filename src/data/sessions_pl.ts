@@ -1,16 +1,28 @@
 import { sessions } from './sessions'
-import type { Session, Scene } from '@/types'
+import type { Session, Scene, HtmlString } from '@/types'
 
 /**
  * Polish session text data.
  *
  * This file contains Polish translations of text fields (title, summary, scenes).
  * The non-text fields (id, sessionNumber, date, tags, npcIds) are stored in sessions.ts.
+ *
+ * HTML support
+ * ------------
+ * All translatable text fields on a `Session` / `Scene` (i.e. `summary`,
+ * `scenes[].prose`, `scenes[].pullQuote.text`, `scenes[].highlightBox.title`,
+ * `scenes[].highlightBox.content`, `scenes[].highlightBox.items`) are typed
+ * as `HtmlString`. They may therefore contain a small, safe subset of HTML
+ * (e.g. `<br>`, `<em>`, `<strong>`, `<ul>` / `<li>`) which the renderer
+ * consumes via `dangerouslySetInnerHTML` so the tags take effect.
+ *
+ * Plain text still works the same as before — only when a tag is present
+ * will the renderer honour it.
  */
 export interface SessionText {
   id: string
   title: string
-  summary: string
+  summary: HtmlString
   scenes?: Scene[]
 }
 
@@ -166,6 +178,83 @@ export const sessionsPl: SessionText[] = [
         prose: [
           'Zmęczeni śledztwami, Łowcy wycofali się do Hargrave House, by odpocząć. Tylko George czuwał, jako że jego potrzeba snu zniknęła wraz z jego fizycznym ciałem. Gdy dryfował przez korytarze (bez celu, oczywiście), zauważył (całkowicie przypadkowo), że drzwi do sypialni Ludwika były lekko uchylone. Zajrzał do środka (kierowany poczuciem obowiązku) i zobaczył, że Zmora z Limehouse siedzi na piersi młodego medium! Dzięki swoim nadprzyrodzonym zmysłom, wampir zauważył ducha i w jednej chwili zamienił się w czarną chmurę dymu i zniknął za otwartym oknem w noc.',
           'George obudził Ludwika - na szczęście chłopak był cały, ale jedna z jego książek o starożytnych kulturach została skradziona!'
+        ],
+      }
+    ],
+  },
+  {
+    id: 'session-03',
+    title: 'W proch się obrócisz',
+    summary:
+      'Singh odkrywa przerażającą niespodziankę w swoim paszteciku. Stwór z Ogrodów Cremorne atakuje Łowców i umyka do Tamizy. Łowcy z Hargrave odnajdują kryjówkę Zmory z Limehouse i ruszają zniszczyć wampira.',
+    scenes: [
+      {
+        label: 'Poranny głód',
+        phase: 'Day',
+        prose: [
+          'Dzień rozpoczął się spokojnie i słonecznie, bez żadnych nagłych wydarzeń. Singh, średniego wzrostu, ciemnoskóry Hindus z turbanem i gęstą brodą, już od dawna krzątał się po rezydencji Hargrave, pucując przedmioty w pokoju ducha George’a. George, kiedyś jowialny i rubaszny mężczyzna w peruce z loczkami, teraz nawiedza Hargrave House jako zjawa z poparzonym, przerażającym obliczem.',
+		  'W tym samym czasie, Lord Richard, kwintesencja brytyjskiego dżentelmena z korkowym kapeluszem i wąsikiem, spożywał tradycyjne angielskie śniadanie – fasolkę na toście, dzieląc się kiełbaską z psem Pitagorasem.',
+		  'Tymczasem Ludwik, blady i wychudzony jak student, obudził się na piętrze, skotłowany w pościeli, wśród skrzepów krwi. Zwymiotował do umywalki i zszedł na dół.',
+		  'Ludwik podsumował bieżące zadania: odnalezienie leża dziecięcego wampira i ustalenie, czy ryboludź istnieje naprawdę. Lord Richard wspomniał o swoim starciu z wampirem w porcie, wierząc, że tam znajduje się jego kryjówka. Singh przypomniał o trzeciej ofierze w pobliżu sierocińca. Postanowiono się rozdzielić.'
+        ]
+      },
+      {
+        label: 'Sierociniec Limehouse',
+        phase: 'Day',
+        prose: [
+          'Lord Richard i Ludwik udali się do sierocińca w Limehouse. Tam zostali zaprowadzeni do dyrektora Chesterfielda, człowieka skromnego i zestresowanego, który z wdzięcznością przyjął datek od Lorda Richarda. Ludwik, korzystając z nieuwagi dyrektora, przeglądał księgi uczniów i odkrył, że Chesterfield sam był wychowankiem tego sierocińca, a także znalazł wpis dotyczący Elmy Thorpe sprzed 30 lat.',
+		  'Lord Richard zapytał o ciało znalezione za sierocińcem. Dyrektor potwierdził, że była to Charla Bell, znaleziona tydzień lub dwa wcześniej, określając to jako „tragiczny wypadek”. Powiedział, że ciało znaleźli uczniowie. Lord Richard zaoferował dodatkowe pieniądze, by porozmawiać z dziećmi, obawiając się, że wampir może w to być zamieszany.',
+		  'Chesterfield zaprowadził ich do trzech chłopców – Toma, Johna i Jimmy’ego – którzy mieli pokazać im miejsce znalezienia ciała, po czym szybko się oddalił. Chłopcy, wyraźnie nieprzyjaźni, poprowadzili Łowców przez szereg zaułków i piwnic. Nagle jeden z nich pociągnął Ludwika w bok i Lord Richard został sam w wąskim zaułku. Okazało się, że to pułapka: chłopcy rzucali cegłami z dachu, a Lord Richard otrzymał cios w głowę, doznając wstrząsu mózgu.',
+		  'Ludwik wrócił po towarzysza i wykorzystując magię krwi wykonał niemożliwy skok na dach, łapiąc jednego z chłopców. Chłopiec, ze łzami w oczach, opowiedział, że Charla Bell została wyssana z krwi i że "Zmora z Limehouse" (wampir), obiecała im ochronę i moc w zamian za służbę. Dzieci mówiły również, że wampir sam by teraz zajął się Łowcami, gdyby nie przebudowa kanalizacji, która odcięła go chwilowo od sierocińca. Ludwik przegnał uliczników, a następnie wezwał powóz dla siebie i rannego towarzysza i wrócili do Hargrave House.'
+        ],
+      },
+      {
+        label: 'Mięsne paszteciki i bezcielesne śledztwo',
+        phase: 'Day',
+        prose: [
+          `Singh udał się do Cremor Gardens. Zatrzymał się przy stoisku "Figg's Pigs" oferującym pięknie pachnące paszteciki wieprzowe. Gospodarz, Tytus Figg, podśpiewując pod nosem podał mu i drugiemu dżentelmenowi obok dwie porcje jeszcze gorącego wypieku. Po kilku kęsach, obaj mężczyźni zorientowali się, że w cieście jest ludzkie mięso! Nieznajomy okazał się detektywem Scotland Yardu, a gdy pokazał odznakę, Tytus zaczął uciekać. Detektyw przesadził susem kontuar, Singh za nim i dopadli Pana Figga na zapleczu, gdzie Singh z przerażeniem odkrył ludzki tors wiszący na rzeźniczych hakach. Titus Figg został aresztowany, ale reszta jego rodziny zbiegła. Łowcy musza znaleźć mordedczych kanibali, nim Ci znów zaatakują!`,
+		  'George kontynuował śledztwo w sprawie ryboludzia z Cremorne, śledząc właściciela parku, Thomasa Simpsona. Podążył za nim do namiotu, gdzie występował Greco, "widzący chłopiec". Greco okazał się być prawdziwym medium i wyczuł obecność ducha. Doradził mu, aby udał się do starych zabudowań portowych, gdzie spotka jednookiego mężczyznę, z którym łączy go wspólny cel. George i Singh odnaleźli jednookiego rybaka i ten Rybak opisał potwierdził, że widział bestię nawiedzającą Ogrody Cremorne. Opisał Ryboludzia jako trzymetrową, łuskowatą, śluzowatą kreaturę z pazurami i zapachem morza. Hindus założył się z nim o to, kto schwyta ryboludzia.  Umówili się na spotkanie w ogrodach Cremorne nocą, aby go osaczyć, a rybak dał Singowi klucz do wschodniej bramy.'
+        ],
+      },
+      {
+        label: 'Łowy, Łowy, Łowy',
+        phase: 'Dusk',
+        prose: [
+          'Wieczorem do Hargrave House przybył Sir Anthony Wood, przyjaciel Lorda Richarda, członek prestiżowego Królewskiego Stowarzyszenia Odkrywców. Gdy usłyszał czym zajmują się obecnie Łowcy, przypomniał sobie legendę z czasów arturiańskich o Trytornie, który uwiódł i utopił damę, za co został przeklęty i uwięziony w drzewie. Podarował też Lordowi Richardowi kości wielorybów rzeźbione w wizerunki trytonów - ponoć bardzo popularne wśród lokalnych marynarzy.',
+		  'Łowcy zebrali się, aby omówić plan działania. Singh i George spotkają się z Abelem, by wspólnie zapolować na ryboludzia, Ludwik spróbuje wywabić wampira krążąc po ulicach Londynu i wykorzystując swoją relację z Ciemnością, a Lord Richard uda się na poszukiwanie samego leża wampira.'
+        ],
+      },
+      {
+        label: 'Nieoczekiwane spotkanie',
+        phase: 'Night',
+        prose: [
+          'Ludwik udał się na długi spacer przez ciemny Londyn, brocząc krwią i świadomie kusząc los. Jego uwagę przyciągnęła żebraczka, która wyciągała dłoń w błagalnym geście. Gdy Ludwik podał jej zakrwawioną rękę, ku jego przerażeniu, kobieta chwyciła ją i oblizała! Okazała się być Hortensją Figg, żoną Tytusa. Była wysoka, chuda i jej lewa ręka kończyła się kikutem tuż pod łokciem. Wyraziła obawę o swoje dzieci i dała Ludwikowi (za jego "dar") starą książeczkę z wierzykami dla dzieci - w której ktoś starannie wykreślił wszelkie wzmianki o ptakach.',
+		  'Jednocześnie, Ludwik uświadomił sobie, że Los spłatał mu figla - postawił na jego drodzę zmorę, lecz nie tą, której się spodziewał! To oznacza, że Lord Richard znalazł się w śmiertelnym niebezpieczeństwie!'
+        ],
+      },
+      {
+        label: 'Koniec Zmory z Limehouse',
+        phase: 'Night',
+        prose: [
+          'Analizując wszystkie poszlaki, Łowcy doszli do wniosku, że wampirt ma trzy kryjówki - pod miejscami, gdzie znaleziono ciała. Dzięki przebudowie kanalizacji, nie może się swobodnie między nimi poruszać, a dziwne spirale krwi, które widzieli, to oznaka, że jest w pobliżu. Lord Richard postanowił, że dopadnie bestię tej nocy. Udał się do piwnicy tawerny Dog & Whistle i z zadowoleniem zauważył "spiralę krwi" nad klapą w podłodze. Wszedł w ciemność ze swoją wierną strzelbą na słonie. Niestety nie zdała się na wiele gdy wampir niespodziewanie zaatakował z sufitu! Na szczęście wierny Pitagoras odwrócił uwagę stwora, a Lord Richard użył specjalnie przygotowanej obrotowej kuszy na kołki - jeden z nich trafił wampira w serce. Dziecięce ciało wampira rozpadło się w proch. '
+        ],
+      },
+      {
+        label: 'Potyczka nad Tamizą',
+        phase: 'Night',
+        prose: [
+          'Singh (z harpunem od Lorda Richarda) i George (który przybrał fizyczną postać) wkroczyli do Cremorne Gardens. Usłyszeli dziwną pieśń i zobaczyli jednookiego Abela, idącego jak zahipnotyzowany w stronę Tamizy. Singh odciągnął go i uratował przed utopieniem. George, w eterycznej formie, zanurkował w Tamizie szukając stwora, ale zamiast tego znalazł piekny, szmaragdowy kolczyk. Wtedy z krzaków wyskoczyła ciemna postać i zaatakowała Singha i Abela! George, wciąż w fizycznej postaci i w polerowanej zbroi, rzucił się na przeciwnika. Czuł jego łuskowate ciało i słyszał krzyk bólu, po czym stworzenie wskoczyło do wody i zniknęło, pozostawiając porzucone ubrania. Zakład Singha i Abela pozostał nierozstrzygnięty.'
+        ],
+      },
+      {
+        label: 'Poranek w Hargrave House',
+        phase: 'Dawn',
+        prose: [
+          'Kolejny poranek Łowcy powitali żywi - co już samo w sobie jest osiągnięciem, biorąc pod uwagę niebezpieczeństwa z jakimi się zmierzyli. Rozwiązali również sprawe Zmory z Limehouse, a Jenny Johnson, właścicielka palarni opium, postanowiła, że w przyszłości będzie wspierać Hargrave House, jeśli tylko będą potrzebowali pomoc we wschodnim Londynie.',
+		      `I tylko sny które nawiedziły ich tej nocy, nie dawały im spokoju:<ul>
+<li>Singowi śniły się czasy, gdy potężni Hindusi rządzili ziemią, u boku ogromnych, gadzich stworów.
+<li> Lordowi Richardowi śniło się powstanie Londinium, rzymskie drogi i młody chłopak obserwujący legionistów oddających cześć bogini Cybele.
+<li>Ludwik śnił o świetlistych sylwetkach dawnych bogów, będących częścią "wielkiego układu krwionośnego" świata. Jedna z postaci, z szafirowym gardłem, zwróciła się do niego: "Ciebie będę potrzebować" – była to Teodora Brathwaite.</ul>`
         ],
       }
     ],

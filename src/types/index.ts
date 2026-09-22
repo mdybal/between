@@ -5,20 +5,20 @@ type HighlightVariant = 'clue' | 'danger' | 'note' | 'lore'
 export type ScenePhase = 'Dawn' | 'Day' | 'Dusk' | 'Night'
 
 export interface ScenePullQuote {
-  text: string
+  text: HtmlString
   attribution?: string
 }
 
 export interface SceneHighlightBox {
   variant: HighlightVariant
-  title?: string
-  items?: string[]
-  content?: string
+  title?: HtmlString
+  items?: HtmlString[]
+  content?: HtmlString
 }
 
 export interface Scene {
   label: string
-  prose: string[]
+  prose: HtmlString[]
   highlightBox?: SceneHighlightBox
   pullQuote?: ScenePullQuote
   phase?: ScenePhase
@@ -29,7 +29,7 @@ export interface Session {
   sessionNumber: number
   title: string
   date: string          // ISO date string, e.g. "1893-10-14"
-  summary: string
+  summary: HtmlString
   npcIds?: string[]      // IDs of NPCs that appear in this session (link to characters)
   tags?: string[]
   scenes?: Scene[]
@@ -63,11 +63,11 @@ export interface CharacterBase {
   status?: 'active' | 'retired' | 'deceased' 
   imageUrl?: string
   /**
-   * Optional reference to a threat ID (from src/data/threats.ts).
-   * Only relevant when type === 'npc'. Links the character to a specific
-   * threat/case, which is then displayed as a tag and used as a filter key.
+   * Optional list of references to threat IDs (from src/data/threats.ts).
+   * Only relevant when type === 'npc'. Links the character to one or more
+   * threats/cases, which are then displayed as tags and used as filter keys.
    */
-  case?: string
+  case?: string[]
 }
 
 /**
@@ -149,6 +149,13 @@ export interface MapZone {
 export type ThreatLevel = string // e.g., "2-4", "1-3", "0-5"
 
 /**
+ * A string that may contain a small, safe subset of inline HTML tags
+ * (e.g. `<br>`, `<p>`, `<em>`, `<strong>`). Render with `dangerouslySetInnerHTML`
+ * (or a sanitizer) — never as plain text — otherwise the tags will appear literally.
+ */
+export type HtmlString = string
+
+/**
  * Base threat fields stored in src/data/threats.ts.
  * Non-text fields only (text fields are merged in from threats_en.ts / threats_pl.ts).
  */
@@ -186,7 +193,7 @@ export interface MaskSection {
  */
 export interface Threat extends ThreatBase {
   name: string
-  description: string
+  description: HtmlString
   knownFacts?: string[]
   questions: ThreatQuestion[]
   mask?: MaskSection

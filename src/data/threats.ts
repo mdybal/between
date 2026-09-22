@@ -12,15 +12,15 @@ export const threats: ThreatBase[] = [
     type: 'mastermind',
     status: 'active',
     firstEncountered: 'session-01',
-    clueImages: ['brathwaite01.png','brathwaite02.png', 'brathwaite03.png'],
+    clueImages: ['brathwaite01.png','brathwaite02.png', 'brathwaite03.png','brathwaite04.png'],
   },
   {
     id: 'cremorne-gardens',
     type: 'threat',
-    threatLevel: '1-5',
+    threatLevel: '2-5',
     status: 'active',
     firstEncountered: 'session-02',
-    clueImages: ['cremorne01.png','cremorne02.png'],
+    clueImages: ['cremorne01.png','cremorne02.png','cremorne03.png','cremorne04.png','cremorne05.png','cremorne06.png','cremorne07.png'],
   },
   {
     id: 'james-street-ghost',
@@ -35,10 +35,19 @@ export const threats: ThreatBase[] = [
   {
     id: 'limehouse-lurker',
     type: 'threat',
-    threatLevel: '2-5',
-    status: 'active',
+    threatLevel: '3-5',
+    status: 'neutralised',
     firstEncountered: 'session-01',
-    clueImages: ['lurker01.png','lurker02.png','lurker03.png','lurker04.png','lurker05.png','lurker06.png','lurker07.png','lurker08.png','lurker09.png','lurker10.png'],
-    usedClues: ['lurker02.png','lurker04.png','lurker05.png','lurker09.png','lurker07.png','lurker08.png']
+    clueImages: ['lurker01.png','lurker02.png','lurker03.png','lurker04.png','lurker05.png','lurker06.png','lurker07.png','lurker08.png','lurker09.png','lurker10.png', 'lurker11.png'],
+    usedClues: ['lurker01.png','lurker02.png','lurker03.png','lurker04.png','lurker05.png','lurker06.png','lurker07.png','lurker08.png','lurker09.png','lurker10.png', 'lurker11.png']
+  },
+  {
+    id: 'figgs-pigs',
+    type: 'threat',
+    threatLevel: '1-5',
+    status: 'active',
+    firstEncountered: 'session-03',
+    clueImages: ['figgs01.png'],
+    usedClues: ['']
   },
 ]

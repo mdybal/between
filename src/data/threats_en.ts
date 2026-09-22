@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { MaskSection, Threat, ThreatQuestion } from '@/types'
+import type { HtmlString, MaskSection, Threat, ThreatQuestion } from '@/types'
 
 /**
  * English threat text data.
@@ -7,11 +7,17 @@ import type { MaskSection, Threat, ThreatQuestion } from '@/types'
  * This file contains all translatable text fields (name, description,
  * knownFacts, questions) for threats. The id, type, threatLevel, status,
  * firstEncountered, and clueImages fields are stored in threats.ts.
+ *
+ * The `description` field may contain a small subset of inline HTML
+ * (e.g. `<br>`, `<p>`) to allow paragraph / line-break formatting. The
+ * renderers consume it via `dangerouslySetInnerHTML` so the tags take
+ * effect — never interpolated as plain text, or the tags will appear
+ * literally.
  */
 export interface ThreatText {
   id: string
   name: string
-  description: string
+  description: HtmlString
   knownFacts?: string[]
   questions: ThreatQuestion[]
   mask?: MaskSection
@@ -66,6 +72,7 @@ export const threatsEn: ThreatText[] = [
       },
       {
         question: 'Where is the vampire’s lair? (Complexity: 4)',
+        answer: `The vampire has three different lairs in the old, roman tunnels under Opium Den, Limehouse School, and Dog & Whistle. He cannot travel freely between them due to Bazalgette's canal construction. Blood acts strangely when the Lurker is nearby`,
       },
     ],
     mask: {
@@ -86,6 +93,28 @@ export const threatsEn: ThreatText[] = [
     mask: {
       title: 'The Mask of the Revelry',
       description:'Each Hunter narrates a flashback to the last truly fun day they had.',
+    },
+  },
+  {
+    id: 'figgs-pigs',
+    name: 'Figg`s Pigs',
+    description:
+      `When enjoying a stroll through the Cremorne Gardens, Singh smelled a delicious aroma of meat pie. Not having eaten a proper breakfast, he followed the scent to a small food stall called "Figg's Pigs". A jovial owner served him and another gentleman, a steaming meat pie. Both enjoyed a few first bites, until they realised with dread that the pie contains human meat! The other man, revelaed to be a Scotland Yard detective jumped the coutnter in pursuit and quickly apprehended the stall owner - Mr. Figgs. During the whole encounter, Mr.Figgs man kept laughing manically and singing about "Three Pigs"<br>
+      It soon turned out, that Mr. Figg did not act alone - his whole family was involved in the gruesome business of selling human meat pies. The police raided the Figg's residence but found his wife, Hortencia, and his two sons, Obert and Patrick, long gone. The Hunters must stop the Figgs family before they can continue their grisly business.`,
+    questions: [
+      {
+        question: 'What kind of animal does Patrick Figg think he is? (Complexity: 2)',
+      },
+      {
+        question: 'What type of victim does Obert Figg prefer? (Complexity: 2)',
+      },
+      {
+        question: 'What did La Hortencia Figg lose that she’s trying to recapture or remember? (Complexity: 2)',
+      }
+    ],
+    mask: {
+      title: 'The Mask of the Pig',
+      description:'Each Hunter narrates a dream about the pagan swine god, Moc’h. Did Moc’h demand a sacrifice of riches, status, or blood? What did they each sacrifice?',
     },
   },
 ]

@@ -137,9 +137,12 @@ export default function ThreatsPage() {
                     {threat.name}
                   </h2>
 
-                  <p className="mt-2 line-clamp-2 font-serif text-sm leading-loose text-graphite-500">
-                    {threat.description}
-                  </p>
+                  <p
+                    className="mt-2 line-clamp-2 font-serif text-sm leading-loose text-graphite-500"
+                    // Description is an HtmlString (may contain `<br>`, `<p>`, etc.),
+                    // so we render it as HTML instead of inserting raw text.
+                    dangerouslySetInnerHTML={{ __html: threat.description }}
+                  />
                 </div>
 
                 <ChevronRight

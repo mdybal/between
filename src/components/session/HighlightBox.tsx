@@ -1,9 +1,11 @@
 import { cn } from '@/lib/utils'
+import type { HtmlString } from '@/types'
 
 type HighlightVariant = 'clue' | 'danger' | 'note' | 'lore'
 
 interface HighlightBoxProps {
-  title?: string
+  /** Title may contain a small subset of inline HTML (see HtmlString). */
+  title?: HtmlString
   children: React.ReactNode
   variant?: HighlightVariant
   className?: string
@@ -68,9 +70,10 @@ export function HighlightBox({
       )}
       style={{ backgroundColor: variantBg[variant] }}
     >
-      <p className={cn('mb-3 font-display text-xs uppercase tracking-widest', styles.title)}>
-        {displayTitle}
-      </p>
+      <p
+        className={cn('mb-3 font-display text-xs uppercase tracking-widest', styles.title)}
+        dangerouslySetInnerHTML={{ __html: displayTitle }}
+      />
       <div className="font-serif text-sm leading-loose text-graphite-300">
         {children}
       </div>
@@ -80,9 +83,12 @@ export function HighlightBox({
 
 /**
  * BulletList — a simple styled list, useful inside HighlightBox or standalone.
+ *
+ * Items are `HtmlString`s: each entry may contain a small subset of inline
+ * HTML (e.g. `<em>`, `<strong>`), rendered via `dangerouslySetInnerHTML`.
  */
 interface BulletListProps {
-  items: string[]
+  items: HtmlString[]
   bulletColor?: string
   className?: string
 }
@@ -93,7 +99,10 @@ export function BulletList({ items, bulletColor = 'text-amber-700', className }:
       {items.map((item, i) => (
         <li key={i} className="flex gap-3">
           <span className={cn('mt-1 shrink-0', bulletColor)}>✦</span>
-          <span className="font-serif text-sm leading-loose text-graphite-300">{item}</span>
+          <span
+            className="font-serif text-sm leading-loose text-graphite-300"
+            dangerouslySetInnerHTML={{ __html: item }}
+          />
         </li>
       ))}
     </ul>

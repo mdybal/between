@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { Threat, ThreatQuestion, MaskSection } from '@/types'
+import type { HtmlString, Threat, ThreatQuestion, MaskSection } from '@/types'
 
 /**
  * Polish threat text data.
@@ -10,11 +10,17 @@ import type { Threat, ThreatQuestion, MaskSection } from '@/types'
  *
  * To add Polish translations, add entries with the same id as in threats_en.ts
  * and replace the text fields with Polish translations.
+ *
+ * The `description` field may contain a small subset of inline HTML
+ * (e.g. `<br>`, `<p>`) to allow paragraph / line-break formatting. The
+ * renderers consume it via `dangerouslySetInnerHTML` so the tags take
+ * effect — never interpolated as plain text, or the tags will appear
+ * literally.
  */
 export interface ThreatText {
   id: string
   name: string
-  description: string
+  description: HtmlString
   knownFacts?: string[]
   questions: ThreatQuestion[]
   mask?: MaskSection
@@ -86,6 +92,29 @@ export const threatsPl: ThreatText[] = [
       title: 'Maska Hulaszczej Zabawy',
       description:
         'Każdy Łowca opowiada retrospekcję o ostatnim naprawdę zabawnym dniu, jaki przeżył.',
+    },
+  },
+  {
+    id: 'figgs-pigs',
+    name: 'Świńskie Figgle',
+    description:
+      `Podczas przechadzki po Ogrodach Cremorne Singh zwęszył apetyczny aromat mięsnego ciasta. Jako iż nie zjadł porządnego śniadania, podążył za zapachem do niewielkiego stoiska z jedzeniem zwanego „Figg's Pigs". Jowialny właściciel podał jemu i innemu dżentelmenowi parujące mięsne ciasto. Obaj delektowali się pierwszymi kęsami, aż ze zgrozą odkryli, że ciasto zawiera ludzkie mięso! Drugi mężczyzna (jak się okazało, detektyw Scotland Yardu), przeskoczył ladę w pogoń i szybko zatrzymał właściciela straganu — pana Figga. Przez całe zajście pan Figg śmiał się maniakalnie i śpiewał o „Trzech Świnkach"<br>
+      Wkrótce okazało się, że pan Figg nie działał sam — cała jego rodzina była zamieszana w makabryczny interes sprzedaży ciast z ludzkiego mięsa. Policja przeprowadziła nalot na rezydencję Figgów, ale jego żona, Hortencia, i dwóch synów, Obert i Patrick, zbiegli. Łowcy muszą powstrzymać rodzinę Figgów, nim padną kolejne ofiary.`,
+    questions: [
+      {
+        question: 'Za jakie zwierzę uważa się Patrick Figg? (Złożoność: 2)',
+      },
+      {
+        question: 'Jaki typ ofiar preferuje Obert Figg? (Złożoność: 2)',
+      },
+      {
+        question: 'Co straciła Hortencia Figg, co próbuje odzyskać lub sobie przypomnieć? (Złożoność: 2)',
+      }
+    ],
+    mask: {
+      title: 'Maska Świni',
+      description:
+        'Każdy Łowca opowiada sen o pogańskim bogu świń, Moc\'h. Czy Moc\'h zażądał ofiary z bogactwa, statusu czy krwi? Co złożyli w ofierze?',
     },
   },
 ]

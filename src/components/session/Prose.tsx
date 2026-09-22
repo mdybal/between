@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import type { ScenePhase } from '@/types'
+import type { HtmlString, ScenePhase } from '@/types'
 
 /**
  * Phase-specific text color presets for prose (milder than dividers)
@@ -13,27 +13,33 @@ const phaseTextColors: Record<ScenePhase, string> = {
 
 /**
  * Prose — a block of narrative text.
- * Use multiple <Prose> blocks to break up a session into paragraphs / sections.
+ *
+ * The `html` prop is treated as an `HtmlString` (see `src/types`) and is
+ * rendered with `dangerouslySetInnerHTML` so that a small, safe subset of
+ * inline HTML (e.g. `<br>`, `<em>`, `<strong>`, `<ul>`) takes effect.
+ *
+ * Use a `<div>` (not `<p>`) here because the contents may legally include
+ * block-level tags such as `<ul>`/`<li>` — browsers will close a `<p>`
+ * early if it contains such tags, which would break the layout.
  */
 interface ProseProps {
-  children: React.ReactNode
+  html: HtmlString
   phase?: ScenePhase
   className?: string
 }
 
-export function Prose({ children, phase, className }: ProseProps) {
+export function Prose({ html, phase, className }: ProseProps) {
   const phaseTextColor = phase ? phaseTextColors[phase] : null
-  
+
   return (
-    <p
+    <div
       className={cn(
-        'font-serif text-base leading-loose',
+        'prose-html font-serif text-base leading-loose',
         phaseTextColor ?? 'text-graphite-200',
         className,
       )}
-    >
-      {children}
-    </p>
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   )
 }
 

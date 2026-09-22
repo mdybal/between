@@ -25,11 +25,15 @@ export default function CharacterDetailPage() {
     ? '/characters' + location.state.fromCharacters
     : '/characters'
 
-  // Resolve the case (threat) display name for NPCs that have a `case` field.
-  const caseName = (() => {
-    if (!character.case) return null
+  // Resolve the case (threat) display names for NPCs that have a `case` field.
+  // A character may belong to multiple cases, so we resolve the full list and
+  // render one badge per case.
+  const caseNames: string[] = (() => {
+    if (!character.case || character.case.length === 0) return []
     const threats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
-    return threats.find((th) => th.id === character.case)?.name ?? null
+    return character.case
+      .map((id) => threats.find((th) => th.id === id)?.name)
+      .filter((name): name is string => Boolean(name))
   })()
 
   return (
@@ -89,11 +93,11 @@ export default function CharacterDetailPage() {
                     {t.characters.subtypeLabels[character.subtype]}
                   </Badge>
                 )}
-                {caseName && (
-                  <Badge variant="amber">
-                    {t.characters.caseBadgeLabel}: {caseName}
+                {caseNames.map((name) => (
+                  <Badge key={name} variant="amber">
+                    {t.characters.caseBadgeLabel}: {name}
                   </Badge>
-                )}
+                ))}
               </>
             ) : (
               <Badge variant="amber">

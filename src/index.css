@@ -198,4 +198,86 @@
     background-repeat: no-repeat;
     pointer-events: none;
   }
+
+  /* ── Prose-html lists (HTML lists rendered inside session Prose blocks) ── */
+  /*
+   * Styles scoped to the .prose-html container produced by <Prose>. Without
+   * these rules, <ul> / <ol> / <li> inherit Tailwind preflight resets (which
+   * strip list-style and padding) and appear with no bullets, no numbering
+   * and no indentation.
+   *
+   * The look mirrors the bespoke <BulletList> component used inside
+   * highlight boxes (see HighlightBox.tsx) so HTML-authored lists and
+   * hard-coded ones stay visually consistent.
+   */
+  .prose-html ul,
+  .prose-html ol {
+    list-style: none;
+    margin: 0.75rem 0 0.75rem 0;
+    padding-left: 1.5rem;
+  }
+  .prose-html ul ul,
+  .prose-html ol ol,
+  .prose-html ul ol,
+  .prose-html ol ul {
+    margin: 0.5rem 0 0.25rem 0;
+    padding-left: 1.5rem;
+  }
+  .prose-html li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-html li > p {
+    margin: 0;
+  }
+  .prose-html li > p + p {
+    margin-top: 0.5rem;
+  }
+
+  /* Unordered bullets: ✦ glyph in amber, matching <BulletList> */
+  .prose-html ul > li::before {
+    content: '\2726';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #b87828; /* amber-700 */
+    font-size: 0.85em;
+    line-height: 1.85;
+  }
+  .prose-html ul ul > li::before {
+    content: '\00B7'; /* middle dot for nested bullets */
+    font-size: 1.2em;
+    line-height: 1.85;
+  }
+
+  /* Ordered numbering: keep decimal, restyle the digits in amber */
+  .prose-html ol {
+    counter-reset: prose-ol;
+  }
+  .prose-html ol > li {
+    counter-increment: prose-ol;
+  }
+  .prose-html ol > li::before {
+    content: counter(prose-ol) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #b87828;
+    font-family: 'Cinzel', Georgia, serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85em;
+    line-height: 1.85;
+    min-width: 1.25rem;
+    text-align: right;
+  }
+  .prose-html ol ol {
+    counter-reset: prose-ol-inner;
+  }
+  .prose-html ol ol > li {
+    counter-increment: prose-ol-inner;
+  }
+  .prose-html ol ol > li::before {
+    content: counter(prose-ol-inner, lower-alpha) '.';
+  }
 }

@@ -31,7 +31,7 @@ export const charactersPl: CharacterText[] = [
       'Duch zamordowanego członka domu Hargrave. Młody mężczyzna ubrany w strój z innej epoki, pachnący dymem i popiołem.',
     background:
       'Byłeś mieszkańcem Domu Hargrave wiele dekad temu, a teraz jesteś duchem, jesteś martwy. W rzeczy samej, spotkał Cię przedwczesny koniec w wyniku zdrady. Pojawienie się potomka zdrajcy w Londynie zbudziło Cię, i przykowało do Domu Hargrave, który będziesz nawiedzać dopóki nie dokonasz zemsty. W międzyczasie znów oddajesz się do brudnej pracy wykonywanej przez Dom Hargrave, a ci nowi Łowcy z pewnością mogliby skorzystać z Twojej pomocy. Przy odrobinie wysiłku udaje Ci się zgromadzić energię potrzebną do tymczasowego wyswobodzenia się ze swoich spektralnych więzów by znów spacerować po ulicach Londynu.',
-    conditions: ['Naznaczony przez wampira'],
+    conditions: ['Naznaczony przez wampira', 'Panta Rei'],
     masks: [
       {
         category: 'Maska Przeszłości',
@@ -98,7 +98,7 @@ export const charactersPl: CharacterText[] = [
       'Ludwig przybył do Londynu z Pomorza. Jest młody, chorowity i dumny ze swojego wąsika. Oszukuje swoją matkę, że studiuje w Królewskim Kolegium Chirurgów.',
     background:
       'Odkąd pamiętasz, mroczne byty były w pobliżu. Czają się tuż na granicy Twojego widzenia, tuż za krawędzią lustra. Gdy zamykasz oczy, możesz je poczuć: ich zimny oddech, ich tłuste dotknięcia... sporadyczne gorączkowe objęcia. Chcą być w środku Ciebie; chcą ocierać się o Twoje wnętrzności i zdeponować swoją moc. Przyciągasz też innych: tych, którzy chcieliby wykorzystać Cię do opanowania tych ciemnych rzeczy, abyś służył ich celom. Niektórzy z nich, mogą być użyteczni, jak Łowcy, z którymi dzielisz dom. Innych, jak Sabat, najlepiej unikać. W obu przypadkach nie jesteś niczyją własnością, narzędziem ani bronią; nie jesteś zwykłym śmiertelnikiem. Twoje przeznaczenie należy do Ciebie.',
-    conditions: ['Najukochańszy'],
+    conditions: ['Najukochańszy', 'Wróg uliczników'],
     masks: [
       {
         category: 'Maska Przeszłości',
@@ -132,7 +132,7 @@ export const charactersPl: CharacterText[] = [
       'Trzydziesto-kilku letni, słynny odkrywca. Samouwielbiający się i słusznie arogancki. Zawsze nosi swój korkowy kapelusz i buty do jazdy konnej.',
     background:
       'Urodziłeś się wśród fantastycznego bogactwa i przywilejów. Mógłbyś spędzać dnie rozpieszczany przez luksus, bez niczego pilniejszego niż decydowanie, co włożyć na wieczorny obiad. Ale wybrałeś inne życie; wybrałeś służbę swojej królowej. Wykorzystałeś swoje bogactwo i koneksje, by odkrywać świat, by opisywać nieznane terytoria. I teraz masz pasmo górskie nazwane twoim imieniem — odpowiedni zaszczyt, zważywszy, że górujesz nad innymi Brytyjczykami. Twoja siła, twój intelekt, twoja przebiegłość — żaden nie może im dorównać. Żaden oprócz... Mistrzyni Zbrodni. Mistrzyni, która nieustannie knuje przeciwko Jej Królewskiej Mości, której umysł i zasoby przewyższają twoje własne. Sprostałeś każej próbie, którą bogowie przed tobą postawili, ale Mistrzyni to coś zupełnie innego. A twoja nowa praca, twoja praca z Domem Hargrave, jest z nią w jakiś sposób połączona. Spędzasz dni i noce eksplorując prawdziwe serce ciemności — potwory, które skradają się po ulicach Londynu — ale żaden nie jest tak potworny jak twój przeciwnik, ten, który siedzi po drugiej stronie szachownicy. Czy Wielka Brytania wciąż będzie stała, gdy wielka gra dobiegnie końca?',
-    conditions: [],
+    conditions: ['Wstrząśnienie mózgu'],
     masks: [
       {
         category: 'Maska Przeszłości',
@@ -383,7 +383,80 @@ export const charactersPl: CharacterText[] = [
       'Simon chętnie opowie o swoim spotkaniu ze stworzeniem, zwłaszcza jeśli postawisz mu ale lub trochę go pochlebisz.',
     traits: ['Wyniosły', 'Zadufany', 'Tchórz'],
     },
-    
+    {
+    id: 'greco',
+    name: 'Greco',
+    occupation: 'jasnowidzący chłopiec',
+    description:
+      'Ciemna skóra, pucułowata twarz. Sztuczny rubin przyklejony do czoła.',
+    background:
+      'Greco jest słynnym medium Ogrodów Cremorne. Greco dużo widzi — i „widzi" dużo — w Ogrodach. Lubi pana Simpsona, ale mniej ceni Abigail, którą uważa za nieco zbyt władczą. Lubi słodycze.',
+    traits: ['Tajemniczy', 'Dziecinny', 'Wiedza ponad swój wiek']
+    },
+    {
+    id: 'abel-knox',
+    name: 'Abel Knox',
+    occupation: 'robotnik portowy',
+    description:
+      'Opaska na oku. Gęsta broda. Surowy typ.',
+    background:
+      'Abel twierdzi, że widział stworzenie i jest zdecydowany je złapać.',
+    traits: ['Zahartowany', 'Doświadczony przez życie'],
+    },
+
+    //Figgs Pigs
+    {
+    id: 'dj-pettigrew',
+    name: 'D.J. Pettigrew',
+    occupation: 'detektyw Scotland Yardu',
+    description:
+      'Oklapnięty wąsik. Tweedowa marynarka. Pali fajkę. Bezpośredni i rzeczowy.',
+    background:
+      'D.J. Pettigrew jest odznaczonym oficerem Scotland Yardu. Wie o Domu Hargrave i pracy, którą wykonują, ale jej nie pochwala i nie zawaha się przyciąć Łowców, jeśli nadarzy się okazja.',
+    traits: ['Poważny', 'Praworządny', 'Odważny'],
+    },
+    {
+    id: 'mr-figgs',
+    name: 'Titus Figg',
+    occupation: 'Rzeźnik',
+    description:
+      'Bardzo muskularny, owłosione ręce. Szalony uśmiech. Cały czas śpiewa swoją piosenkę',
+    background:
+      `Głowa rodu Figgów i właściciel niesławnego „Figg's Pigs". Aresztowany przez Scotland Yard za serwowanie ludzkiego mięsa w swoich wyrobach.`,
+    traits: ['Silny', 'Szalony', 'Morderczy'],
+    },
+    {
+    id: 'hortencia-figgs',
+    name: 'Hortencia Figg',
+    occupation: 'Kochająca Matka',
+    description:
+      'Kocha swoje dzieci ponad wszystko. Brakuje jej ręki.',
+    background:
+      'Żona pana Figga i matka Oberta i Patricka. Zrobiłaby (i robiła) wszystko dla swoich ukochanych synów.',
+    traits: ['Podstępna', 'Szalona', 'Mordercza'],
+    },
+    {
+    id: 'obert-figgs',
+    name: 'Obert Figg',
+    occupation: 'Ostrze',
+    description:
+      'Długi, zakrwawiony fartuch. Cienki, oleisty uśmiech. Nóż rzeźnicki długi jak noga.',
+    background:
+      'Obert Figg jest mistrzem rodziny Figgów, prawdziwym czarodziejem w szlachtowaniu i rozbiorze mięsa.',
+    traits: ['Śmiercionośny', 'Szalony', 'Morderczy'],
+    },
+    {
+    id: 'patrick-figgs',
+    name: 'Patrick Figg',
+    occupation: 'Dzikie Dziecko',
+    description:
+      'Słodkie usposobienie. Łatwo go spłoszyć. Chodzi na czworakach.',
+    background:
+      'Patrick wierzy, że jest zwierzęciem.',
+    traits: ['Dziki', 'Szalony', 'Morderczy'],
+    },
+
+
 ]
 
 /**

@@ -58,13 +58,16 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
   // Preserve search params when navigating to character detail
   const searchParams = location.search
 
-  // Resolve the case (threat) display name for NPCs that have a `case` field.
-  // The id maps to a threat in src/data/threats.ts; the display name comes
-  // from the language-specific threats text data.
-  const caseName = (() => {
-    if (!character.case) return null
+  // Resolve the case (threat) display names for NPCs that have a `case` field.
+  // The ids map to threats in src/data/threats.ts; the display names come
+  // from the language-specific threats text data. A character may belong to
+  // multiple cases, so we resolve the list and render one badge per case.
+  const caseNames: string[] = (() => {
+    if (!character.case || character.case.length === 0) return []
     const threats = lang === 'pl' ? getThreatsPl() : getThreatsEn()
-    return threats.find((th) => th.id === character.case)?.name ?? null
+    return character.case
+      .map((id) => threats.find((th) => th.id === id)?.name)
+      .filter((name): name is string => Boolean(name))
   })()
 
   const cardContent = (
@@ -83,11 +86,11 @@ export default function CharacterCard({ character, asCard = false }: CharacterCa
                     {t.characters.subtypeLabels[character.subtype]}
                   </Badge>
                 )}
-                {caseName && (
-                  <Badge variant="amber">
-                    {t.characters.caseBadgeLabel}: {caseName}
+                {caseNames.map((name) => (
+                  <Badge key={name} variant="amber">
+                    {t.characters.caseBadgeLabel}: {name}
                   </Badge>
-                )}
+                ))}
               </>
             ) : (
               <Badge variant="amber">{t.characters.typeLabels.hunter}</Badge>
