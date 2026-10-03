@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Between: Przygotowanie do Sesji 4 (7-3-1 &amp; Okruchy Życia)</title>
+    <style>
+        :root {
+            --bg-body: #0d1219;
+            --bg-card: #151e2b;
+            --bg-card-hover: #1c2738;
+            --bg-card-inner: #0f1622;
+            --border: #233145;
+            --gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.25);
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --danger: #ef4444;
+            --threat: #f87171;
+            --mastermind: #c084fc;
+            --life: #38bdf8;
+            --water: #22d3ee;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.5;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, #182232 0%, #121924 100%);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .title-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .orig-badge {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            margin-left: 6px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            color: #fff;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+        .btn-gold {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.4);
+            color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold);
+            color: #0d1219;
+            font-weight: 600;
+        }
+
+        /* Status Grid */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .status-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .status-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .status-card-header.threat { color: var(--threat); }
+        .status-card-header.mastermind { color: var(--mastermind); }
+        .status-card-header.water { color: var(--water); }
+
+        .status-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .status-pill {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-pill.ready {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border-color: rgba(34, 197, 94, 0.4);
+            font-weight: 600;
+        }
+
+        /* Hunter Grid */
+        .hunter-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .hunter-bar-title {
+            font-weight: 600;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hunter-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hunter-name {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .hunter-condition {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Filters Bar */
+        .filters-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+        .filter-btn.active {
+            background: var(--gold);
+            color: #0b0f15;
+            font-weight: 700;
+            border-color: var(--gold);
+        }
+
+        /* Elements List (Cards) */
+        .elements-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        details.element-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        details.element-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        details.element-card[open] {
+            border-color: var(--gold);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+        }
+
+        summary.element-summary {
+            list-style: none;
+            padding: 14px 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+            background: transparent;
+            transition: background 0.15s ease;
+        }
+
+        summary.element-summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary.element-summary:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .summary-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .element-num {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gold);
+            min-width: 52px;
+        }
+
+        .element-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .summary-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chevron {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+            color: var(--gold);
+        }
+
+        /* Badges */
+        .badge {
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .badge-life { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-club { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-threat { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-water { background: rgba(6, 182, 212, 0.15); color: #22d3ee; border: 1px solid rgba(6, 182, 212, 0.3); }
+        .badge-mastermind { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+        .badge-new { background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 700; }
+
+        details.element-card.card-new {
+            border-left: 3px solid #22c55e;
+        }
+
+        /* Card Content */
+        .element-body {
+            padding: 16px 20px 20px;
+            border-top: 1px solid var(--border);
+            background: var(--bg-card-inner);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .element-blurb {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid var(--gold);
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.92rem;
+            color: #f1f5f9;
+        }
+
+        .sensory-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .sensory-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .sensory-icon {
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .element-hook {
+            background: rgba(212, 175, 55, 0.06);
+            border: 1px dashed rgba(212, 175, 55, 0.35);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+        }
+
+        .hook-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .hook-content strong {
+            color: var(--gold);
+        }
+
+        /* Dusk Phase Box */
+        .dusk-card {
+            background: linear-gradient(180deg, rgba(6, 182, 212, 0.08) 0%, rgba(15, 23, 42, 0.4) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .dusk-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .dusk-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dusk-badge {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .dusk-body {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .dusk-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        @media (max-width: 650px) {
+            .dusk-options {
+                grid-template-columns: 1fr;
+            }
+            .summary-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+
+        .dusk-option-box {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .dusk-option-box strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-top">
+                <div>
+                    <span class="title-badge">The Between • 1893</span>
+                    <span class="orig-badge">🌿 Sesja 4 • Dołączono +7 scen (Łącznie: 21)</span>
+                    <h1>Przygotowanie do Sesji 4 (7-3-1)</h1>
+                    <div class="subtitle">Dołączono 7 nowych scen do pliku session_04.html • Brak powtórzeń (Uruchomienie #2)</div>
+                </div>
+                <div class="controls">
+                    <button class="btn btn-gold" id="btnExpandAll" onclick="toggleAll(true)">
+                        <span>🔽</span> Rozwiń wszystkie
+                    </button>
+                    <button class="btn" id="btnCollapseAll" onclick="toggleAll(false)">
+                        <span>🔼</span> Zwiń wszystkie
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Status Grid -->
+        <div class="status-grid">
+            <div class="status-card">
+                <div class="status-card-header mastermind">
+                    <span>👑</span> Theodora Brathwaite
+                </div>
+                <div class="status-card-desc">Mastermind • Warstwa 1 (Złożoność: 8)</div>
+                <div class="status-pill">Odkryte wskazówki: 4 / 8</div>
+            </div>
+            <div class="status-card">
+                <div class="status-card-header threat">
+                    <span>🥩</span> Świńskie Figgle (Figg's Pigs)
+                </div>
+                <div class="status-card-desc">Titus w Bedlam • Reszta klanu poluje w Shoreditch</div>
+                <div class="status-pill">Odkryte wskazówki: 1 / 14</div>
+            </div>
+            <div class="status-card">
+                <div class="status-card-header water">
+                    <span>🌊</span> Ryboludź z Cremorne Gardens
+                </div>
+                <div class="status-card-desc">Pytanie Progowe: Czy to mistyfikacja? (Złożoność: 4)</div>
+                <div class="status-pill ready">⚡ Gotowi na rzut (+3 modyfikator)</div>
+            </div>
+        </div>
+
+        <!-- Hunter Status Bar -->
+        <div class="hunter-bar">
+            <span class="hunter-bar-title">🩸 Aktywne Kondycje:</span>
+            <div class="hunter-item">
+                <span class="hunter-name">Richard:</span>
+                <span class="hunter-condition">Wstrząśnienie mózgu</span>
+            </div>
+            <div class="hunter-item">
+                <span class="hunter-name">Ludwig:</span>
+                <span class="hunter-condition">Umiłowany</span>
+                <span class="hunter-condition">Wróg dzieciarni</span>
+            </div>
+            <div class="hunter-item">
+                <span class="hunter-name">Singh:</span>
+                <span class="hunter-condition">Zawiodłem George'a</span>
+            </div>
+            <div class="hunter-item">
+                <span class="hunter-name">George:</span>
+                <span class="hunter-condition">Naznaczony</span>
+                <span class="hunter-condition">Panta Rei</span>
+            </div>
+        </div>
+
+        <!-- 14 Elements -->
+        <div class="section-header">
+            <div class="section-title">🎭 Paleta 21 Elementów (Technika 7-3-1 &amp; Okruchy Życia)</div>
+            <div style="font-size: 0.82rem; color: var(--text-muted);">Kliknij nagłówek, by zwinąć/rozwinąć</div>
+        </div>
+
+        <div class="filters-bar">
+            <button class="filter-btn active" data-filter="all">Wszystkie (21)</button>
+            <button class="filter-btn" data-filter="life">Okruchy życia &amp; Londyn (7)</button>
+            <button class="filter-btn" data-filter="threat-figgs">Świńskie Figgle (6)</button>
+            <button class="filter-btn" data-filter="threat-cremorne">Ryboludź z Cremorne (5)</button>
+            <button class="filter-btn" data-filter="mastermind">Theodora Brathwaite (3)</button>
+        </div>
+
+        <div class="elements-list">
+            
+        <details class="element-card" data-num="1" data-category="life" data-id="life-whitechapel-urchins" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🐴 #1</span>
+                    <span class="element-title">Ulicznicy i końskie łajno na Whitechapel High Street</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-life">Okruch życia / Ulica</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Dorożka wioząca Ludwiga utyka w gęstym zatorze wozów na Whitechapel. Z mgły i błotnistego zaułka nagle wybiega zgraja uliczników z rękami pełnymi świeżego końskiego nawozu, celując prosto w uchylone okno powozu.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Plask parującego końskiego nawozu rozbryzgującego się na lakierowanych drzwiach i szybie dorożki.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Piskliwy, złośliwy rechot chłopców w podartych kaszkietach uciekających w stronę zaułka rzeźników.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Ciężka, wilgotna woń deszczu, końskiego potu i dymu z pobliskiej wędzarni ryb.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Aktywuje kondycję Ludwiga: <code>Wróg dzieciarni ulicznej</code>. Jeśli Łowcy złapią małego Jimmy'ego, okazuje się, że dzieciak dostał ciepły mięsny pasztecik od 'pani w kwiecistym czepku' (Hortencia Figg).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="2" data-category="life" data-id="life-explorers-club-brandy" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🍷 #2</span>
+                    <span class="element-title">Zaproszenie na cygaro i brandy w Royal Explorers Club</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-club">Okruch życia / Towarzyskie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W wytłumionej dymem cygar palarni elitarnego klubu lord Richard zostaje osaczony przez pułkownika Arbuthnota. Przy szklaneczce brandy weteran zaczyna z uśmieszkiem drążyć sprawę plotek o 'niedyspozycji' Richarda i dziwnych incydentach w dokach.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Bogaty, słodkawy aromat cygar maduro zmieszany z zapachem politury mahoniowej i wosku do wąsów.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Miarowe pykanie zegara stojącego i stłumiony szelest rozkładanych stron The Times.</div><div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Głęboki, sprężysty chłód pikowanej skóry fotela Chesterfield pod dłonią.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Richard musi utrzymać fason pomimo pulsującego bólu głowy (<code>Wstrząśnienie mózgu</code>). W dymie cygar padają plotki o tajemniczych zakładach jednookiego Abla Knoxa i dziwnych światłach w Cremorne Gardens.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="3" data-category="life" data-id="life-covent-garden-market" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🌿 #3</span>
+                    <span class="element-title">Singh na porannym targu w Covent Garden</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-life">Okruch życia / Sprawy domu</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Przeciskając się między straganami z ziołami i rybami w poszukiwaniu rzadkich składników do spiżarni Hargrave House, Singh uświadamia sobie, że od kilku przecznic ktoś dyskretnie depcze mu po piętach w tłumie.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Krzyki przekupek zachwalających świeżą miętę, skrzynki śledzi i cytryny prosto z Sycylii.</div><div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Chrzęst kruszonego lodu i gnijących liści kapusty miażdżonych pod podeszwami trzewików.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Ostra, orzeźwiająca woń roztartego w palcach rozmarynu kontrastująca z miejskim spaleniskiem.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Singh zauważa, że jest dyskretnie obserwowany przez eleganckiego dżentelmena z szafirową spinką w krawacie (człowiek Theodory). Poczucie winy (<code>Zawiodłem George'a</code>) kusi, by nie wracać prosto do domu.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="4" data-category="life" data-id="life-savile-row-tailor" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">✂️ #4</span>
+                    <span class="element-title">Przymiarka surduta u krawca na Savile Row</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-club">Okruch życia / Sprawy osobiste</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W eleganckim salonie krawieckim na Savile Row krawiec Pettigrew pieczołowicie wbija szpilki w nowy wełniany surdut Richarda, gdy nagły zawrót głowy i tępy ból w skroniach niemal zwalają lorda z podestu prosto w wielkie lustro.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Ostre, piekące ukłucie szpilki krawieckiej w ramię, gdy podłoga na moment usuwa się spod nóg.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Odbicie w krysztale lustra ukazujące nienaturalnie bladą twarz i nierówne źrenice Richarda.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Sucha woń grubej wełny z merynosów, parującej bawełny i wosku krawieckiego.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Test opanowania przy kondycji: <code>Wstrząśnienie mózgu</code>. Pettigrew z dumą wspomina, że identyczny szafirowy aksamit zamawiała niedawno dla swoich lokajów pani Theodora Brathwaite.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="5" data-category="life" data-id="life-hargrave-nightmares" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">☕ #5</span>
+                    <span class="element-title">Nocne koszmary i krew w herbacie w Hargrave House</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-life">Okruch życia / Sprawy domu</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W środku nocy w bibliotece Hargrave House Singh zastaje George'a majaczącego nad otwartym atlasem; gdy nalewa mu uspokajającego naparu, George w konwulsyjnym transie upuszcza filiżankę, a na jego mankietach widnieją świeże plamy krwi.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Brzęk tłuczonej cienkiej porcelany i gorączkowy, urywany szept George'a powtarzającego słowa w łacinie.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Dwa sine, nabrzmiałe ślady kłów na szyi George'a, pulsujące w chwiejnym świetle świecy.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Ziołowa woń rumianku i bergamotki nagle zdominowana przez metaliczny, ciepły zapach krwi.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Aktywuje kondycję George'a: <code>Naznaczony przez wampira</code> oraz winę Singha: <code>Zawiodłem George'a</code>. George w majakach nakreślił na marginesie mapy Tamizy ten sam znak, który noszą agenci Theodory.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="6" data-category="threat-figgs" data-id="figgs-bedlam-titus-cell" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">⛓️ #6</span>
+                    <span class="element-title">Titus Figg w wyciszonej celi szpitala Bethlem (Bedlam)</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-threat">NPC / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Gdy żelazny wizjer w drzwiach celi w Bedlam zgrzyta, Łowcy stają twarzą w twarz z posiniaczonym Titusem Figgiem. Mężczyzna nagle przerywa uderzanie głową o ścianę i z obłąkanym uśmiechem wpatruje się prosto w Ludwiga.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Gryzący, chemiczny swąd kwasu karbolowego zmieszany z wilgocią starej słomy.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Głuche, rytmiczne uderzenia czoła Titusa o pikowaną skórzaną ścianę celi.</div><div class="sensory-item"><span class="sensory-icon">🗣️</span> <strong>Głos:</strong> Piskliwy, monotonny śpiew rymowanki: 'Cztery i dwadzieścia pieczonych wron... a ptaki wycięte ze stron!'</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>A small book of pressed flowers; written on the inside cover: 'For my little sweet one.'</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="7" data-category="threat-figgs" data-id="figgs-shoreditch-smokehouse" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🥩 #7</span>
+                    <span class="element-title">Opuszczona wędzarnia i lodownia Figgów w Shoreditch</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-threat">Lokacja / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Za wyłamanym ryglem w zaułku rzeźników panuje lodowaty chłód i grobowa cisza. Na hakach kołyszą się podejrzane płachty mięsa, a naoliwione deski podłogi uginają się niebezpiecznie nad ciemną czeluścią piwnicy.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Mdły, słodkawo-miedziowy zapach zastałej krwi i zjełczałego smalcu.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Szarobury snop światła ukazujący płachty ludzkiej skóry schnące na hakach jak pergamin.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Chrobot tłustych szczurów buszujących w bryłach soli kamiennej.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>Dots of now-dried marmalade making a path, as if leading something in or out of a particular room.</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="8" data-category="threat-figgs" data-id="figgs-smithfield-pasties" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🥧 #8</span>
+                    <span class="element-title">Rzeźnicki powóz i „darmowe paszteciki” Hortencii Figg w Smithfield</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-threat">NPC / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Wśród nocnego zgiełku targu bydła w Smithfield starsza kobieta w kwiecistym czepku i fartuchu umazanym rdzawymi plamami z łzawym uśmiechem rozdaje darmowe, dymiące pasztety wygłodniałym robotnikom i dzieciom.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Nęcący, ziołowy aromat pieczonego mięsa z gałką muszkatołową, pod którym tli się słodkawy, mdlący swąd zepsucia.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Szkliste, pełne bezbrzeżnej rozpaczy oczy staruszki, która czule głaszcze małego chłopca po karku, badając grubość mięśni.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Chrupanie kruchego ciasta i głuche mlaskanie biesiadników na tle ryczenia pędzonego bydła.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>A carefully folded bundle of long, blonde hair.</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="9" data-category="threat-figgs" data-id="figgs-shoreditch-viaduct-nest" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🦴 #9</span>
+                    <span class="element-title">Makabryczne gniazdo i legowisko pod wiaduktem w Shoreditch</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-threat">Lokacja / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Za zbutwiałymi drzwiami technicznymi pod ceglanym wiaduktem kolejowym w Shoreditch wąski tunel prowadzi do sklepionej komory, w której klan Figgów uwił gigantyczne legowisko ze szczątków ubrań, włosów i kości.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Głębokie na metr legowisko utkane ze zmatowiałych ludzkich włosów, dziecięcych bucików, wstążek i zębów.</div><div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Lepka, zimna maź na kamiennych ścianach i chłód ciężkiego łańcucha ze skórzaną obrożą dla olbrzymiego brytana.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Głuche dudnienie przetaczającego się nad głowami pociągu, sypiące drobnym pyłem węglowym prosto w odsłonięte kości.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>A great amount of hay scattered around a place.</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="10" data-category="threat-cremorne" data-id="cremorne-chelsea-pier-siren" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🌊 #10</span>
+                    <span class="element-title">Syreni śpiew na zamglonym molo w Chelsea (Cremorne)</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-water">Wydarzenie / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Na ociekającym rzeczną wilgocią pomoście pijany Abel Knox chwieje się niebezpiecznie nad krawędzią. Z mętnej toni Tamizy, zmieszany z echem ścieków Bazalgette'a, zaczyna dobiegać hipnotyzujący, bezsłowny śpiew.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Żółta, tłusta mgła (pea-souper) oblepiająca żelazne polery molo jak brudna wata.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Cichy, przejmujący, bezsłowny śpiew kobiecy wydobywający się z rur ściekowych Bazalgette'a.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Błysk ogromnych, czarnych ślepi rozcinających gęstą toń wody tuż pod deskami pomostu.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Na miejscu porzucona zostaje oficjalna wskazówka: 🔎 <strong>A stack of overdue bills.</strong>. Ryzyko hipnotycznego śpiewu ściągającego do mętnej wody Tamizy.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="11" data-category="threat-cremorne" data-id="cremorne-greco-calliope" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🎪 #11</span>
+                    <span class="element-title">Wróżbiarz Greco i parowy mechanizm w Ogrodach Cremorne</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-water">NPC / Śledztwo</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W chińskiej pagodzie pośród gasnących lampionów Ogrodów Cremorne samozwańczy „Władca Snów” Greco tasuje pożółkłe karty tarota, gdy nagle z zębatych kół pobliskich organów parowych zaczyna ściekać gęsty, rybi śluz.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Tłuste, opalizujące łuski rybie zaklinowane między mosiężnymi trybami parowej machiny muzycznej.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Zachrypnięty, gwiżdżący syk pary uciekającej z miedzianych piszczałek i nerwowy, fałszywy chichot wróżbiarza.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Gryzący dym kadzidła sandałowego zmieszany z odrażającym fetorem gnijącej ikry i rzecznego mułu.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Na miejscu porzucona zostaje oficjalna wskazówka: 🔎 <strong>A rubbery smell in an unusual place.</strong>. Ryzyko hipnotycznego śpiewu ściągającego do mętnej wody Tamizy.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="12" data-category="threat-cremorne" data-id="cremorne-battersea-boat" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🚣 #12</span>
+                    <span class="element-title">Nocna przeprawa łodzią przez zamgloną Tamizę pod mostem Battersea</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-water">Wydarzenie / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Niewielka łódź wiosłowa wioząca Łowców przez Tamizę nagle gwałtownie uderza w coś potężnego pod powierzchnią wody, a gęsta, siarkowa mgła odcina ich od widoku obu brzegów rzeki.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Lodowaty rozbryzg mętnej, ściekowej wody zalewający dno łodzi i gwałtowne przechylenie burty.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Wielki, czarny kształt z poszarpaną płetwą grzbietową przepływający bezszelestnie tuż pod piórem wiosła.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Chrzęst szponów lub zębów szorujących po drewnianym dnie łodzi tuż pod podeszwami Łowców.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Na miejscu porzucona zostaje oficjalna wskazówka: 🔎 <strong>Oily fish scales, discarded.</strong>. Ryzyko hipnotycznego śpiewu ściągającego do mętnej wody Tamizy.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="13" data-category="mastermind" data-id="mastermind-sapphire-box-hargrave" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">💎 #13</span>
+                    <span class="element-title">Szafirowa przesyłka pod drzwiami Hargrave House</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-mastermind">Wydarzenie / Mastermind</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Po porannym, pojedynczym uderzeniu mosiężnego dzwonka służący znajduje na progu samotne hebanowe puzderko z błękitną wstążką i bilecikiem: 'Dla Najbardziej Umiłowanego'. W sieni wciąż unosi się zapach perfum posłańca.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Nieskazitelnie gładki błękitny jedwab wstążki na małym, hebanowym puzderku.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Chłodny, metaliczny dźwięk dzwonka u drzwi frontowych cichnący w pustej sieni.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Intensywna, narkotyczna woń jaśminu i czystego opium ulatniająca się ze szczeliny wieczka.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Oficjalna wskazówka Masterminda: 🔎 <strong>A gift box tied with a sapphire blue ribbon; inside is (pick one: something sweet, something expensive, something bloody, something shocking, something else).</strong>. Ślad Theodory Brathwaite wskazujący na infiltrację najwyższych sfer Londynu.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card" data-num="14" data-category="mastermind" data-id="mastermind-scotland-yard-mask" data-new="false">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🎭 #14</span>
+                    <span class="element-title">Wenecka szafirowa maska w gabinecie inspektora Scotland Yardu</span>
+                </div>
+                <div class="summary-right">
+                    
+                    <span class="badge badge-mastermind">NPC / Mastermind</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Podczas dyskretnej rozmowy na temat zamknięcia śledztwa w sprawie Zmory z Limehouse, Łowcy zauważają w oszklonej serwantce inspektora Scotland Yardu kobiecą maskę z błękitnej weneckiej porcelany, identyczną jak u posłańców Theodory.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Zimny, szafirowy połysk porcelanowej maski z delikatnymi pajęczynami pęknięć wokół pustych oczodołów.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Pióro inspektora drapiące po papierze urzędowym i jego nienaturalnie sztywny, formalny ton głosu unikającego kontaktu wzrokowego.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Woń taniego tytoniu fajkowego zmieszana z subtelnym, słodkawym zapachem jaśminowych perfum pani Brathwaite.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Oficjalna wskazówka Masterminda: 🔎 <strong>A blue gem glimmering in a poorly lit place.</strong>. Ślad Theodory Brathwaite wskazujący na infiltrację najwyższych sfer Londynu.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="15" data-category="life" data-id="life-british-museum-reading" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">📜 #15</span>
+                    <span class="element-title">Zakazany manuskrypt w okrągłej czytelni British Museum</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-life">Okruch życia / Śledztwo naukowe</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Pod monumentalną kopułą czytelni British Museum George w tajemnicy bada XVII-wieczny rejestr zaginionych rodów szlacheckich, gdy drżący z przejęcia bibliotekarz przynosi mu wolumin z wyciętymi stronami dotyczącymi rodziny Brathwaite.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Chłodny błękitny pył osiadający na wytłaczanych złotem skórzanych oprawach rzadkich ksiąg.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Upiorny szelest przewracanych welinowych kart niosący się echem pod monumentalną kopułą.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Sucha woń rozkładającego się papieru, kleju kostnego i naftowych piecyków.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> George odkrywa, że wycięte strony zastąpiono błękitnym pergaminem z pieczęcią weneckiego lwa (ślad Masterminda).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="16" data-category="life" data-id="life-applebee-cellar-dispute" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🧹 #16</span>
+                    <span class="element-title">Skargi pani Applebee i przeciek w piwnicy Hargrave House</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-life">Okruch życia / Sprawy domu</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Gospodyni pani Applebee wpada do bawialni z pogrzebaczem w dłoni, lamentując nad zgniłymi zapasami i obrzydliwym szlamem wyciekającym zza starej zamurowanej niszy w piwnicy na wino.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Brunatno-zielony śluz przeciekający między starymi cegłami fundamentów Hargrave House.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Ostra woń siarkowodoru i rzecznego mułu zmieszana z zapachem pleśniowego sera.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Głuchy, podziemny szum wody napierającej na fundamenty od strony kolektora rzecznego.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Singh badając ścianę odkrywa ukryty kanał rewizyjny połączony z kolektorem Bazalgette'a – ślad bytności stwora z Cremorne tuż pod domem!</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="17" data-category="threat-figgs" data-id="figgs-boars-head-delivery" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🐗 #17</span>
+                    <span class="element-title">Dyliżans z „ciastami mięsnymi” przed gospodą The Boar's Head</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-threat">NPC / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Przed zalaną deszczem gospodą w Whitechapel z furgonu wysiada barczysty Obert Figg z wiklinowym koszem parujących placków, podczas gdy z wnętrza tawerny dobiegają krzyki klienta, który w swoim cieście znalazł złoty ząb z kawałkiem kości.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Duszący, maślany zapach gorącego ciasta kruchego zmieszany z metaliczną nutą krwi.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Wściekła awantura przy szynku, tłuczenie kufli i ponury, gardłowy pomruk Oberta.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Błysk wypolerowanego złotego zęba tkwiącego w przekrojonym, ciemnoczerwonym farszu.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>Blocks of salt in an unusual place.</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="18" data-category="threat-figgs" data-id="figgs-st-katherine-docks" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">📦 #18</span>
+                    <span class="element-title">Patrick Figg polujący na czworakach wśród skrzyń w dokach św. Katarzyny</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-threat">Spotkanie / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W labiryncie skrzyń z herbatą i jutowych worków w dokach Łowcy dostrzegają skuloną postać poruszającą się z nieludzką zwinnością na czterech kończynach, wlokącą za sobą bezwładne ciało stróża nocnego.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Wilgotne, chrapliwe kwiczenie i charkot wydobywający się z gardła polującego Patricka.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Świeża smuga krwi ciągnąca się po mokrym bruku prosto do ciemnego luku magazynu.</div><div class="sensory-item"><span class="sensory-icon">✋</span> <strong>Dotyk:</strong> Chłód porzuconej mosiężnej latarni stróża ze stłuczoną szybką i wgniecionym daszkiem.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> W lokacji ukryta jest oficjalna wskazówka: 🔎 <strong>A heap of clothing, discarded; the dominant color is red.</strong>. Zagrożenie ze strony klanu Figgów gwałtownie eskaluje przy porażce (6-).</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="19" data-category="threat-cremorne" data-id="cremorne-abigail-backstage" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🎭 #19</span>
+                    <span class="element-title">Za kulisami teatru Ogrodów Cremorne i gabinet Abigail Simpson</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-water">NPC / Śledztwo</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> W zapuszczonym gabinecie dyrektorki panna Simpson nerwowo pali papierosa nad stertą monitów komorniczych i szkicami 'akwarium dla syreny', gdy z sąsiedniej garderoby dobiega plusk wody w wielkim drewnianym cebrze.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Tani tytoń turecki, zapach pudru teatralnego i niepokojący odór morskich wodorostów.</div><div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Pogniecione weksle i szkice techniczne przedstawiające skórzano-parową uprząż z płetwą.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Ciężki, mokry chlust wody za ścianą i głuche uderzenie czegoś masywnego o deski.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Na miejscu porzucona zostaje oficjalna wskazówka: 🔎 <strong>A large dorsal fin, seemingly torn off.</strong>. Ryzyko hipnotycznego śpiewu ściągającego do mętnej wody Tamizy.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="20" data-category="threat-cremorne" data-id="cremorne-chinese-pagoda-trail" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🏮 #20</span>
+                    <span class="element-title">Śluzowaty ślad na schodach chińskiej pagody podczas balu maskowego</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-water">Wydarzenie / Zagrożenie</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Wśród wirujących par w weneckich maskach i dźwięków orkiestry na drewnianych schodach pagody pojawia się szeroka, lśniąca smuga rybiego śluzu, prowadząca prosto do prywatnej loży, z której słychać stłumiony krzyk.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Opalizujący w świetle lampionów zielonkawy śluz oblepiający aksamitną poręcz schodów.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Walc Straussa grany przez orkiestrę nagle zagłuszony brzękiem tłuczonych kryształowych kandelabrów.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Dławiący fetor zgniłych ryb i wodorostów wdzierający się do dusznej sali balowej.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Na miejscu porzucona zostaje oficjalna wskazówka: 🔎 <strong>Numerous reports of drunk and disorderly behavior.</strong>. Ryzyko hipnotycznego śpiewu ściągającego do mętnej wody Tamizy.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+
+        <details class="element-card card-new" data-num="21" data-category="mastermind" data-id="mastermind-brathwaite-hall-auction" data-new="true">
+            <summary class="element-summary">
+                <div class="summary-left">
+                    <span class="element-num">🏛️ #21</span>
+                    <span class="element-title">Tajna licytacja antyków i prochu w Brathwaite Hall</span>
+                </div>
+                <div class="summary-right">
+                    <span class="badge badge-new">✨ Dołączona</span>
+                    <span class="badge badge-mastermind">Wydarzenie / Mastermind</span>
+                    <span class="chevron">▼</span>
+                </div>
+            </summary>
+            <div class="element-body">
+                <div class="element-blurb">
+                    <strong>🎬 Zarys sceny (Blurb):</strong> Podczas prywatnej aukcji w podmiejskiej rezydencji pani Brathwaite Łowcy w przebraniach dostrzegają samą Theodorę, która z prywatnej loży z chłodnym uśmiechem licytuje skrzynie z wojskowym dynamitem i starożytne tablice.
+                </div>
+                <div class="sensory-grid">
+                    <div class="sensory-item"><span class="sensory-icon">👁️</span> <strong>Wzrok:</strong> Posągowo piękna sylwetka Theodory w szafirowej sukni, z twarzą przysłoniętą kunsztowną koronką.</div><div class="sensory-item"><span class="sensory-icon">👂</span> <strong>Słuch:</strong> Suche, głuche stuknięcie kościanego młotka aukcjonera po każdej astronomicznej ofercie.</div><div class="sensory-item"><span class="sensory-icon">👃</span> <strong>Węch:</strong> Narkotyczny aromat indyjskich perfum jaśminowych i dymu z woskowych świec.</div>
+                </div>
+                
+            <div class="element-hook">
+                <span class="hook-icon">⛓️</span>
+                <div class="hook-content"><strong>Haczyk / Wskazówka:</strong> Oficjalna wskazówka Masterminda: 🔎 <strong>Evidence that Mrs. Brathwaite has been researching the possibility that something from myth and legend actually existed (pick one: Camelot, the Fae realm, Saint George’s dragon, something else).</strong>. Ślad Theodory Brathwaite wskazujący na infiltrację najwyższych sfer Londynu.</div>
+            </div>
+            
+            </div>
+        </details>
+        
+        </div>
+
+        <!-- Dusk Phase -->
+        <div class="dusk-card">
+            <div class="dusk-header">
+                <div class="dusk-title">
+                    <span>🌆</span> Faza Zmierzchu: Odpowiedz na Pytanie (Cremorne Gardens)
+                </div>
+                <span class="dusk-badge">Modyfikator: +3</span>
+            </div>
+            <div class="dusk-body">
+                <div>
+                    <strong>Pytanie Progowe:</strong> <em>Czy stwór jest prawdziwy, czy to mistyfikacja?</em> (Złożoność: 4)<br>
+                    Łowcy zgromadzili aż <strong>7 aktywnych wskazówek</strong>, co daje bezpieczny modyfikator <strong>+3</strong> do rzutu!
+                </div>
+                <div class="dusk-options">
+                    <div class="dusk-option-box">
+                        <strong>🌊 Jeśli PRAWDZIWY:</strong>
+                        Przejście do pytania: <em>Czego pożąda stwór?</em> (Złożoność 4). Syrena jest autentycznym przedludzkim bytem wywabionym przez roboty kanalizacyjne.
+                    </div>
+                    <div class="dusk-option-box">
+                        <strong>🎭 Jeśli MISTYFIKACJA:</strong>
+                        Przejście do pytania: <em>Kto za tym stoi i dlaczego?</em> (Złożoność 4). Abigail Simpson lub Knox zaaranżowali mechaniczną bestię, by ratować zadłużone ogrody.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            The Between TTRPG • Wygenerowano automatycznie przez <code>session_prep.py</code> • Metoda 7-3-1 (Jason Cordova)<br>
+            Historia: 0 elementów wykorzystanych w poprzednich podejściach • Brak duplikatów
+        </footer>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'the_between_prep_session_' + 4;
+
+        function toggleAll(expand) {
+            document.querySelectorAll('details.element-card').forEach(function(detail) {
+                detail.open = expand;
+            });
+            saveState();
+        }
+
+        function saveState() {
+            const state = {};
+            document.querySelectorAll('details.element-card').forEach(function(detail) {
+                const num = detail.getAttribute('data-num');
+                state[num] = detail.open;
+            });
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch(e) {}
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const state = JSON.parse(raw);
+                    document.querySelectorAll('details.element-card').forEach(function(detail) {
+                        const num = detail.getAttribute('data-num');
+                        const isNew = detail.getAttribute('data-new') === 'true';
+                        if (isNew) {
+                            detail.open = true;
+                        } else if (state[num] !== undefined) {
+                            detail.open = state[num];
+                        }
+                    });
+                    return;
+                }
+            } catch(e) {}
+            document.querySelectorAll('details.element-card').forEach(function(detail, idx) {
+                const isNew = detail.getAttribute('data-new') === 'true';
+                detail.open = isNew || (idx < 3);
+            });
+        }
+
+        document.querySelectorAll('details.element-card').forEach(function(detail) {
+            detail.addEventListener('toggle', saveState);
+        });
+
+        // Obsługa filtrów kategorii
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                const filter = btn.getAttribute('data-filter');
+                document.querySelectorAll('details.element-card').forEach(function(card) {
+                    const cat = card.getAttribute('data-category');
+                    if (filter === 'all' || cat === filter) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        loadState();
+    </script>
+</body>
+</html>
