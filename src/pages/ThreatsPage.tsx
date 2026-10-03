@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { ChevronRight, AlertTriangle } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
@@ -7,6 +6,7 @@ import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
 import { cn } from '@/lib/utils'
 import { getThreatLevelStyle } from '@/lib/threatUtils'
+import { SelectableLink } from '@/lib/SelectableLink'
 import { useLanguage } from '@/i18n/LanguageContext'
 
 type FilterValue = 'all' | 'mastermind' | 'threat'
@@ -78,7 +78,7 @@ export default function ThreatsPage() {
         {sorted.map((threat) => {
           const neutral = isNeutralised(threat)
           return (
-            <Link
+            <SelectableLink
               key={threat.id}
               to={`/threats/${threat.id}`}
               className={cn(
@@ -153,7 +153,7 @@ export default function ThreatsPage() {
                   )}
                 />
               </div>
-            </Link>
+            </SelectableLink>
           )
         })}
       </div>

@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
 import { Calendar, ChevronRight } from 'lucide-react'
 import PageHeader from '@/components/ui/PageHeader'
 import Badge from '@/components/ui/Badge'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { getSessionsEn } from '@/data/sessions_en'
 import { getSessionsPl } from '@/data/sessions_pl'
+import { SelectableLink } from '@/lib/SelectableLink'
 
 export default function ActualPlaysPage() {
   const { lang, t } = useLanguage()
@@ -21,7 +21,7 @@ export default function ActualPlaysPage() {
 
       <div className="space-y-4">
         {sortedSessions.map((session) => (
-          <Link
+          <SelectableLink
             key={session.id}
             to={`/actual-plays/${session.id}`}
             className="art-card group block rounded-lg p-6 transition-all"
@@ -82,7 +82,7 @@ export default function ActualPlaysPage() {
                 className="mt-1 shrink-0 text-amber-900 transition-transform group-hover:translate-x-1 group-hover:text-amber-600"
               />
             </div>
-          </Link>
+          </SelectableLink>
         ))}
       </div>
 

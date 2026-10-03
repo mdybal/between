@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { BookOpen, Users, Skull, ChevronRight } from 'lucide-react'
 import { useLanguage } from '@/i18n/LanguageContext'
 import { getCharactersEn } from '@/data/characters_en'
@@ -7,6 +6,7 @@ import { getSessionsEn } from '@/data/sessions_en'
 import { getSessionsPl } from '@/data/sessions_pl'
 import { getThreatsEn } from '@/data/threats_en'
 import { getThreatsPl } from '@/data/threats_pl'
+import { SelectableLink } from '@/lib/SelectableLink'
 
 export default function HomePage() {
   const { lang, t } = useLanguage()
@@ -64,7 +64,7 @@ export default function HomePage() {
       {/* Latest Session Banner */}
       {latestSession && (
         <section className="mb-5">
-          <Link
+          <SelectableLink
             to={`/actual-plays/${latestSession.id}`}
             className="art-card group block rounded-lg p-6 transition-colors"
             style={{
@@ -97,7 +97,7 @@ export default function HomePage() {
                 className="mt-1 shrink-0 text-amber-700 transition-transform group-hover:translate-x-1"
               />
             </div>
-          </Link>
+          </SelectableLink>
         </section>
       )}
 
@@ -105,7 +105,7 @@ export default function HomePage() {
       <div className="mx-auto nouveau-divider max-w-sm " />
       <section className="grid gap-6 md:grid-cols-3">
         {sections.map(({ to, icon: Icon, label, description, count, countLabel }) => (
-          <Link
+          <SelectableLink
             key={to}
             to={to}
             className="art-card group flex flex-col rounded-lg p-6 transition-all duration-200"
@@ -151,7 +151,7 @@ export default function HomePage() {
                 className="text-amber-800 transition-transform group-hover:translate-x-1 group-hover:text-amber-500"
               />
             </div>
-          </Link>
+          </SelectableLink>
         ))}
       </section>
     </div>
