@@ -86,7 +86,11 @@ export const threatsPl: ThreatText[] = [
     questions: [
       {
         question: 'Czy stworzenie jest prawdziwe, czy to mistyfikacja? (Złożoność: 4)',
+        answer: 'Stworzenie jest mistyfikacją - człowiek (lub kilku ludzi) w kostiumie.'
       },
+      {
+        question: 'Kto stoi za mistyfikacją i dlaczego? (Złożoność: 4)',
+      }
     ],
     mask: {
       title: 'Maska Hulaszczej Zabawy',
@@ -116,6 +120,18 @@ export const threatsPl: ThreatText[] = [
       description:
         'Każdy Łowca opowiada sen o pogańskim bogu świń, Moc\'h. Czy Moc\'h zażądał ofiary z bogactwa, statusu czy krwi? Co złożyli w ofierze?',
     },
+  },
+  {
+    id: 'whateley-camera',
+    name: 'Aparat Whateleya',
+    description:
+      `Biblioteka Domu Hargrave'a zawiera badania nad tak zwanym Aparatem Whateleya, jedną z pierwszych na świecie kamer typu mokrej płytki. Znane są przypadki, że osoby sfotografowane tym aparatem znikają bez śladu. Amerykański naukowiec i filozof, Atticus Whateley, studiował ten aparat przez wiele lat i wysunął teorię o Wonnej Pustce" — rodzaju proto-Ziemi, która istniała w niemal całkowitej ciemności i była domem potężnych bytów, wygnanych przez Boga pierwszego dnia Stworzenia. Wierzył, że niektóre z tych bytów mogą wciąż działać w naszym świecie, ukryte przed oczami śmiertelników, być może za pośrednictwem powszednich przedmiotów, takich jak ten aparat. Choć jego badania nie potrafiły udowodnić istnienia Wonnej Pustki, udało mu się wykazać, w jaki sposób aparat powodował, że ludzie byli porwani do innego wymiaru; niestety, zanim zdążył przedstawić swoją pracę do oceny, został zabity, jego notatki zniszczono, a aparat zaginął. <br>
+      Przed tygodniem zniknęła piękna aktorka i przyjaciółka Beulah Thrum, Penelope Levy. Po raz ostatni widziano ją w The Society Obscura z narzeczonym Beulah, Simonem Piedmontem.`,
+    questions: [
+      {
+        question: 'Jakie okoliczności sprawią, że osoba sfotografowana tym aparatem zniknie? (Złożoność: 8)',
+      },
+    ],
   },
 ]
 

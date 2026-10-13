@@ -88,6 +88,10 @@ export const threatsEn: ThreatText[] = [
     questions: [
       {
         question: 'Is the creature real or is it a hoax? (Complexity: 4)',
+        answer: 'The creature is a hoax - a man (or multiple men) in a costume. '
+      },
+      {
+        question: 'Who is perpetrating the hoax and why? (Complexity: 4)',
       },
     ],
     mask: {
@@ -116,6 +120,18 @@ export const threatsEn: ThreatText[] = [
       title: 'The Mask of the Pig',
       description:'Each Hunter narrates a dream about the pagan swine god, Moc’h. Did Moc’h demand a sacrifice of riches, status, or blood? What did they each sacrifice?',
     },
+  },
+  {
+    id: 'whateley-camera',
+    name: 'Whateley Camera',
+    description:
+      `The Hargrave House library contains research on the so-called Whateley Camera, one of the first wet plate-type cameras ever produced. People who are photographed by the camera have been known to disappear without a trace. An American scientist and philosopher, Atticus Whateley, studied the camera for a number of years and advanced an idea called the “Fragrant Void,” a sort-of proto-Earth that existed in near-total darkness, and that was home to powerful entities who were banished by God on the first day of Creation. He believed some of those entities could still operate in our world, hidden from view, perhaps through common objects, like the camera. While his research couldn’t prove theexistence of the Fragrant Void, he did manage to show how the camera caused people to be whisked away to another dimension; unfortunately, before he could present his work for review, he was killed, his notes were destroyed, and the camera went missing. <br>
+      One week ago, a beautiful actress and a friend of Beulah Thrum, Penelope Levy, disappeared. She was last seen at The Society Obscura with Beulah's fiancess, Simon Piedmont.`,
+    questions: [
+      {
+        question: 'What circumstances will cause someone photographed by the camera to disappear? (Complexity: 8)',
+      },
+    ],
   },
 ]
 

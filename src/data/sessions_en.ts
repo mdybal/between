@@ -265,6 +265,72 @@ export const sessionsEn: SessionText[] = [
       },
     ],
   },
+  {
+    id: 'session-04',
+    title: `Moc'h, the Mermaid and the Old Camera `,
+    summary:
+      `Talented actress Penelope Ladywhite disappeared without a trace after a visit to the mysterious Obscura Society. In the abandoned slaughterhouse of the Figg family in Southwark, Sir George and Lord Richard come face to face with the macabre altar of the pagan pig deity Moc'h. The creature from Cremorne Gardens turns out to be an elaborate hoax. A reception alongside magnate Theodora Brathwaite brings a social scandal.`,
+    scenes: [
+      {
+        label: 'An Unexpected Invitation, an Unexpected Guest',
+        phase: 'Dawn',
+        prose: [
+          'The wind blowing from the Thames brought with it the smell of damp, soot and river mud. In Hargrave House, the day began slowly. Lord Richard, staring out into the street through a large telescope attached to the windowsill, was the first to spot a messenger running down the steps of the residence. On the threshold lay a small letter sealed with the deep, emerald seal of the Royal Geographical Society. The club president, General Herod Barzley, invited distinguished gentlemen to a gala evening featuring the guest of honor – Theodora Brathwaite, the legendary "Queen of Barbados".',
+          'Before the Lord and his companion Singh could discuss the contents of the invitation, someone banged on the front door with desperate force. A sobbing Beulah stood on the threshold. Burying her face in Singh\'s arms, she choked out terrible news through her tears: her closest friend, the beautiful actress Penelope Ladywhite, had vanished into thin air. She had been drawn into the circles of the so-called Obscura Society – an elite group of artists and technologists making scandalous, occult photographs. Beulah held in her trembling hand a photograph of Penelope with an unnatural, phosphorescent aura. In the Hargrave library, a connection was immediately found: the name of Atticus Wheteley, an investigator of other dimensions, whose camera had the power to tear the fabric of the world and cast captured souls straight into the abyss of the "Fragrant Void".',
+          'The Hunters joined forces. Before setting out to search for Penelope, it was necessary to close the case of the Creature from Cremorne Gardens, which Beulah\'s lover, the young bon-vivant Simon, boasted about in local taverns, and also to investigate the cannibal slaughterhouse of the Figg clan, sealed by Scotland Yard.'
+        ]
+      },
+      {
+        label: `The Altar of Moc'h`,
+        phase: 'Day',
+        prose: [
+          'While Ludwig and Singh went to meet the arrogant Simon near the Parliament building, Lord Richard and Sir George Montegu, accompanied by the indispensable hound Pythagoras, directed their carriage to the south bank of the river. The Southwark district struck their senses with a cacophony of roars of driven cattle and the overpowering stench of rancid fat and blood coming from the tannery.',
+          `The sealed building with the sign "Figg's Pigs" hid a secret going far beyond ordinary butchery. While Pythagoras scratched the wooden wainscoting behind the shop counter with a loud growl, Sir George, in his incorporeal form, passed through the hidden mechanism of a wardrobe. He found himself in a spacious, underground crypt. In the center of the chamber, in the fumes of rotting meat, stood a primitive stone altar. A severed head of a massive boar was stuck on an iron skewer, and on the stone floor around it human arms and lower legs were arranged in the shape of a blasphemous solar symbol.`,
+          `The icy emanation of the pagan deity Moc'h crashed upon the soul of the dead Hunter like a lead bell. George froze, paralyzed by an overpowering fear, feeling his ectoplasmic form begin to dissipate. The situation was saved by Lord Richard – bursting into the crypt with a bare ivory cane, without hesitation he knocked the monstrous head to the ground and smashed the arrangement of bones, cursing to high heaven. Shielding himself with an enchanted pygmy head, upon which the curse of Moc'h descended, he freed George from the dark spell. `,
+          `The ghost decided to look deeper into the past of this place. A shocking vision from the day of the wedding appeared to him: Titus Figg carried his chosen one, the young and proud Hortencia in a snow-white dress, over the threshold. However, instead of to the bed, he led her before the altar of Moc'h. There, Hortencia without a shadow of hesitation laid her own right arm on the block, allowing it to be chopped off with an axe as an offering to the deity in exchange for the power and success of their murderous business. In a stash behind the altar, the Hunters found the same wedding dress, dried with black gore, and a pile of clothes of murdered workers.`
+        ],
+      },
+      {
+        label: 'Queen of Barbados',
+        phase: 'Day',
+        prose: [
+          `At dusk, the carriage pulled up in front of the marble stairs of the Royal Geographical Society. The club interiors were drowned in the smoke of the finest cigars and the glare of crystal chandeliers. General Herod Barzley proudly presented the star of the evening to the guests. Theodora Brathwaite, clad in a flowing sapphire gown emphasizing her proud, almost monarchal features, focused the gazes of all London high society.`,
+          `As the magnate recounted her past corsair exploits in the Caribbean Sea, her pardon by young Queen Victoria and her commercial power, Lord Richard could not withstand the pressure. Tired, aching after the hardships of the day and consumed by anxiety, he began to wash down his stress abundantly with Scotch whisky. Alcohol quickly took away his courtesy. Richard began to loudly mock the present gentlemen and throw arrogant remarks, becoming the laughing stock of the whole salon. Taking advantage of her superiority, Brathwaite asked Richard a ruthless question: who really is Ludwig Virchow to him? The aristocrat, his pride wounded, confessed with brutal honesty what had been boiling inside him for a long time – he called the young German a brazen freeloader and parasite who, instead of hunting in the bush, poisons Hargrave House with his presence.`,
+          `Despite Ludwig's humiliation and Lord Richard's compromise, the Hunters returned together to Hargrave House and sat down at the table together to consider the state of affairs. Putting together all the clues, they concluded that the amphibious Fishman from Cremorne Gardens never existed as a supernatural being. It was a cynical hoax organized using fish oil and an elaborate costume. Now it was only necessary to discover the motive and identity of the perpetrator (or perpetrators).`
+        ],
+      },
+      {
+        label: `Echoes of the Past`,
+        phase: `Dusk`,
+        prose: [
+          `However, this triumph of intellect opened old wounds of the past. In the quiet of the carriage, each of the Hunters had to confront his own demon:
+<ul>
+<li> Sir George saw a flashback from the 17th century when his portrait was being painted, and Singh's ancestor, a maharaja and George's friend, brought an African grimoire of black magic to Hargrave House, initiating an alliance that was to end in the flames of betrayal.</li>
+<li> Ludwig returned to the moment of his conception in the Prussian primeval forest, where his bleeding mother Anna made a night pact to save the child she carried under her heart.</li>
+<li> The boy from the village bitterly remembered an African expedition during which the Explorer deceitfully stole the revered tusks of the great matriarch elephant, hanging today shamelessly above the fireplace as a hunting trophy in Hargrave House.</li></ul>`
+        ]
+      },
+      {
+        label: 'Night in Cremorne Gardens',
+        phase: 'Night',
+        prose: [
+          `Singh and Ludwig decided to visit Cremorne Gardens again under the cover of night. Each arrived here for a different purpose, so they separated right past the gate. Singh strode energetically under the scaffolding of the Ferris Wheel - where, as Simon Piedmont testified, the monster was deprived of its dorsal fin. The brave valet found the item he was looking for, but the creature (or rather the person disguised as it) attacked unexpectedly! Fortunately, Singh had brought Pythagoras with him, who chased away the attacker by tearing off its tail! As expected, both the fin and the tail turned out to be part of a costume made of leather and rubber.`,
+          `At the same time, in a circus tent smoked with incense, Ludwig Virchow sat down for a private séance with the medium Greco. When the "Seeing Boy" laid out the tarot card depicting the Fool on his forehead, Ludwig decided to test his alleged power. He pulled out a crystal vial with the ashes and clots of the Limehouse Horror, and then smashed it with all his might on the mahogany table. Fragments of glass cut the German's skin, and the cursed vampire blood immediately entered his veins. Ludwig writhed in agony as his right hand, from fingers to wrist, blackened like charred wood, branding him with the indelible mark of darkness. Staggering, Ludwig ran out of the tent onto a narrow path. There, among the shadows, a snow-white albino peacock appeared to him with a glowing bloody eye on its forehead. Its spread plumage blinded Ludwig with a mystical glare - a prophetic vision somehow connected with the Fragrant Void and the disappearance of Penelope Levy. There Singh found him.`,
+          `Lord Richard also intended to go to Cremorne Gardens, but never got there. Heading along the coast, he saw Abel Knox on Vauxhall Bridge, climbing over the railing. The Lord rushed towards him and at the last moment caught the would-be suicide, who intended to jump into the depths of the river. The man seemed to be under the influence of some charm, but slowly came to his senses. Sobbing, he only handed Richard a crumpled letter and crawled away into the darkness. On the piece of paper there was only one sentence "Abigail will pay for this!". However, one more detail did not escape Lord Richard's keen eye - in the gutter he noticed a woman's blue glove, which must have fallen out of a passing carriage.`
+        ],
+      },
+      {
+        label: 'Madness in Bedlam',
+        phase: 'Day',
+        prose: [
+          `A dirty gray dawn greeted Hargrave House with the smell of burning and soap. In the garden tub, Singh struggled to scrub Pythagoras from river fish oil and soot. To everyone's amazement, the previously brown dog turned out to have a snow-white, flawless coat.`,
+          `At the same time, Mrs. Applebee's terrifying squeal came from the kitchen. From the pantry wall, damaged by the vibrations of Bazalgette's city sewer system, stinking, thick sludge began to seep out. Sir George, wishing to finally solve the tormented housekeeper's problem, materialized a clockwork mining mechanism and set off a charge in the chimney flue. A powerful explosion shook the ground floor of the residence, tearing pipes from the walls and covering the whole kitchen with rubble and soot. Hysterically crying, Mrs. Applebee threw her apron at the phantom and declared that she would never set foot in this cursed house again.`,
+          `Lord Richard and George went to the infamous hospital for the insane, Bedlam. The ward head, Dr. Rodney Walters, received the gentlemen with cool reserve, leading them to the padded cell of Titus Figg. Bound in a straitjacket, the butcher with madness in his eyes rhythmically hit his shaved head against the soft wall, beating time to a blasphemous rhyme about three little pigs. George caught the insane rhythm and hummed a verse about a bride from the slaughterhouse. Titus, delighted with the joint singing, shouted a new verse: Hortencia sacrificed her hand and family home for the love of Moc'h and the herd of the pig god will grow and grow. Suddenly, a choir of other voices joined Titus - the other inmates on the ward were singing! Worse, Dr. Walters himself began to hum this melody and moved to the cell doors to let the madmen out. For Lord Richard this was too much. The veteran of African wars exploded with fury. He cornered the doctor against the wall and with a powerful blow of his fist broke his nose, and then smashed his head against the floor time after time, until his elegant white coat flowed with blood. From the torn pocket of the unconscious ward head fell an old children's herbarium with a dedication: "For my sweet Hortensia - Dad". Leaving the ward, the Hunters looked up. Above the entrance shone a polished brass commemorative plaque, announcing that the expansion of the facility was financed by a generous donation from Theodora Brathwaite.`,
+          `Singh and Ludwig went to Cremorne Gardens once again - this time they wanted to confront the owners of the garden, Thomas Simpson and his daughter, Abigail. Guided by instinct, Singh slipped behind the administrative buildings of the Gardens and caught through the hedge a fragment of an argument between father and daughter. Abigail was strongly opposed to trying to capture the creature and putting it on public display. Shouting her objection, she turned on her heel and rushed forward - straight onto the path where Ludwig stood (waiting for Singh's return). Seeing Abigail alone (and suspecting that she was behind the whole hoax), he decided to cast a charm on her. Unfortunately, the ritual went a bit too well - although the girl was bound to him and would not be able to escape him, the young medium himself felt bound to the girl - and decided that he must protect her. Without thinking long, he fled with her straight to Chen Bao's Opium Den.`
+        ],
+      },
+    ],
+  }
 ]
 
 /**

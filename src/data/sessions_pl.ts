@@ -259,6 +259,72 @@ export const sessionsPl: SessionText[] = [
       }
     ],
   },
+  {
+    id: 'session-04',
+    title: `Moc'h, Syrena i Stary Aparat `,
+    summary:
+      `Utalentowana aktorka Penelope Ladywhite, zniknęła bez śladu po wizycie w tajemniczym Towarzystwie Obskura. W opuszczonej rzeźni rodziny Figgów w Southwark Sir George i Lord Richard stają twarzą w twarz z makabrycznym ołtarzem pogańskiego bóstwa świń Moc'ha. Stwór z Ogrodów Cremorne, okazuje się być misterną mistyfikacją. Przyjęcie u boku magnatki Theodory Brathwaite przynosi towarzyski skandal.`,
+    scenes: [
+      {
+        label: 'Nieoczekiwane zaproszenie, nieoczekiwany gość',
+        phase: 'Dawn',
+        prose: [
+          'Wiatr wiejący znad Tamizy przyniósł ze sobą zapach wilgoci, sadzy i rzecznego mułu. W Hargrave House dzień zaczynał się powoli. Lord Richard, wpatrując się w ulicę przez wielką lunetę przytwierdzoną do okiennego parapetu, jako pierwszy dostrzegł posłańca zbiegającego po schodach rezydencji. Na progu leżał niewielki list zalakowany głęboką, szmaragdową pieczęcią Królewskiego Towarzystwa Geograficznego. Prezes klubu, generał Herod Barzley, zapraszał wybitnych dżentelmenów na uroczysty wieczór z udziałem gościa honorowego – Theodory Brathwaite, legendarnej „Królowej Barbadosu”.',
+		  'Zanim jednak Lord i towarzyszący mu Singh zdołali omówić treść zaproszenia, do frontowych drzwi załomotał ktoś z rozpaczliwą siłą. W progu stanęła zaszlochana Beulah. Wtuliwszy twarz w ramiona Singha, wykrztusiła spomiędzy łez przerażającą wieść: jej najbliższa przyjaciółka, piękna aktorka Penelope Ladywhite, przepadła jak kamień w wodę. Została wciągnięta w kręgi tzw. Towarzystwa Obskura – elitarnej grupy artystów i technologów wykonujących gorszące, okultystyczne fotografie. Beulah trzymała w drżącej dłoni fotografię Penelope o nienaturalnej, fosforyzującej aurze. W bibliotece Hargrave natychmiast odnaleziono powiązanie: nazwisko Atticusa Wheteleya, badacza innych wymiarów, którego aparat miał potęgę rozrywania tkanki świata i strącania uwiecznionych dusz wprost w czeluść „Wonnej Pustki”.',
+		  'Łowcy połączyli siły. Przed wyruszeniem na poszukiwania Penelope należało zamknąć sprawę Stwora z Cremorne Gardens, którym w lokalnych szynkach chełpił się kochanek Beulah, młody bon-vivant Simon, a także zbadać zaplombowaną przez Scotland Yard rzeźnię kanibali z rodu Figgów.'
+        ]
+      },
+      {
+        label: `Ołtarz Moc'ha`,
+        phase: 'Day',
+        prose: [
+          'Podczas gdy Ludwig i Singh udali się na spotkanie z zarozumiałym Simonem w pobliże gmachu Parlamentu, Lord Richard oraz Sir George Montegu w towarzystwie niezastąpionego ogara Pitagorasa skierowali powóz na południowy brzeg rzeki. Dzielnica Southwark uderzyła ich zmysły kakofonią ryków pędzonego bydła i obezwładniającym odorem zjełczałego tłuszczu oraz krwi dochodzącym z garbarni.',
+		  `Zapieczętowany budynek z szyldem "Figg's Pigs" skrywał tajemnicę dalece wykraczającą poza zwykłe rzeźnictwo. Podczas gdy Pitagoras z głośnym warkotem drapał drewnianą boazerię za ladą sklepu, Sir George w postaci bezcielesnej przeniknął przez ukryty mechanizm szafy. Znalazł się w przestronnej, podziemnej krypcie. Na środku komnaty, w oparach gnijącego mięsa, stał prymitywny kamienny ołtarz. Na żelaznym szpikulcu tkwił odcięty łeb potężnego knura, a na kamiennej posadzce wokół niego ułożono ludzkie ramiona i podudzia w kształt bluźnierczego symbolu solarnego.`,
+		  `Lodowata emanacja pogańskiego bóstwa Moc'ha runęła na duszę zmarłego Łowcy niczym ołowiany dzwon. George zamarł, sparaliżowany obezwładniającym strachem, czując, jak jego ektoplazmatyczna forma zaczyna się rozpraszać. Sytuację uratował Lord Richard – wpadłszy do krypty z obnażoną laską z kości słoniowej, bez wahania strącił potworny łeb na ziemię i rozbił układ kości, przeklinając na czym świat stoi. Zasłoniwszy się zaklętą głową pigmeja, na którą spłynęło przekleństwo Moc'ha, wyzwolił George'a spod mrocznego uroku. `,
+		  `Duch postanowił spojrzeć głębiej w przeszłość tego miejsca. Ukazała mu się wstrząsająca wizja z dnia ślubu: Titus Figg wnosił przez próg swoją wybrankę, młodą i dumną Hortencię w śnieżnobiałej sukni. Jednak zamiast do łoża, poprowadził ją przed ołtarz Moc'ha. Tam Hortencia bez cienia wahania położyła własne prawe ramię na pniu, pozwalając odrąbać je toporem w ofierze bóstwu w zamian za potęgę i powodzenie ich morderczego interesu. W schowku za ołtarzem Łowcy odnaleźli tę samą suknię ślubną, zaschniętą od czarnej posoki, oraz stos ubrań zamordowanych robotników.`
+        ],
+      },
+      {
+        label: 'Królowa Barbadosu',
+        phase: 'Day',
+        prose: [
+          `O zmierzchu dorożka zajechała przed marmurowe schody Królewskiego Towarzystwa Geograficznego. Wnętrza klubu tonęły w dymie najlepszych cygar i blasku kryształowych żyrandoli. Generał Herod Barzley z dumą przedstawił gościom gwiazdę wieczoru. Theodora Brathwaite, odziana w powłóczystą szafirową suknię podkreślającą jej dumne, niemal monarsze rysy, skupiała na sobie spojrzenia całej londyńskiej śmietanki towarzyskiej.`,
+          `Gdy magnatka opowiadała o swoich dawnych korsarskich wyczynach na Morzu Karaibskim, ułaskawieniu przez młodą królową Wiktorię i handlowej potędze, Lord Richard nie wytrzymał presji. Zmęczony, obolały po trudach dnia i trawiony niepokojem, począł obficie zapijać stres szkocką whisky. Alkohol szybko odebrał mu kurtuazję. Richard zaczął głośno kpić z obecnych dżentelmenów i rzucać aroganckie uwagi, stając się pośmiewiskiem całego salonu. Korzystając ze swej przewagi, Brathwaite zadała Richardowi bezlitosne pytanie: kim naprawdę jest dla niego Ludwig Virchow? Ugodzony w dumę arystokrata wyznał z brutalną szczerością to, co od dawna w nim kipiało – nazwał młodego Niemca bezczelnym darmozjadem i pasożytem, który zamiast polować w buszu, zatruwa swą obecnością Hargrave House.`,
+          `Mimo upokorzenia Ludwiga, i kompromitacji Lorda Richarda, Łowcy wrócili razem do Hargrave House i usiedli razem do stołu by zastanowić się nad stanem spraw. Zestawiając wszystkie poszlaki, doszli do wniosku, że amfibijny Ryboludź z Ogrodów Cremorne nigdy nie istniał jako nadnaturalna istota. Była to cyniczna mistyfikacja zorganizowana z użyciem tranu i wyszukanego kostiumu. Teraz należało tylko odkryć motywajcę i tożsamość sprawcy (lub sprawców).`
+        ],
+      },
+      {
+        label: `Echa przeszłości`,
+        phase: `Dusk`,
+        prose: [
+          `Ten triumf intelektu otworzył jednak stare rany przeszłości. W zaciszu powozu każdy z Łowców musiał skonfrontować się z własnym demonem:
+<ul>
+<li> Sir George ujrzał retrospekcję z XVII wieku, gdy malowano jego portret, a przodek Singha, maharadża i przyjaciel George'a, wniósł do Hargrave House afrykański grymuar czarnej magii, zapoczątkowując sojusz, który miał zakończyć się płomieniami zdrady.
+<li> Ludwig powrócił do chwili swego poczęcia w pruskiej puszczy, gdzie jego krwawiąca matka Anna zawarła nocny pakt, by uratować dziecko, które nosiła pod sercem.
+<li> Chłopiec w wiosce z goryczą przypomniał sobie afrykańską ekspedycję, podczas której Odkrywca podstępnie ukradł czczone kły wielkiej słonicy matriarchini, zawieszone dziś bezwstydnie nad kominkiem jako myśliwskie trofeum w Hargrave House.`
+        ]
+      },
+      {
+        label: 'Noc w Cremorne Gardens',
+        phase: 'Night',
+        prose: [
+          `Singh i Ludwig postanowili znów odwiedzić Cremorne Gardens pod osłoną nocy. Każdy przybył tu w innym celu, więc rozdzielili się zaraz za bramą. Singh sprężystym krokiem ruszył pod rusztowanie Diabelskiego Młyna - gdzie, jak zeznał Simon Piedmont, potwór został pozbawiony swojej płetwy grzbietowej. Odważny lokaj znalazł szukany przedmiot, lecz stwór (a raczej przebrana za niego osoba) zaatakowałą niespodziewanie! Na szczeście Singh wziął ze sobą Pitagorasa, który przepędził napastinka odrywając mu ogon! Zgodnie z Oczekiwaniami, zarówno płetwa jak i ogon okazały się być częścią kostiumu wykonanego ze skóry i gumy.`,
+          `W tym samym czasie, w zadymionym kadzidłem namiocie cyrkowym, Ludwig Virchow zasiadł do prywatnego seansu z medium Greco. Gdy "Widzący Chłopiec" na czole wyłożył kartę tarota przedstawiającą Głupca, Ludwig postanowił sprawdzić jego rzekomą potęgę. Wyciągnął kryształową fiolkę z popiołem i skrzepami Zmory z Limehouse, po czym z całej siły zmiażdżył ją na mahoniowym stoliku. Odłamki szkła rozcięły skórę Niemca, a przeklęta wampirza krew natychmiast wniknęła w jego żyły. Ludwig wygiął się w agonii, gdy jego prawa dłoń od palców aż po nadgarstek poczerniała niczym zwęglone drewno, naznaczając go nieusuwalnym piętnem ciemności. Chwiejąc się na nogach, Ludwig wybiegł z namiotu na wąską ścieżkę. Tam, pośród cieni, ukazał mu się śnieżnobiały paw albinos z jarzącym się krwawym okiem na czole. Rozpostarty pióropusz oślepił Ludwiga mistycznym blaskiem - prorocza wizja związana w jakiś sposób z Wonną Pustką i zaginięciem Penelopy Levy. Tam znalazł go Singh.`,
+          `Lord Richard również miał zamiar udać się do Cremorne Gardens, ale nigdy tam nie dotarł. Zmierzająć wzdłuż wybrzeża, zobaczył Abela Knoxa na moście Vauxhall, wspinającego się na barierkę. Lord rzucił się w jego stronę i w ostatniej chwili złapał niedoszłego samobójcę, który zamierzał skoczyć w odmęty rzeki. Mężczyzna wydawał się być pod wpływem jakiegoś uroku, ale powoli dochodził do siebie. Łkając i szlochając podał tylko Richardowi pomięty list i odpełz w mrok. Na kartce widniało tylko jedno zdanie "Abigail za to zapłaci!". Bystremu wzrokowi Lorda Richarda nie umknął jednak jeszcze jeden szczegół - w rynsztoku zauważył damską, niebieska rękawiczkę, która musiała wypaść z przejeżdżającego tędy powozu.`
+        ],
+      },
+      {
+        label: 'Szaleństwo w Bedlam',
+        phase: 'Day',
+        prose: [
+          `Brudnoszary świt powitał Hargrave House zapachem spalenizny i mydła. W ogrodowej balii Singh z mozołem szorował Pitagorasa z rzecznego tranu i sadzy. Ku zdumieniu wszystkich okazało się, że bury dotychczas pies w rzeczywistości ma śnieżnobiałą, nieskazitelną sierść.`,
+          `W tym samym czasie z kuchni dobiegł przeraźliwy pisk pani Applebee. Ze ściany w spiżarni, uszkodzonej przez drgania miejskiej kanalizacji Bazalgette'a, począł przesączać się cuchnący, gęsty szlam. Sir George, pragnąc wreszcie rozwiązać problem udręczonej gospodyni, zmaterializował zegarowy mechanizm minerski i odpalił ładunek w przewodzie kominowym. Potężna eksplozja wstrząsnęła parterem rezydencji, wyrywając rury ze ścian i zasypując całą kuchnię gruzem oraz sadzą. Histerycznie płacząca pani Applebee cisnęła fartuchem w zjawę i oświadczyła, że jej noga więcej w tym przeklętym domu nie postanie.`,
+          `Lord Richard i George do owianego ponurą sławą szpitala dla obłąkanych, Bedlam. Ordynator placówki, dr Rodney Walters, przyjął dżentelmenów z chłodną rezerwą, prowadząc ich do wyciszonej celi Titusa Figga. Skuty w kaftan bezpieczeństwa rzeźnik z obłędem w oczach rytmicznie uderzał ogoloną głową o miękką ścianę, wybijając tempo do bluźnierczej rymowanki o trzech świnkach. George podchwycił obłąkańczy rytm i zanucił zwrotkę o pannie młodej z rzeźni. Titus, zachwycony wspólnym śpiewem, wykrzyczał nową zwrotkę: Hortencia poświęciła dłoń i rodzinny dom z miłości do Moc'ha i trzoda świnskiego boga będzie rosnąć i rosnąc. Nagle, do Titusa dołączył chór innych głosów - to śpiewali pozostali osadzeni na oddziale! Co gorsza, sam dr Walters, zaczął nucić tą melodię i ruszył do drzwi cel by wypuścić obłąkanych. Dla Lorda Richarda było to zbyt wiele. Weteran afrykańskich wojen eksplodował furią. Dopadł doktora pod ścianą i potężnym ciosem pięści złamał mu nos, a następnie raz za razem uderzał jego głową o posadzkę, aż elegancki biały kitel spłynął krwią. Z rozerwanej kieszeni nieprzytomnego ordynatora wypadł stary, dziecięcy zielnik z  dedykacją: „Dla mojej słodkiej Hortensji – Tata”. Opuszczając oddział, Łowcy unieśli wzrok. Nad wejściem lśniła wypolerowana mosiężna tablica dziękczynna, obwieszczająca, że rozbudowę placówki sfinansował szczodry datek Theodory Brathwaite.`,
+          `Singh i Ludwig jeszcze raz udali się do Cremorne Gardens - tym razem chcieli skonfrontować właścicieli ogrodu, Thomasa Simpsona i jego córkę, Abigail. Wiedziony instynktem, Singh zagradł się na tyły budynków administracyjnych Ogrodów i uchwycił przez żywopłot fragment kłótni między ojcem a córką. Abigail była zdecydowanie przeciwna próbie schwytania stwora i wystawienia go na widok publiczny. Wykrzyczawszy swój sprzeciw, odwróciła sie na pięcie i ruszyła przed siebie - prosto na ścieżkę, gdzie (czekając na powrót Singha) stał Ludwig. Widząć samotną Abigail (i podejrzewając, że to ona stoi za cała mistyfikacją) postanowił rzucić na nią urok. Niestety rytuał poszedł nieco zbyt dobrze - wprawdzie dziewczyna została z nim związana i nie byłaby w stanie mu uciec, to młody medium sam poczuł związany się z dziewczyną - i uznał, że musi ją chronić. Nie myśląc długo, uciekł z nią prosto do Palarnii Opium Chen Bao.`
+        ],
+      },
+    ],
+  },
 ]
 
 /**

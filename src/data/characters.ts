@@ -75,7 +75,7 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'ally',
     imageUrl: '/img/characters/pythagoras.png',
-    case: ['james-street-ghost']
+    case: ['james-street-ghost', 'limehouse-lurker', 'cremorne-gardens' ],
   },
   {
     id: 'irma-thicket',
@@ -97,7 +97,7 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'ally',
     imageUrl: '/img/characters/chen-bao.png',
-    case: ['limehouse-lurker']
+    case: ['limehouse-lurker','whateley-camera']
   },
   /*{
     id: 'rory-bell',
@@ -182,21 +182,21 @@ export const characters: CharacterBase[] = [
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/beulah-thrum.png',
-    case: ['cremorne-gardens']
+    case: ['cremorne-gardens','whateley-camera']
   },
   {
     id: 'simon-piedmont',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/simon-piedmont.png',
-    case: ['cremorne-gardens']
+    case: ['cremorne-gardens','whateley-camera']
   },
   {
     id: 'greco',
     type: 'npc',
     subtype: 'neutral',
     imageUrl: '/img/characters/greco.png',
-    case: ['cremorne-gardens']
+    case: ['cremorne-gardens','whateley-camera']
   },
   {
     id: 'abel-knox',
@@ -241,5 +241,21 @@ export const characters: CharacterBase[] = [
     subtype: 'neutral',
     imageUrl: '/img/characters/patrick-figgs.png',
     case: ['figgs-pigs']
+  },
+  {
+    id: 'rodney-walters',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/rodney-walters.png',
+    case: ['figgs-pigs']
+  },
+
+  //Whateley Camera
+  {
+    id: 'penelope-levy',
+    type: 'npc',
+    subtype: 'neutral',
+    imageUrl: '/img/characters/penelope-levy.png',
+    case: ['whateley-camera']
   },
 ]

@@ -17,10 +17,11 @@ export const threats: ThreatBase[] = [
   {
     id: 'cremorne-gardens',
     type: 'threat',
-    threatLevel: '2-5',
+    threatLevel: '3-5',
     status: 'active',
     firstEncountered: 'session-02',
-    clueImages: ['cremorne01.png','cremorne02.png','cremorne03.png','cremorne04.png','cremorne05.png','cremorne06.png','cremorne07.png'],
+    clueImages: ['cremorne01.png','cremorne02.png','cremorne03.png','cremorne04.png','cremorne05.png','cremorne06.png','cremorne07.png','cremorne08.png','cremorne09.png','cremorne10.png'],
+    usedClues: ['cremorne01.png','cremorne03.png','cremorne04.png','cremorne05.png','cremorne06.png','cremorne07.png']
   },
   {
     id: 'james-street-ghost',
@@ -44,10 +45,19 @@ export const threats: ThreatBase[] = [
   {
     id: 'figgs-pigs',
     type: 'threat',
+    threatLevel: '2-5',
+    status: 'active',
+    firstEncountered: 'session-03',
+    clueImages: ['figgs01.png','figgs02.png','figgs03.png','figgs04.png','figgs05.png','figgs06.png'],
+    usedClues: ['']
+  },
+  {
+    id: 'whateley-camera',
+    type: 'threat',
     threatLevel: '1-5',
     status: 'active',
     firstEncountered: 'session-03',
-    clueImages: ['figgs01.png'],
+    clueImages: ['whateley01.png','whateley02.png'],
     usedClues: ['']
   },
 ]

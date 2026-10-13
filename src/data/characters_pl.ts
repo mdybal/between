@@ -31,14 +31,14 @@ export const charactersPl: CharacterText[] = [
       'Duch zamordowanego członka domu Hargrave. Młody mężczyzna ubrany w strój z innej epoki, pachnący dymem i popiołem.',
     background:
       'Byłeś mieszkańcem Domu Hargrave wiele dekad temu, a teraz jesteś duchem, jesteś martwy. W rzeczy samej, spotkał Cię przedwczesny koniec w wyniku zdrady. Pojawienie się potomka zdrajcy w Londynie zbudziło Cię, i przykowało do Domu Hargrave, który będziesz nawiedzać dopóki nie dokonasz zemsty. W międzyczasie znów oddajesz się do brudnej pracy wykonywanej przez Dom Hargrave, a ci nowi Łowcy z pewnością mogliby skorzystać z Twojej pomocy. Przy odrobinie wysiłku udaje Ci się zgromadzić energię potrzebną do tymczasowego wyswobodzenia się ze swoich spektralnych więzów by znów spacerować po ulicach Londynu.',
-    conditions: ['Naznaczony przez wampira', 'Panta Rei'],
+    conditions: ['Panta Rei'],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
           { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą jak walczyłeś i niszczyłeś potworne stwory w imieniu Domu Hargrave.', masked: true },
-          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą intymny moment z Łowcą, który ostatecznie Cię zdradził. Nazwij go.' },
-          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą nemezis Domu Hargrave w tamtych dniach.' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą intymny moment z Łowcą, który ostatecznie Cię zdradził. Nazwij go.', masked: true  },
+          { name: 'Opowiedz retrospekcję z czasów, gdy żyłeś, pokazującą nemezis Domu Hargrave w tamtych dniach.', masked: true  },
           { name: 'Opowiedz retrospekcję pokazującą, jak Łowca, który ostatecznie Cię zdradził, związał się z nemezis Domu Hargrave.' },
           { name: 'Opowiedz retrospekcję pokazującą zdradę.' },
           { name: 'Opowiedz retrospekcję pokazującą, jak zdrada doprowadziła do Twojej śmierci.' },
@@ -64,14 +64,14 @@ export const charactersPl: CharacterText[] = [
       'Sikh z długiej linii sług rodziny Montegu. Zawsze nienagannie ubrany i doskonale zadbany, Singh jest ucieleśnieniem spokojnej lojalności.',
     background:
       'Miałeś życie zanim wstąpiłeś w służbę do swojego Pracodawcy, ale szczegóły tego życia są nieistotne. Wszystko co teraz ma znaczenie to osoba, której służysz, i Dom Hargrave, gdzie zestarzejesz się i umrzesz — jeśli będziesz miał szczęście. Bardziej prawdopodobne, że twoarzysze Twojego Pracodawcy, ci Łowcy, będą Twoim końcem, grzebiąc w rzeczach, które powinny pozostać pochowane i drażniąc zjawiska, które zamieszkują ciemne miejsca. Zrobisz co w Twojej mocy, by im pomóc, oczywiście, by trzymać ich przy życiu, bo bez nich, kim właściwie jesteś?',
-    conditions: [`Zawiodłem George'a`],
+    conditions: [],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
-          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą Twoje najbardziej znaczące zawodowe zwycięstwo.', masked: true },
-          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą jak urozmaicone było Twoje życie.', masked: true },
-          { name: 'Opowiedz retrospekcję z wydarzenia, które ostatecznie zmusiło Cię do służby.' },
+          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą Twoje najbardziej znaczące zawodowe zwycięstwo.', masked: false },
+          { name: 'Opowiedz retrospekcję z czasów młodości, przed służbą, pokazującą jak urozmaicone było Twoje życie.', masked: false },
+          { name: 'Opowiedz retrospekcję z wydarzenia, które ostatecznie zmusiło Cię do służby.', masked: false },
           { name: 'Opowiedz retrospekcję z czasów, gdy byłeś bardziej członkiem rodziny dla swojego pracodawcy niż kimś z jego własnego ciała i krwi.' },
           { name: 'Opowiedz retrospekcję z czasów, gdy Twój pracodawca zachowywał się w sposób całkowicie obojętny na Twoją godność.' },
           { name: 'Opowiedz retrospekcję pokazującą, jak musiałeś wykonywać pracę emocjonalną, aby zadowolić lub uspokoić swojego pracodawcę.' },
@@ -82,7 +82,7 @@ export const charactersPl: CharacterText[] = [
         category: 'Maska Przyszłości',
         masks: [
           { name: 'Złocone Drzwi' },
-          { name: 'Brama Porośnięta Mchem' },
+          { name: 'Brama Porośnięta Mchem', masked: true },
           { name: 'Próg Ciemności' },
           { name: 'Kosmiczny Passaż' },
           { name: 'Skrwawiony Portal' },
@@ -98,12 +98,12 @@ export const charactersPl: CharacterText[] = [
       'Ludwig przybył do Londynu z Pomorza. Jest młody, chorowity i dumny ze swojego wąsika. Oszukuje swoją matkę, że studiuje w Królewskim Kolegium Chirurgów.',
     background:
       'Odkąd pamiętasz, mroczne byty były w pobliżu. Czają się tuż na granicy Twojego widzenia, tuż za krawędzią lustra. Gdy zamykasz oczy, możesz je poczuć: ich zimny oddech, ich tłuste dotknięcia... sporadyczne gorączkowe objęcia. Chcą być w środku Ciebie; chcą ocierać się o Twoje wnętrzności i zdeponować swoją moc. Przyciągasz też innych: tych, którzy chcieliby wykorzystać Cię do opanowania tych ciemnych rzeczy, abyś służył ich celom. Niektórzy z nich, mogą być użyteczni, jak Łowcy, z którymi dzielisz dom. Innych, jak Sabat, najlepiej unikać. W obu przypadkach nie jesteś niczyją własnością, narzędziem ani bronią; nie jesteś zwykłym śmiertelnikiem. Twoje przeznaczenie należy do Ciebie.',
-    conditions: ['Najukochańszy', 'Wróg uliczników'],
+    conditions: ['Najukochańszy'],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
-          { name: 'Opowiedz retrospekcję z czasów, gdy byłeś w łonie matki, pokazującą, że już wtedy ciemne byty były tobą zainteresowane.' },
+          { name: 'Opowiedz retrospekcję z czasów, gdy byłeś w łonie matki, pokazującą, że już wtedy ciemne byty były tobą zainteresowane.', masked: true },
           { name: 'Opowiedz retrospekcję z dzieciństwa pokazującą pierwszą okazję, gdy spotkałeś ciemną istotę.' },
           { name: 'Opowiedz retrospekcję z młodości pokazującą twoje pierwsze spotkanie seksualne z ciemną istotą.' },
           { name: 'Opowiedz retrospekcję z młodości pokazującą czas, gdy wykorzystałeś swoje nadprzyrodzone zdolności do samolubnych celów.' },
@@ -132,15 +132,15 @@ export const charactersPl: CharacterText[] = [
       'Trzydziesto-kilku letni, słynny odkrywca. Samouwielbiający się i słusznie arogancki. Zawsze nosi swój korkowy kapelusz i buty do jazdy konnej.',
     background:
       'Urodziłeś się wśród fantastycznego bogactwa i przywilejów. Mógłbyś spędzać dnie rozpieszczany przez luksus, bez niczego pilniejszego niż decydowanie, co włożyć na wieczorny obiad. Ale wybrałeś inne życie; wybrałeś służbę swojej królowej. Wykorzystałeś swoje bogactwo i koneksje, by odkrywać świat, by opisywać nieznane terytoria. I teraz masz pasmo górskie nazwane twoim imieniem — odpowiedni zaszczyt, zważywszy, że górujesz nad innymi Brytyjczykami. Twoja siła, twój intelekt, twoja przebiegłość — żaden nie może im dorównać. Żaden oprócz... Mistrzyni Zbrodni. Mistrzyni, która nieustannie knuje przeciwko Jej Królewskiej Mości, której umysł i zasoby przewyższają twoje własne. Sprostałeś każej próbie, którą bogowie przed tobą postawili, ale Mistrzyni to coś zupełnie innego. A twoja nowa praca, twoja praca z Domem Hargrave, jest z nią w jakiś sposób połączona. Spędzasz dni i noce eksplorując prawdziwe serce ciemności — potwory, które skradają się po ulicach Londynu — ale żaden nie jest tak potworny jak twój przeciwnik, ten, który siedzi po drugiej stronie szachownicy. Czy Wielka Brytania wciąż będzie stała, gdy wielka gra dobiegnie końca?',
-    conditions: ['Wstrząśnienie mózgu'],
+    conditions: ['Przeklęta głowa pigmeja'],
     masks: [
       {
         category: 'Maska Przeszłości',
         masks: [
           { name: 'Opowiedz retrospekcję z czasu, gdy Odkrywca po raz pierwszy przybył do twojej wsi. Czy to była radosna chwila? Czy było w tym coś złowieszczego?', masked: true },
-          { name: 'Opowiedz retrospekcję pokazującą twoją przyjaźń z Odkrywcą. Jaki to był związek? Rodzic i dziecko? Nauczyciel i uczeń? Pan i sługa?' },
-          { name: 'Opowiedz retrospekcję z czasu, gdy twoja wieś ucierpiała zbrodnię z rąk Odkrywcy. Jak pomogłeś ją popełnić?' },
-          { name: 'Opowiedz retrospekcję pokazującą, jak zmierzyłeś się z konsekwencjami zbrodni, której pomogłeś dokonać Odkrywcy.' },
+          { name: 'Opowiedz retrospekcję pokazującą twoją przyjaźń z Odkrywcą. Jaki to był związek? Rodzic i dziecko? Nauczyciel i uczeń? Pan i sługa?', masked: true  },
+          { name: 'Opowiedz retrospekcję z czasu, gdy twoja wieś ucierpiała zbrodnię z rąk Odkrywcy. Jak pomogłeś ją popełnić?', masked: true  },
+          { name: 'Opowiedz retrospekcję pokazującą, jak zmierzyłeś się z konsekwencjami zbrodni, której pomogłeś dokonać Odkrywcy.', masked: true  },
           { name: 'Opowiedz retrospekcję z niedawnej przeszłości pokazującą, jak wieś wciąż cierpi z powodu skutków okupacji Odkrywcy.' },
           { name: 'Opowiedz retrospekcję pokazującą twoje przybycie do Londynu.' },
           { name: 'Opowiedz retrospekcję z czasu, gdy pierwszy raz spotkałeś Mistrzynię Zbrodni.' },
@@ -454,6 +454,26 @@ export const charactersPl: CharacterText[] = [
     background:
       'Patrick wierzy, że jest zwierzęciem.',
     traits: ['Dziki', 'Szalony', 'Morderczy'],
+    },
+    {
+    id: 'rodney-walters',
+    name: 'Dr Rodney Walters',
+    occupation: 'psychiatra',
+    description:
+      'Siwe, zmierzwione włosy. Pachnie płynem dezynfekującym. Niewysoki i chudy.',
+    background:
+      'Zafascynowany przypadkiem Titusa Figga i jego wpływem na innych pacjentów.',
+    traits: ['Protekcjonalny', 'Wykształcony', 'Skryty'],
+    },
+    {
+    id: 'penelope-levy',
+    name: 'Penelope Levy',
+    occupation: 'aktorka',
+    description:
+      'Burza kasztanowych włosów. Upudrowane policzki. Za cichy głos.',
+    background:
+      'Początkująca aktorka i modelka. Uczestniczyła w spotkaniach Towarzystwa Obscura',
+    traits: ['Piękna', 'Kapryśna', 'Ambitna'],
     },
 
 
