@@ -22,7 +22,7 @@ export function getInitialLang(): Lang {
   } catch {
     // localStorage unavailable (SSR / private browsing edge cases)
   }
-  return 'en'
+  return 'pl'
 }
 
 export function LanguageProvider({ 
