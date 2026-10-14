@@ -12,7 +12,7 @@ export const threats: ThreatBase[] = [
     type: 'mastermind',
     status: 'active',
     firstEncountered: 'session-01',
-    clueImages: ['brathwaite01.png','brathwaite02.png', 'brathwaite03.png','brathwaite04.png'],
+    clueImages: ['brathwaite01.png','brathwaite02.png', 'brathwaite03.png','brathwaite04.png','brathwaite05.png','brathwaite06.png'],
   },
   {
     id: 'cremorne-gardens',
