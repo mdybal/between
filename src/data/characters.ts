@@ -1,4 +1,4 @@
-import type { CharacterBase } from '@/types'
+import type { CharacterBase } from '../types'
 
 /**
  * Character data containing non-text fields (id, type, subtype, imageUrl,

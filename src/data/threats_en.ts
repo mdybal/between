@@ -1,5 +1,5 @@
 import { threats } from './threats'
-import type { HtmlString, MaskSection, Threat, ThreatQuestion } from '@/types'
+import type { HtmlString, MaskSection, Threat, ThreatQuestion } from '../types'
 
 /**
  * English threat text data.

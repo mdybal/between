@@ -1,5 +1,5 @@
 import { characters } from './characters'
-import type { Character } from '@/types'
+import type { Character } from '../types'
 
 /**
  * English character text data.

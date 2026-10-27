@@ -1,4 +1,4 @@
-import type { ThreatBase } from '@/types'
+import type { ThreatBase } from '../types'
 
 /**
  * Threat data containing non-text fields (id, type, threatLevel, status,

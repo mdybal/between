@@ -1,5 +1,7 @@
 {
   "rewrites": [
+    { "source": "/api/characters/:id", "destination": "/api/characters?id=:id" },
+    { "source": "/api/threats/:id", "destination": "/api/threats?id=:id" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
