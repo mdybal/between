@@ -1,6 +1,6 @@
 import { getCharactersEn } from '../src/data/characters_en.js'
 import { getThreatsEn } from '../src/data/threats_en.js'
-import { errorResponse, handleOptions, jsonResponse } from './_shared'
+import { errorResponse, handleOptions, jsonResponse } from './_shared.js'
 
 export const runtime = 'edge'
 

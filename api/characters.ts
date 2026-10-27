@@ -1,5 +1,5 @@
 import { getCharactersEn } from '../src/data/characters_en.js'
-import { errorResponse, handleOptions, jsonResponse, parseUrl } from './_shared'
+import { errorResponse, handleOptions, jsonResponse, parseUrl } from './_shared.js'
 
 export const runtime = 'edge'
 
