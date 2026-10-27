@@ -1,12 +1,12 @@
 import { getThreatsEn } from '../src/data/threats_en'
-import { errorResponse, handleOptions, jsonResponse } from './_shared'
+import { errorResponse, handleOptions, jsonResponse, parseUrl } from './_shared'
 
 export const runtime = 'edge'
 
 export function GET(request: Request): Response {
   try {
     const threats = getThreatsEn()
-    const id = new URL(request.url).searchParams.get('id')
+    const id = parseUrl(request).searchParams.get('id')
 
     if (id) {
       const threat = threats.find((t) => t.id === id)
@@ -25,7 +25,7 @@ export function GET(request: Request): Response {
       threats,
     })
   } catch (err) {
-    return errorResponse(err instanceof Error ? err.message : 'Internal error')
+    return errorResponse(err instanceof Error ? err.message : 'Internal error', 500)
   }
 }
 

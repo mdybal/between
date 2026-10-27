@@ -1,12 +1,12 @@
 import { getCharactersEn } from '../src/data/characters_en'
-import { errorResponse, handleOptions, jsonResponse } from './_shared'
+import { errorResponse, handleOptions, jsonResponse, parseUrl } from './_shared'
 
 export const runtime = 'edge'
 
 export function GET(request: Request): Response {
   try {
     const characters = getCharactersEn()
-    const id = new URL(request.url).searchParams.get('id')
+    const id = parseUrl(request).searchParams.get('id')
 
     if (id) {
       const character = characters.find((c) => c.id === id)
@@ -25,7 +25,7 @@ export function GET(request: Request): Response {
       characters,
     })
   } catch (err) {
-    return errorResponse(err instanceof Error ? err.message : 'Internal error')
+    return errorResponse(err instanceof Error ? err.message : 'Internal error', 500)
   }
 }
 
