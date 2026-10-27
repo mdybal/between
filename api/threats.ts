@@ -1,4 +1,4 @@
-import { getThreatsEn } from '../src/data/threats_en'
+import { getThreatsEn } from '../src/data/threats_en.js'
 import { errorResponse, handleOptions, jsonResponse, parseUrl } from './_shared'
 
 export const runtime = 'edge'
