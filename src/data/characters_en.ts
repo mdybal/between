@@ -1,4 +1,4 @@
-import { characters } from './characters'
+import { characters } from './characters.js'
 import type { Character } from '../types'
 
 /**

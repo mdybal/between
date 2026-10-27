@@ -1,4 +1,4 @@
-import { threats } from './threats'
+import { threats } from './threats.js'
 import type { HtmlString, MaskSection, Threat, ThreatQuestion } from '../types'
 
 /**
